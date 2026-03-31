@@ -144,7 +144,7 @@ function SidebarNavItem({
 
 function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
   const pathname = usePathname();
-  const { displayName, initials, roleLabel } = useProfile();
+  const { displayName, initials, roleLabel, avatarUrl } = useProfile();
 
   const isActive = (href: string) => {
     const hrefPath = href.split("?")[0];
@@ -234,7 +234,7 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
       <div className="border-t border-brand-100 px-4 py-3">
         <div className="flex items-center gap-3">
           <Avatar size="default">
-            <AvatarImage src="" alt="Empresa" />
+            {avatarUrl && <AvatarImage src={avatarUrl} alt="Empresa" />}
             <AvatarFallback className="bg-brand-100 text-brand-700 text-xs font-semibold">
               {initials}
             </AvatarFallback>

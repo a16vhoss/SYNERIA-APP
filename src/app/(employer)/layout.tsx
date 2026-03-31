@@ -22,7 +22,7 @@ export default function EmployerLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const { displayName, initials, roleLabel } = useProfile();
+  const { displayName, initials, roleLabel, avatarUrl } = useProfile();
 
   return (
     <div className="min-h-screen bg-cream">
@@ -36,6 +36,7 @@ export default function EmployerLayout({
           mobileMenuTrigger={<EmployerMobileSidebar />}
           userName={displayName}
           userInitials={initials}
+          userAvatarUrl={avatarUrl ?? undefined}
           userRole={roleLabel}
           profileHref="/employer/profile"
           unreadCount={0}

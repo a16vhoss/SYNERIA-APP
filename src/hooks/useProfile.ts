@@ -77,5 +77,6 @@ export function useProfile() {
     displayName,
     initials,
     roleLabel,
+    avatarUrl: profile?.avatarUrl ?? null,
   };
 }
