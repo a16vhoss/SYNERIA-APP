@@ -45,13 +45,12 @@ const principalItems: NavItem[] = [
   { label: "Candidatos", href: "/employer/candidates", icon: Users, badge: 0 },
   { label: "Contratos", href: "/employer/contracts", icon: FileSignature },
   { label: "Wallet", href: "/employer/wallet", icon: Wallet },
-  { label: "Mi Perfil", href: "/employer/profile", icon: UserCircle },
-  { label: "Empresa Perfil", href: "/employer/company-profile", icon: Building2 },
+  { label: "Perfil Empresa", href: "/employer/company-profile", icon: Building2 },
   { label: "Mensajes", href: "/employer/messages", icon: MessageSquare, badge: 0 },
 ];
 
 const supportItems: NavItem[] = [
-  { label: "Configuracion", href: "/employer/settings", icon: Settings },
+  { label: "Configuracion", href: "/employer/company-profile", icon: Settings },
 ];
 
 // ── Animations ─────────────────────────────────────────────────────

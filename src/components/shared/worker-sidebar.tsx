@@ -46,12 +46,12 @@ const principalItems: NavItem[] = [
   { label: "Red", href: "/network", icon: Users },
   { label: "Wallet", href: "/wallet", icon: Wallet },
   { label: "Mi Perfil", href: "/profile", icon: UserCircle },
-  { label: "Documentos", href: "/profile/documents", icon: FolderOpen },
+  { label: "Documentos", href: "/profile", icon: FolderOpen },
   { label: "Mensajes", href: "/messages", icon: MessageSquare, badge: 0 },
 ];
 
 const supportItems: NavItem[] = [
-  { label: "Configuracion", href: "/settings", icon: Settings },
+  { label: "Configuracion", href: "/profile", icon: Settings },
 ];
 
 // ── Animations ─────────────────────────────────────────────────────
