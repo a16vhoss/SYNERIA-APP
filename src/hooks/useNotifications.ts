@@ -39,11 +39,11 @@ export function useNotifications(): UseNotificationsReturn {
           setNotifications(
             data.map((n: any) => ({
               id: n.id,
-              type: n.type ?? "info",
+              type: n.type ?? "system",
               title: n.title ?? "",
-              message: n.message ?? "",
+              description: n.message ?? "",
+              time: n.created_at ?? new Date().toISOString(),
               read: n.read ?? false,
-              createdAt: n.created_at ?? new Date().toISOString(),
             }))
           );
         }

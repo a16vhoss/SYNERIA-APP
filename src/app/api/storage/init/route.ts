@@ -63,23 +63,25 @@ export async function POST() {
 
     for (const policy of policies) {
       // Use raw SQL to create policies since the JS API doesn't support it directly
-      await supabaseAdmin.rpc("exec_sql", {
-        sql: `
-          DO $$
-          BEGIN
-            IF NOT EXISTS (
-              SELECT 1 FROM pg_policies WHERE policyname = '${policy.name}' AND tablename = 'objects'
-            ) THEN
-              CREATE POLICY "${policy.name}" ON storage.objects
-              FOR ${policy.operation}
-              TO authenticated
-              WITH CHECK (${policy.definition});
-            END IF;
-          END $$;
-        `,
-      }).catch(() => {
+      try {
+        await supabaseAdmin.rpc("exec_sql", {
+          sql: `
+            DO $$
+            BEGIN
+              IF NOT EXISTS (
+                SELECT 1 FROM pg_policies WHERE policyname = '${policy.name}' AND tablename = 'objects'
+              ) THEN
+                CREATE POLICY "${policy.name}" ON storage.objects
+                FOR ${policy.operation}
+                TO authenticated
+                WITH CHECK (${policy.definition});
+              END IF;
+            END $$;
+          `,
+        });
+      } catch {
         // Policy might already exist or RPC might not be available - that's ok
-      });
+      }
     }
 
     return NextResponse.json({ success: true, message: "Storage buckets initialized" });

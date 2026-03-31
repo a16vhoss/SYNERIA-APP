@@ -42,7 +42,7 @@ export async function createReview(
         company_id: contract.company_id,
         rating,
         comment,
-        tags: tags.map((t) => t.id),
+        tags: tags,
       })
       .select()
       .single();
@@ -80,8 +80,9 @@ export async function getReviewsForUser(
       reviewerGradient: gradients[i % gradients.length],
       rating: r.rating,
       comment: r.comment ?? "",
-      date: r.created_at,
-      tags: r.tags ?? [],
+      tags: (r.tags ?? []) as ReviewTag[],
+      contractPosition: "",
+      createdAt: r.created_at,
     }));
   } catch {
     return [];
@@ -110,8 +111,9 @@ export async function getReviewsForCompany(
       reviewerGradient: gradients[i % gradients.length],
       rating: r.rating,
       comment: r.comment ?? "",
-      date: r.created_at,
-      tags: r.tags ?? [],
+      tags: (r.tags ?? []) as ReviewTag[],
+      contractPosition: "",
+      createdAt: r.created_at,
     }));
   } catch {
     return [];
@@ -147,9 +149,13 @@ export async function getPendingReviews(): Promise<PendingReview[]> {
     if (!pending.length) return [];
 
     return pending.map((c) => ({
+      id: `pending-${c.id}`,
       contractId: c.id,
-      position: c.position,
-      companyName: c.employer_name ?? "Empresa",
+      contractPosition: c.position ?? "",
+      counterpartyName: c.employer_name ?? "Empresa",
+      counterpartyLetter: (c.employer_name ?? "E").charAt(0),
+      counterpartyGradient: "blue" as const,
+      completedAt: new Date().toISOString(),
     }));
   } catch {
     return [];

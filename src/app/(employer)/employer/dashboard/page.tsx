@@ -15,7 +15,7 @@ async function getEmployerData() {
 
     if (!user) {
       return {
-        company: { name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false },
+        company: { id: "", name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
         vacancies: [],
         candidates: [],
         stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },
@@ -31,7 +31,7 @@ async function getEmployerData() {
 
     if (!profile?.companies) {
       return {
-        company: { name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false },
+        company: { id: "", name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
         vacancies: [],
         candidates: [],
         stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },
@@ -113,7 +113,7 @@ async function getEmployerData() {
     };
   } catch {
     return {
-      company: { name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false },
+      company: { id: "", name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
       vacancies: [],
       candidates: [],
       stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },

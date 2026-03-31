@@ -53,15 +53,17 @@ export async function getConnections(): Promise<NetworkConnection[]> {
       return {
         id: c.id,
         name: profile?.full_name ?? "Usuario",
-        role: profile?.role === "employer" ? "Empresa" : "Trabajador",
+        role: (profile?.role === "employer" ? "employer" : "worker") as "worker" | "employer",
         company: "",
         sector: "",
-        location: `${profile?.city ?? ""}, ${profile?.country ?? ""}`,
-        avatar: profile?.avatar_url ?? undefined,
-        letter: (profile?.full_name ?? "U").charAt(0),
-        gradient: gradients[i % gradients.length],
+        country: profile?.country ?? "",
+        city: profile?.city ?? "",
+        avatarUrl: profile?.avatar_url ?? undefined,
+        avatarLetter: (profile?.full_name ?? "U").charAt(0),
+        avatarGradient: gradients[i % gradients.length],
         mutualConnections: 0,
         connectedSince: c.connected_at ?? c.created_at,
+        skills: (profile?.skills as string[]) ?? [],
       };
     });
   } catch {
@@ -119,14 +121,14 @@ export async function getSuggestions(): Promise<NetworkSuggestion[]> {
     return suggestions.map((p, i) => ({
       id: p.id,
       name: p.full_name ?? "Usuario",
-      role: p.role === "employer" ? "Empresa" : "Trabajador",
-      company: "",
-      sector: "",
-      location: `${p.city ?? ""}, ${p.country ?? ""}`,
-      letter: (p.full_name ?? "U").charAt(0),
-      gradient: gradients[i % gradients.length],
+      country: p.country ?? "",
+      city: p.city ?? "",
+      avatarLetter: (p.full_name ?? "U").charAt(0),
+      avatarGradient: gradients[i % gradients.length],
+      skills: (p.skills as string[]) ?? [],
+      reason: "same_sector" as const,
+      reasonDetail: "Sugerencia basada en tu perfil",
       mutualConnections: 0,
-      matchReason: "Sugerencia basada en tu perfil",
     }));
   } catch {
     return [];
@@ -165,14 +167,10 @@ export async function getRequests(): Promise<NetworkRequest[]> {
       return {
         id: r.id,
         name: profile?.full_name ?? "Usuario",
-        role: profile?.role === "employer" ? "Empresa" : "Trabajador",
-        company: "",
-        sector: "",
-        location: `${profile?.city ?? ""}, ${profile?.country ?? ""}`,
-        letter: (profile?.full_name ?? "U").charAt(0),
-        gradient: gradients[i % gradients.length],
-        mutualConnections: 0,
+        avatarLetter: (profile?.full_name ?? "U").charAt(0),
+        avatarGradient: gradients[i % gradients.length],
         message: r.message ?? "Me gustaria conectar contigo",
+        direction: "incoming" as const,
         sentAt: r.created_at,
       };
     });
@@ -261,13 +259,13 @@ export async function getEndorsements(): Promise<SkillEndorsement[]> {
     const profileMap = new Map(profiles?.map((p) => [p.id, p]) ?? []);
     const gradients = ["green", "orange", "purple", "blue", "red", "teal"] as const;
 
-    return Array.from(skillMap.entries()).map(([skill, data], i) => ({
-      id: `endorsement-${i}`,
+    return Array.from(skillMap.entries()).map(([skill, data]) => ({
       skillName: skill,
       count: data.count,
       endorsers: data.endorserIds.slice(0, 3).map((id, j) => ({
-        letter: (profileMap.get(id)?.full_name ?? "U").charAt(0),
-        gradient: gradients[j % gradients.length],
+        name: profileMap.get(id)?.full_name ?? "Usuario",
+        avatarLetter: (profileMap.get(id)?.full_name ?? "U").charAt(0),
+        avatarGradient: gradients[j % gradients.length],
       })),
     }));
   } catch {
@@ -347,12 +345,12 @@ export async function getNetworkActivity(): Promise<NetworkActivity[]> {
 
     return activities.map((a, i) => ({
       id: a.id,
-      userName: profileMap.get(a.actor_id)?.full_name ?? "Usuario",
-      userLetter: (profileMap.get(a.actor_id)?.full_name ?? "U").charAt(0),
-      userGradient: gradients[i % gradients.length],
-      action: a.activity_type,
-      detail: (a.summary_data as Record<string, string>)?.detail ?? "",
-      timeAgo: getTimeAgo(a.created_at),
+      actorName: profileMap.get(a.actor_id)?.full_name ?? "Usuario",
+      actorLetter: (profileMap.get(a.actor_id)?.full_name ?? "U").charAt(0),
+      actorGradient: gradients[i % gradients.length],
+      type: (a.activity_type ?? "new_connection") as NetworkActivity["type"],
+      text: (a.summary_data as Record<string, string>)?.detail ?? "",
+      time: getTimeAgo(a.created_at),
     }));
   } catch {
     return [];
