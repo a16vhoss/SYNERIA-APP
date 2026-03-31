@@ -20,29 +20,30 @@ import {
 } from "@/components/ui/select";
 import { PasswordStrengthIndicator } from "@/components/shared/password-strength-indicator";
 import { RoleSelector } from "@/components/auth/role-selector";
+import { useTranslations } from "next-intl";
 import { OAuthButtons } from "@/components/auth/oauth-buttons";
 import { useAuth } from "@/hooks/useAuth";
 import { COUNTRIES } from "@/lib/constants/countries";
 
-const registerSchema = z
-  .object({
-    fullName: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
-    email: z.email("Ingresa un correo valido"),
-    password: z
-      .string()
-      .min(8, "La contrasena debe tener al menos 8 caracteres"),
-    confirmPassword: z.string().min(1, "Confirma tu contrasena"),
-    country: z.string().min(1, "Selecciona un pais"),
-    terms: z.literal(true, {
-      error: "Debes aceptar los terminos y condiciones",
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Las contrasenas no coinciden",
-    path: ["confirmPassword"],
-  });
+type RegisterFormValues = {
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  country: string;
+  terms: true;
+};
 
-type RegisterFormValues = z.infer<typeof registerSchema>;
+const registerSchema = z.object({
+  fullName: z.string().min(1),
+  email: z.string().email(),
+  password: z.string().min(8),
+  confirmPassword: z.string().min(8),
+  country: z.string().min(1),
+  terms: z.literal(true),
+}).refine((data) => data.password === data.confirmPassword, {
+  path: ["confirmPassword"],
+});
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -62,6 +63,7 @@ const fadeUp = {
 };
 
 export function RegisterForm() {
+  const t = useTranslations("auth");
   const [role, setRole] = useState<"worker" | "employer">("worker");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -122,18 +124,17 @@ export function RegisterForm() {
           <Mail className="size-8 text-brand-600" />
         </div>
         <h2 className="font-heading text-2xl font-bold text-foreground">
-          Verifica tu correo
+          {t("verification.title")}
         </h2>
         <p className="max-w-sm text-sm text-muted-foreground">
-          Hemos enviado un enlace de verificacion a tu correo electronico. Revisa
-          tu bandeja de entrada para activar tu cuenta.
+          {t("verification.subtitle")}
         </p>
         <button
           type="button"
           onClick={() => setEmailSent(false)}
           className="text-sm font-medium text-brand-600 hover:text-brand-700"
         >
-          Volver al registro
+          {t("register.signIn")}
         </button>
       </motion.div>
     );
@@ -149,10 +150,10 @@ export function RegisterForm() {
       {/* Header */}
       <div className="space-y-2">
         <h2 className="font-heading text-2xl font-bold text-foreground">
-          Crea tu cuenta
+          {t("register.title")}
         </h2>
         <p className="text-sm text-muted-foreground">
-          Unete a miles de profesionales y empresas en Syneria
+          {t("register.subtitle")}
         </p>
       </div>
 
@@ -180,13 +181,13 @@ export function RegisterForm() {
         >
           {/* Full Name */}
           <div className="space-y-2">
-            <Label htmlFor="register-name">Nombre completo</Label>
+            <Label htmlFor="register-name">{t("register.firstName")}</Label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 id="register-name"
                 type="text"
-                placeholder="Tu nombre completo"
+                placeholder={t("register.firstNamePlaceholder")}
                 className="h-11 rounded-xl pl-10"
                 {...register("fullName")}
                 aria-invalid={!!errors.fullName}
@@ -201,13 +202,13 @@ export function RegisterForm() {
 
           {/* Email */}
           <div className="space-y-2">
-            <Label htmlFor="register-email">Correo electronico</Label>
+            <Label htmlFor="register-email">{t("register.email")}</Label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 id="register-email"
                 type="email"
-                placeholder="tu@correo.com"
+                placeholder={t("register.emailPlaceholder")}
                 className="h-11 rounded-xl pl-10"
                 {...register("email")}
                 aria-invalid={!!errors.email}
@@ -222,13 +223,13 @@ export function RegisterForm() {
 
           {/* Password */}
           <div className="space-y-2">
-            <Label htmlFor="register-password">Contrasena</Label>
+            <Label htmlFor="register-password">{t("register.password")}</Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 id="register-password"
                 type={showPassword ? "text" : "password"}
-                placeholder="Minimo 8 caracteres"
+                placeholder={t("register.passwordPlaceholder")}
                 className="h-11 rounded-xl pl-10 pr-10"
                 {...register("password")}
                 aria-invalid={!!errors.password}
@@ -256,13 +257,13 @@ export function RegisterForm() {
 
           {/* Confirm Password */}
           <div className="space-y-2">
-            <Label htmlFor="register-confirm">Confirmar contrasena</Label>
+            <Label htmlFor="register-confirm">{t("register.confirmPassword")}</Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 id="register-confirm"
                 type={showConfirm ? "text" : "password"}
-                placeholder="Repite tu contrasena"
+                placeholder={t("register.confirmPasswordPlaceholder")}
                 className="h-11 rounded-xl pl-10 pr-10"
                 {...register("confirmPassword")}
                 aria-invalid={!!errors.confirmPassword}
@@ -289,7 +290,7 @@ export function RegisterForm() {
 
           {/* Country */}
           <div className="space-y-2">
-            <Label>Pais</Label>
+            <Label>{t("register.country")}</Label>
             <Select
               value={countryValue}
               onValueChange={(val) =>
@@ -298,7 +299,7 @@ export function RegisterForm() {
             >
               <SelectTrigger className="h-11 w-full rounded-xl pl-10">
                 <Globe className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                <SelectValue placeholder="Selecciona tu pais" />
+                <SelectValue placeholder={t("register.countryPlaceholder")} />
               </SelectTrigger>
               <SelectContent>
                 {COUNTRIES.map((country) => (
@@ -331,19 +332,19 @@ export function RegisterForm() {
               htmlFor="register-terms"
               className="cursor-pointer text-sm leading-snug text-muted-foreground"
             >
-              Acepto los{" "}
+              {t("terms.accept")}{" "}
               <Link
                 href="/terms"
                 className="font-medium text-brand-600 hover:text-brand-700"
               >
-                Terminos y Condiciones
+                {t("terms.termsOfService")}
               </Link>{" "}
-              y la{" "}
+              {t("terms.and")}{" "}
               <Link
                 href="/privacy"
                 className="font-medium text-brand-600 hover:text-brand-700"
               >
-                Politica de Privacidad
+                {t("terms.privacyPolicy")}
               </Link>
             </label>
           </div>
@@ -361,7 +362,7 @@ export function RegisterForm() {
               {loading ? (
                 <Loader2 className="size-4 animate-spin" />
               ) : (
-                "Crear Cuenta"
+                t("register.submit")
               )}
             </button>
           </div>

@@ -29,6 +29,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useProfile } from "@/hooks/useProfile";
+import { useTranslations } from "next-intl";
 
 // ── Navigation config ──────────────────────────────────────────────
 
@@ -39,20 +40,24 @@ interface NavItem {
   badge?: number;
 }
 
-const principalItems: NavItem[] = [
-  { label: "Panel", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Buscar Empleos", href: "/jobs", icon: Search },
-  { label: "Mis Aplicaciones", href: "/applications", icon: FileText, badge: 0 },
-  { label: "Red", href: "/network", icon: Users },
-  { label: "Wallet", href: "/wallet", icon: Wallet },
-  { label: "Mi Perfil", href: "/profile", icon: UserCircle },
-  { label: "Documentos", href: "/profile", icon: FolderOpen },
-  { label: "Mensajes", href: "/messages", icon: MessageSquare, badge: 0 },
-];
+function getPrincipalItems(t: (key: string) => string): NavItem[] {
+  return [
+    { label: t("nav.dashboard"), href: "/dashboard", icon: LayoutDashboard },
+    { label: t("nav.searchJobs"), href: "/jobs", icon: Search },
+    { label: t("nav.myApplications"), href: "/applications", icon: FileText, badge: 0 },
+    { label: t("nav.network"), href: "/network", icon: Users },
+    { label: t("nav.wallet"), href: "/wallet", icon: Wallet },
+    { label: t("nav.myProfile"), href: "/profile", icon: UserCircle },
+    { label: t("nav.documents"), href: "/profile", icon: FolderOpen },
+    { label: t("nav.messages"), href: "/messages", icon: MessageSquare, badge: 0 },
+  ];
+}
 
-const supportItems: NavItem[] = [
-  { label: "Configuracion", href: "/profile?tab=configuracion", icon: Settings },
-];
+function getSupportItems(t: (key: string) => string): NavItem[] {
+  return [
+    { label: t("nav.settings"), href: "/profile?tab=configuracion", icon: Settings },
+  ];
+}
 
 // ── Animations ─────────────────────────────────────────────────────
 
@@ -145,6 +150,9 @@ function SidebarNavItem({
 function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
   const pathname = usePathname();
   const { displayName, initials, roleLabel, avatarUrl } = useProfile();
+  const t = useTranslations("common");
+  const principalItems = getPrincipalItems(t);
+  const supportItems = getSupportItems(t);
 
   const isActive = (href: string) => {
     if (href === "/dashboard") return pathname === "/dashboard";
@@ -201,7 +209,7 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
             className="group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-red-500 transition-colors hover:bg-red-50 hover:text-red-600"
           >
             <LogOut className="h-[18px] w-[18px] shrink-0" />
-            <span>Cerrar Sesion</span>
+            <span>{t("nav.logout")}</span>
           </button>
         </motion.div>
 

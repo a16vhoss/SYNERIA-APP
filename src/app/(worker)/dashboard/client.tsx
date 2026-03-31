@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type { JobData } from "@/components/shared";
 import type { MockStats } from "@/lib/constants/mock-data";
 import { PageHeader } from "@/components/shared";
@@ -22,6 +23,8 @@ interface DashboardData {
 }
 
 export function WorkerDashboardClient({ data }: { data: DashboardData }) {
+  const t = useTranslations("worker");
+
   return (
     <div className="flex flex-col gap-6">
       {/* Tabs */}
@@ -29,8 +32,8 @@ export function WorkerDashboardClient({ data }: { data: DashboardData }) {
 
       {/* Greeting */}
       <PageHeader
-        title={`Hola, ${data.firstName}!`}
-        subtitle="Tu proxima oportunidad te espera. Explora empleos que se ajusten a tu perfil."
+        title={t("dashboard.greeting", { name: data.firstName })}
+        subtitle={t("dashboard.subtitle")}
       />
 
       {/* Interview banner (if upcoming) */}

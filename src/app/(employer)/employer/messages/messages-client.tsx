@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { PageHeader } from "@/components/shared";
 import { GlassCard } from "@/components/shared";
@@ -11,6 +12,7 @@ import { useMessages } from "@/hooks/useMessages";
 import type { Conversation } from "@/lib/actions/messages";
 
 export function EmployerMessagesClient({ currentUserId }: { currentUserId?: string }) {
+  const tc = useTranslations("common");
   const {
     conversations,
     activeConversation,
@@ -49,8 +51,8 @@ export function EmployerMessagesClient({ currentUserId }: { currentUserId?: stri
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        title="Mensajes"
-        subtitle="Gestiona la comunicacion con tus candidatos"
+        title={tc("messages")}
+        subtitle={tc("messagesSubtitle")}
       />
 
       <GlassCard className="h-[calc(100vh-12rem)] overflow-hidden !p-0" hover={false}>

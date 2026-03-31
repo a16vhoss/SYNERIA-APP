@@ -20,6 +20,7 @@ import {
 } from "recharts";
 import { toast } from "sonner";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/shared/page-header";
@@ -153,18 +154,19 @@ const txTypeConfig: Record<
   },
 };
 
+// statusCfg labels are set dynamically in the component using translations
 const statusCfg: Record<
   TxStatus,
-  { label: string; bg: string; text: string; dot: string }
+  { labelKey: string; bg: string; text: string; dot: string }
 > = {
   completed: {
-    label: "Completado",
+    labelKey: "wallet.payments.completed",
     bg: "bg-emerald-100",
     text: "text-emerald-700",
     dot: "bg-emerald-500",
   },
   pending: {
-    label: "Pendiente",
+    labelKey: "wallet.payments.pending",
     bg: "bg-amber-100",
     text: "text-amber-700",
     dot: "bg-amber-500",
@@ -176,6 +178,7 @@ const statusCfg: Record<
 /* ------------------------------------------------------------------ */
 
 export function EmployerWalletClient() {
+  const t = useTranslations("employer");
   const [balance, setBalance] = useState(12850);
   const [depositOpen, setDepositOpen] = useState(false);
   const [paymentOpen, setPaymentOpen] = useState(false);
@@ -206,8 +209,8 @@ export function EmployerWalletClient() {
       transition={{ duration: 0.3 }}
     >
       <PageHeader
-        title="Wallet Empresarial"
-        subtitle="Gestiona fondos y realiza pagos a tu equipo de trabajo"
+        title={t("wallet.title")}
+        subtitle={t("wallet.deposit.subtitle")}
       />
 
       {/* Balance Card */}
@@ -226,7 +229,7 @@ export function EmployerWalletClient() {
                 <TrendingUp className="size-4 text-brand-600" />
               </div>
               <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Balance Empresarial
+                {t("wallet.balance")}
               </span>
             </div>
 
@@ -254,7 +257,7 @@ export function EmployerWalletClient() {
                 onClick={() => setDepositOpen(true)}
               >
                 <Landmark className="size-4" />
-                Depositar Fondos
+                {t("wallet.deposit.title")}
               </Button>
               <Button
                 variant="outline"
@@ -263,7 +266,7 @@ export function EmployerWalletClient() {
                 onClick={() => setPaymentOpen(true)}
               >
                 <Send className="size-4" />
-                Enviar Pago
+                {t("wallet.sendPayment.title")}
               </Button>
             </motion.div>
           </div>
@@ -322,7 +325,7 @@ export function EmployerWalletClient() {
             className="font-heading text-2xl font-bold text-foreground"
           />
           <span className="text-xs text-muted-foreground">
-            Contratos Activos
+            {t("dashboard.stats.activeContracts")}
           </span>
         </motion.div>
 
@@ -342,7 +345,7 @@ export function EmployerWalletClient() {
             className="font-heading text-2xl font-bold text-foreground"
           />
           <span className="text-xs text-muted-foreground">
-            Pagos este mes
+            {t("wallet.pendingPayments")}
           </span>
         </motion.div>
 
@@ -362,7 +365,7 @@ export function EmployerWalletClient() {
             className="font-heading text-2xl font-bold text-foreground"
           />
           <span className="text-xs text-muted-foreground">
-            Total depositado
+            {t("wallet.totalSpent")}
           </span>
         </motion.div>
       </div>
@@ -375,7 +378,7 @@ export function EmployerWalletClient() {
         transition={{ delay: 0.35 }}
       >
         <h2 className="font-heading text-lg font-bold text-foreground">
-          Contratos Activos
+          {t("dashboard.stats.activeContracts")}
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {mockContracts.map((contract, i) => (
@@ -411,7 +414,7 @@ export function EmployerWalletClient() {
               </div>
               <div className="mt-3 flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">
-                  Salario mensual
+                  {t("wallet.sendPayment.monthlySalary")}
                 </span>
                 <span className="text-sm font-semibold text-foreground">
                   ${contract.salary.toLocaleString()}
@@ -426,7 +429,7 @@ export function EmployerWalletClient() {
                 }}
               >
                 <Send className="size-3" />
-                Enviar Pago
+                {t("wallet.sendPayment.title")}
               </Button>
             </motion.div>
           ))}
@@ -441,7 +444,7 @@ export function EmployerWalletClient() {
         transition={{ delay: 0.5 }}
       >
         <h2 className="font-heading text-lg font-bold text-foreground">
-          Historial de Transacciones
+          {t("wallet.payments.history")}
         </h2>
 
         <div className="overflow-hidden rounded-xl bg-card shadow-[var(--shadow-card)] ring-1 ring-foreground/5">
@@ -503,7 +506,7 @@ export function EmployerWalletClient() {
                   <span
                     className={cn("size-1.5 rounded-full", sCfg.dot)}
                   />
-                  {sCfg.label}
+                  {t(sCfg.labelKey)}
                 </span>
               </motion.div>
             );

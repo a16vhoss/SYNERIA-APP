@@ -2,6 +2,7 @@
 
 import { Briefcase, Users, CalendarCheck, UserCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { StatCard } from "@/components/shared/stat-card";
 
 interface DashboardStatsProps {
@@ -30,28 +31,29 @@ export function DashboardStats({
   inInterview,
   accepted,
 }: DashboardStatsProps) {
+  const t = useTranslations("employer");
   const stats = [
     {
       icon: Briefcase,
-      label: "Vacantes Activas",
+      label: t("dashboard.stats.activeVacancies"),
       value: activeVacancies,
       variant: "default" as const,
     },
     {
       icon: Users,
-      label: "Candidatos Recibidos",
+      label: t("dashboard.stats.totalCandidates"),
       value: totalCandidates,
       variant: "blue" as const,
     },
     {
       icon: CalendarCheck,
-      label: "En Entrevista",
+      label: t("candidates.pipeline.interview"),
       value: inInterview,
       variant: "purple" as const,
     },
     {
       icon: UserCheck,
-      label: "Aceptados",
+      label: t("candidates.pipeline.hired"),
       value: accepted,
       variant: "teal" as const,
     },

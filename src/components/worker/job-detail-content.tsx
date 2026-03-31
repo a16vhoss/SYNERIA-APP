@@ -1,18 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const TABS = [
-  { id: "descripcion", label: "Descripcion" },
-  { id: "responsabilidades", label: "Responsabilidades" },
-  { id: "requisitos", label: "Requisitos" },
-  { id: "beneficios", label: "Beneficios" },
-] as const;
+const TAB_IDS = ["descripcion", "responsabilidades", "requisitos", "beneficios"] as const;
 
-type TabId = (typeof TABS)[number]["id"];
+type TabId = (typeof TAB_IDS)[number];
 
 interface JobDetailContentProps {
   description: string;
@@ -29,25 +25,33 @@ export function JobDetailContent({
   benefits,
   className,
 }: JobDetailContentProps) {
+  const t = useTranslations("worker");
   const [activeTab, setActiveTab] = useState<TabId>("descripcion");
+
+  const tabLabels: Record<TabId, string> = {
+    descripcion: t("jobs.detail.aboutJob"),
+    responsabilidades: t("jobs.detail.requirements"),
+    requisitos: t("jobs.detail.requirements"),
+    beneficios: t("jobs.detail.benefits"),
+  };
 
   return (
     <div className={cn("flex flex-col gap-6", className)}>
       {/* Tab bar */}
       <div className="flex gap-1 border-b border-foreground/10">
-        {TABS.map((tab) => (
+        {TAB_IDS.map((id) => (
           <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            key={id}
+            onClick={() => setActiveTab(id)}
             className={cn(
               "relative px-4 py-2.5 text-sm font-medium transition-colors",
-              activeTab === tab.id
+              activeTab === id
                 ? "text-brand-600"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            {tab.label}
-            {activeTab === tab.id && (
+            {tabLabels[id]}
+            {activeTab === id && (
               <motion.div
                 className="absolute inset-x-0 bottom-0 h-0.5 bg-brand-600"
                 layoutId="job-tab-indicator"
@@ -71,7 +75,7 @@ export function JobDetailContent({
           {activeTab === "descripcion" && (
             <div className="space-y-4">
               <h3 className="font-heading text-base font-semibold text-foreground">
-                Descripcion del Puesto
+                {t("jobs.detail.aboutJob")}
               </h3>
               <div className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
                 {description}
@@ -82,7 +86,7 @@ export function JobDetailContent({
           {activeTab === "responsabilidades" && (
             <div className="space-y-4">
               <h3 className="font-heading text-base font-semibold text-foreground">
-                Responsabilidades
+                {t("jobs.detail.requirements")}
               </h3>
               <ul className="space-y-2.5">
                 {responsibilities.map((item, i) => (
@@ -104,7 +108,7 @@ export function JobDetailContent({
           {activeTab === "requisitos" && (
             <div className="space-y-4">
               <h3 className="font-heading text-base font-semibold text-foreground">
-                Requisitos
+                {t("jobs.detail.requirements")}
               </h3>
               <ul className="space-y-2.5">
                 {requirements.map((item, i) => (
@@ -126,7 +130,7 @@ export function JobDetailContent({
           {activeTab === "beneficios" && (
             <div className="space-y-4">
               <h3 className="font-heading text-base font-semibold text-foreground">
-                Beneficios
+                {t("jobs.detail.benefits")}
               </h3>
               <ul className="space-y-3">
                 {benefits.map((item, i) => (

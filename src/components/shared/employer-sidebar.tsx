@@ -29,6 +29,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useProfile } from "@/hooks/useProfile";
+import { useTranslations } from "next-intl";
 
 // ── Navigation config ──────────────────────────────────────────────
 
@@ -39,20 +40,24 @@ interface NavItem {
   badge?: number;
 }
 
-const principalItems: NavItem[] = [
-  { label: "Dashboard", href: "/employer/dashboard", icon: LayoutDashboard },
-  { label: "Mis Vacantes", href: "/employer/vacancies", icon: Briefcase, badge: 0 },
-  { label: "Candidatos", href: "/employer/candidates", icon: Users, badge: 0 },
-  { label: "Contratos", href: "/employer/contracts", icon: FileSignature },
-  { label: "Wallet", href: "/employer/wallet", icon: Wallet },
-  { label: "Mi Perfil", href: "/employer/profile", icon: UserCircle },
-  { label: "Perfil Empresa", href: "/employer/company-profile", icon: Building2 },
-  { label: "Mensajes", href: "/employer/messages", icon: MessageSquare, badge: 0 },
-];
+function getPrincipalItems(t: (key: string) => string): NavItem[] {
+  return [
+    { label: t("nav.dashboard"), href: "/employer/dashboard", icon: LayoutDashboard },
+    { label: t("nav.vacancies"), href: "/employer/vacancies", icon: Briefcase, badge: 0 },
+    { label: t("nav.candidates"), href: "/employer/candidates", icon: Users, badge: 0 },
+    { label: t("nav.contracts"), href: "/employer/contracts", icon: FileSignature },
+    { label: t("nav.wallet"), href: "/employer/wallet", icon: Wallet },
+    { label: t("nav.myProfile"), href: "/employer/profile", icon: UserCircle },
+    { label: t("nav.company"), href: "/employer/company-profile", icon: Building2 },
+    { label: t("nav.messages"), href: "/employer/messages", icon: MessageSquare, badge: 0 },
+  ];
+}
 
-const supportItems: NavItem[] = [
-  { label: "Configuracion", href: "/employer/profile?tab=configuracion", icon: Settings },
-];
+function getSupportItems(t: (key: string) => string): NavItem[] {
+  return [
+    { label: t("nav.settings"), href: "/employer/profile?tab=configuracion", icon: Settings },
+  ];
+}
 
 // ── Animations ─────────────────────────────────────────────────────
 
@@ -145,6 +150,9 @@ function SidebarNavItem({
 function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
   const pathname = usePathname();
   const { displayName, initials, roleLabel, avatarUrl } = useProfile();
+  const t = useTranslations("common");
+  const principalItems = getPrincipalItems(t);
+  const supportItems = getSupportItems(t);
 
   const isActive = (href: string) => {
     const hrefPath = href.split("?")[0];
@@ -201,7 +209,7 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
             className="group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-red-500 transition-colors hover:bg-red-50 hover:text-red-600"
           >
             <LogOut className="h-[18px] w-[18px] shrink-0" />
-            <span>Cerrar Sesion</span>
+            <span>{t("nav.logout")}</span>
           </button>
         </motion.div>
 

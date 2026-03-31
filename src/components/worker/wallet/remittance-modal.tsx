@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send } from "lucide-react";
 import { toast } from "sonner";
@@ -55,6 +56,8 @@ export function RemittanceModal({
   onOpenChange,
   balance = 4850,
 }: RemittanceModalProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const [amount, setAmount] = useState("");
   const [recipient, setRecipient] = useState("");
   const [country, setCountry] = useState("");
@@ -70,11 +73,11 @@ export function RemittanceModal({
 
   const handleSend = () => {
     if (!recipient || !country || parsedAmount <= 0) {
-      toast.error("Completa todos los campos");
+      toast.error(tc("validation.required"));
       return;
     }
     if (insufficient) {
-      toast.error("Saldo insuficiente");
+      toast.error(tc("misc.error"));
       return;
     }
     toast.success(
@@ -101,10 +104,10 @@ export function RemittanceModal({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Send className="size-5 text-brand-600" />
-            Enviar Remesa
+            {t("wallet.remittance.title")}
           </DialogTitle>
           <DialogDescription>
-            Envia dinero a tus familiares de forma rapida y segura.
+            {t("wallet.remittance.send")}
           </DialogDescription>
         </DialogHeader>
 
@@ -116,7 +119,7 @@ export function RemittanceModal({
         >
           {/* Amount */}
           <div className="space-y-1.5">
-            <Label htmlFor="rem-amount">Monto (USD)</Label>
+            <Label htmlFor="rem-amount">{t("wallet.remittance.amount")} (USD)</Label>
             <Input
               id="rem-amount"
               type="number"
@@ -130,7 +133,7 @@ export function RemittanceModal({
 
           {/* Recipient */}
           <div className="space-y-1.5">
-            <Label htmlFor="rem-recipient">Nombre del destinatario</Label>
+            <Label htmlFor="rem-recipient">{t("wallet.remittance.recipient")}</Label>
             <Input
               id="rem-recipient"
               placeholder="Maria Ramirez"
@@ -141,13 +144,13 @@ export function RemittanceModal({
 
           {/* Country */}
           <div className="space-y-1.5">
-            <Label>Pais del destinatario</Label>
+            <Label>{t("wallet.remittance.country")}</Label>
             <Select
               value={country}
               onValueChange={(v) => v && setCountry(v)}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Seleccionar pais" />
+                <SelectValue placeholder={t("wallet.remittance.country")} />
               </SelectTrigger>
               <SelectContent>
                 {countries.map((c) => (

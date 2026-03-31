@@ -16,19 +16,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import type { MockCandidate } from "@/lib/constants/mock-data";
 import { updateApplicationStatus } from "@/lib/actions/applications";
 
 type StatusFilter = "all" | "pending" | "reviewing" | "interview" | "accepted" | "rejected";
-
-const STATUS_OPTIONS: { value: StatusFilter; label: string }[] = [
-  { value: "all", label: "Todos los estados" },
-  { value: "pending", label: "Pendiente" },
-  { value: "reviewing", label: "Revisando" },
-  { value: "interview", label: "Entrevista" },
-  { value: "accepted", label: "Aceptada" },
-  { value: "rejected", label: "Rechazada" },
-];
 
 const containerVariants = {
   hidden: {},
@@ -58,6 +50,8 @@ interface CandidatesClientProps {
 }
 
 export function CandidatesClient({ initialCandidates, vacancies = [] }: CandidatesClientProps = {}) {
+  const t = useTranslations("employer");
+  const tc = useTranslations("common");
   const [candidates, setCandidates] = useState<MockCandidate[]>(initialCandidates ?? []);
   const [vacancyFilter, setVacancyFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
@@ -92,13 +86,19 @@ export function CandidatesClient({ initialCandidates, vacancies = [] }: Candidat
     );
     try {
       await updateApplicationStatus(candidateId, newStatus);
-      toast.success(`Candidato ${newStatus === "accepted" ? "aceptado" : newStatus === "rejected" ? "rechazado" : "actualizado"}`);
+      toast.success(
+        newStatus === "accepted"
+          ? t("candidates.actions.accept")
+          : newStatus === "rejected"
+            ? t("candidates.actions.reject")
+            : tc("updated")
+      );
     } catch {
       // Rollback on error
       setCandidates((prev) =>
         prev.map((c) => (c.id === candidateId ? { ...c, status: "pending" } : c))
       );
-      toast.error("Error al actualizar estado");
+      toast.error(tc("error"));
     }
   }
 
@@ -116,8 +116,8 @@ export function CandidatesClient({ initialCandidates, vacancies = [] }: Candidat
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        title="Candidatos"
-        subtitle={`${candidates.length} candidatos en total`}
+        title={t("candidates.title")}
+        subtitle={`${candidates.length} ${t("dashboard.stats.totalCandidates").toLowerCase()}`}
       />
 
       {/* Filters */}
@@ -128,7 +128,7 @@ export function CandidatesClient({ initialCandidates, vacancies = [] }: Candidat
         transition={{ delay: 0.1, duration: 0.3 }}
       >
         <SearchInput
-          placeholder="Buscar candidato..."
+          placeholder={t("candidates.filters.search")}
           value={search}
           onChange={setSearch}
           className="sm:max-w-xs"
@@ -139,10 +139,10 @@ export function CandidatesClient({ initialCandidates, vacancies = [] }: Candidat
           onValueChange={(v) => v && setVacancyFilter(v)}
         >
           <SelectTrigger className="w-56">
-            <SelectValue placeholder="Todas las vacantes" />
+            <SelectValue placeholder={t("candidates.filters.vacancy")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todas las vacantes</SelectItem>
+            <SelectItem value="all">{t("candidates.filters.vacancy")}</SelectItem>
             {vacancies.map((vac) => (
               <SelectItem key={vac.id} value={vac.id}>
                 {vac.title}
@@ -156,14 +156,15 @@ export function CandidatesClient({ initialCandidates, vacancies = [] }: Candidat
           onValueChange={(v) => v && setStatusFilter(v as StatusFilter)}
         >
           <SelectTrigger className="w-48">
-            <SelectValue placeholder="Todos los estados" />
+            <SelectValue placeholder={t("candidates.filters.status")} />
           </SelectTrigger>
           <SelectContent>
-            {STATUS_OPTIONS.map((opt) => (
-              <SelectItem key={opt.value} value={opt.value}>
-                {opt.label}
-              </SelectItem>
-            ))}
+            <SelectItem value="all">{t("candidates.filters.status")}</SelectItem>
+            <SelectItem value="pending">{t("candidates.pipeline.applied")}</SelectItem>
+            <SelectItem value="reviewing">{t("candidates.pipeline.screening")}</SelectItem>
+            <SelectItem value="interview">{t("candidates.pipeline.interview")}</SelectItem>
+            <SelectItem value="accepted">{t("candidates.pipeline.hired")}</SelectItem>
+            <SelectItem value="rejected">{t("candidates.pipeline.rejected")}</SelectItem>
           </SelectContent>
         </Select>
       </motion.div>
@@ -172,8 +173,8 @@ export function CandidatesClient({ initialCandidates, vacancies = [] }: Candidat
       {filtered.length === 0 ? (
         <EmptyState
           icon={Users}
-          title="Sin candidatos"
-          description="No se encontraron candidatos con los filtros seleccionados."
+          title={t("candidates.title")}
+          description={t("candidates.filters.search")}
         />
       ) : (
         <motion.div

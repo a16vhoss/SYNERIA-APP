@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FolderOpen } from "lucide-react";
@@ -29,15 +30,6 @@ import type { InterviewData } from "@/lib/actions/applications";
 import { respondToInterview } from "@/lib/actions/applications";
 
 type StatusFilter = "all" | "pending" | "reviewing" | "interview" | "accepted" | "rejected";
-
-const STATUS_OPTIONS: { value: StatusFilter; label: string }[] = [
-  { value: "all", label: "Todas" },
-  { value: "pending", label: "Pendiente" },
-  { value: "reviewing", label: "Revisando" },
-  { value: "interview", label: "Entrevista" },
-  { value: "accepted", label: "Aceptada" },
-  { value: "rejected", label: "Rechazada" },
-];
 
 const GRADIENT_MAP: Record<string, "green" | "orange" | "purple" | "blue" | "teal" | "red"> = {
   green: "green",
@@ -102,7 +94,18 @@ export function ApplicationsClient({
   initialApplications,
   initialInterviews,
 }: ApplicationsClientProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const router = useRouter();
+
+  const STATUS_OPTIONS: { value: StatusFilter; label: string }[] = [
+    { value: "all", label: tc("misc.all") },
+    { value: "pending", label: tc("status.pending") },
+    { value: "reviewing", label: tc("status.reviewing") },
+    { value: "interview", label: tc("status.interview") },
+    { value: "accepted", label: tc("status.accepted") },
+    { value: "rejected", label: tc("status.rejected") },
+  ];
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [applications] = useState<MockApplication[]>(initialApplications);
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -152,7 +155,7 @@ export function ApplicationsClient({
 
   return (
     <div className="flex flex-col gap-6">
-      <PageHeader title="Mis Aplicaciones" />
+      <PageHeader title={t("applications.title")} />
 
       {/* Filters */}
       <motion.div
@@ -166,7 +169,7 @@ export function ApplicationsClient({
           onValueChange={(v) => v && setStatusFilter(v as StatusFilter)}
         >
           <SelectTrigger className="w-48">
-            <SelectValue placeholder="Filtrar por estado" />
+            <SelectValue placeholder={tc("actions.filter")} />
           </SelectTrigger>
           <SelectContent>
             {STATUS_OPTIONS.map((opt) => (
@@ -182,10 +185,10 @@ export function ApplicationsClient({
       {filtered.length === 0 ? (
         <EmptyState
           icon={FolderOpen}
-          title="Sin aplicaciones"
-          description="Aun no has enviado aplicaciones. Explora empleos disponibles."
+          title={tc("empty.noApplications")}
+          description={t("applications.empty")}
           action={{
-            label: "Explorar empleos",
+            label: t("applications.emptyAction"),
             onClick: () => router.push("/jobs"),
           }}
         />
@@ -200,16 +203,16 @@ export function ApplicationsClient({
             <TableHeader>
               <TableRow className="hover:bg-transparent">
                 <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Puesto
+                  {t("applications.table.position")}
                 </TableHead>
                 <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Empresa
+                  {t("applications.table.company")}
                 </TableHead>
                 <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Fecha
+                  {t("applications.table.date")}
                 </TableHead>
                 <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Estado
+                  {t("applications.table.status")}
                 </TableHead>
               </TableRow>
             </TableHeader>

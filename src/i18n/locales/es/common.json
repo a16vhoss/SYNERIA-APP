@@ -182,5 +182,120 @@
     "beta": "Beta",
     "new": "Nuevo",
     "premium": "Premium"
+  },
+  "landing": {
+    "nav": {
+      "home": "Inicio",
+      "jobs": "Empleos",
+      "companies": "Empresas",
+      "sectors": "Sectores",
+      "login": "Iniciar Sesion"
+    },
+    "hero": {
+      "tagline": "Plataforma Global de Empleo",
+      "headingLine1": "El Futuro del Trabajo es Global.",
+      "headingLine2": "Y Empieza Aqui.",
+      "subtitle": "La plataforma que conecta trabajadores migrantes con empleadores internacionales. Contratos digitales, wallet integrada y soporte en 6 idiomas.",
+      "connectWith": "Conecta con",
+      "rotatingWords": {
+        "professionals": "profesionales",
+        "opportunities": "oportunidades",
+        "companies": "empresas",
+        "globalTalent": "talento global"
+      },
+      "exploreJobs": "Explorar Empleos",
+      "postJob": "Publicar Empleo",
+      "presentIn": "Presente en 28 paises",
+      "workers": "+12,500 trabajadores",
+      "companiesCount": "+3,200 empresas"
+    },
+    "features": {
+      "badge": "Todo en una plataforma",
+      "title": "La Plataforma",
+      "subtitle": "Herramientas poderosas para trabajadores y empresas, disenadas para el mercado laboral global.",
+      "smartSearch": {
+        "title": "Busqueda Inteligente de Empleos",
+        "description": "Encuentra oportunidades que coincidan con tu perfil, habilidades y paises de interes. Filtros avanzados por sector, salario y tipo de contrato."
+      },
+      "wallet": {
+        "title": "Wallet Digital Integrada",
+        "description": "Gestiona tus ingresos, recibe pagos y envia remesas internacionales desde una sola plataforma con comisiones minimas."
+      },
+      "contracts": {
+        "title": "Contratos Digitales con Blockchain",
+        "description": "Firma contratos digitalmente con verificacion inmutable. Transparencia total en terminos, beneficios y condiciones laborales."
+      },
+      "documents": {
+        "title": "Verificacion de Documentos",
+        "description": "Sube y verifica tu pasaporte, certificaciones y documentos laborales. Perfiles verificados generan mas confianza con empleadores."
+      },
+      "multilingual": {
+        "title": "Soporte Multilingue",
+        "description": "Plataforma disponible en 6 idiomas: Espanol, Ingles, Portugues, Frances, Aleman y Arabe. Comunicacion sin barreras."
+      },
+      "network": {
+        "title": "Red Profesional Global",
+        "description": "Conecta con profesionales de 28 paises. Construye tu red, comparte experiencias y accede a oportunidades exclusivas."
+      }
+    },
+    "howItWorks": {
+      "badge": "Proceso simple",
+      "title": "Como Funciona",
+      "subtitle": "En 5 pasos simples, conecta tu talento con oportunidades globales.",
+      "step1": {
+        "title": "Crea tu cuenta",
+        "description": "Registrate como trabajador o empresa en menos de 2 minutos. Selecciona tu rol y comienza."
+      },
+      "step2": {
+        "title": "Completa tu perfil",
+        "description": "Agrega tu experiencia, habilidades, idiomas y documentos. Un perfil completo multiplica tus oportunidades."
+      },
+      "step3": {
+        "title": "Busca empleos",
+        "description": "Explora empleos filtrados por sector, pais y salario. Nuestro sistema te sugiere las mejores coincidencias."
+      },
+      "step4": {
+        "title": "Aplica y conecta",
+        "description": "Envia tu aplicacion directamente. Comunicate con empleadores y firma contratos digitales seguros."
+      },
+      "step5": {
+        "title": "Trabaja globalmente",
+        "description": "Gestiona tu contrato, recibe pagos en tu wallet y construye tu carrera internacional."
+      }
+    },
+    "testimonials": {
+      "badge": "Historias reales",
+      "title": "Lo que dicen nuestros usuarios",
+      "subtitle": "Miles de trabajadores y empresas ya confian en Syneria para conectar talento global.",
+      "testimonial1": {
+        "quote": "Gracias a Syneria encontre un trabajo estable en Alemania en menos de 3 semanas. El proceso fue transparente y el contrato digital me dio mucha confianza.",
+        "name": "Carlos Ramirez",
+        "role": "Electricista Industrial",
+        "country": "Colombia"
+      },
+      "testimonial2": {
+        "quote": "Como empresa, Syneria nos permite acceder a talento calificado de toda Latinoamerica. Los perfiles verificados y el sistema de contratos ahorran semanas de trabajo.",
+        "name": "Sarah Mueller",
+        "role": "HR Manager - BauTech GmbH",
+        "country": "Alemania"
+      },
+      "testimonial3": {
+        "quote": "La wallet integrada es increible. Recibo mi salario y puedo enviar remesas a mi familia directamente desde la plataforma. Todo en un solo lugar.",
+        "name": "Maria Gonzalez",
+        "role": "Chef Profesional",
+        "country": "Mexico"
+      }
+    },
+    "cta": {
+      "badge": "Unete hoy gratis",
+      "title": "Tu Talento, Tu Mundo,",
+      "titleHighlight": "Tu Economia",
+      "subtitle": "Registrate gratis y accede a miles de oportunidades laborales en 28 paises. Tu carrera internacional comienza hoy.",
+      "createAccount": "Crear Cuenta Gratis",
+      "iAmCompany": "Soy Empresa",
+      "noCreditCard": "Sin tarjeta de credito",
+      "registerIn2Min": "Registro en 2 minutos",
+      "support6Languages": "Soporte 6 idiomas"
+    }
   }
 }

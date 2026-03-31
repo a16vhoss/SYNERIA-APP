@@ -2,6 +2,7 @@
 
 import { User, Settings, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
@@ -39,6 +40,7 @@ export function UserAvatarMenu({
   onLogout,
   className,
 }: UserAvatarMenuProps) {
+  const tc = useTranslations("common");
   const initials = getInitials(name);
 
   return (
@@ -81,19 +83,19 @@ export function UserAvatarMenu({
 
         <DropdownMenuItem onClick={onViewProfile}>
           <User className="size-4" />
-          <span>Ver Perfil</span>
+          <span>{tc("nav.myProfile")}</span>
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={onSettings}>
           <Settings className="size-4" />
-          <span>Configuración</span>
+          <span>{tc("nav.settings")}</span>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={onLogout} variant="destructive">
           <LogOut className="size-4" />
-          <span>Cerrar Sesión</span>
+          <span>{tc("nav.logout")}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

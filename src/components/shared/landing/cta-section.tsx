@@ -4,10 +4,12 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, Building2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function CtaSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const t = useTranslations("common.landing.cta");
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -74,7 +76,7 @@ export function CtaSection() {
             <span className="relative inline-flex size-2 rounded-full bg-brand-400" />
           </span>
           <span className="text-sm font-medium text-brand-100">
-            Unete hoy gratis
+            {t("badge")}
           </span>
         </motion.div>
 
@@ -85,9 +87,9 @@ export function CtaSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-6"
         >
-          Tu Talento, Tu Mundo,{" "}
+          {t("title")}{" "}
           <span className="relative">
-            Tu Economia
+            {t("titleHighlight")}
             <motion.span
               className="absolute -bottom-1 left-0 right-0 h-1 bg-brand-400 rounded-full"
               initial={{ scaleX: 0 }}
@@ -104,8 +106,7 @@ export function CtaSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg sm:text-xl text-brand-200/80 max-w-2xl mx-auto mb-10"
         >
-          Registrate gratis y accede a miles de oportunidades laborales en 28
-          paises. Tu carrera internacional comienza hoy.
+          {t("subtitle")}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -119,7 +120,7 @@ export function CtaSection() {
             href="/login"
             className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-brand-800 font-semibold text-base hover:bg-brand-50 transition-all duration-300 hover:shadow-xl hover:shadow-white/20 active:scale-[0.97]"
           >
-            Crear Cuenta Gratis
+            {t("createAccount")}
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           <Link
@@ -127,7 +128,7 @@ export function CtaSection() {
             className="group inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white/30 text-white font-semibold text-base hover:bg-white/10 hover:border-white/50 transition-all duration-300 active:scale-[0.97]"
           >
             <Building2 className="size-4" />
-            Soy Empresa
+            {t("iAmCompany")}
           </Link>
         </motion.div>
 
@@ -138,11 +139,11 @@ export function CtaSection() {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="mt-12 flex flex-wrap items-center justify-center gap-6 text-brand-300/50 text-xs uppercase tracking-wider font-medium"
         >
-          <span>Sin tarjeta de credito</span>
+          <span>{t("noCreditCard")}</span>
           <span className="w-1 h-1 rounded-full bg-brand-400/30" />
-          <span>Registro en 2 minutos</span>
+          <span>{t("registerIn2Min")}</span>
           <span className="w-1 h-1 rounded-full bg-brand-400/30" />
-          <span>Soporte 6 idiomas</span>
+          <span>{t("support6Languages")}</span>
         </motion.div>
       </motion.div>
     </section>

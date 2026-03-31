@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MapPin, BadgeCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { CompanyAvatar } from "@/components/shared/company-avatar";
 import { StarRating } from "@/components/shared/star-rating";
 
@@ -26,6 +27,7 @@ export function CompanyHeader({
   rating = 0,
   imageUrl,
 }: CompanyHeaderProps) {
+  const t = useTranslations("employer");
   return (
     <motion.div
       className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left"
@@ -58,7 +60,7 @@ export function CompanyHeader({
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.3, type: "spring", stiffness: 400, damping: 15 }}
-              title="Empresa verificada"
+              title={t("companyProfile.verified")}
             >
               <BadgeCheck className="size-6 text-brand-600" />
             </motion.span>

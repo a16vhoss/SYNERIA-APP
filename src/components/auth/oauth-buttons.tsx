@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface OAuthButtonsProps {
   onGoogle: () => void;
@@ -50,6 +51,7 @@ export function OAuthButtons({
   loading = false,
   disabled = false,
 }: OAuthButtonsProps) {
+  const t = useTranslations("auth");
   return (
     <div className="space-y-3">
       {/* Divider */}
@@ -58,7 +60,7 @@ export function OAuthButtons({
           <span className="w-full border-t border-border" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-3 text-muted-foreground">o</span>
+          <span className="bg-white px-3 text-muted-foreground">{t("oauth.orContinueWith")}</span>
         </div>
       </div>
 
@@ -76,7 +78,7 @@ export function OAuthButtons({
         ) : (
           <>
             <GoogleIcon />
-            <span>Google</span>
+            <span>{t("oauth.continueWithGoogle")}</span>
           </>
         )}
       </motion.button>
@@ -95,7 +97,7 @@ export function OAuthButtons({
         ) : (
           <>
             <LinkedInIcon />
-            <span>LinkedIn</span>
+            <span>{t("oauth.continueWithLinkedin")}</span>
           </>
         )}
       </motion.button>

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import { toast } from "sonner";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,6 +58,8 @@ export function PaymentModal({
   balance,
   onPayment,
 }: PaymentModalProps) {
+  const t = useTranslations("employer");
+  const tc = useTranslations("common");
   const [selectedContractId, setSelectedContractId] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -82,17 +85,15 @@ export function PaymentModal({
 
   const handleSend = () => {
     if (!selectedContractId || parsedAmount <= 0) {
-      toast.error("Completa todos los campos");
+      toast.error(tc("fillAllFields"));
       return;
     }
     if (insufficient) {
-      toast.error("Saldo insuficiente");
+      toast.error(t("wallet.sendPayment.insufficient"));
       return;
     }
     onPayment?.(selectedContractId, parsedAmount);
-    toast.success(
-      `Pago de $${parsedAmount.toFixed(2)} enviado a ${selectedContract?.workerName}`
-    );
+    toast.success(t("wallet.sendPayment.success"));
     setSelectedContractId("");
     setAmount("");
     setDescription("");
@@ -114,10 +115,10 @@ export function PaymentModal({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Send className="size-5 text-brand-600" />
-            Enviar Pago
+            {t("wallet.sendPayment.title")}
           </DialogTitle>
           <DialogDescription>
-            Envia un pago a un trabajador de tu equipo.
+            {t("wallet.sendPayment.description")}
           </DialogDescription>
         </DialogHeader>
 
@@ -129,13 +130,13 @@ export function PaymentModal({
         >
           {/* Contract select */}
           <div className="space-y-1.5">
-            <Label>Contrato</Label>
+            <Label>{t("contracts.title")}</Label>
             <Select
               value={selectedContractId}
               onValueChange={(v) => v && setSelectedContractId(v)}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Seleccionar contrato" />
+                <SelectValue placeholder={t("contracts.title")} />
               </SelectTrigger>
               <SelectContent>
                 {contracts.map((c) => (
@@ -149,7 +150,7 @@ export function PaymentModal({
 
           {/* Amount */}
           <div className="space-y-1.5">
-            <Label htmlFor="pay-amount">Monto (USD)</Label>
+            <Label htmlFor="pay-amount">{t("wallet.sendPayment.amount")}</Label>
             <Input
               id="pay-amount"
               type="number"
@@ -163,7 +164,7 @@ export function PaymentModal({
 
           {/* Description */}
           <div className="space-y-1.5">
-            <Label htmlFor="pay-desc">Descripcion</Label>
+            <Label htmlFor="pay-desc">{t("vacancies.create.description")}</Label>
             <Input
               id="pay-desc"
               placeholder="Pago mensual marzo"
@@ -181,25 +182,25 @@ export function PaymentModal({
               transition={{ duration: 0.2 }}
             >
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Monto del pago</span>
+                <span className="text-muted-foreground">{t("wallet.sendPayment.amount")}</span>
                 <span className="font-medium">${parsedAmount.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">
-                  Comision plataforma (1.5%)
+                  {t("wallet.sendPayment.platformFee")}
                 </span>
                 <span className="font-medium">${fee.toFixed(2)}</span>
               </div>
               <div className="border-t border-foreground/10 pt-2">
                 <div className="flex justify-between text-sm">
                   <span className="font-medium text-foreground">
-                    Total a deducir
+                    {t("wallet.sendPayment.totalDeducted")}
                   </span>
                   <span className="font-bold">${totalDeducted.toFixed(2)}</span>
                 </div>
                 <div className="mt-1 flex justify-between text-sm">
                   <span className="text-muted-foreground">
-                    Balance despues del pago
+                    {t("wallet.sendPayment.balanceAfter")}
                   </span>
                   <span
                     className={cn(
@@ -213,7 +214,7 @@ export function PaymentModal({
               </div>
               {insufficient && (
                 <p className="text-xs font-medium text-rose-600">
-                  Saldo insuficiente. Deposita fondos antes de enviar.
+                  {t("wallet.sendPayment.insufficient")}
                 </p>
               )}
             </motion.div>
@@ -229,7 +230,7 @@ export function PaymentModal({
             }
           >
             <Send className="size-4" />
-            Enviar Pago
+            {t("wallet.sendPayment.title")}
           </Button>
         </DialogFooter>
       </DialogContent>

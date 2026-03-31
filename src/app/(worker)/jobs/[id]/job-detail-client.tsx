@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -134,6 +135,8 @@ interface JobDetailClientProps {
 }
 
 export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }: JobDetailClientProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const job = buildJobDetail(jobData);
   const [saved, setSaved] = useState(false);
   const [applyOpen, setApplyOpen] = useState(false);
@@ -146,12 +149,12 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
   }
 
   const summaryItems: SummaryItem[] = [
-    { icon: Briefcase, label: "Sector", value: job.summary.sector },
-    { icon: Clock, label: "Tipo", value: job.summary.type },
-    { icon: Timer, label: "Experiencia", value: job.summary.experience },
-    { icon: Globe, label: "Idiomas", value: job.summary.languages },
-    { icon: Calendar, label: "Fecha inicio", value: job.summary.startDate },
-    { icon: Clock, label: "Duracion", value: job.summary.duration },
+    { icon: Briefcase, label: t("jobs.filters.category"), value: job.summary.sector },
+    { icon: Clock, label: t("jobs.detail.type"), value: job.summary.type },
+    { icon: Timer, label: t("jobs.filters.experience"), value: job.summary.experience },
+    { icon: Globe, label: t("jobs.detail.location"), value: job.summary.languages },
+    { icon: Calendar, label: t("contracts.detail.startDate"), value: job.summary.startDate },
+    { icon: Clock, label: t("contracts.detail.endDate"), value: job.summary.duration },
   ];
 
   const similarJobs: SimilarJob[] = (similarJobsProp ?? []).map((j) => ({
@@ -187,7 +190,7 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
             href="/jobs"
             className="hover:text-foreground transition-colors"
           >
-            Empleos
+            {t("jobs.title")}
           </Link>
           <ChevronRight className="size-3.5" />
           <span className="text-foreground font-medium truncate max-w-[300px]">
@@ -265,7 +268,7 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
                 {/* Action buttons */}
                 <div className="flex flex-wrap gap-2">
                   <Button onClick={() => setApplyOpen(true)} size="lg">
-                    Aplicar Ahora
+                    {t("jobs.detail.applyNow")}
                   </Button>
                   <Button
                     variant="outline"
@@ -277,7 +280,7 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
                     ) : (
                       <Bookmark className="mr-1.5 size-4" />
                     )}
-                    {saved ? "Guardado" : "Guardar"}
+                    {saved ? t("jobs.detail.savedJob") : t("jobs.detail.saveJob")}
                   </Button>
                   <Button
                     variant="outline"
@@ -285,7 +288,7 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
                     onClick={handleShare}
                   >
                     <Share2 className="mr-1.5 size-4" />
-                    {copied ? "Copiado!" : "Compartir"}
+                    {copied ? tc("misc.copiedToClipboard") : t("jobs.detail.shareJob")}
                   </Button>
                 </div>
               </div>

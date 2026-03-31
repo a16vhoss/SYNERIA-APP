@@ -8,18 +8,17 @@ import { motion } from "framer-motion";
 import { Eye, EyeOff, Loader2, Mail, Lock } from "lucide-react";
 import Link from "next/link";
 
+import { useTranslations } from "next-intl";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { OAuthButtons } from "@/components/auth/oauth-buttons";
 import { useAuth } from "@/hooks/useAuth";
 
-const loginSchema = z.object({
-  email: z.email("Ingresa un correo valido"),
-  password: z.string().min(1, "La contrasena es requerida"),
-});
-
-type LoginFormValues = z.infer<typeof loginSchema>;
+type LoginFormValues = {
+  email: string;
+  password: string;
+};
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -35,10 +34,16 @@ const fadeUp = {
 };
 
 export function LoginForm() {
+  const t = useTranslations("auth");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const { signInWithEmail, signInWithGoogle, signInWithLinkedIn, loading, error, clearError } =
     useAuth();
+
+  const loginSchema = z.object({
+    email: z.email(t("login.errorInvalid")),
+    password: z.string().min(1, t("login.password")),
+  });
 
   const {
     register,
@@ -64,10 +69,10 @@ export function LoginForm() {
       {/* Header */}
       <motion.div variants={fadeUp} className="space-y-2">
         <h2 className="font-heading text-2xl font-bold text-foreground">
-          Bienvenido de vuelta
+          {t("login.title")}
         </h2>
         <p className="text-sm text-muted-foreground">
-          Ingresa tus credenciales para acceder a tu cuenta
+          {t("login.subtitle")}
         </p>
       </motion.div>
 
@@ -85,13 +90,13 @@ export function LoginForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Email */}
         <motion.div variants={fadeUp} className="space-y-2">
-          <Label htmlFor="login-email">Correo electronico</Label>
+          <Label htmlFor="login-email">{t("login.email")}</Label>
           <div className="relative">
             <Mail className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               id="login-email"
               type="email"
-              placeholder="tu@correo.com"
+              placeholder={t("login.emailPlaceholder")}
               className="h-11 rounded-xl pl-10"
               {...register("email")}
               aria-invalid={!!errors.email}
@@ -104,13 +109,13 @@ export function LoginForm() {
 
         {/* Password */}
         <motion.div variants={fadeUp} className="space-y-2">
-          <Label htmlFor="login-password">Contrasena</Label>
+          <Label htmlFor="login-password">{t("login.password")}</Label>
           <div className="relative">
             <Lock className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               id="login-password"
               type={showPassword ? "text" : "password"}
-              placeholder="Tu contrasena"
+              placeholder={t("login.passwordPlaceholder")}
               className="h-11 rounded-xl pl-10 pr-10"
               {...register("password")}
               aria-invalid={!!errors.password}
@@ -145,13 +150,13 @@ export function LoginForm() {
               checked={rememberMe}
               onCheckedChange={(checked) => setRememberMe(checked === true)}
             />
-            Recordarme
+            {t("login.rememberMe")}
           </label>
           <Link
             href="/reset-password"
             className="text-sm font-medium text-brand-600 transition-colors hover:text-brand-700"
           >
-            Olvidaste tu contrasena?
+            {t("login.forgotPassword")}
           </Link>
         </motion.div>
 
@@ -167,7 +172,7 @@ export function LoginForm() {
             {loading ? (
               <Loader2 className="size-4 animate-spin" />
             ) : (
-              "Iniciar Sesion"
+              t("login.submit")
             )}
           </motion.button>
         </motion.div>

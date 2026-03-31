@@ -3,43 +3,33 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Quote } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const testimonials = [
+const testimonialKeys = [
   {
-    quote:
-      "Gracias a Syneria encontre un trabajo estable en Alemania en menos de 3 semanas. El proceso fue transparente y el contrato digital me dio mucha confianza.",
-    name: "Carlos Ramirez",
-    role: "Electricista Industrial",
-    country: "Colombia",
-    flag: "🇨🇴",
+    key: "testimonial1",
+    flag: "\u{1F1E8}\u{1F1F4}",
     avatar: "CR",
     gradient: "from-brand-500 to-brand-700",
   },
   {
-    quote:
-      "Como empresa, Syneria nos permite acceder a talento calificado de toda Latinoamerica. Los perfiles verificados y el sistema de contratos ahorran semanas de trabajo.",
-    name: "Sarah Mueller",
-    role: "HR Manager - BauTech GmbH",
-    country: "Alemania",
-    flag: "🇩🇪",
+    key: "testimonial2",
+    flag: "\u{1F1E9}\u{1F1EA}",
     avatar: "SM",
     gradient: "from-brand-400 to-brand-600",
   },
   {
-    quote:
-      "La wallet integrada es increible. Recibo mi salario y puedo enviar remesas a mi familia directamente desde la plataforma. Todo en un solo lugar.",
-    name: "Maria Gonzalez",
-    role: "Chef Profesional",
-    country: "Mexico",
-    flag: "🇲🇽",
+    key: "testimonial3",
+    flag: "\u{1F1F2}\u{1F1FD}",
     avatar: "MG",
     gradient: "from-brand-600 to-brand-800",
   },
-];
+] as const;
 
 export function TestimonialsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const t = useTranslations("common.landing.testimonials");
 
   return (
     <section
@@ -58,21 +48,21 @@ export function TestimonialsSection() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold mb-4">
-            Historias reales
+            {t("badge")}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-brand-900 mb-4">
-            Lo que dicen nuestros usuarios
+            {t("title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Miles de trabajadores y empresas ya confian en Syneria para conectar talento global.
+            {t("subtitle")}
           </p>
         </motion.div>
 
         {/* Testimonial cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, i) => (
+          {testimonialKeys.map((testimonial, i) => (
             <motion.div
-              key={testimonial.name}
+              key={testimonial.key}
               initial={{ opacity: 0, y: 40, rotateY: -5 }}
               animate={
                 isInView
@@ -93,7 +83,7 @@ export function TestimonialsSection() {
 
               {/* Quote text */}
               <p className="text-foreground/80 leading-relaxed mb-6 text-[15px]">
-                &ldquo;{testimonial.quote}&rdquo;
+                &ldquo;{t(`${testimonial.key}.quote`)}&rdquo;
               </p>
 
               {/* Author */}
@@ -107,14 +97,14 @@ export function TestimonialsSection() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="font-heading font-semibold text-brand-900 text-sm truncate">
-                      {testimonial.name}
+                      {t(`${testimonial.key}.name`)}
                     </span>
-                    <span className="text-base" title={testimonial.country}>
+                    <span className="text-base" title={t(`${testimonial.key}.country`)}>
                       {testimonial.flag}
                     </span>
                   </div>
                   <p className="text-xs text-muted-foreground truncate">
-                    {testimonial.role}
+                    {t(`${testimonial.key}.role`)}
                   </p>
                 </div>
               </div>

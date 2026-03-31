@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { AnimatedLeftPanel } from "@/components/auth/animated-left-panel";
 import { LoginForm } from "@/components/auth/login-form";
 import { RegisterForm } from "@/components/auth/register-form";
 
 export function LoginClient() {
+  const t = useTranslations("auth");
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
 
   return (
@@ -21,7 +23,7 @@ export function LoginClient() {
         {/* Mobile header strip */}
         <div className="bg-gradient-to-r from-brand-700 to-brand-900 px-6 py-4 lg:hidden">
           <h2 className="font-heading text-lg font-bold text-white">Syneria</h2>
-          <p className="text-sm text-white/70">Tu plataforma global de talento</p>
+          <p className="text-sm text-white/70">{t("login.subtitle")}</p>
         </div>
 
         <div className="flex flex-1 items-center justify-center px-6 py-10 lg:px-16">
@@ -37,7 +39,7 @@ export function LoginClient() {
                     color: activeTab === tab ? "#1B4332" : "#6B7280",
                   }}
                 >
-                  {tab === "login" ? "Iniciar Sesion" : "Registrarse"}
+                  {tab === "login" ? t("login.submit") : t("register.title")}
                 </button>
               ))}
               <motion.div

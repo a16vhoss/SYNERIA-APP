@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { User, Building2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 type Role = "worker" | "employer";
 
@@ -11,17 +12,19 @@ interface RoleSelectorProps {
   onChange: (role: Role) => void;
 }
 
-const roles: { value: Role; label: string; icon: typeof User }[] = [
-  { value: "worker", label: "Soy Trabajador", icon: User },
-  { value: "employer", label: "Soy Empresa", icon: Building2 },
+const roleConfig: { value: Role; icon: typeof User }[] = [
+  { value: "worker", icon: User },
+  { value: "employer", icon: Building2 },
 ];
 
 export function RoleSelector({ value, onChange }: RoleSelectorProps) {
+  const t = useTranslations("auth");
   return (
     <div className="relative flex w-full rounded-xl bg-muted p-1">
-      {roles.map((role) => {
+      {roleConfig.map((role) => {
         const Icon = role.icon;
         const isActive = value === role.value;
+        const label = role.value === "worker" ? t("roles.worker") : t("roles.employer");
 
         return (
           <button
@@ -48,7 +51,7 @@ export function RoleSelector({ value, onChange }: RoleSelectorProps) {
             )}
             <span className="relative z-10 flex items-center gap-2">
               <Icon className="size-4" />
-              {role.label}
+              {label}
             </span>
           </button>
         );

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, Ban } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   Dialog,
@@ -41,6 +42,9 @@ export function ContractCancelDialog({
   onRequestCancel,
   onRespondCancel,
 }: ContractCancelDialogProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
+
   const [reason, setReason] = useState("");
   const [requestStep, setRequestStep] = useState<RequestStep>("reason");
   const [loading, setLoading] = useState(false);
@@ -87,8 +91,8 @@ export function ContractCancelDialog({
           <DialogTitle className="flex items-center gap-2 font-heading text-lg font-bold">
             <Ban className="size-5 text-red-600" />
             {mode === "request"
-              ? "Solicitar Cancelacion"
-              : "Responder a Solicitud de Cancelacion"}
+              ? t("contracts.cancel.title")
+              : `${tc("actions.reject")} - ${t("contracts.cancel.title")}`}
           </DialogTitle>
         </DialogHeader>
 
@@ -114,11 +118,11 @@ export function ContractCancelDialog({
 
               <div className="space-y-2">
                 <Label htmlFor="cancel-reason">
-                  Motivo de cancelacion
+                  {t("contracts.cancel.reason")}
                 </Label>
                 <Textarea
                   id="cancel-reason"
-                  placeholder="Explica el motivo por el cual deseas cancelar este contrato..."
+                  placeholder={t("contracts.cancel.reasonPlaceholder")}
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
                   className="min-h-24"
@@ -130,14 +134,14 @@ export function ContractCancelDialog({
                   variant="outline"
                   onClick={() => handleClose(false)}
                 >
-                  Volver
+                  {tc("actions.back")}
                 </Button>
                 <Button
                   onClick={() => setRequestStep("confirm")}
                   disabled={reason.trim().length < 10}
                   className="bg-red-600 text-white hover:bg-red-700"
                 >
-                  Continuar
+                  {tc("actions.continue")}
                 </Button>
               </DialogFooter>
             </motion.div>
@@ -158,12 +162,10 @@ export function ContractCancelDialog({
                   <AlertTriangle className="mt-0.5 size-5 text-red-600" />
                   <div className="space-y-1">
                     <p className="text-sm font-semibold text-red-800">
-                      Confirmar Solicitud
+                      {tc("actions.confirm")}
                     </p>
                     <p className="text-sm text-red-700">
-                      Esta accion enviara una solicitud de cancelacion a la
-                      otra parte. El contrato no se cancelara hasta que ambas
-                      partes esten de acuerdo.
+                      {t("contracts.cancel.warning")}
                     </p>
                   </div>
                 </div>
@@ -171,7 +173,7 @@ export function ContractCancelDialog({
 
               <div className="rounded-lg bg-muted/50 p-3">
                 <p className="text-xs font-medium text-muted-foreground">
-                  Tu motivo:
+                  {t("contracts.cancel.reason")}:
                 </p>
                 <p className="mt-1 text-sm text-foreground">{reason}</p>
               </div>
@@ -181,14 +183,14 @@ export function ContractCancelDialog({
                   variant="outline"
                   onClick={() => setRequestStep("reason")}
                 >
-                  Atras
+                  {tc("actions.back")}
                 </Button>
                 <Button
                   onClick={handleRequestSubmit}
                   disabled={loading}
                   className="bg-red-600 text-white hover:bg-red-700"
                 >
-                  {loading ? "Enviando..." : "Confirmar Cancelacion"}
+                  {loading ? tc("misc.loading") : t("contracts.cancel.confirm")}
                 </Button>
               </DialogFooter>
             </motion.div>
@@ -209,7 +211,7 @@ export function ContractCancelDialog({
                   {contract.position}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Solicitado por:{" "}
+                  {tc("misc.by")}:{" "}
                   {contract.cancellation_requested_by === "worker"
                     ? contract.worker_name
                     : contract.company_name}
@@ -218,10 +220,10 @@ export function ContractCancelDialog({
 
               <div className="rounded-lg border border-orange-200 bg-orange-50 p-4">
                 <p className="text-xs font-medium text-orange-800">
-                  Motivo de cancelacion:
+                  {t("contracts.cancel.reason")}:
                 </p>
                 <p className="mt-1 text-sm text-orange-700">
-                  {contract.cancellation_reason || "Sin motivo especificado"}
+                  {contract.cancellation_reason || t("contracts.cancel.reasonPlaceholder")}
                 </p>
               </div>
 
@@ -230,21 +232,21 @@ export function ContractCancelDialog({
                   variant="outline"
                   onClick={() => handleClose(false)}
                 >
-                  Cerrar
+                  {tc("actions.close")}
                 </Button>
                 <Button
                   onClick={() => handleRespond(false)}
                   disabled={loading}
                   className="bg-orange-600 text-white hover:bg-orange-700"
                 >
-                  Disputar
+                  {tc("actions.reject")}
                 </Button>
                 <Button
                   onClick={() => handleRespond(true)}
                   disabled={loading}
                   className="bg-red-600 text-white hover:bg-red-700"
                 >
-                  Aceptar Cancelacion
+                  {tc("actions.accept")}
                 </Button>
               </DialogFooter>
             </motion.div>

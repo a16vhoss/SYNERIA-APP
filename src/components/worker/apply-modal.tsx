@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -58,6 +59,8 @@ export function ApplyModal({
   jobTitle,
   companyName,
 }: ApplyModalProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -218,7 +221,7 @@ export function ApplyModal({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
               >
-                Aplicacion enviada exitosamente
+                {t("jobs.apply.success")}
               </motion.h3>
               <motion.p
                 className="text-center text-sm text-muted-foreground"
@@ -226,8 +229,7 @@ export function ApplyModal({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.35 }}
               >
-                Tu aplicacion a {companyName} ha sido enviada. Te notificaremos
-                cuando haya una respuesta.
+                {t("jobs.apply.success")} - {companyName}
               </motion.p>
 
               <motion.div
@@ -235,7 +237,7 @@ export function ApplyModal({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.45 }}
               >
-                <Button onClick={handleClose}>Cerrar</Button>
+                <Button onClick={handleClose}>{tc("actions.close")}</Button>
               </motion.div>
             </motion.div>
           ) : (
@@ -250,10 +252,9 @@ export function ApplyModal({
               transition={{ duration: 0.3 }}
             >
               <DialogHeader>
-                <DialogTitle>Aplicar a {jobTitle}</DialogTitle>
+                <DialogTitle>{t("jobs.apply.title", { jobTitle })}</DialogTitle>
                 <DialogDescription>
-                  Completa la informacion para enviar tu aplicacion a{" "}
-                  {companyName}.
+                  {t("jobs.apply.coverLetterPlaceholder")} - {companyName}
                 </DialogDescription>
               </DialogHeader>
 
@@ -264,7 +265,7 @@ export function ApplyModal({
                 transition={{ delay: 0.1 }}
               >
                 <label className="mb-1.5 block text-sm font-medium text-foreground">
-                  Curriculum Vitae
+                  {t("jobs.apply.resume")}
                 </label>
                 {cvFile ? (
                   <div className="flex items-center gap-3 rounded-lg border border-brand-200 bg-brand-50 p-3">
@@ -300,9 +301,9 @@ export function ApplyModal({
                   >
                     <Upload className="size-6 text-muted-foreground" />
                     <p className="text-sm text-muted-foreground">
-                      Arrastra tu CV aqui o{" "}
+                      {t("jobs.apply.uploadResume")}{" "}
                       <label className="cursor-pointer font-medium text-brand-600 hover:underline">
-                        selecciona un archivo
+                        {tc("actions.upload")}
                         <input
                           type="file"
                           accept=".pdf,.doc,.docx"
@@ -326,7 +327,7 @@ export function ApplyModal({
               >
                 <div className="mb-1.5 flex items-center justify-between">
                   <label className="text-sm font-medium text-foreground">
-                    Carta de presentacion
+                    {t("jobs.apply.coverLetter")}
                   </label>
                   <span
                     className={cn(
@@ -341,7 +342,7 @@ export function ApplyModal({
                 </div>
                 <Textarea
                   {...register("coverLetter")}
-                  placeholder="Describe por que eres un buen candidato para este puesto..."
+                  placeholder={t("jobs.apply.coverLetterPlaceholder")}
                   className="min-h-[100px]"
                 />
                 {errors.coverLetter && (
@@ -359,7 +360,7 @@ export function ApplyModal({
               >
                 <div className="mb-1.5 flex items-center justify-between">
                   <label className="text-sm font-medium text-foreground">
-                    Motivacion
+                    {t("jobs.apply.coverLetter")}
                   </label>
                   <span
                     className={cn(
@@ -374,7 +375,7 @@ export function ApplyModal({
                 </div>
                 <Textarea
                   {...register("motivation")}
-                  placeholder="Que te motiva a aplicar a este empleo..."
+                  placeholder={t("jobs.apply.coverLetterPlaceholder")}
                   className="min-h-[80px]"
                 />
                 {errors.motivation && (
@@ -391,7 +392,7 @@ export function ApplyModal({
                 transition={{ delay: 0.25 }}
               >
                 <label className="mb-1.5 block text-sm font-medium text-foreground">
-                  Disponibilidad
+                  {t("jobs.apply.availability")}
                 </label>
                 <Popover>
                   <PopoverTrigger
@@ -408,7 +409,7 @@ export function ApplyModal({
                     <CalendarIcon className="mr-2 size-4" />
                     {availability
                       ? format(availability, "PPP", { locale: es })
-                      : "Selecciona una fecha"}
+                      : t("jobs.apply.startDate")}
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
@@ -434,10 +435,10 @@ export function ApplyModal({
                   variant="outline"
                   onClick={handleClose}
                 >
-                  Cancelar
+                  {tc("actions.cancel")}
                 </Button>
                 <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "Enviando..." : "Enviar Aplicacion"}
+                  {isSubmitting ? t("jobs.apply.submitting") : t("jobs.apply.submit")}
                 </Button>
               </DialogFooter>
             </motion.form>

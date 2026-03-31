@@ -6,18 +6,20 @@ import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
-
-const navLinks = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Empleos", href: "#plataforma" },
-  { label: "Empresas", href: "#como-funciona" },
-  { label: "Sectores", href: "#sectores" },
-];
+import { useTranslations } from "next-intl";
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { scrollY } = useScroll();
+  const t = useTranslations("common.landing.nav");
+
+  const navLinks = [
+    { label: t("home"), href: "#inicio" },
+    { label: t("jobs"), href: "#plataforma" },
+    { label: t("companies"), href: "#como-funciona" },
+    { label: t("sectors"), href: "#sectores" },
+  ];
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 50);
@@ -87,7 +89,7 @@ export function LandingNav() {
                   "active:scale-[0.97]"
                 )}
               >
-                Iniciar Sesion
+                {t("login")}
               </Link>
             </motion.div>
 
@@ -149,7 +151,7 @@ export function LandingNav() {
                 onClick={() => setMobileOpen(false)}
                 className="block w-full text-center py-3.5 rounded-full bg-brand-600 text-white font-semibold text-base hover:bg-brand-700 transition-colors"
               >
-                Iniciar Sesion
+                {t("login")}
               </Link>
             </motion.div>
           </motion.nav>

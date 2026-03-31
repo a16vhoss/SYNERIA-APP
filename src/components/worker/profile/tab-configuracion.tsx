@@ -23,6 +23,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 
 const stagger = {
@@ -48,6 +49,7 @@ const LANGUAGES = [
 ];
 
 export function TabConfiguracion() {
+  const tc = useTranslations("common");
   const [notifJobs, setNotifJobs] = useState(true);
   const [notifApplications, setNotifApplications] = useState(true);
   const [frequency, setFrequency] = useState("semanal");
@@ -101,7 +103,7 @@ export function TabConfiguracion() {
 
       // Persist language preference via cookie and reload to apply
       document.cookie = `NEXT_LOCALE=${language};path=/;max-age=${60 * 60 * 24 * 365}`;
-      toast.success("Configuracion guardada");
+      toast.success(tc("misc.savedSuccessfully"));
 
       // Reload after a short delay so the toast is visible
       setTimeout(() => window.location.reload(), 800);
@@ -214,7 +216,7 @@ export function TabConfiguracion() {
           className="bg-brand-600 hover:bg-brand-700"
         >
           {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Guardar Configuracion
+          {tc("actions.save")} {tc("nav.settings")}
         </Button>
       </motion.div>
 
@@ -238,7 +240,7 @@ export function TabConfiguracion() {
           onClick={() => setDeleteOpen(true)}
         >
           <Trash2 className="mr-2 h-4 w-4" />
-          Eliminar mi cuenta
+          {tc("actions.delete")} mi cuenta
         </Button>
       </motion.div>
 
@@ -262,7 +264,7 @@ export function TabConfiguracion() {
           />
           <DialogFooter>
             <Button variant="outline" onClick={() => setDeleteOpen(false)}>
-              Cancelar
+              {tc("actions.cancel")}
             </Button>
             <Button
               variant="destructive"

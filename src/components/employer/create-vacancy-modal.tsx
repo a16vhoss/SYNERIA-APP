@@ -12,6 +12,7 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -54,6 +55,7 @@ export function CreateVacancyModal({
   onOpenChange,
   onSubmit,
 }: CreateVacancyModalProps) {
+  const t = useTranslations("employer");
   const {
     register,
     handleSubmit,
@@ -85,7 +87,7 @@ export function CreateVacancyModal({
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="font-heading text-lg font-bold">
-            Publicar Nueva Vacante
+            {t("vacancies.create.title")}
           </DialogTitle>
         </DialogHeader>
 
@@ -101,14 +103,14 @@ export function CreateVacancyModal({
               variants={fieldVariants}
               custom={0}
             >
-              Informacion del Puesto
+              {t("vacancies.create.jobTitle")}
             </motion.p>
 
             <motion.div variants={fieldVariants} custom={1}>
-              <Label htmlFor="title">Titulo del puesto</Label>
+              <Label htmlFor="title">{t("vacancies.create.jobTitle")}</Label>
               <Input
                 id="title"
-                placeholder="Titulo del puesto"
+                placeholder={t("vacancies.create.jobTitlePlaceholder")}
                 {...register("title", { required: "Campo requerido", minLength: { value: 3, message: "Minimo 3 caracteres" } })}
                 aria-invalid={!!errors.title}
                 className="mt-1"
@@ -119,10 +121,10 @@ export function CreateVacancyModal({
             </motion.div>
 
             <motion.div variants={fieldVariants} custom={2}>
-              <Label htmlFor="description">Descripcion</Label>
+              <Label htmlFor="description">{t("vacancies.create.description")}</Label>
               <Textarea
                 id="description"
-                placeholder="Descripcion del puesto..."
+                placeholder={t("vacancies.create.descriptionPlaceholder")}
                 rows={3}
                 {...register("description", { required: "Campo requerido", minLength: { value: 10, message: "Minimo 10 caracteres" } })}
                 aria-invalid={!!errors.description}
@@ -139,7 +141,7 @@ export function CreateVacancyModal({
               custom={3}
             >
               <div>
-                <Label htmlFor="sector">Sector</Label>
+                <Label htmlFor="sector">{t("vacancies.create.category")}</Label>
                 <select
                   id="sector"
                   {...register("sector", { required: "Selecciona un sector" })}
@@ -157,7 +159,7 @@ export function CreateVacancyModal({
                 )}
               </div>
               <div>
-                <Label htmlFor="contract_type">Tipo de contrato</Label>
+                <Label htmlFor="contract_type">{t("vacancies.create.type")}</Label>
                 <select
                   id="contract_type"
                   {...register("contract_type", { required: "Selecciona un tipo" })}
@@ -188,7 +190,7 @@ export function CreateVacancyModal({
               variants={fieldVariants}
               custom={4}
             >
-              Ubicacion y Salario
+              {t("vacancies.create.location")}
             </motion.p>
 
             <motion.div
@@ -197,7 +199,7 @@ export function CreateVacancyModal({
               custom={5}
             >
               <div>
-                <Label htmlFor="country">Pais</Label>
+                <Label htmlFor="country">{t("companyProfile.location")}</Label>
                 <select
                   id="country"
                   {...register("country", { required: "Selecciona un pais" })}
@@ -235,7 +237,7 @@ export function CreateVacancyModal({
               custom={6}
             >
               <div>
-                <Label htmlFor="salary_min">Salario minimo (EUR/mes)</Label>
+                <Label htmlFor="salary_min">{t("vacancies.create.salaryMin")}</Label>
                 <Input
                   id="salary_min"
                   type="number"
@@ -245,7 +247,7 @@ export function CreateVacancyModal({
                 />
               </div>
               <div>
-                <Label htmlFor="salary_max">Salario maximo (EUR/mes)</Label>
+                <Label htmlFor="salary_max">{t("vacancies.create.salaryMax")}</Label>
                 <Input
                   id="salary_max"
                   type="number"
@@ -268,14 +270,14 @@ export function CreateVacancyModal({
               variants={fieldVariants}
               custom={7}
             >
-              Requisitos y Beneficios
+              {t("vacancies.create.requirements")}
             </motion.p>
 
             <motion.div variants={fieldVariants} custom={8}>
-              <Label htmlFor="requirements">Requisitos</Label>
+              <Label htmlFor="requirements">{t("vacancies.create.requirements")}</Label>
               <Textarea
                 id="requirements"
-                placeholder="Experiencia requerida, certificaciones, idiomas..."
+                placeholder={t("vacancies.create.requirementsPlaceholder")}
                 rows={3}
                 {...register("requirements")}
                 className="mt-1"
@@ -283,10 +285,10 @@ export function CreateVacancyModal({
             </motion.div>
 
             <motion.div variants={fieldVariants} custom={9}>
-              <Label htmlFor="benefits">Beneficios</Label>
+              <Label htmlFor="benefits">{t("vacancies.create.benefits")}</Label>
               <Textarea
                 id="benefits"
-                placeholder="Visa patrocinada, alojamiento, seguro medico..."
+                placeholder={t("vacancies.create.benefitsPlaceholder")}
                 rows={3}
                 {...register("benefits")}
                 className="mt-1"
@@ -299,14 +301,14 @@ export function CreateVacancyModal({
             <DialogClose
               render={<Button variant="outline" type="button" />}
             >
-              Cancelar
+              {t("candidates.interview.cancel")}
             </DialogClose>
             <Button
               type="submit"
               disabled={isSubmitting}
               className="bg-brand-600 text-white hover:bg-brand-700"
             >
-              {isSubmitting ? "Publicando..." : "Publicar Vacante"}
+              {isSubmitting ? t("vacancies.create.publishing") : t("vacancies.create.publish")}
             </Button>
           </DialogFooter>
         </form>

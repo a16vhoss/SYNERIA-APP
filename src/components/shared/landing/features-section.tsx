@@ -11,55 +11,21 @@ import {
   Globe2,
 } from "lucide-react";
 import { GlassCard } from "@/components/shared/glass-card";
+import { useTranslations } from "next-intl";
 
-const features = [
-  {
-    icon: Search,
-    title: "Busqueda Inteligente de Empleos",
-    description:
-      "Encuentra oportunidades que coincidan con tu perfil, habilidades y paises de interes. Filtros avanzados por sector, salario y tipo de contrato.",
-    gradient: "from-brand-500 to-brand-600",
-  },
-  {
-    icon: Wallet,
-    title: "Wallet Digital Integrada",
-    description:
-      "Gestiona tus ingresos, recibe pagos y envia remesas internacionales desde una sola plataforma con comisiones minimas.",
-    gradient: "from-brand-400 to-brand-600",
-  },
-  {
-    icon: FileCheck,
-    title: "Contratos Digitales con Blockchain",
-    description:
-      "Firma contratos digitalmente con verificacion inmutable. Transparencia total en terminos, beneficios y condiciones laborales.",
-    gradient: "from-brand-600 to-brand-700",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Verificacion de Documentos",
-    description:
-      "Sube y verifica tu pasaporte, certificaciones y documentos laborales. Perfiles verificados generan mas confianza con empleadores.",
-    gradient: "from-brand-500 to-brand-700",
-  },
-  {
-    icon: Languages,
-    title: "Soporte Multilingue",
-    description:
-      "Plataforma disponible en 6 idiomas: Espanol, Ingles, Portugues, Frances, Aleman y Arabe. Comunicacion sin barreras.",
-    gradient: "from-brand-400 to-brand-500",
-  },
-  {
-    icon: Globe2,
-    title: "Red Profesional Global",
-    description:
-      "Conecta con profesionales de 28 paises. Construye tu red, comparte experiencias y accede a oportunidades exclusivas.",
-    gradient: "from-brand-600 to-brand-800",
-  },
-];
+const featureKeys = [
+  { icon: Search, key: "smartSearch", gradient: "from-brand-500 to-brand-600" },
+  { icon: Wallet, key: "wallet", gradient: "from-brand-400 to-brand-600" },
+  { icon: FileCheck, key: "contracts", gradient: "from-brand-600 to-brand-700" },
+  { icon: ShieldCheck, key: "documents", gradient: "from-brand-500 to-brand-700" },
+  { icon: Languages, key: "multilingual", gradient: "from-brand-400 to-brand-500" },
+  { icon: Globe2, key: "network", gradient: "from-brand-600 to-brand-800" },
+] as const;
 
 export function FeaturesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const t = useTranslations("common.landing.features");
 
   return (
     <section
@@ -80,24 +46,23 @@ export function FeaturesSection() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold mb-4">
-            Todo en una plataforma
+            {t("badge")}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-brand-900 mb-4">
-            La Plataforma
+            {t("title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Herramientas poderosas para trabajadores y empresas, disenadas para el
-            mercado laboral global.
+            {t("subtitle")}
           </p>
         </motion.div>
 
         {/* Feature grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, i) => {
+          {featureKeys.map((feature, i) => {
             const Icon = feature.icon;
             return (
               <motion.div
-                key={feature.title}
+                key={feature.key}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
@@ -113,10 +78,10 @@ export function FeaturesSection() {
                     <Icon className="size-5 text-white" />
                   </div>
                   <h3 className="font-heading text-lg font-bold text-brand-900 mb-2">
-                    {feature.title}
+                    {t(`${feature.key}.title`)}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {feature.description}
+                    {t(`${feature.key}.description`)}
                   </p>
                 </GlassCard>
               </motion.div>

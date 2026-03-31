@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { PageHeader } from "@/components/shared/page-header";
 import { StatCard } from "@/components/shared/stat-card";
@@ -52,23 +53,28 @@ interface WalletClientProps {
 /*  Tab definitions                                                    */
 /* ------------------------------------------------------------------ */
 
-const mainTabs: { key: MainTab; label: string }[] = [
-  { key: "wallet", label: "Wallet" },
-  { key: "contratos", label: "Contratos" },
-];
-
-const contractTabs: { key: ContractFilter; label: string }[] = [
-  { key: "todos", label: "Todos" },
-  { key: "activo", label: "Activos" },
-  { key: "completado", label: "Completados" },
-  { key: "pendiente", label: "Pendientes" },
-];
+/* Tab labels are now resolved inside the component via useTranslations */
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
 export function WalletClient({ initialContracts, walletData, transactionData }: WalletClientProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
+
+  const mainTabs: { key: MainTab; label: string }[] = [
+    { key: "wallet", label: t("wallet.title") },
+    { key: "contratos", label: t("contracts.title") },
+  ];
+
+  const contractTabs: { key: ContractFilter; label: string }[] = [
+    { key: "todos", label: tc("misc.all") },
+    { key: "activo", label: tc("status.active") },
+    { key: "completado", label: tc("status.completed") },
+    { key: "pendiente", label: tc("status.pending") },
+  ];
+
   const [activeMainTab, setActiveMainTab] = useState<MainTab>("wallet");
 
   /* Wallet modals */
@@ -139,7 +145,7 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
             : c
         )
       );
-      toast.success("Contrato firmado exitosamente");
+      toast.success(t("contracts.sign.signed"));
       return result;
     },
     []
@@ -160,7 +166,7 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
             : c
         )
       );
-      toast.success("Solicitud de cancelacion enviada");
+      toast.success(t("contracts.cancel.title"));
     },
     []
   );
@@ -179,7 +185,7 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
         )
       );
       toast.success(
-        accept ? "Cancelacion aceptada" : "Contrato en disputa"
+        accept ? tc("status.cancelled") : tc("status.inDispute")
       );
     },
     []
@@ -194,8 +200,8 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
     >
       {/* Page Header */}
       <PageHeader
-        title="Wallet & Contratos"
-        subtitle="Gestiona tus finanzas, envios y firma contratos digitalmente"
+        title={`${t("wallet.title")} & ${t("contracts.title")}`}
+        subtitle={t("wallet.balance")}
       />
 
       {/* Main Tab Bar */}
@@ -252,7 +258,7 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
             <BalanceCard
               balance={walletData?.balance}
               onSendMoney={() => setRemittanceOpen(true)}
-              onReceive={() => toast.info("Comparte tu ID de wallet para recibir pagos")}
+              onReceive={() => toast.info(tc("misc.comingSoon"))}
             />
 
             {/* Quick Actions */}
@@ -260,7 +266,7 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
               onAction={(id) => {
                 if (id === "remesas") setRemittanceOpen(true);
                 else if (id === "cambio") setSwapOpen(true);
-                else toast.info("Funcion disponible proximamente");
+                else toast.info(tc("misc.comingSoon"));
               }}
             />
 
@@ -270,13 +276,13 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
             {/* Cards & Accounts */}
             <div>
               <h2 className="mb-4 font-heading text-lg font-bold text-foreground">
-                Tarjetas & Cuentas
+                {t("wallet.card.title")}
               </h2>
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <div className="flex flex-col items-center gap-3">
                   <WalletCardVisual />
                   <span className="text-xs text-muted-foreground">
-                    Solicitar Tarjeta Fisica
+                    {t("wallet.card.requestCard")}
                   </span>
                 </div>
                 <ConnectedAccounts />
@@ -311,19 +317,19 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               <StatCard
                 icon={FileSignature}
-                label="Contratos Activos"
+                label={t("contracts.statuses.active")}
                 value={stats.activos}
                 variant="default"
               />
               <StatCard
                 icon={CheckCircle2}
-                label="Completados"
+                label={t("contracts.statuses.completed")}
                 value={stats.completados}
                 variant="blue"
               />
               <StatCard
                 icon={Clock}
-                label="Pendientes de Firma"
+                label={t("contracts.statuses.pending")}
                 value={stats.pendientes}
                 variant="orange"
               />
@@ -381,7 +387,7 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
             {/* Title */}
             <div className="flex items-center justify-between">
               <h2 className="font-heading text-lg font-bold text-foreground">
-                Mis Contratos
+                {t("contracts.title")}
               </h2>
               <span className="text-sm text-muted-foreground">
                 {filtered.length} contrato(s)
@@ -392,8 +398,8 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
             {filtered.length === 0 ? (
               <EmptyState
                 icon={FileSignature}
-                title="Sin contratos"
-                description="No tienes contratos en esta categoria."
+                title={tc("empty.noContracts")}
+                description={tc("empty.noContracts")}
               />
             ) : (
               <div className="space-y-4">
@@ -428,9 +434,7 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
                           setCancelMode("respond");
                         }}
                         onReview={() => {
-                          toast.info(
-                            "Sistema de resenas disponible proximamente"
-                          );
+                          toast.info(tc("misc.comingSoon"));
                         }}
                       />
                     </motion.div>

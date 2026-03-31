@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -47,13 +48,13 @@ interface StatusAction {
   confirm?: boolean;
 }
 
-function getActions(currentStatus: VacancyStatus): StatusAction[] {
+function getActions(currentStatus: VacancyStatus, t: (key: string) => string): StatusAction[] {
   switch (currentStatus) {
     case "active":
       return [
-        { label: "Pausar", icon: Pause, status: "paused" },
+        { label: t("vacancies.status.unpublish"), icon: Pause, status: "paused" },
         {
-          label: "Cerrar",
+          label: t("vacancies.status.close"),
           icon: XCircle,
           status: "closed",
           variant: "destructive",
@@ -62,9 +63,9 @@ function getActions(currentStatus: VacancyStatus): StatusAction[] {
       ];
     case "paused":
       return [
-        { label: "Activar", icon: Play, status: "active" },
+        { label: t("vacancies.status.publish"), icon: Play, status: "active" },
         {
-          label: "Cerrar",
+          label: t("vacancies.status.close"),
           icon: XCircle,
           status: "closed",
           variant: "destructive",
@@ -72,38 +73,25 @@ function getActions(currentStatus: VacancyStatus): StatusAction[] {
         },
       ];
     case "closed":
-      return [{ label: "Reabrir", icon: RotateCcw, status: "active" }];
+      return [{ label: t("vacancies.status.reopen"), icon: RotateCcw, status: "active" }];
     case "draft":
-      return [{ label: "Publicar", icon: Send, status: "active" }];
+      return [{ label: t("vacancies.status.publish"), icon: Send, status: "active" }];
     default:
       return [];
   }
 }
 
-const statusLabels: Record<VacancyStatus, string> = {
-  active: "Activa",
-  paused: "Pausada",
-  closed: "Cerrada",
-  draft: "Borrador",
-};
-
-const toastMessages: Record<VacancyStatus, string> = {
-  active: "Vacante activada correctamente",
-  paused: "Vacante pausada correctamente",
-  closed: "Vacante cerrada correctamente",
-  draft: "Vacante movida a borradores",
-};
-
 export function VacancyStatusActions({
   vacancy,
   onStatusChange,
 }: VacancyStatusActionsProps) {
+  const t = useTranslations("employer");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [pendingStatus, setPendingStatus] = useState<VacancyStatus | null>(
     null
   );
 
-  const actions = getActions(vacancy.status);
+  const actions = getActions(vacancy.status, t);
 
   function handleAction(action: StatusAction) {
     if (action.confirm) {
@@ -116,7 +104,7 @@ export function VacancyStatusActions({
 
   function applyStatus(status: VacancyStatus) {
     onStatusChange(vacancy.id, status);
-    toast.success(toastMessages[status]);
+    toast.success(t("vacancies.edit.success"));
     setConfirmOpen(false);
     setPendingStatus(null);
   }
@@ -134,7 +122,7 @@ export function VacancyStatusActions({
 
         <DropdownMenuContent align="end" sideOffset={4}>
           <DropdownMenuLabel>
-            Estado: {statusLabels[vacancy.status]}
+            {t("dashboard.vacanciesTable.status")}: {vacancy.status}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           {actions.map((action) => {
@@ -159,7 +147,7 @@ export function VacancyStatusActions({
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 font-heading text-lg font-bold">
               <AlertTriangle className="size-5 text-amber-500" />
-              Confirmar Cierre
+              {t("vacancies.status.close")}
             </DialogTitle>
           </DialogHeader>
 
@@ -172,7 +160,7 @@ export function VacancyStatusActions({
                 exit={{ opacity: 0, y: -8 }}
               >
                 <p className="text-sm text-muted-foreground">
-                  Esta seguro que desea cerrar la vacante{" "}
+                  {t("vacancies.status.deleteConfirm")}{" "}
                   <span className="font-semibold text-foreground">
                     &ldquo;{vacancy.title}&rdquo;
                   </span>
@@ -196,7 +184,7 @@ export function VacancyStatusActions({
             <DialogClose
               render={<Button variant="outline" type="button" />}
             >
-              Cancelar
+              {t("vacancies.edit.save")}
             </DialogClose>
             <Button
               variant="destructive"
@@ -205,7 +193,7 @@ export function VacancyStatusActions({
               }
             >
               <XCircle className="size-4" data-icon="inline-start" />
-              Cerrar Vacante
+              {t("vacancies.status.close")}
             </Button>
           </DialogFooter>
         </DialogContent>

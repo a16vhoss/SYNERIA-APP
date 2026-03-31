@@ -182,5 +182,120 @@
     "beta": "Beta",
     "new": "Nouveau",
     "premium": "Premium"
+  },
+  "landing": {
+    "nav": {
+      "home": "Accueil",
+      "jobs": "Emplois",
+      "companies": "Entreprises",
+      "sectors": "Secteurs",
+      "login": "Connexion"
+    },
+    "hero": {
+      "tagline": "Plateforme mondiale d'emploi",
+      "headingLine1": "Le Futur du Travail est Mondial.",
+      "headingLine2": "Et il Commence Ici.",
+      "subtitle": "La plateforme qui connecte les travailleurs migrants aux employeurs internationaux. Contrats numeriques, portefeuille integre et support en 6 langues.",
+      "connectWith": "Connectez-vous avec",
+      "rotatingWords": {
+        "professionals": "des professionnels",
+        "opportunities": "des opportunites",
+        "companies": "des entreprises",
+        "globalTalent": "des talents mondiaux"
+      },
+      "exploreJobs": "Explorer les emplois",
+      "postJob": "Publier une offre",
+      "presentIn": "Present dans 28 pays",
+      "workers": "+12 500 travailleurs",
+      "companiesCount": "+3 200 entreprises"
+    },
+    "features": {
+      "badge": "Tout en une plateforme",
+      "title": "La Plateforme",
+      "subtitle": "Des outils puissants pour les travailleurs et les entreprises, concus pour le marche du travail mondial.",
+      "smartSearch": {
+        "title": "Recherche intelligente d'emplois",
+        "description": "Trouvez des opportunites correspondant a votre profil, vos competences et vos pays d'interet. Filtres avances par secteur, salaire et type de contrat."
+      },
+      "wallet": {
+        "title": "Portefeuille numerique integre",
+        "description": "Gerez vos revenus, recevez des paiements et envoyez des transferts internationaux depuis une seule plateforme avec des frais minimaux."
+      },
+      "contracts": {
+        "title": "Contrats numeriques Blockchain",
+        "description": "Signez des contrats numeriquement avec verification immuable. Transparence totale sur les termes, avantages et conditions de travail."
+      },
+      "documents": {
+        "title": "Verification des documents",
+        "description": "Telechargez et verifiez votre passeport, certifications et documents de travail. Les profils verifies generent plus de confiance aupres des employeurs."
+      },
+      "multilingual": {
+        "title": "Support multilingue",
+        "description": "Plateforme disponible en 6 langues : espagnol, anglais, portugais, francais, allemand et arabe. Communication sans barrieres."
+      },
+      "network": {
+        "title": "Reseau professionnel mondial",
+        "description": "Connectez-vous avec des professionnels de 28 pays. Construisez votre reseau, partagez vos experiences et accedez a des opportunites exclusives."
+      }
+    },
+    "howItWorks": {
+      "badge": "Processus simple",
+      "title": "Comment ca marche",
+      "subtitle": "En 5 etapes simples, connectez votre talent aux opportunites mondiales.",
+      "step1": {
+        "title": "Creez votre compte",
+        "description": "Inscrivez-vous en tant que travailleur ou entreprise en moins de 2 minutes. Selectionnez votre role et commencez."
+      },
+      "step2": {
+        "title": "Completez votre profil",
+        "description": "Ajoutez votre experience, competences, langues et documents. Un profil complet multiplie vos opportunites."
+      },
+      "step3": {
+        "title": "Recherchez des emplois",
+        "description": "Explorez les emplois filtres par secteur, pays et salaire. Notre systeme vous suggere les meilleures correspondances."
+      },
+      "step4": {
+        "title": "Postulez et connectez",
+        "description": "Envoyez votre candidature directement. Communiquez avec les employeurs et signez des contrats numeriques securises."
+      },
+      "step5": {
+        "title": "Travaillez mondialement",
+        "description": "Gerez votre contrat, recevez des paiements dans votre portefeuille et construisez votre carriere internationale."
+      }
+    },
+    "testimonials": {
+      "badge": "Histoires reelles",
+      "title": "Ce que disent nos utilisateurs",
+      "subtitle": "Des milliers de travailleurs et d'entreprises font deja confiance a Syneria pour connecter les talents mondiaux.",
+      "testimonial1": {
+        "quote": "Grace a Syneria, j'ai trouve un emploi stable en Allemagne en moins de 3 semaines. Le processus etait transparent et le contrat numerique m'a donne beaucoup de confiance.",
+        "name": "Carlos Ramirez",
+        "role": "Electricien industriel",
+        "country": "Colombie"
+      },
+      "testimonial2": {
+        "quote": "En tant qu'entreprise, Syneria nous permet d'acceder a des talents qualifies de toute l'Amerique latine. Les profils verifies et le systeme de contrats font gagner des semaines de travail.",
+        "name": "Sarah Mueller",
+        "role": "Responsable RH - BauTech GmbH",
+        "country": "Allemagne"
+      },
+      "testimonial3": {
+        "quote": "Le portefeuille integre est incroyable. Je recois mon salaire et je peux envoyer des transferts a ma famille directement depuis la plateforme. Tout en un seul endroit.",
+        "name": "Maria Gonzalez",
+        "role": "Chef professionnelle",
+        "country": "Mexique"
+      }
+    },
+    "cta": {
+      "badge": "Rejoignez-nous gratuitement",
+      "title": "Votre Talent, Votre Monde,",
+      "titleHighlight": "Votre Economie",
+      "subtitle": "Inscrivez-vous gratuitement et accedez a des milliers d'opportunites d'emploi dans 28 pays. Votre carriere internationale commence aujourd'hui.",
+      "createAccount": "Creer un compte gratuit",
+      "iAmCompany": "Je suis une entreprise",
+      "noCreditCard": "Sans carte de credit",
+      "registerIn2Min": "Inscription en 2 minutes",
+      "support6Languages": "Support 6 langues"
+    }
   }
 }

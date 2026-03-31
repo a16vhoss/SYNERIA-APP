@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/shared/page-header";
@@ -45,19 +46,24 @@ interface ContractsClientProps {
 /*  Tab definitions                                                    */
 /* ------------------------------------------------------------------ */
 
-const filterTabs: { key: ContractFilter; label: string }[] = [
-  { key: "todos", label: "Todos" },
-  { key: "activo", label: "Activos" },
-  { key: "completado", label: "Completados" },
-  { key: "pendiente", label: "Pendientes" },
-  { key: "cancelado", label: "Cancelados" },
-];
+// filterTabs are defined inside the component to use translations
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
 export function ContractsClient({ initialContracts }: ContractsClientProps) {
+  const t = useTranslations("employer");
+  const tc = useTranslations("common");
+
+  const filterTabs: { key: ContractFilter; label: string }[] = [
+    { key: "todos", label: tc("all") },
+    { key: "activo", label: t("contracts.manage.active") },
+    { key: "completado", label: t("contracts.manage.completed") },
+    { key: "pendiente", label: t("contracts.manage.pending") },
+    { key: "cancelado", label: t("contracts.manage.cancelled") },
+  ];
+
   const [contracts, setContracts] =
     useState<ContractData[]>(initialContracts);
   const [activeFilter, setActiveFilter] = useState<ContractFilter>("todos");
@@ -138,7 +144,7 @@ export function ContractsClient({ initialContracts }: ContractsClientProps) {
             : c
         )
       );
-      toast.success("Solicitud de cancelacion enviada");
+      toast.success(t("contracts.manage.cancelRequested"));
     },
     []
   );
@@ -157,7 +163,7 @@ export function ContractsClient({ initialContracts }: ContractsClientProps) {
         )
       );
       toast.success(
-        accept ? "Cancelacion aceptada" : "Contrato en disputa"
+        accept ? t("contracts.manage.cancelAccepted") : t("contracts.manage.inDispute")
       );
     },
     []
@@ -166,13 +172,13 @@ export function ContractsClient({ initialContracts }: ContractsClientProps) {
   const handleContractCreated = useCallback((contract: ContractData) => {
     setContracts((prev) => [contract, ...prev]);
     setShowCreate(false);
-    toast.success("Contrato creado y enviado al trabajador");
+    toast.success(t("contracts.create.success"));
   }, []);
 
   const handleContractRenewed = useCallback((contract: ContractData) => {
     setContracts((prev) => [contract, ...prev]);
     setRenewingContract(null);
-    toast.success("Renovacion enviada al trabajador");
+    toast.success(t("contracts.manage.renewSent"));
   }, []);
 
   return (
@@ -184,8 +190,8 @@ export function ContractsClient({ initialContracts }: ContractsClientProps) {
     >
       {/* Page Header */}
       <PageHeader
-        title="Contratos"
-        subtitle="Gestiona los contratos con tus trabajadores"
+        title={t("contracts.title")}
+        subtitle={t("contracts.manage.subtitle")}
       >
         <Button
           onClick={() => setShowCreate(true)}
@@ -193,7 +199,7 @@ export function ContractsClient({ initialContracts }: ContractsClientProps) {
           size="lg"
         >
           <Plus className="size-4" data-icon="inline-start" />
-          Crear Contrato
+          {t("contracts.create.title")}
         </Button>
       </PageHeader>
 
@@ -201,25 +207,25 @@ export function ContractsClient({ initialContracts }: ContractsClientProps) {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           icon={FileSignature}
-          label="Activos"
+          label={t("contracts.manage.active")}
           value={stats.activos}
           variant="default"
         />
         <StatCard
           icon={CheckCircle2}
-          label="Completados"
+          label={t("contracts.manage.completed")}
           value={stats.completados}
           variant="blue"
         />
         <StatCard
           icon={Clock}
-          label="Pendientes"
+          label={t("contracts.manage.pending")}
           value={stats.pendientes}
           variant="orange"
         />
         <StatCard
           icon={XCircle}
-          label="Cancelados"
+          label={t("contracts.manage.cancelled")}
           value={stats.cancelados}
           variant="red"
         />
@@ -286,16 +292,12 @@ export function ContractsClient({ initialContracts }: ContractsClientProps) {
           {filtered.length === 0 ? (
             <EmptyState
               icon={FileSignature}
-              title="Sin contratos"
-              description={
-                activeFilter !== "todos"
-                  ? "No hay contratos con este filtro."
-                  : "Aun no has creado ningun contrato. Crea uno para empezar."
-              }
+              title={t("contracts.title")}
+              description={t("contracts.manage.emptyDescription")}
               action={
                 activeFilter === "todos"
                   ? {
-                      label: "Crear Contrato",
+                      label: t("contracts.create.title"),
                       onClick: () => setShowCreate(true),
                     }
                   : undefined

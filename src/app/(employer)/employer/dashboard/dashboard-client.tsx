@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Briefcase, Users, UserCheck } from "lucide-react";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { DashboardHeader } from "@/components/employer/dashboard-header";
 import { DashboardStats } from "@/components/employer/dashboard-stats";
@@ -31,13 +32,14 @@ export function EmployerDashboardClient({
   vacancies,
   stats,
 }: EmployerDashboardClientProps) {
+  const t = useTranslations("employer");
   const [activeTab, setActiveTab] = useState<TabKey>("vacantes");
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const tabs: { key: TabKey; label: string; count: number; icon: React.ElementType }[] = [
-    { key: "vacantes", label: "VACANTES", count: stats.activeVacancies, icon: Briefcase },
-    { key: "candidatos", label: "CANDIDATOS", count: stats.totalCandidates, icon: Users },
-    { key: "aceptados", label: "ACEPTADOS", count: stats.accepted, icon: UserCheck },
+    { key: "vacantes", label: t("dashboard.stats.activeVacancies").toUpperCase(), count: stats.activeVacancies, icon: Briefcase },
+    { key: "candidatos", label: t("dashboard.stats.totalCandidates").toUpperCase(), count: stats.totalCandidates, icon: Users },
+    { key: "aceptados", label: t("candidates.pipeline.hired").toUpperCase(), count: stats.accepted, icon: UserCheck },
   ];
 
   return (
@@ -106,10 +108,10 @@ export function EmployerDashboardClient({
         >
           <Users className="mx-auto mb-3 size-10 text-brand-400" />
           <h3 className="font-heading text-lg font-semibold text-foreground">
-            Candidatos Recibidos
+            {t("dashboard.stats.totalCandidates")}
           </h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            Aqui veras todos los candidatos que han aplicado a tus vacantes.
+            {t("dashboard.recentApplications")}
           </p>
         </motion.div>
       )}
@@ -122,10 +124,10 @@ export function EmployerDashboardClient({
         >
           <UserCheck className="mx-auto mb-3 size-10 text-brand-400" />
           <h3 className="font-heading text-lg font-semibold text-foreground">
-            Candidatos Aceptados
+            {t("candidates.pipeline.hired")}
           </h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            Aqui veras los candidatos que has aceptado para tus vacantes.
+            {t("dashboard.pendingActions")}
           </p>
         </motion.div>
       )}
@@ -148,11 +150,11 @@ export function EmployerDashboardClient({
               requirements: data.requirements,
               benefits: data.benefits,
             });
-            toast.success("Vacante publicada correctamente");
+            toast.success(t("vacancies.create.success"));
             setShowCreateModal(false);
             window.location.reload();
           } catch {
-            toast.error("Error al publicar vacante");
+            toast.error(t("vacancies.create.error"));
           }
         }}
       />

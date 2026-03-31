@@ -9,48 +9,20 @@ import {
   Handshake,
   Globe2,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const steps = [
-  {
-    icon: UserPlus,
-    number: "01",
-    title: "Crea tu cuenta",
-    description:
-      "Registrate como trabajador o empresa en menos de 2 minutos. Selecciona tu rol y comienza.",
-  },
-  {
-    icon: ClipboardCheck,
-    number: "02",
-    title: "Completa tu perfil",
-    description:
-      "Agrega tu experiencia, habilidades, idiomas y documentos. Un perfil completo multiplica tus oportunidades.",
-  },
-  {
-    icon: Search,
-    number: "03",
-    title: "Busca empleos",
-    description:
-      "Explora empleos filtrados por sector, pais y salario. Nuestro sistema te sugiere las mejores coincidencias.",
-  },
-  {
-    icon: Handshake,
-    number: "04",
-    title: "Aplica y conecta",
-    description:
-      "Envia tu aplicacion directamente. Comunicate con empleadores y firma contratos digitales seguros.",
-  },
-  {
-    icon: Globe2,
-    number: "05",
-    title: "Trabaja globalmente",
-    description:
-      "Gestiona tu contrato, recibe pagos en tu wallet y construye tu carrera internacional.",
-  },
-];
+const stepKeys = [
+  { icon: UserPlus, number: "01", key: "step1" },
+  { icon: ClipboardCheck, number: "02", key: "step2" },
+  { icon: Search, number: "03", key: "step3" },
+  { icon: Handshake, number: "04", key: "step4" },
+  { icon: Globe2, number: "05", key: "step5" },
+] as const;
 
 export function HowItWorksSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const t = useTranslations("common.landing.howItWorks");
 
   return (
     <section
@@ -67,13 +39,13 @@ export function HowItWorksSection() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold mb-4">
-            Proceso simple
+            {t("badge")}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-brand-900 mb-4">
-            Como Funciona
+            {t("title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            En 5 pasos simples, conecta tu talento con oportunidades globales.
+            {t("subtitle")}
           </p>
         </motion.div>
 
@@ -97,7 +69,7 @@ export function HowItWorksSection() {
 
           {/* Steps */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-4">
-            {steps.map((step, i) => {
+            {stepKeys.map((step, i) => {
               const Icon = step.icon;
               return (
                 <motion.div
@@ -127,15 +99,15 @@ export function HowItWorksSection() {
                   </div>
 
                   {/* Mobile connecting line */}
-                  {i < steps.length - 1 && (
+                  {i < stepKeys.length - 1 && (
                     <div className="absolute top-[72px] left-1/2 -translate-x-1/2 w-0.5 h-8 bg-brand-200 lg:hidden sm:hidden" />
                   )}
 
                   <h3 className="font-heading text-base font-bold text-brand-900 mb-2">
-                    {step.title}
+                    {t(`${step.key}.title`)}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-[220px]">
-                    {step.description}
+                    {t(`${step.key}.description`)}
                   </p>
                 </motion.div>
               );

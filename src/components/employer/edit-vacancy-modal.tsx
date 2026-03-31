@@ -15,6 +15,7 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -66,6 +67,7 @@ export function EditVacancyModal({
   vacancy,
   onSubmit,
 }: EditVacancyModalProps) {
+  const t = useTranslations("employer");
   const {
     register,
     handleSubmit,
@@ -125,7 +127,7 @@ export function EditVacancyModal({
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="font-heading text-lg font-bold">
-            Editar Vacante
+            {t("vacancies.edit.title")}
           </DialogTitle>
           {vacancy.published_at && (
             <motion.div
@@ -135,7 +137,7 @@ export function EditVacancyModal({
               transition={{ delay: 0.15 }}
             >
               <Clock className="size-3" />
-              Ultima edicion: {formatPublishedDate(vacancy.published_at)}
+              {t("dashboard.vacanciesTable.posted")}: {formatPublishedDate(vacancy.published_at)}
             </motion.div>
           )}
         </DialogHeader>
@@ -152,14 +154,14 @@ export function EditVacancyModal({
               variants={fieldVariants}
               custom={0}
             >
-              Informacion del Puesto
+              {t("vacancies.create.jobTitle")}
             </motion.p>
 
             <motion.div variants={fieldVariants} custom={1}>
-              <Label htmlFor="edit-title">Titulo del puesto</Label>
+              <Label htmlFor="edit-title">{t("vacancies.create.jobTitle")}</Label>
               <Input
                 id="edit-title"
-                placeholder="Titulo del puesto"
+                placeholder={t("vacancies.create.jobTitlePlaceholder")}
                 {...register("title", {
                   required: "Campo requerido",
                   minLength: { value: 3, message: "Minimo 3 caracteres" },
@@ -175,10 +177,10 @@ export function EditVacancyModal({
             </motion.div>
 
             <motion.div variants={fieldVariants} custom={2}>
-              <Label htmlFor="edit-description">Descripcion</Label>
+              <Label htmlFor="edit-description">{t("vacancies.create.description")}</Label>
               <Textarea
                 id="edit-description"
-                placeholder="Descripcion del puesto..."
+                placeholder={t("vacancies.create.descriptionPlaceholder")}
                 rows={3}
                 {...register("description", {
                   required: "Campo requerido",
@@ -200,7 +202,7 @@ export function EditVacancyModal({
               custom={3}
             >
               <div>
-                <Label htmlFor="edit-sector">Sector</Label>
+                <Label htmlFor="edit-sector">{t("vacancies.create.category")}</Label>
                 <select
                   id="edit-sector"
                   {...register("sector", {
@@ -222,7 +224,7 @@ export function EditVacancyModal({
                 )}
               </div>
               <div>
-                <Label htmlFor="edit-contract_type">Tipo de contrato</Label>
+                <Label htmlFor="edit-contract_type">{t("vacancies.create.type")}</Label>
                 <select
                   id="edit-contract_type"
                   {...register("contract_type", {
@@ -257,7 +259,7 @@ export function EditVacancyModal({
               variants={fieldVariants}
               custom={4}
             >
-              Ubicacion y Salario
+              {t("vacancies.create.location")}
             </motion.p>
 
             <motion.div
@@ -266,7 +268,7 @@ export function EditVacancyModal({
               custom={5}
             >
               <div>
-                <Label htmlFor="edit-country">Pais</Label>
+                <Label htmlFor="edit-country">{t("companyProfile.location")}</Label>
                 <select
                   id="edit-country"
                   {...register("country", {
@@ -313,7 +315,7 @@ export function EditVacancyModal({
               custom={6}
             >
               <div>
-                <Label htmlFor="edit-salary_min">Salario minimo (EUR/mes)</Label>
+                <Label htmlFor="edit-salary_min">{t("vacancies.create.salaryMin")}</Label>
                 <Input
                   id="edit-salary_min"
                   type="number"
@@ -323,7 +325,7 @@ export function EditVacancyModal({
                 />
               </div>
               <div>
-                <Label htmlFor="edit-salary_max">Salario maximo (EUR/mes)</Label>
+                <Label htmlFor="edit-salary_max">{t("vacancies.create.salaryMax")}</Label>
                 <Input
                   id="edit-salary_max"
                   type="number"
@@ -346,14 +348,14 @@ export function EditVacancyModal({
               variants={fieldVariants}
               custom={7}
             >
-              Requisitos y Beneficios
+              {t("vacancies.create.requirements")}
             </motion.p>
 
             <motion.div variants={fieldVariants} custom={8}>
-              <Label htmlFor="edit-requirements">Requisitos</Label>
+              <Label htmlFor="edit-requirements">{t("vacancies.create.requirements")}</Label>
               <Textarea
                 id="edit-requirements"
-                placeholder="Experiencia requerida, certificaciones, idiomas..."
+                placeholder={t("vacancies.create.requirementsPlaceholder")}
                 rows={3}
                 {...register("requirements")}
                 className="mt-1"
@@ -361,10 +363,10 @@ export function EditVacancyModal({
             </motion.div>
 
             <motion.div variants={fieldVariants} custom={9}>
-              <Label htmlFor="edit-benefits">Beneficios</Label>
+              <Label htmlFor="edit-benefits">{t("vacancies.create.benefits")}</Label>
               <Textarea
                 id="edit-benefits"
-                placeholder="Visa patrocinada, alojamiento, seguro medico..."
+                placeholder={t("vacancies.create.benefitsPlaceholder")}
                 rows={3}
                 {...register("benefits")}
                 className="mt-1"
@@ -377,14 +379,14 @@ export function EditVacancyModal({
             <DialogClose
               render={<Button variant="outline" type="button" />}
             >
-              Cancelar
+              {t("candidates.interview.cancel")}
             </DialogClose>
             <Button
               type="submit"
               disabled={isSubmitting}
               className="bg-brand-600 text-white hover:bg-brand-700"
             >
-              {isSubmitting ? "Guardando..." : "Guardar Cambios"}
+              {isSubmitting ? t("vacancies.edit.saving") : t("vacancies.edit.save")}
             </Button>
           </DialogFooter>
         </form>

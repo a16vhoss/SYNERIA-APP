@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   Send,
@@ -23,36 +24,7 @@ interface QuickAction {
   bgColor: string;
 }
 
-const actions: QuickAction[] = [
-  {
-    id: "remesas",
-    label: "Enviar Remesas",
-    icon: Send,
-    color: "text-brand-600",
-    bgColor: "bg-brand-100",
-  },
-  {
-    id: "cambio",
-    label: "Cambio de Divisa",
-    icon: ArrowLeftRight,
-    color: "text-sky-600",
-    bgColor: "bg-sky-100",
-  },
-  {
-    id: "microseguros",
-    label: "Microseguros",
-    icon: Shield,
-    color: "text-violet-600",
-    bgColor: "bg-violet-100",
-  },
-  {
-    id: "recargas",
-    label: "Recargas",
-    icon: Smartphone,
-    color: "text-amber-600",
-    bgColor: "bg-amber-100",
-  },
-];
+/* Action definitions are now resolved inside the component via useTranslations */
 
 /* ------------------------------------------------------------------ */
 /*  Container variants                                                 */
@@ -86,6 +58,39 @@ interface QuickActionsProps {
 }
 
 export function QuickActions({ onAction }: QuickActionsProps) {
+  const t = useTranslations("worker");
+
+  const actions: QuickAction[] = [
+    {
+      id: "remesas",
+      label: t("wallet.remittance.title"),
+      icon: Send,
+      color: "text-brand-600",
+      bgColor: "bg-brand-100",
+    },
+    {
+      id: "cambio",
+      label: t("wallet.swap.title"),
+      icon: ArrowLeftRight,
+      color: "text-sky-600",
+      bgColor: "bg-sky-100",
+    },
+    {
+      id: "microseguros",
+      label: "Microseguros",
+      icon: Shield,
+      color: "text-violet-600",
+      bgColor: "bg-violet-100",
+    },
+    {
+      id: "recargas",
+      label: "Recargas",
+      icon: Smartphone,
+      color: "text-amber-600",
+      bgColor: "bg-amber-100",
+    },
+  ];
+
   return (
     <motion.div
       className="flex items-start justify-between gap-4 sm:justify-start sm:gap-8"

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, PauseCircle, Users } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { StatCard } from "@/components/shared/stat-card";
 import type { MockVacancy } from "@/lib/constants/mock-data";
 
@@ -26,6 +27,7 @@ const item = {
 };
 
 export function VacancyStats({ vacancies }: VacancyStatsProps) {
+  const t = useTranslations("employer");
   const active = vacancies.filter((v) => v.status === "active").length;
   const paused = vacancies.filter((v) => v.status === "paused").length;
   const totalApplications = vacancies.reduce(
@@ -43,7 +45,7 @@ export function VacancyStats({ vacancies }: VacancyStatsProps) {
       <motion.div variants={item}>
         <StatCard
           icon={Briefcase}
-          label="Vacantes Activas"
+          label={t("dashboard.stats.activeVacancies")}
           value={active}
           variant="default"
           trend={
@@ -56,7 +58,7 @@ export function VacancyStats({ vacancies }: VacancyStatsProps) {
       <motion.div variants={item}>
         <StatCard
           icon={PauseCircle}
-          label="Vacantes Pausadas"
+          label={t("vacancies.status.unpublish")}
           value={paused}
           variant="orange"
         />
@@ -64,7 +66,7 @@ export function VacancyStats({ vacancies }: VacancyStatsProps) {
       <motion.div variants={item}>
         <StatCard
           icon={Users}
-          label="Total Aplicaciones"
+          label={t("dashboard.vacanciesTable.applicants")}
           value={totalApplications}
           variant="blue"
           trend={

@@ -14,6 +14,7 @@ import {
   Eye,
 } from "lucide-react";
 
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -100,6 +101,8 @@ export function CreateContractForm({
   onCreated,
   acceptedCandidates = [],
 }: CreateContractFormProps) {
+  const t = useTranslations("employer");
+  const tc = useTranslations("common");
   const [selectedBenefits, setSelectedBenefits] = useState<string[]>([]);
   const [step, setStep] = useState<"form" | "preview">("form");
 
@@ -180,7 +183,7 @@ export function CreateContractForm({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-heading text-lg font-bold">
             <FileText className="size-5 text-brand-600" />
-            {step === "form" ? "Crear Nuevo Contrato" : "Vista Previa"}
+            {step === "form" ? t("contracts.create.title") : t("contracts.create.preview")}
           </DialogTitle>
         </DialogHeader>
 
@@ -201,23 +204,23 @@ export function CreateContractForm({
                 className="flex items-center gap-2 text-sm font-semibold text-brand-700"
               >
                 <Briefcase className="size-4" />
-                Informacion del Puesto
+                {t("contracts.create.positionInfo")}
               </motion.p>
 
               <motion.div custom={1} variants={sectionVariants}>
-                <Label htmlFor="worker_name">Trabajador</Label>
+                <Label htmlFor="worker_name">{t("contracts.create.worker")}</Label>
                 <select
                   id="worker_name"
                   {...register("worker_name")}
                   className="mt-1 w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
-                  <option value="">Seleccionar candidato aceptado...</option>
+                  <option value="">{t("contracts.create.selectCandidate")}</option>
                   {acceptedCandidates.map((c) => (
                     <option key={c.id} value={c.name}>
                       {c.name} - {c.role_applied}
                     </option>
                   ))}
-                  <option value="Otro trabajador">Otro trabajador</option>
+                  <option value="Otro trabajador">{t("contracts.create.otherWorker")}</option>
                 </select>
                 {errors.worker_name && (
                   <p className="mt-1 text-xs text-red-500">
@@ -227,7 +230,7 @@ export function CreateContractForm({
               </motion.div>
 
               <motion.div custom={2} variants={sectionVariants}>
-                <Label htmlFor="position">Puesto / Cargo</Label>
+                <Label htmlFor="position">{t("contracts.create.position")}</Label>
                 <Input
                   id="position"
                   placeholder="Ej: Asistente de Construccion"
@@ -242,7 +245,7 @@ export function CreateContractForm({
               </motion.div>
 
               <motion.div custom={3} variants={sectionVariants}>
-                <Label htmlFor="work_schedule">Horario de Trabajo</Label>
+                <Label htmlFor="work_schedule">{t("contracts.create.schedule")}</Label>
                 <Input
                   id="work_schedule"
                   placeholder="Ej: Lunes a Viernes, 9:00 - 18:00"
@@ -269,7 +272,7 @@ export function CreateContractForm({
                 className="flex items-center gap-2 text-sm font-semibold text-brand-700"
               >
                 <MapPin className="size-4" />
-                Ubicacion y Salario
+                {t("contracts.create.locationAndSalary")}
               </motion.p>
 
               <motion.div
@@ -278,7 +281,7 @@ export function CreateContractForm({
                 className="grid grid-cols-2 gap-3"
               >
                 <div>
-                  <Label htmlFor="country">Pais</Label>
+                  <Label htmlFor="country">{t("companyProfile.location")}</Label>
                   <Input
                     id="country"
                     placeholder="Chile"
@@ -292,7 +295,7 @@ export function CreateContractForm({
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="city">Ciudad</Label>
+                  <Label htmlFor="city">{t("vacancies.create.location")}</Label>
                   <Input
                     id="city"
                     placeholder="Santiago"
@@ -313,7 +316,7 @@ export function CreateContractForm({
                 className="grid grid-cols-2 gap-3"
               >
                 <div>
-                  <Label htmlFor="salary">Salario Mensual</Label>
+                  <Label htmlFor="salary">{t("contracts.create.salary")}</Label>
                   <div className="relative mt-1">
                     <DollarSign className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -331,7 +334,7 @@ export function CreateContractForm({
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="currency">Moneda</Label>
+                  <Label htmlFor="currency">{t("contracts.create.currency")}</Label>
                   <select
                     id="currency"
                     {...register("currency")}
@@ -362,7 +365,7 @@ export function CreateContractForm({
                 className="flex items-center gap-2 text-sm font-semibold text-brand-700"
               >
                 <Calendar className="size-4" />
-                Fechas del Contrato
+                {t("contracts.create.dates")}
               </motion.p>
 
               <motion.div
@@ -371,7 +374,7 @@ export function CreateContractForm({
                 className="grid grid-cols-2 gap-3"
               >
                 <div>
-                  <Label htmlFor="start_date">Fecha de Inicio</Label>
+                  <Label htmlFor="start_date">{t("contracts.create.startDate")}</Label>
                   <Input
                     id="start_date"
                     type="date"
@@ -385,7 +388,7 @@ export function CreateContractForm({
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="end_date">Fecha de Fin</Label>
+                  <Label htmlFor="end_date">{t("contracts.create.endDate")}</Label>
                   <Input
                     id="end_date"
                     type="date"
@@ -413,11 +416,11 @@ export function CreateContractForm({
                 className="flex items-center gap-2 text-sm font-semibold text-brand-700"
               >
                 <FileText className="size-4" />
-                Terminos y Beneficios
+                {t("contracts.create.termsAndBenefits")}
               </motion.p>
 
               <motion.div custom={10} variants={sectionVariants}>
-                <Label htmlFor="terms">Terminos del Contrato</Label>
+                <Label htmlFor="terms">{t("contracts.create.terms")}</Label>
                 <Textarea
                   id="terms"
                   placeholder="Describe los terminos y condiciones del contrato..."
@@ -432,7 +435,7 @@ export function CreateContractForm({
               </motion.div>
 
               <motion.div custom={11} variants={sectionVariants}>
-                <Label className="mb-2 block">Beneficios</Label>
+                <Label className="mb-2 block">{t("vacancies.create.benefits")}</Label>
                 <div className="grid grid-cols-2 gap-2">
                   {AVAILABLE_BENEFITS.map((benefit) => (
                     <label
@@ -453,10 +456,10 @@ export function CreateContractForm({
                 <div className="flex items-center justify-between rounded-lg border border-foreground/5 p-3">
                   <div>
                     <p className="text-sm font-medium text-foreground">
-                      Patrocinio de Visa
+                      {t("contracts.create.visaSponsorship")}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      La empresa patrocinara la visa del trabajador
+                      {t("contracts.create.visaSponsorshipDesc")}
                     </p>
                   </div>
                   <Switch
@@ -473,14 +476,14 @@ export function CreateContractForm({
                 variant="outline"
                 onClick={() => handleClose(false)}
               >
-                Cancelar
+                {tc("cancel")}
               </Button>
               <Button
                 type="submit"
                 className="bg-brand-600 text-white hover:bg-brand-700"
               >
                 <Eye className="size-4" data-icon="inline-start" />
-                Vista Previa
+                {t("contracts.create.preview")}
               </Button>
             </DialogFooter>
           </form>
@@ -490,7 +493,7 @@ export function CreateContractForm({
             <div className="rounded-lg border border-foreground/10 bg-muted/30 p-4 space-y-3">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">
-                  Trabajador
+                  {t("contracts.create.worker")}
                 </p>
                 <p className="font-semibold text-foreground">
                   {formValues.worker_name}
@@ -498,14 +501,14 @@ export function CreateContractForm({
               </div>
               <div>
                 <p className="text-xs font-medium text-muted-foreground">
-                  Puesto
+                  {t("contracts.create.position")}
                 </p>
                 <p className="text-foreground">{formValues.position}</p>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <p className="text-xs font-medium text-muted-foreground">
-                    Ubicacion
+                    {t("companyProfile.location")}
                   </p>
                   <p className="text-foreground">
                     {formValues.city}, {formValues.country}
@@ -513,7 +516,7 @@ export function CreateContractForm({
                 </div>
                 <div>
                   <p className="text-xs font-medium text-muted-foreground">
-                    Salario
+                    {t("contracts.create.salary")}
                   </p>
                   <p className="text-foreground">
                     {formValues.currency} ${formValues.salary}/mes
@@ -523,7 +526,7 @@ export function CreateContractForm({
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <p className="text-xs font-medium text-muted-foreground">
-                    Inicio
+                    {t("contracts.create.startDate")}
                   </p>
                   <p className="text-foreground">{formValues.start_date}</p>
                 </div>

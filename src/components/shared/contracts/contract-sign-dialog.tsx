@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, FileSignature, Shield } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   Dialog,
@@ -38,6 +39,9 @@ export function ContractSignDialog({
   contract,
   onSign,
 }: ContractSignDialogProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
+
   const [step, setStep] = useState<Step>("terms");
   const [accepted, setAccepted] = useState(false);
   const [signatureData, setSignatureData] = useState<string | null>(null);
@@ -79,7 +83,7 @@ export function ContractSignDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-heading text-lg font-bold">
             <FileSignature className="size-5 text-brand-600" />
-            Firma Digital de Contrato
+            {t("contracts.sign.title")}
           </DialogTitle>
         </DialogHeader>
 
@@ -97,7 +101,7 @@ export function ContractSignDialog({
             >
               <div className="rounded-lg bg-muted/50 p-3">
                 <p className="text-xs font-medium text-muted-foreground">
-                  Contrato para
+                  {t("contracts.sign.review")}
                 </p>
                 <p className="font-semibold text-foreground">
                   {contract.position}
@@ -109,30 +113,30 @@ export function ContractSignDialog({
 
               <div>
                 <p className="mb-2 text-sm font-semibold text-foreground">
-                  Terminos del Contrato
+                  {t("contracts.detail.scope")}
                 </p>
                 <ScrollArea className="h-48 rounded-lg border border-foreground/10 bg-white p-3">
                   <div className="space-y-3 text-sm text-muted-foreground">
                     <p>{contract.terms}</p>
                     <div>
-                      <p className="font-medium text-foreground">Horario:</p>
+                      <p className="font-medium text-foreground">{t("jobs.detail.type")}:</p>
                       <p>{contract.work_schedule}</p>
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">Salario:</p>
+                      <p className="font-medium text-foreground">{t("jobs.detail.salary")}:</p>
                       <p>
                         {contract.currency} ${contract.salary.toLocaleString()}
                         /mes
                       </p>
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">Periodo:</p>
+                      <p className="font-medium text-foreground">{t("contracts.detail.startDate")} - {t("contracts.detail.endDate")}:</p>
                       <p>
-                        {contract.start_date} a {contract.end_date}
+                        {contract.start_date} {tc("misc.to")} {contract.end_date}
                       </p>
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">Beneficios:</p>
+                      <p className="font-medium text-foreground">{t("jobs.detail.benefits")}:</p>
                       <ul className="ml-4 list-disc">
                         {contract.benefits.map((b) => (
                           <li key={b}>{b}</li>
@@ -142,7 +146,7 @@ export function ContractSignDialog({
                     {contract.visa_sponsorship && (
                       <div>
                         <p className="font-medium text-foreground">
-                          Patrocinio de visa incluido
+                          {t("contracts.detail.deliverables")}
                         </p>
                       </div>
                     )}
@@ -155,13 +159,13 @@ export function ContractSignDialog({
                   variant="outline"
                   onClick={() => handleClose(false)}
                 >
-                  Cancelar
+                  {tc("actions.cancel")}
                 </Button>
                 <Button
                   onClick={() => setStep("accept")}
                   className="bg-brand-600 text-white hover:bg-brand-700"
                 >
-                  Continuar
+                  {tc("actions.continue")}
                 </Button>
               </DialogFooter>
             </motion.div>
@@ -183,12 +187,10 @@ export function ContractSignDialog({
                   <Shield className="mt-0.5 size-5 text-amber-600" />
                   <div className="space-y-1">
                     <p className="text-sm font-semibold text-amber-800">
-                      Confirmacion Legal
+                      {tc("actions.confirm")}
                     </p>
                     <p className="text-sm text-amber-700">
-                      Al firmar este contrato, aceptas todos los terminos y
-                      condiciones establecidos. Esta firma digital tiene la
-                      misma validez legal que una firma manuscrita.
+                      {t("contracts.sign.agree")}
                     </p>
                   </div>
                 </div>
@@ -201,22 +203,20 @@ export function ContractSignDialog({
                   className="mt-0.5"
                 />
                 <span className="text-sm text-foreground">
-                  He leido y acepto todos los terminos y condiciones del
-                  contrato. Entiendo que esta firma digital es legalmente
-                  vinculante.
+                  {t("contracts.sign.agree")}
                 </span>
               </label>
 
               <DialogFooter>
                 <Button variant="outline" onClick={() => setStep("terms")}>
-                  Atras
+                  {tc("actions.back")}
                 </Button>
                 <Button
                   onClick={() => setStep("signature")}
                   disabled={!accepted}
                   className="bg-brand-600 text-white hover:bg-brand-700"
                 >
-                  Continuar a Firma
+                  {tc("actions.continue")}
                 </Button>
               </DialogFooter>
             </motion.div>
@@ -234,8 +234,7 @@ export function ContractSignDialog({
               className="space-y-4"
             >
               <p className="text-sm text-muted-foreground">
-                Dibuja tu firma en el recuadro de abajo. Esta firma sera
-                registrada en la blockchain.
+                {t("contracts.sign.review")}
               </p>
 
               <ContractSignatureCanvas
@@ -244,7 +243,7 @@ export function ContractSignDialog({
 
               <DialogFooter>
                 <Button variant="outline" onClick={() => setStep("accept")}>
-                  Atras
+                  {tc("actions.back")}
                 </Button>
                 <Button
                   onClick={handleSign}
@@ -255,7 +254,7 @@ export function ContractSignDialog({
                     className="size-4"
                     data-icon="inline-start"
                   />
-                  {signing ? "Firmando..." : "Firmar Digitalmente"}
+                  {signing ? t("contracts.sign.signing") : t("contracts.sign.sign")}
                 </Button>
               </DialogFooter>
             </motion.div>
@@ -288,16 +287,16 @@ export function ContractSignDialog({
 
               <div>
                 <h3 className="text-lg font-bold text-foreground">
-                  Contrato Firmado Exitosamente
+                  {t("contracts.sign.signed")}
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Tu firma ha sido registrada en la blockchain
+                  {tc("misc.savedSuccessfully")}
                 </p>
               </div>
 
               <div className="rounded-lg bg-muted/50 p-3 text-left">
                 <p className="text-xs font-medium text-muted-foreground">
-                  Hash de Blockchain
+                  {tc("misc.info")}
                 </p>
                 <p className="mt-1 break-all font-mono text-xs text-foreground">
                   {result.hash}
@@ -309,7 +308,7 @@ export function ContractSignDialog({
                   onClick={() => handleClose(false)}
                   className="w-full bg-brand-600 text-white hover:bg-brand-700"
                 >
-                  Cerrar
+                  {tc("actions.close")}
                 </Button>
               </DialogFooter>
             </motion.div>

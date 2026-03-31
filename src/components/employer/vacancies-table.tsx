@@ -17,6 +17,7 @@ import {
   TableRow,
   TableCell,
 } from "@/components/ui/table";
+import { useTranslations } from "next-intl";
 import { SearchInput } from "@/components/shared/search-input";
 import { StatusBadge } from "@/components/shared/status-badge";
 import { EmptyState } from "@/components/shared/empty-state";
@@ -40,6 +41,7 @@ const rowVariants = {
 };
 
 export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTableProps) {
+  const t = useTranslations("employer");
   const [search, setSearch] = useState("");
   const [sortField, setSortField] = useState<SortField>("published_at");
   const [sortDir, setSortDir] = useState<SortDirection>("desc");
@@ -149,7 +151,7 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
       {/* Section header */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="font-heading text-xl font-bold text-foreground">
-          Mis Vacantes
+          {t("dashboard.recentVacancies")}
         </h2>
         <Button
           onClick={onCreateVacancy}
@@ -157,7 +159,7 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
           size="lg"
         >
           <Plus className="size-4" data-icon="inline-start" />
-          Publicar Nueva Vacante
+          {t("vacancies.create.title")}
         </Button>
       </div>
 
@@ -165,7 +167,7 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="flex-1">
           <SearchInput
-            placeholder="Buscar vacante..."
+            placeholder={t("candidates.filters.search")}
             value={search}
             onChange={setSearch}
           />
@@ -175,11 +177,11 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
           onChange={(e) => setStatusFilter(e.target.value)}
           className="h-9 rounded-lg border border-input bg-card px-3 text-sm text-foreground outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
         >
-          <option value="all">Todos los estados</option>
-          <option value="active">Activo</option>
-          <option value="paused">Pausado</option>
-          <option value="closed">Cerrado</option>
-          <option value="draft">Borrador</option>
+          <option value="all">{t("candidates.filters.status")}</option>
+          <option value="active">{t("vacancies.status.publish")}</option>
+          <option value="paused">{t("vacancies.status.unpublish")}</option>
+          <option value="closed">{t("vacancies.status.close")}</option>
+          <option value="draft">{t("vacancies.create.saveDraft")}</option>
         </select>
       </div>
 
@@ -187,15 +189,15 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
       {filtered.length === 0 ? (
         <EmptyState
           icon={Briefcase}
-          title="No hay vacantes"
+          title={t("vacancies.empty")}
           description={
             search || statusFilter !== "all"
-              ? "No se encontraron vacantes con los filtros aplicados."
-              : "Aun no has publicado ninguna vacante. Crea tu primera vacante para empezar a recibir candidatos."
+              ? t("vacancies.empty")
+              : t("vacancies.empty")
           }
           action={
             !search && statusFilter === "all"
-              ? { label: "Publicar Vacante", onClick: onCreateVacancy }
+              ? { label: t("vacancies.emptyAction"), onClick: onCreateVacancy }
               : undefined
           }
         />
@@ -205,22 +207,22 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
             <TableHeader>
               <TableRow className="border-b-0 bg-brand-800 hover:bg-brand-800">
                 <SortableHead field="title" className="text-white">
-                  Titulo del Puesto
+                  {t("dashboard.vacanciesTable.title")}
                 </SortableHead>
                 <SortableHead field="location" className="text-white">
-                  Ubicacion
+                  {t("vacancies.create.location")}
                 </SortableHead>
                 <SortableHead field="applications_count" className="text-white">
-                  Aplicaciones
+                  {t("dashboard.vacanciesTable.applicants")}
                 </SortableHead>
                 <SortableHead field="status" className="text-white">
-                  Estado
+                  {t("dashboard.vacanciesTable.status")}
                 </SortableHead>
                 <SortableHead field="published_at" className="text-white">
-                  Fecha Publicacion
+                  {t("dashboard.vacanciesTable.posted")}
                 </SortableHead>
                 <TableHead className="text-xs font-semibold uppercase tracking-wider text-white/90">
-                  Acciones
+                  {t("dashboard.vacanciesTable.actions")}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -266,7 +268,7 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
                           href={`/employer/vacancies/${vacancy.id}/edit`}
                           className="text-sm font-medium text-brand-600 hover:text-brand-700 hover:underline"
                         >
-                          Editar
+                          {t("vacancies.edit.title")}
                         </Link>
                         <Button
                           size="xs"
@@ -282,12 +284,12 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
                           {vacancy.status === "active" ? (
                             <>
                               <Pause className="size-3" data-icon="inline-start" />
-                              Pausar
+                              {t("vacancies.status.unpublish")}
                             </>
                           ) : (
                             <>
                               <Play className="size-3" data-icon="inline-start" />
-                              Activar
+                              {t("vacancies.status.publish")}
                             </>
                           )}
                         </Button>
@@ -295,7 +297,7 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
                           href={`/employer/vacancies/${vacancy.id}/candidates`}
                           className="text-sm font-medium text-brand-600 hover:text-brand-700 hover:underline"
                         >
-                          Ver Candids
+                          {t("candidates.title")}
                         </Link>
                       </div>
                     </TableCell>

@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 // ── Types ──────────────────────────────────────────────────────────
 
@@ -60,6 +61,8 @@ export function TopBar({
   profileHref = "/profile",
   className,
 }: TopBarProps) {
+  const t = useTranslations("common");
+
   const [currentLang, setCurrentLang] = useState<string>(() => {
     if (typeof document !== "undefined") {
       const match = document.cookie.match(/NEXT_LOCALE=(\w+)/);
@@ -90,7 +93,7 @@ export function TopBar({
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Buscar..."
+              placeholder={`${t("actions.search")}...`}
               className="h-9 rounded-lg border-brand-100 bg-white pl-9 text-sm placeholder:text-muted-foreground/50 focus-visible:ring-brand-200"
             />
           </div>
@@ -140,10 +143,10 @@ export function TopBar({
             </AnimatePresence>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" sideOffset={8} className="w-72">
-            <DropdownMenuLabel>Notificaciones</DropdownMenuLabel>
+            <DropdownMenuLabel>{t("nav.notifications")}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <div className="px-3 py-6 text-center text-sm text-muted-foreground">
-              No hay notificaciones nuevas
+              {t("empty.noNotifications")}
             </div>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -214,7 +217,7 @@ export function TopBar({
               }}
             >
               <User className="mr-2 h-4 w-4" />
-              Mi Perfil
+              {t("nav.myProfile")}
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
@@ -222,7 +225,7 @@ export function TopBar({
               }}
             >
               <Settings className="mr-2 h-4 w-4" />
-              Configuracion
+              {t("nav.settings")}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
@@ -233,7 +236,7 @@ export function TopBar({
               }}
             >
               <LogOut className="mr-2 h-4 w-4" />
-              Cerrar Sesion
+              {t("nav.logout")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

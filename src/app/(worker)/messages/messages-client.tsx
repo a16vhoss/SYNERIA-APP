@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { PageHeader } from "@/components/shared";
@@ -11,6 +12,7 @@ import { useMessages } from "@/hooks/useMessages";
 import type { Conversation } from "@/lib/actions/messages";
 
 export function WorkerMessagesClient({ currentUserId }: { currentUserId?: string }) {
+  const t = useTranslations("worker");
   const {
     conversations,
     activeConversation,
@@ -49,8 +51,8 @@ export function WorkerMessagesClient({ currentUserId }: { currentUserId?: string
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        title="Mensajes"
-        subtitle="Comunicate con empleadores sobre tus aplicaciones"
+        title={t("messages.title")}
+        subtitle={t("messages.conversations")}
       />
 
       <GlassCard className="h-[calc(100vh-12rem)] overflow-hidden !p-0" hover={false}>

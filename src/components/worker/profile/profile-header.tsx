@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { MapPin, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/shared/progress-bar";
@@ -24,6 +25,8 @@ export function ProfileHeader({
   profileCompletion,
   verified,
 }: ProfileHeaderProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
 
   return (
@@ -84,12 +87,12 @@ export function ProfileHeader({
           >
             {verified ? (
               <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-700">
-                Verificado
+                {tc("status.verified")}
               </span>
             ) : (
               <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-700">
                 <AlertTriangle className="size-3" />
-                Verificacion Pendiente
+                {tc("status.pending")}
               </span>
             )}
           </motion.div>
@@ -103,12 +106,12 @@ export function ProfileHeader({
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <Button size="lg">Actualizar Curriculum</Button>
+        <Button size="lg">{tc("actions.update")} {t("profile.documents.resume")}</Button>
 
         <div className="w-48">
           <ProgressBar
             value={profileCompletion}
-            label="Perfil completo"
+            label={t("dashboard.profileCompletion")}
             showPercentage
             color="primary"
           />

@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Building2 } from "lucide-react";
 
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -46,6 +47,8 @@ const fadeUp = {
 export function CompanyProfileClient({
   initialData,
 }: CompanyProfileClientProps) {
+  const t = useTranslations("employer");
+  const tc = useTranslations("common");
   const [isSaving, setIsSaving] = useState(false);
 
   const {
@@ -96,10 +99,10 @@ export function CompanyProfileClient({
         .eq("owner_id", user.id);
 
       if (error) throw error;
-      toast.success("Perfil de empresa actualizado correctamente");
+      toast.success(t("companyProfile.success"));
       reset(data);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Error al guardar los cambios");
+      toast.error(err instanceof Error ? err.message : tc("error"));
     } finally {
       setIsSaving(false);
     }
@@ -107,14 +110,14 @@ export function CompanyProfileClient({
 
   function onCancel() {
     reset();
-    toast.info("Cambios descartados");
+    toast.info(tc("discarded"));
   }
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <PageHeader
-        title="Perfil de Empresa"
-        subtitle="Configura la informacion publica de tu empresa"
+        title={t("companyProfile.title")}
+        subtitle={t("companyProfile.description")}
       />
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -139,14 +142,14 @@ export function CompanyProfileClient({
                 <div className="flex flex-1 flex-col gap-3">
                   <div>
                     <h3 className="font-heading text-base font-semibold text-foreground">
-                      Logo de la empresa
+                      {t("companyProfile.companyName")}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      Se genera automaticamente con la primera letra del nombre
+                      {t("companyProfile.logoDescription")}
                     </p>
                   </div>
                   <div>
-                    <Label className="mb-2">Color del gradiente</Label>
+                    <Label className="mb-2">{t("companyProfile.gradientColor")}</Label>
                     <GradientPicker
                       value={logoGradient ?? "green"}
                       onChange={(g) => setValue("logo_gradient", g, { shouldDirty: true })}
@@ -164,14 +167,14 @@ export function CompanyProfileClient({
                 <div className="flex items-center gap-2">
                   <Building2 className="size-4 text-brand-600" />
                   <h3 className="font-heading text-base font-semibold text-foreground">
-                    Informacion General
+                    {t("companyProfile.title")}
                   </h3>
                 </div>
 
                 {/* Name */}
                 <div className="space-y-1.5">
                   <Label htmlFor="name">
-                    Nombre de la empresa <span className="text-destructive">*</span>
+                    {t("companyProfile.companyName")} <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="name"
@@ -187,7 +190,7 @@ export function CompanyProfileClient({
                 {/* Description */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="description">Descripcion</Label>
+                    <Label htmlFor="description">{t("companyProfile.description")}</Label>
                     <span className="text-xs text-muted-foreground">
                       {description?.length ?? 0}/500
                     </span>
@@ -209,13 +212,13 @@ export function CompanyProfileClient({
 
                 {/* Sector */}
                 <div className="space-y-1.5">
-                  <Label htmlFor="sector">Sector</Label>
+                  <Label htmlFor="sector">{t("companyProfile.industry")}</Label>
                   <select
                     id="sector"
                     className="flex h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                     {...register("sector")}
                   >
-                    <option value="">Selecciona un sector</option>
+                    <option value="">{t("companyProfile.industry")}</option>
                     {SECTORS.map((sector) => (
                       <option key={sector} value={sector}>
                         {sector}
@@ -230,13 +233,13 @@ export function CompanyProfileClient({
                 {/* Country + City */}
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-1.5">
-                    <Label htmlFor="country">Pais</Label>
+                    <Label htmlFor="country">{t("companyProfile.location")}</Label>
                     <select
                       id="country"
                       className="flex h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                       {...register("country")}
                     >
-                      <option value="">Selecciona un pais</option>
+                      <option value="">{t("companyProfile.location")}</option>
                       {COUNTRIES.map((c) => (
                         <option key={c.code} value={c.code}>
                           {c.flag} {c.name}
@@ -248,7 +251,7 @@ export function CompanyProfileClient({
                     )}
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="city">Ciudad</Label>
+                    <Label htmlFor="city">{t("vacancies.create.location")}</Label>
                     <Input
                       id="city"
                       placeholder="Ej: Madrid"
@@ -263,7 +266,7 @@ export function CompanyProfileClient({
 
                 {/* Website */}
                 <div className="space-y-1.5">
-                  <Label htmlFor="website">Sitio web</Label>
+                  <Label htmlFor="website">{t("companyProfile.website")}</Label>
                   <Input
                     id="website"
                     type="url"
@@ -278,7 +281,7 @@ export function CompanyProfileClient({
 
                 {/* Number of employees */}
                 <div className="space-y-1.5">
-                  <Label htmlFor="employees_count">Numero de empleados</Label>
+                  <Label htmlFor="employees_count">{t("companyProfile.size")}</Label>
                   <Input
                     id="employees_count"
                     type="number"
@@ -308,10 +311,10 @@ export function CompanyProfileClient({
               onClick={onCancel}
               disabled={!isDirty || isSaving}
             >
-              Cancelar
+              {tc("cancel")}
             </Button>
             <Button type="submit" disabled={!isDirty || isSaving}>
-              {isSaving ? "Guardando..." : "Guardar Cambios"}
+              {isSaving ? t("companyProfile.saving") : t("companyProfile.save")}
             </Button>
           </motion.div>
         </motion.div>

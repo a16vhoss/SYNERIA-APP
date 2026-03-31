@@ -10,18 +10,20 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import { Logo } from "@/components/shared/logo";
 import { useAuth } from "@/hooks/useAuth";
 
-const schema = z.object({
-  email: z.email("Ingresa un correo valido"),
-});
-
-type FormData = z.infer<typeof schema>;
+type FormData = { email: string };
 
 export default function ResetPasswordPage() {
+  const t = useTranslations("auth");
   const [sent, setSent] = useState(false);
   const { resetPassword, loading: isLoading } = useAuth();
+
+  const schema = z.object({
+    email: z.email(t("login.errorInvalid")),
+  });
 
   const {
     register,
@@ -67,37 +69,36 @@ export default function ResetPasswordPage() {
                 <CheckCircle2 className="h-8 w-8 text-brand-600" />
               </motion.div>
               <h2 className="mb-2 font-heading text-xl font-bold">
-                Revisa tu correo
+                {t("resetPassword.successTitle")}
               </h2>
               <p className="mb-6 text-sm text-muted-foreground">
-                Te hemos enviado un enlace para restablecer tu contrasena.
+                {t("resetPassword.successMessage")}
               </p>
               <Link href="/login">
                 <Button variant="outline" className="w-full">
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  Volver a Iniciar Sesion
+                  {t("resetPassword.backToLogin")}
                 </Button>
               </Link>
             </motion.div>
           ) : (
             <>
               <h2 className="mb-2 font-heading text-xl font-bold">
-                Recuperar Contrasena
+                {t("resetPassword.title")}
               </h2>
               <p className="mb-6 text-sm text-muted-foreground">
-                Ingresa tu correo electronico y te enviaremos un enlace para
-                restablecer tu contrasena.
+                {t("resetPassword.subtitle")}
               </p>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                  <Label htmlFor="email">Correo Electronico</Label>
+                  <Label htmlFor="email">{t("resetPassword.email")}</Label>
                   <div className="relative mt-1">
                     <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
                       id="email"
                       type="email"
-                      placeholder="tu@email.com"
+                      placeholder={t("resetPassword.emailPlaceholder")}
                       className="pl-10"
                       {...register("email")}
                     />
@@ -117,7 +118,7 @@ export default function ResetPasswordPage() {
                   {isLoading && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Enviar enlace
+                  {t("resetPassword.submit")}
                 </Button>
               </form>
 
@@ -127,7 +128,7 @@ export default function ResetPasswordPage() {
                   className="text-sm text-brand-600 hover:underline"
                 >
                   <ArrowLeft className="mr-1 inline h-3 w-3" />
-                  Volver a Iniciar Sesion
+                  {t("resetPassword.backToLogin")}
                 </Link>
               </div>
             </>

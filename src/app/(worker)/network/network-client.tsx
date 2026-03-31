@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Users, Award, Inbox, Compass, Network } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -26,6 +27,8 @@ type TabId = "my-network" | "discover" | "requests";
 /* ------------------------------------------------------------------ */
 
 export function NetworkClient() {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const {
     connections,
     suggestions,
@@ -49,9 +52,9 @@ export function NetworkClient() {
   const pendingCount = incomingRequests.length;
 
   const tabs: Array<{ id: TabId; label: string; badge?: number }> = [
-    { id: "my-network", label: "Mi Red" },
-    { id: "discover", label: "Descubrir" },
-    { id: "requests", label: "Solicitudes", badge: pendingCount },
+    { id: "my-network", label: t("network.tabs.connections") },
+    { id: "discover", label: t("network.tabs.suggestions") },
+    { id: "requests", label: t("network.tabs.requests"), badge: pendingCount },
   ];
 
   /* -- Filtered connections ---------------------------------------- */
@@ -86,8 +89,8 @@ export function NetworkClient() {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        title="Red Profesional"
-        subtitle="Gestiona tus conexiones y descubre nuevos contactos"
+        title={t("network.title")}
+        subtitle={t("network.connections.title")}
       />
 
       {/* Stats bar */}
@@ -99,11 +102,11 @@ export function NetworkClient() {
       >
         <div className="flex items-center gap-2 rounded-lg bg-brand-100 px-3 py-1.5 text-sm font-medium text-brand-700">
           <Users className="size-4" />
-          {connections.length} conexiones
+          {connections.length} {t("network.tabs.connections").toLowerCase()}
         </div>
         <div className="flex items-center gap-2 rounded-lg bg-amber-100 px-3 py-1.5 text-sm font-medium text-amber-700">
           <Award className="size-4" />
-          {totalEndorsements} endorsements
+          {totalEndorsements} {t("network.tabs.endorsements").toLowerCase()}
         </div>
       </motion.div>
 
@@ -156,7 +159,7 @@ export function NetworkClient() {
           >
             {/* Search */}
             <SearchInput
-              placeholder="Buscar conexiones por nombre, sector, pais..."
+              placeholder={t("network.connections.search")}
               value={search}
               onChange={setSearch}
             />
@@ -167,16 +170,16 @@ export function NetworkClient() {
                 {filteredConnections.length === 0 ? (
                   <EmptyState
                     icon={Users}
-                    title="Sin conexiones"
+                    title={tc("empty.noConnections")}
                     description={
                       search
-                        ? "No se encontraron conexiones con ese filtro."
-                        : "Aun no tienes conexiones. Descubre personas en la pestana Descubrir."
+                        ? tc("empty.noSearchResults")
+                        : tc("empty.noConnections")
                     }
                     action={
                       !search
                         ? {
-                            label: "Descubrir personas",
+                            label: t("network.tabs.suggestions"),
                             onClick: () => setActiveTab("discover"),
                           }
                         : undefined
@@ -208,7 +211,7 @@ export function NetworkClient() {
 
                 <GlassCard hover={false}>
                   <h3 className="mb-3 font-heading text-base font-semibold text-foreground">
-                    Actividad reciente
+                    {t("dashboard.recentActivity")}
                   </h3>
                   <ActivityFeed activities={[]} />
                 </GlassCard>
@@ -227,14 +230,14 @@ export function NetworkClient() {
             className="flex flex-col gap-4"
           >
             <p className="text-sm text-muted-foreground">
-              Personas y empresas que podrian interesarte
+              {t("network.suggestions.title")}
             </p>
 
             {visibleSuggestions.length === 0 ? (
               <EmptyState
                 icon={Compass}
-                title="Sin sugerencias"
-                description="No hay sugerencias disponibles en este momento."
+                title={t("network.tabs.suggestions")}
+                description={tc("empty.noData")}
               />
             ) : (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -275,7 +278,7 @@ export function NetworkClient() {
                       : "bg-muted text-muted-foreground hover:text-foreground"
                   )}
                 >
-                  {dir === "incoming" ? "Recibidas" : "Enviadas"}
+                  {dir === "incoming" ? t("network.requests.title") : t("network.tabs.requests")}
                   {dir === "incoming" && incomingRequests.length > 0 && (
                     <span className="ml-1.5 inline-flex size-5 items-center justify-center rounded-full bg-white/20 text-[10px]">
                       {incomingRequests.length}
@@ -298,8 +301,8 @@ export function NetworkClient() {
                   {incomingRequests.length === 0 ? (
                     <EmptyState
                       icon={Inbox}
-                      title="Sin solicitudes"
-                      description="No tienes solicitudes de conexion pendientes."
+                      title={t("network.requests.noRequests")}
+                      description={t("network.requests.noRequests")}
                     />
                   ) : (
                     incomingRequests.map((req, i) => (
@@ -324,8 +327,8 @@ export function NetworkClient() {
                   {outgoingRequests.length === 0 ? (
                     <EmptyState
                       icon={Network}
-                      title="Sin solicitudes enviadas"
-                      description="No has enviado solicitudes de conexion."
+                      title={t("network.requests.noRequests")}
+                      description={t("network.requests.noRequests")}
                     />
                   ) : (
                     outgoingRequests.map((req, i) => (

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Users, Briefcase, Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { StatCard } from "@/components/shared/stat-card";
 
 interface CompanyStatsProps {
@@ -30,6 +31,7 @@ export function CompanyStats({
   activeJobs,
   avgRating,
 }: CompanyStatsProps) {
+  const t = useTranslations("employer");
   return (
     <motion.div
       className="grid gap-4 sm:grid-cols-3"
@@ -40,7 +42,7 @@ export function CompanyStats({
       <motion.div variants={item}>
         <StatCard
           icon={Users}
-          label="Empleados"
+          label={t("companyProfile.size")}
           value={employeesCount}
           variant="default"
         />
@@ -48,7 +50,7 @@ export function CompanyStats({
       <motion.div variants={item}>
         <StatCard
           icon={Briefcase}
-          label="Vacantes Activas"
+          label={t("dashboard.stats.activeVacancies")}
           value={activeJobs}
           variant="blue"
         />
@@ -56,7 +58,7 @@ export function CompanyStats({
       <motion.div variants={item}>
         <StatCard
           icon={Star}
-          label="Rating Promedio"
+          label={t("companyProfile.avgRating")}
           value={avgRating}
           suffix="/5"
           variant="orange"

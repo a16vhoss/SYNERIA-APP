@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Building2, CheckCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface DashboardHeaderProps {
   companyName: string;
@@ -12,6 +13,7 @@ export function DashboardHeader({
   companyName,
   verified = false,
 }: DashboardHeaderProps) {
+  const t = useTranslations("employer");
   return (
     <motion.div
       className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-brand-700 to-brand-600 px-6 py-8 md:px-10 md:py-10"
@@ -42,7 +44,7 @@ export function DashboardHeader({
           <div>
             <div className="flex items-center gap-2">
               <h1 className="font-heading text-2xl font-bold text-white md:text-3xl">
-                Bienvenido, {companyName}
+                {t("dashboard.welcome", { name: companyName })}
               </h1>
               {verified && (
                 <motion.span
@@ -63,7 +65,7 @@ export function DashboardHeader({
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          Encuentra y gestiona los mejores talentos
+          {t("dashboard.subtitle")}
         </motion.p>
       </div>
     </motion.div>

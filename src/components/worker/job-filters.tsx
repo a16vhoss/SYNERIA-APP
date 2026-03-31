@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { X, SlidersHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -47,6 +48,8 @@ export function JobFilters({
   onClearFilters,
   className,
 }: JobFiltersProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const activeCount = [sector, country, jobType, salaryMin].filter(
     (v) => v && v !== "" && v !== "all" && v !== "0"
   ).length;
@@ -61,7 +64,7 @@ export function JobFilters({
       <div className="flex items-center gap-2">
         <SlidersHorizontal className="size-4 text-muted-foreground" />
         <span className="text-sm font-medium text-muted-foreground">
-          Filtros
+          {t("jobs.filters.title")}
         </span>
         {activeCount > 0 && (
           <Badge variant="default" className="h-5 min-w-5 px-1.5 text-[10px]">
@@ -74,10 +77,10 @@ export function JobFilters({
         {/* Sector */}
         <Select value={sector} onValueChange={(v) => v && onSectorChange(v)}>
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Todos los sectores" />
+            <SelectValue placeholder={t("jobs.filters.category")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todos los sectores</SelectItem>
+            <SelectItem value="all">{t("jobs.filters.category")}</SelectItem>
             {SECTORS.map((s) => (
               <SelectItem key={s} value={s}>
                 {s}
@@ -89,10 +92,10 @@ export function JobFilters({
         {/* Country */}
         <Select value={country} onValueChange={(v) => v && onCountryChange(v)}>
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Todos los paises" />
+            <SelectValue placeholder={t("jobs.filters.location")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todos los paises</SelectItem>
+            <SelectItem value="all">{t("jobs.filters.location")}</SelectItem>
             {COUNTRIES.map((c) => (
               <SelectItem key={c.code} value={c.code}>
                 {c.flag} {c.name}
@@ -104,10 +107,10 @@ export function JobFilters({
         {/* Job Type */}
         <Select value={jobType} onValueChange={(v) => v && onJobTypeChange(v)}>
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Todos tipos" />
+            <SelectValue placeholder={t("jobs.filters.type")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todos tipos</SelectItem>
+            <SelectItem value="all">{t("jobs.filters.type")}</SelectItem>
             {JOB_TYPES.map((jt) => (
               <SelectItem key={jt.value} value={jt.value}>
                 {jt.label}
@@ -119,7 +122,7 @@ export function JobFilters({
         {/* Salary Min */}
         <Select value={salaryMin} onValueChange={(v) => v && onSalaryMinChange(v)}>
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Salario minimo" />
+            <SelectValue placeholder={t("jobs.filters.salary")} />
           </SelectTrigger>
           <SelectContent>
             {SALARY_RANGES.map((sr) => (
@@ -141,7 +144,7 @@ export function JobFilters({
         >
           <span className="inline-flex items-center gap-1">
             <X className="size-3" />
-            Limpiar filtros
+            {tc("actions.clearFilters")}
           </span>
         </motion.button>
       )}

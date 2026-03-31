@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
 import { CalendarIcon, Clock, Link2, MessageSquare } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import {
   Dialog,
@@ -49,6 +50,7 @@ export function InterviewScheduleModal({
   candidateName,
   onSchedule,
 }: InterviewScheduleModalProps) {
+  const t = useTranslations("employer");
   const [submitted, setSubmitted] = useState(false);
 
   const {
@@ -112,10 +114,10 @@ export function InterviewScheduleModal({
                 <CalendarIcon className="size-7 text-violet-600" />
               </motion.div>
               <p className="font-heading text-base font-semibold">
-                Entrevista agendada
+                {t("candidates.interview.scheduled")}
               </p>
               <p className="text-center text-sm text-muted-foreground">
-                Se ha notificado a {candidateName}.
+                {t("candidates.interview.notified", { name: candidateName })}
               </p>
             </motion.div>
           ) : (
@@ -130,10 +132,10 @@ export function InterviewScheduleModal({
             >
               <DialogHeader>
                 <DialogTitle>
-                  Agendar Entrevista para {candidateName}
+                  {t("candidates.interview.schedule")} - {candidateName}
                 </DialogTitle>
                 <DialogDescription>
-                  Completa los datos para programar la entrevista.
+                  {t("candidates.interview.description")}
                 </DialogDescription>
               </DialogHeader>
 
@@ -145,7 +147,7 @@ export function InterviewScheduleModal({
               >
                 <label className="mb-1.5 block text-sm font-medium text-foreground">
                   <CalendarIcon className="mr-1 inline size-3.5" />
-                  Fecha
+                  {t("candidates.interview.date")}
                 </label>
                 <Popover>
                   <PopoverTrigger
@@ -162,7 +164,7 @@ export function InterviewScheduleModal({
                     <CalendarIcon className="mr-2 size-4" />
                     {selectedDate
                       ? format(selectedDate, "PPP", { locale: es })
-                      : "Selecciona una fecha"}
+                      : t("candidates.interview.date")}
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
@@ -191,7 +193,7 @@ export function InterviewScheduleModal({
               >
                 <label className="mb-1.5 block text-sm font-medium text-foreground">
                   <Clock className="mr-1 inline size-3.5" />
-                  Hora
+                  {t("candidates.interview.time")}
                 </label>
                 <Input
                   type="time"
@@ -213,7 +215,7 @@ export function InterviewScheduleModal({
               >
                 <label className="mb-1.5 block text-sm font-medium text-foreground">
                   <Link2 className="mr-1 inline size-3.5" />
-                  Enlace de videollamada
+                  {t("candidates.interview.type")}
                 </label>
                 <Input
                   type="url"
@@ -236,11 +238,11 @@ export function InterviewScheduleModal({
               >
                 <label className="mb-1.5 block text-sm font-medium text-foreground">
                   <MessageSquare className="mr-1 inline size-3.5" />
-                  Notas para el candidato (opcional)
+                  {t("candidates.interview.notes")}
                 </label>
                 <Textarea
                   {...register("notes")}
-                  placeholder="Indicaciones adicionales para el candidato..."
+                  placeholder={t("candidates.interview.notes")}
                   className="min-h-[80px]"
                 />
                 {errors.notes && (
@@ -256,14 +258,14 @@ export function InterviewScheduleModal({
                   variant="outline"
                   onClick={handleClose}
                 >
-                  Cancelar
+                  {t("candidates.interview.cancel")}
                 </Button>
                 <Button
                   type="submit"
                   disabled={isSubmitting}
                   className="bg-violet-600 hover:bg-violet-700"
                 >
-                  {isSubmitting ? "Agendando..." : "Agendar Entrevista"}
+                  {isSubmitting ? t("candidates.interview.scheduling") : t("candidates.interview.confirm")}
                 </Button>
               </DialogFooter>
             </motion.form>

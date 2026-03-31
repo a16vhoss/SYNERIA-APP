@@ -4,13 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Building2 } from "lucide-react";
-
-const rotatingWords = [
-  "profesionales",
-  "oportunidades",
-  "empresas",
-  "talento global",
-];
+import { useTranslations } from "next-intl";
 
 function FloatingShape({
   className,
@@ -43,13 +37,21 @@ function FloatingShape({
 
 export function HeroSection() {
   const [wordIndex, setWordIndex] = useState(0);
+  const t = useTranslations("common.landing.hero");
+
+  const rotatingWords = [
+    t("rotatingWords.professionals"),
+    t("rotatingWords.opportunities"),
+    t("rotatingWords.companies"),
+    t("rotatingWords.globalTalent"),
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setWordIndex((i) => (i + 1) % rotatingWords.length);
     }, 2500);
     return () => clearInterval(interval);
-  }, []);
+  }, [rotatingWords.length]);
 
   return (
     <section
@@ -130,7 +132,7 @@ export function HeroSection() {
             <span className="relative inline-flex size-2 rounded-full bg-brand-400" />
           </span>
           <span className="text-sm font-medium text-brand-100">
-            Plataforma Global de Empleo
+            {t("tagline")}
           </span>
         </motion.div>
 
@@ -144,7 +146,7 @@ export function HeroSection() {
             visible: { transition: { staggerChildren: 0.03 } },
           }}
         >
-          {"El Futuro del Trabajo es Global.".split("").map((char, i) => (
+          {t("headingLine1").split("").map((char, i) => (
             <motion.span
               key={`line1-${i}`}
               variants={{
@@ -163,7 +165,7 @@ export function HeroSection() {
             </motion.span>
           ))}
           <br />
-          {"Y Empieza Aqui.".split("").map((char, i) => (
+          {t("headingLine2").split("").map((char, i) => (
             <motion.span
               key={`line2-${i}`}
               variants={{
@@ -190,8 +192,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 1.2 }}
           className="text-lg sm:text-xl text-brand-200/90 max-w-2xl mx-auto mb-4 font-body leading-relaxed"
         >
-          La plataforma que conecta trabajadores migrantes con empleadores
-          internacionales. Contratos digitales, wallet integrada y soporte en 6 idiomas.
+          {t("subtitle")}
         </motion.p>
 
         {/* Rotating words line */}
@@ -201,7 +202,7 @@ export function HeroSection() {
           transition={{ delay: 1.5 }}
           className="flex items-center justify-center gap-2 text-lg sm:text-xl text-brand-300 mb-10"
         >
-          <span className="font-body">Conecta con</span>
+          <span className="font-body">{t("connectWith")}</span>
           <span className="relative inline-block w-52 h-8 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.span
@@ -229,7 +230,7 @@ export function HeroSection() {
             href="/jobs"
             className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-brand-500 text-white font-semibold text-base hover:bg-brand-400 transition-all duration-300 hover:shadow-xl hover:shadow-brand-500/30 active:scale-[0.97]"
           >
-            Explorar Empleos
+            {t("exploreJobs")}
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
             {/* Glow effect */}
             <span className="absolute inset-0 rounded-full bg-brand-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
@@ -239,7 +240,7 @@ export function HeroSection() {
             className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-full border-2 border-white/30 text-white font-semibold text-base hover:bg-white/10 hover:border-white/50 transition-all duration-300 active:scale-[0.97] backdrop-blur-sm"
           >
             <Building2 className="size-4" />
-            Publicar Empleo
+            {t("postJob")}
           </Link>
         </motion.div>
 
@@ -250,11 +251,11 @@ export function HeroSection() {
           transition={{ delay: 2.2, duration: 0.8 }}
           className="mt-16 flex flex-wrap items-center justify-center gap-6 text-brand-300/60 text-xs font-medium uppercase tracking-wider"
         >
-          <span>Presente en 28 paises</span>
+          <span>{t("presentIn")}</span>
           <span className="hidden sm:block w-1 h-1 rounded-full bg-brand-400/40" />
-          <span>+12,500 trabajadores</span>
+          <span>{t("workers")}</span>
           <span className="hidden sm:block w-1 h-1 rounded-full bg-brand-400/40" />
-          <span>+3,200 empresas</span>
+          <span>{t("companiesCount")}</span>
         </motion.div>
       </div>
 

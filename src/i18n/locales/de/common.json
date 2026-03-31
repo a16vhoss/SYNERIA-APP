@@ -182,5 +182,120 @@
     "beta": "Beta",
     "new": "Neu",
     "premium": "Premium"
+  },
+  "landing": {
+    "nav": {
+      "home": "Startseite",
+      "jobs": "Stellenangebote",
+      "companies": "Unternehmen",
+      "sectors": "Branchen",
+      "login": "Anmelden"
+    },
+    "hero": {
+      "tagline": "Globale Beschaeftigungsplattform",
+      "headingLine1": "Die Zukunft der Arbeit ist Global.",
+      "headingLine2": "Und sie beginnt hier.",
+      "subtitle": "Die Plattform, die Wanderarbeitnehmer mit internationalen Arbeitgebern verbindet. Digitale Vertraege, integriertes Wallet und Support in 6 Sprachen.",
+      "connectWith": "Verbinde dich mit",
+      "rotatingWords": {
+        "professionals": "Fachkraeften",
+        "opportunities": "Moeglichkeiten",
+        "companies": "Unternehmen",
+        "globalTalent": "globalem Talent"
+      },
+      "exploreJobs": "Jobs erkunden",
+      "postJob": "Job veroeffentlichen",
+      "presentIn": "Praesent in 28 Laendern",
+      "workers": "+12.500 Arbeitnehmer",
+      "companiesCount": "+3.200 Unternehmen"
+    },
+    "features": {
+      "badge": "Alles in einer Plattform",
+      "title": "Die Plattform",
+      "subtitle": "Leistungsstarke Tools fuer Arbeitnehmer und Unternehmen, entwickelt fuer den globalen Arbeitsmarkt.",
+      "smartSearch": {
+        "title": "Intelligente Jobsuche",
+        "description": "Finden Sie Moeglichkeiten, die zu Ihrem Profil, Ihren Faehigkeiten und Ihren Laendern von Interesse passen. Erweiterte Filter nach Branche, Gehalt und Vertragstyp."
+      },
+      "wallet": {
+        "title": "Integriertes digitales Wallet",
+        "description": "Verwalten Sie Ihr Einkommen, empfangen Sie Zahlungen und senden Sie internationale Ueberweisungen von einer einzigen Plattform mit minimalen Gebuehren."
+      },
+      "contracts": {
+        "title": "Blockchain-Digitalvertraege",
+        "description": "Unterschreiben Sie Vertraege digital mit unveraenderlicher Verifizierung. Volle Transparenz bei Bedingungen, Leistungen und Arbeitsbedingungen."
+      },
+      "documents": {
+        "title": "Dokumentenverifizierung",
+        "description": "Laden Sie Ihren Reisepass, Zertifizierungen und Arbeitsdokumente hoch und lassen Sie sie verifizieren. Verifizierte Profile schaffen mehr Vertrauen bei Arbeitgebern."
+      },
+      "multilingual": {
+        "title": "Mehrsprachiger Support",
+        "description": "Plattform verfuegbar in 6 Sprachen: Spanisch, Englisch, Portugiesisch, Franzoesisch, Deutsch und Arabisch. Kommunikation ohne Barrieren."
+      },
+      "network": {
+        "title": "Globales professionelles Netzwerk",
+        "description": "Verbinden Sie sich mit Fachkraeften aus 28 Laendern. Bauen Sie Ihr Netzwerk auf, teilen Sie Erfahrungen und erhalten Sie Zugang zu exklusiven Moeglichkeiten."
+      }
+    },
+    "howItWorks": {
+      "badge": "Einfacher Prozess",
+      "title": "So funktioniert es",
+      "subtitle": "In 5 einfachen Schritten verbinden Sie Ihr Talent mit globalen Moeglichkeiten.",
+      "step1": {
+        "title": "Erstellen Sie Ihr Konto",
+        "description": "Registrieren Sie sich als Arbeitnehmer oder Unternehmen in weniger als 2 Minuten. Waehlen Sie Ihre Rolle und legen Sie los."
+      },
+      "step2": {
+        "title": "Vervollstaendigen Sie Ihr Profil",
+        "description": "Fuegen Sie Ihre Erfahrung, Faehigkeiten, Sprachen und Dokumente hinzu. Ein vollstaendiges Profil vervielfacht Ihre Moeglichkeiten."
+      },
+      "step3": {
+        "title": "Suchen Sie nach Jobs",
+        "description": "Erkunden Sie Jobs gefiltert nach Branche, Land und Gehalt. Unser System schlaegt Ihnen die besten Uebereinstimmungen vor."
+      },
+      "step4": {
+        "title": "Bewerben und verbinden",
+        "description": "Senden Sie Ihre Bewerbung direkt. Kommunizieren Sie mit Arbeitgebern und unterschreiben Sie sichere digitale Vertraege."
+      },
+      "step5": {
+        "title": "Arbeiten Sie global",
+        "description": "Verwalten Sie Ihren Vertrag, empfangen Sie Zahlungen in Ihrem Wallet und bauen Sie Ihre internationale Karriere auf."
+      }
+    },
+    "testimonials": {
+      "badge": "Echte Geschichten",
+      "title": "Was unsere Nutzer sagen",
+      "subtitle": "Tausende von Arbeitnehmern und Unternehmen vertrauen bereits auf Syneria, um globale Talente zu verbinden.",
+      "testimonial1": {
+        "quote": "Dank Syneria habe ich in weniger als 3 Wochen einen stabilen Job in Deutschland gefunden. Der Prozess war transparent und der digitale Vertrag gab mir viel Vertrauen.",
+        "name": "Carlos Ramirez",
+        "role": "Industrieelektriker",
+        "country": "Kolumbien"
+      },
+      "testimonial2": {
+        "quote": "Als Unternehmen ermoeglicht uns Syneria den Zugang zu qualifizierten Talenten aus ganz Lateinamerika. Verifizierte Profile und das Vertragssystem sparen Wochen an Arbeit.",
+        "name": "Sarah Mueller",
+        "role": "HR-Managerin - BauTech GmbH",
+        "country": "Deutschland"
+      },
+      "testimonial3": {
+        "quote": "Das integrierte Wallet ist unglaublich. Ich erhalte mein Gehalt und kann Ueberweisungen an meine Familie direkt ueber die Plattform senden. Alles an einem Ort.",
+        "name": "Maria Gonzalez",
+        "role": "Profikoehin",
+        "country": "Mexiko"
+      }
+    },
+    "cta": {
+      "badge": "Heute kostenlos beitreten",
+      "title": "Ihr Talent, Ihre Welt,",
+      "titleHighlight": "Ihre Wirtschaft",
+      "subtitle": "Registrieren Sie sich kostenlos und erhalten Sie Zugang zu Tausenden von Jobmoeglichkeiten in 28 Laendern. Ihre internationale Karriere beginnt heute.",
+      "createAccount": "Kostenloses Konto erstellen",
+      "iAmCompany": "Ich bin ein Unternehmen",
+      "noCreditCard": "Keine Kreditkarte erforderlich",
+      "registerIn2Min": "Registrierung in 2 Minuten",
+      "support6Languages": "Support in 6 Sprachen"
+    }
   }
 }

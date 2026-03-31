@@ -11,6 +11,7 @@ import {
   FileText,
   MapPin,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { CompanyAvatar } from "@/components/shared/company-avatar";
@@ -56,6 +57,7 @@ export function CandidateCard({
   onStatusChange,
   onScheduleInterview,
 }: CandidateCardProps) {
+  const t = useTranslations("employer");
   const [expanded, setExpanded] = useState(false);
   const details = (candidate as any).cover_letter
     ? {
@@ -125,7 +127,7 @@ export function CandidateCard({
             onClick={() => setExpanded((v) => !v)}
           >
             <Eye className="mr-1 size-3.5" />
-            Ver Perfil
+            {t("candidates.actions.viewProfile")}
             <ChevronDown
               className={cn(
                 "ml-1 size-3 transition-transform",
@@ -142,7 +144,7 @@ export function CandidateCard({
               onClick={onScheduleInterview}
             >
               <CalendarPlus className="mr-1 size-3.5" />
-              Agendar Entrevista
+              {t("candidates.actions.scheduleInterview")}
             </Button>
           )}
 
@@ -154,7 +156,7 @@ export function CandidateCard({
                 onClick={() => onStatusChange("accepted")}
               >
                 <CheckCircle2 className="mr-1 size-3.5" />
-                Aceptar
+                {t("candidates.actions.accept")}
               </Button>
               <Button
                 size="sm"
@@ -163,7 +165,7 @@ export function CandidateCard({
                 onClick={() => onStatusChange("rejected")}
               >
                 <XCircle className="mr-1 size-3.5" />
-                Rechazar
+                {t("candidates.actions.reject")}
               </Button>
             </>
           )}
@@ -185,7 +187,7 @@ export function CandidateCard({
                 <>
                   <div>
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-                      Carta de presentacion
+                      {t("candidates.actions.coverLetter")}
                     </p>
                     <p className="text-sm text-foreground leading-relaxed">
                       {details.coverLetter}
@@ -194,7 +196,7 @@ export function CandidateCard({
 
                   <div>
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-                      Motivacion
+                      {t("candidates.actions.motivation")}
                     </p>
                     <p className="text-sm text-foreground leading-relaxed">
                       {details.motivation}
@@ -206,12 +208,12 @@ export function CandidateCard({
                     className="inline-flex items-center gap-1.5 rounded-md bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 transition-colors hover:bg-brand-100"
                   >
                     <FileText className="size-3.5" />
-                    Descargar CV
+                    {t("candidates.actions.downloadCV")}
                   </a>
                 </>
               ) : (
                 <p className="text-sm text-muted-foreground">
-                  No hay detalles adicionales disponibles.
+                  {t("candidates.actions.noDetails")}
                 </p>
               )}
 

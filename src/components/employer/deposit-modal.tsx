@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Landmark } from "lucide-react";
 import { toast } from "sonner";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,12 +30,7 @@ import {
 /*  Payment methods                                                    */
 /* ------------------------------------------------------------------ */
 
-const paymentMethods = [
-  { value: "bank_transfer", label: "Transferencia Bancaria" },
-  { value: "credit_card", label: "Tarjeta de Credito" },
-  { value: "debit_card", label: "Tarjeta de Debito" },
-  { value: "crypto", label: "Criptomoneda (USDC)" },
-];
+// Payment method labels are set dynamically inside the component using translations
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
@@ -51,18 +47,27 @@ export function DepositModal({
   onOpenChange,
   onDeposit,
 }: DepositModalProps) {
+  const t = useTranslations("employer");
+  const tc = useTranslations("common");
   const [amount, setAmount] = useState("");
   const [method, setMethod] = useState("");
+
+  const paymentMethods = [
+    { value: "bank_transfer", label: t("wallet.deposit.bankTransfer") },
+    { value: "credit_card", label: t("wallet.deposit.creditCard") },
+    { value: "debit_card", label: t("wallet.deposit.debitCard") },
+    { value: "crypto", label: t("wallet.deposit.crypto") },
+  ];
 
   const parsedAmount = parseFloat(amount) || 0;
 
   const handleDeposit = () => {
     if (parsedAmount <= 0 || !method) {
-      toast.error("Completa todos los campos");
+      toast.error(tc("fillAllFields"));
       return;
     }
     onDeposit?.(parsedAmount);
-    toast.success(`Deposito de $${parsedAmount.toFixed(2)} procesado`);
+    toast.success(t("wallet.deposit.success"));
     setAmount("");
     setMethod("");
     onOpenChange(false);
@@ -82,10 +87,10 @@ export function DepositModal({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Landmark className="size-5 text-brand-600" />
-            Depositar Fondos
+            {t("wallet.deposit.title")}
           </DialogTitle>
           <DialogDescription>
-            Agrega fondos a tu wallet para realizar pagos a trabajadores.
+            {t("wallet.deposit.subtitle")}
           </DialogDescription>
         </DialogHeader>
 
@@ -97,7 +102,7 @@ export function DepositModal({
         >
           {/* Amount */}
           <div className="space-y-1.5">
-            <Label htmlFor="dep-amount">Monto (USD)</Label>
+            <Label htmlFor="dep-amount">{t("wallet.deposit.amount")}</Label>
             <Input
               id="dep-amount"
               type="number"
@@ -111,13 +116,13 @@ export function DepositModal({
 
           {/* Payment method */}
           <div className="space-y-1.5">
-            <Label>Metodo de pago</Label>
+            <Label>{t("wallet.deposit.method")}</Label>
             <Select
               value={method}
               onValueChange={(v) => v && setMethod(v)}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Seleccionar metodo" />
+                <SelectValue placeholder={t("wallet.deposit.method")} />
               </SelectTrigger>
               <SelectContent>
                 {paymentMethods.map((m) => (
@@ -152,7 +157,7 @@ export function DepositModal({
             disabled={parsedAmount <= 0 || !method}
           >
             <Landmark className="size-4" />
-            Depositar ${parsedAmount > 0 ? parsedAmount.toFixed(2) : "0.00"}
+            {t("wallet.deposit.title")} ${parsedAmount > 0 ? parsedAmount.toFixed(2) : "0.00"}
           </Button>
         </DialogFooter>
       </DialogContent>

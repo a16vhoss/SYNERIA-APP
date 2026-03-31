@@ -15,6 +15,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { toast } from "sonner";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -55,13 +56,7 @@ interface VacanciesClientProps {
 }
 
 // ── Tab definitions ──────────────────────────────────────────────────
-const tabs: { key: TabFilter; label: string }[] = [
-  { key: "all", label: "Todas" },
-  { key: "active", label: "Activas" },
-  { key: "paused", label: "Pausadas" },
-  { key: "closed", label: "Cerradas" },
-  { key: "draft", label: "Borradores" },
-];
+// Tab labels are set dynamically in the component using translations
 
 // ── Row animation ────────────────────────────────────────────────────
 const rowVariants = {
@@ -82,6 +77,16 @@ const rowVariants = {
 export function VacanciesClient({
   initialVacancies,
 }: VacanciesClientProps) {
+  const t = useTranslations("employer");
+
+  const tabs: { key: TabFilter; label: string }[] = [
+    { key: "all", label: t("vacancies.title") },
+    { key: "active", label: t("vacancies.status.publish") },
+    { key: "paused", label: t("vacancies.status.unpublish") },
+    { key: "closed", label: t("vacancies.status.close") },
+    { key: "draft", label: t("vacancies.create.saveDraft") },
+  ];
+
   // State
   const [vacancies, setVacancies] = useState<MockVacancy[]>(initialVacancies);
   const [search, setSearch] = useState("");
@@ -312,8 +317,8 @@ export function VacanciesClient({
     >
       {/* Page header */}
       <PageHeader
-        title="Gestion de Vacantes"
-        subtitle="Administra todas tus publicaciones de empleo"
+        title={t("vacancies.title")}
+        subtitle={t("dashboard.subtitle")}
       >
         <Button
           onClick={() => setShowCreate(true)}
@@ -321,7 +326,7 @@ export function VacanciesClient({
           size="lg"
         >
           <Plus className="size-4" data-icon="inline-start" />
-          Publicar Nueva Vacante
+          {t("vacancies.create.title")}
         </Button>
       </PageHeader>
 
@@ -390,7 +395,7 @@ export function VacanciesClient({
             exit={{ opacity: 0, height: 0, marginTop: 0 }}
           >
             <span className="text-sm font-medium text-brand-700">
-              {selected.size} seleccionada(s)
+              {selected.size} {t("candidates.filters.status")}
             </span>
             <div className="flex gap-2">
               <Button
@@ -399,14 +404,14 @@ export function VacanciesClient({
                 className="border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100"
                 onClick={bulkPause}
               >
-                Pausar
+                {t("vacancies.status.unpublish")}
               </Button>
               <Button
                 size="sm"
                 variant="destructive"
                 onClick={bulkClose}
               >
-                Cerrar
+                {t("vacancies.status.close")}
               </Button>
             </div>
             <Button
@@ -415,7 +420,7 @@ export function VacanciesClient({
               className="ml-auto"
               onClick={() => setSelected(new Set())}
             >
-              Cancelar
+              {t("candidates.interview.cancel")}
             </Button>
           </motion.div>
         )}
@@ -430,7 +435,7 @@ export function VacanciesClient({
       >
         <div className="flex-1">
           <SearchInput
-            placeholder="Buscar vacante por titulo, ubicacion o sector..."
+            placeholder={t("candidates.filters.search")}
             value={search}
             onChange={setSearch}
           />
@@ -449,16 +454,12 @@ export function VacanciesClient({
           {filtered.length === 0 ? (
             <EmptyState
               icon={Briefcase}
-              title="No hay vacantes"
-              description={
-                search || activeTab !== "all"
-                  ? "No se encontraron vacantes con los filtros aplicados."
-                  : "Aun no has publicado ninguna vacante. Crea tu primera vacante para empezar a recibir candidatos."
-              }
+              title={t("vacancies.empty")}
+              description={t("vacancies.empty")}
               action={
                 !search && activeTab === "all"
                   ? {
-                      label: "Publicar Vacante",
+                      label: t("vacancies.emptyAction"),
                       onClick: () => setShowCreate(true),
                     }
                   : undefined
@@ -480,28 +481,28 @@ export function VacanciesClient({
                       />
                     </TableHead>
                     <SortableHead field="title" className="text-white">
-                      Titulo
+                      {t("dashboard.vacanciesTable.title")}
                     </SortableHead>
                     <SortableHead field="location" className="text-white">
-                      Ubicacion
+                      {t("vacancies.create.location")}
                     </SortableHead>
                     <SortableHead
                       field="applications_count"
                       className="text-white"
                     >
-                      Aplicaciones
+                      {t("dashboard.vacanciesTable.applicants")}
                     </SortableHead>
                     <SortableHead field="status" className="text-white">
-                      Estado
+                      {t("dashboard.vacanciesTable.status")}
                     </SortableHead>
                     <SortableHead
                       field="published_at"
                       className="text-white"
                     >
-                      Publicada
+                      {t("dashboard.vacanciesTable.posted")}
                     </SortableHead>
                     <TableHead className="text-xs font-semibold uppercase tracking-wider text-white/90">
-                      Acciones
+                      {t("dashboard.vacanciesTable.actions")}
                     </TableHead>
                   </TableRow>
                 </TableHeader>

@@ -15,6 +15,7 @@ import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/shared/glass-card";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 
@@ -35,12 +36,7 @@ interface UploadedFile {
   url?: string;
 }
 
-const DOCUMENT_SLOTS: DocumentSlot[] = [
-  { key: "passport", label: "Pasaporte", icon: FileText, accept: ".pdf,.jpg,.jpeg,.png" },
-  { key: "cv", label: "Curriculum / CV", icon: FileText, accept: ".pdf,.doc,.docx" },
-  { key: "certifications", label: "Certificaciones", icon: Award, accept: ".pdf,.jpg,.jpeg,.png" },
-  { key: "photo", label: "Foto de Perfil", icon: Camera, accept: ".jpg,.jpeg,.png,.webp" },
-];
+/* DOCUMENT_SLOTS is built inside TabDocumentos to access translations */
 
 const BUCKET_NAME = "documents";
 
@@ -72,6 +68,16 @@ interface TabDocumentosProps {
 }
 
 export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
+
+  const DOCUMENT_SLOTS: DocumentSlot[] = [
+    { key: "passport", label: "Pasaporte", icon: FileText, accept: ".pdf,.jpg,.jpeg,.png" },
+    { key: "cv", label: t("profile.documents.resume"), icon: FileText, accept: ".pdf,.doc,.docx" },
+    { key: "certifications", label: t("profile.documents.certificate"), icon: Award, accept: ".pdf,.jpg,.jpeg,.png" },
+    { key: "photo", label: t("profile.personal.avatar"), icon: Camera, accept: ".jpg,.jpeg,.png,.webp" },
+  ];
+
   const [files, setFiles] = useState<Record<string, UploadedFile | null>>({
     passport: null,
     cv: null,
@@ -171,7 +177,7 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
 
       if (updateError) throw updateError;
 
-      toast.success("Documento subido correctamente");
+      toast.success(tc("misc.savedSuccessfully"));
     } catch (err) {
       console.error("Error uploading document:", err);
       toast.error(
@@ -232,6 +238,14 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
               uploading={isUploading}
               onUpload={(fileList) => handleUpload(slot.key, fileList)}
               onRemove={() => handleRemove(slot.key)}
+              labels={{
+                uploading: tc("misc.loading"),
+                uploaded: tc("misc.success"),
+                pending: tc("status.pending"),
+                uploadFile: tc("actions.upload"),
+                searchFile: tc("actions.search"),
+                replaceFile: tc("actions.update"),
+              }}
             />
           </motion.div>
         );
@@ -244,15 +258,25 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
 /*  Document Card                                                      */
 /* ------------------------------------------------------------------ */
 
+interface DocumentCardLabels {
+  uploading: string;
+  uploaded: string;
+  pending: string;
+  uploadFile: string;
+  searchFile: string;
+  replaceFile: string;
+}
+
 interface DocumentCardProps {
   slot: DocumentSlot;
   uploaded: UploadedFile | null;
   uploading: boolean;
   onUpload: (files: FileList | null) => void;
   onRemove: () => void;
+  labels: DocumentCardLabels;
 }
 
-function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove }: DocumentCardProps) {
+function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove, labels }: DocumentCardProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const Icon = slot.icon;
 
@@ -268,7 +292,7 @@ function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove }: Documen
             {slot.label}
           </h4>
           <p className="text-xs text-muted-foreground">
-            {uploading ? "Subiendo..." : uploaded ? "Archivo subido" : "Pendiente"}
+            {uploading ? labels.uploading : uploaded ? labels.uploaded : labels.pending}
           </p>
         </div>
       </div>
@@ -277,7 +301,7 @@ function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove }: Documen
       {uploading ? (
         <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-brand-300 bg-brand-50/50 px-4 py-5">
           <Loader2 className="size-5 animate-spin text-brand-500" />
-          <span className="ml-2 text-xs font-medium text-brand-600">Subiendo archivo...</span>
+          <span className="ml-2 text-xs font-medium text-brand-600">{labels.uploading}</span>
         </div>
       ) : uploaded ? (
         <div className="flex items-center justify-between rounded-lg border border-brand-200 bg-brand-50 px-3 py-2">
@@ -304,7 +328,7 @@ function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove }: Documen
           )}
         >
           <Upload className="size-5" />
-          <span className="text-xs font-medium">Subir archivo</span>
+          <span className="text-xs font-medium">{labels.uploadFile}</span>
           <span className="text-[10px]">Arrastra o haz click</span>
         </button>
       )}
@@ -331,7 +355,7 @@ function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove }: Documen
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
           >
-            Reemplazar archivo
+            {labels.replaceFile}
           </Button>
         ) : (
           <Button
@@ -340,7 +364,7 @@ function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove }: Documen
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
           >
-            Buscar archivo
+            {labels.searchFile}
           </Button>
         )}
       </div>

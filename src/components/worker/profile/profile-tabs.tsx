@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export type ProfileTabId =
@@ -15,20 +16,22 @@ interface Tab {
   label: string;
 }
 
-const TABS: Tab[] = [
-  { id: "info", label: "Informacion Personal" },
-  { id: "experiencia", label: "Experiencia" },
-  { id: "educacion", label: "Educacion" },
-  { id: "documentos", label: "Documentos" },
-  { id: "configuracion", label: "Configuracion" },
-];
-
 interface ProfileTabsProps {
   activeTab: ProfileTabId;
   onTabChange: (tab: ProfileTabId) => void;
 }
 
 export function ProfileTabs({ activeTab, onTabChange }: ProfileTabsProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
+
+  const TABS: Tab[] = [
+    { id: "info", label: t("profile.tabs.personal") },
+    { id: "experiencia", label: t("profile.tabs.experience") },
+    { id: "educacion", label: t("profile.tabs.education") },
+    { id: "documentos", label: t("profile.tabs.documents") },
+    { id: "configuracion", label: tc("nav.settings") },
+  ];
   return (
     <div className="relative border-b border-border">
       <nav className="-mb-px flex gap-6 overflow-x-auto px-1" aria-label="Tabs de perfil">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Briefcase, ArrowUpDown, ChevronLeft, ChevronRight } from "lucide-react";
@@ -55,6 +56,8 @@ interface JobsPageClientProps {
 }
 
 export function JobsPageClient({ realJobs }: JobsPageClientProps = {}) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const ALL_JOBS: EnrichedJob[] = useMemo(() => {
     if (realJobs?.length) {
       return realJobs.map((j) => ({
@@ -174,16 +177,16 @@ export function JobsPageClient({ realJobs }: JobsPageClientProps = {}) {
   return (
     <div className="flex flex-col gap-6">
       {/* Header */}
-      <PageHeader title="Busqueda de Empleos" />
+      <PageHeader title={t("jobs.title")} />
 
       {/* Search bar */}
       <SearchInput
-        placeholder="Buscar por titulo, empresa o ubicacion..."
+        placeholder={t("jobs.searchPlaceholder")}
         value={searchQuery}
         onChange={setSearchQuery}
         onSearch={() => {}}
         showButton
-        buttonLabel="Buscar"
+        buttonLabel={tc("actions.search")}
       />
 
       {/* Filters */}
@@ -207,21 +210,18 @@ export function JobsPageClient({ realJobs }: JobsPageClientProps = {}) {
         transition={{ delay: 0.2 }}
       >
         <span className="text-sm text-muted-foreground">
-          <span className="font-semibold text-foreground">
-            {filtered.length}
-          </span>{" "}
-          empleos encontrados
+          {tc("misc.resultsCount", { count: filtered.length })}
         </span>
 
         <div className="flex items-center gap-2">
           <ArrowUpDown className="size-3.5 text-muted-foreground" />
           <Select value={sortBy} onValueChange={(v) => { if (v) setSortBy(v); }}>
             <SelectTrigger className="w-auto">
-              <SelectValue placeholder="Ordenar" />
+              <SelectValue placeholder={tc("actions.sortBy")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="recent">Mas reciente</SelectItem>
-              <SelectItem value="salary">Mayor salario</SelectItem>
+              <SelectItem value="recent">{t("jobs.filters.postedDate")}</SelectItem>
+              <SelectItem value="salary">{t("jobs.filters.salary")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -246,10 +246,10 @@ export function JobsPageClient({ realJobs }: JobsPageClientProps = {}) {
       ) : (
         <EmptyState
           icon={Briefcase}
-          title="Sin resultados"
-          description="No se encontraron empleos que coincidan con tus filtros. Intenta ajustar los criterios de busqueda."
+          title={tc("empty.noSearchResults")}
+          description={tc("empty.noJobs")}
           action={{
-            label: "Limpiar filtros",
+            label: tc("actions.clearFilters"),
             onClick: clearFilters,
             variant: "outline",
           }}

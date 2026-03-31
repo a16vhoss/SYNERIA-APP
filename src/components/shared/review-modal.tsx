@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -18,12 +19,12 @@ import { CompanyAvatar } from "@/components/shared/company-avatar";
 import { ReviewTagSelector } from "@/components/shared/review-tag-selector";
 import type { ReviewTag } from "@/lib/constants/mock-data";
 
-const ratingLabels: Record<number, string> = {
-  1: "Malo",
-  2: "Regular",
-  3: "Bueno",
-  4: "Muy bueno",
-  5: "Excelente",
+const ratingLabelKeys: Record<number, string> = {
+  1: "terrible",
+  2: "bad",
+  3: "average",
+  4: "good",
+  5: "excellent",
 };
 
 interface ReviewModalProps {
@@ -49,6 +50,9 @@ export function ReviewModal({
   counterpartyGradient,
   onSubmit,
 }: ReviewModalProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
+
   const [rating, setRating] = useState(0);
   const [tags, setTags] = useState<ReviewTag[]>([]);
   const [comment, setComment] = useState("");
@@ -107,7 +111,7 @@ export function ReviewModal({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                Resena enviada
+                {t("reviews.success")}
               </motion.h3>
               <motion.p
                 className="text-sm text-muted-foreground"
@@ -115,7 +119,7 @@ export function ReviewModal({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                Gracias por compartir tu experiencia.
+                {tc("misc.savedSuccessfully")}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
@@ -123,7 +127,7 @@ export function ReviewModal({
                 transition={{ delay: 0.5 }}
               >
                 <Button variant="outline" onClick={() => handleClose(false)}>
-                  Cerrar
+                  {tc("actions.close")}
                 </Button>
               </motion.div>
             </motion.div>
@@ -136,9 +140,9 @@ export function ReviewModal({
               exit={{ opacity: 0 }}
             >
               <DialogHeader>
-                <DialogTitle>Califica tu experiencia</DialogTitle>
+                <DialogTitle>{t("reviews.writeReview")}</DialogTitle>
                 <DialogDescription>
-                  Comparte tu opinion sobre esta experiencia laboral.
+                  {t("reviews.comment")}
                 </DialogDescription>
               </DialogHeader>
 
@@ -177,7 +181,7 @@ export function ReviewModal({
                       exit={{ opacity: 0, y: 4 }}
                       transition={{ duration: 0.15 }}
                     >
-                      {ratingLabels[rating]}
+                      {t(`reviews.ratingLabels.${ratingLabelKeys[rating]}`)}
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -186,7 +190,7 @@ export function ReviewModal({
               {/* Tags */}
               <div className="flex flex-col gap-2">
                 <label className="text-xs font-medium text-muted-foreground">
-                  Etiquetas (opcional, max. 5)
+                  {t("reviews.title")}
                 </label>
                 <ReviewTagSelector
                   selected={tags}
@@ -198,10 +202,10 @@ export function ReviewModal({
               {/* Comment */}
               <div className="flex flex-col gap-2">
                 <label className="text-xs font-medium text-muted-foreground">
-                  Comentario (opcional)
+                  {t("reviews.comment")}
                 </label>
                 <Textarea
-                  placeholder="Describe tu experiencia..."
+                  placeholder={t("reviews.commentPlaceholder")}
                   value={comment}
                   onChange={(e) =>
                     setComment(e.target.value.slice(0, maxComment))
@@ -215,10 +219,10 @@ export function ReviewModal({
 
               <DialogFooter>
                 <Button variant="outline" onClick={() => handleClose(false)}>
-                  Cancelar
+                  {tc("actions.cancel")}
                 </Button>
                 <Button disabled={!canSubmit} onClick={handleSubmit}>
-                  Enviar Resena
+                  {t("reviews.submit")}
                 </Button>
               </DialogFooter>
             </motion.div>

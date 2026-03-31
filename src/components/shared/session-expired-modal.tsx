@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LogIn, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 interface SessionExpiredModalProps {
   open: boolean;
@@ -45,6 +46,9 @@ function saveFormData() {
 }
 
 export function SessionExpiredModal({ open }: SessionExpiredModalProps) {
+  const t = useTranslations("common");
+  const tAuth = useTranslations("auth");
+
   const handleLogin = useCallback(() => {
     saveFormData();
     window.location.href = "/login";
@@ -81,12 +85,11 @@ export function SessionExpiredModal({ open }: SessionExpiredModalProps) {
               </div>
 
               <h2 className="font-heading text-lg font-semibold text-foreground">
-                Tu sesion ha expirado
+                {t("misc.sessionExpired")}
               </h2>
 
               <p className="mt-2 text-sm text-muted-foreground">
-                Tu sesion ha expirado por inactividad. Inicia sesion de nuevo
-                para continuar.
+                {t("misc.sessionExpired")}
               </p>
 
               <Button
@@ -95,7 +98,7 @@ export function SessionExpiredModal({ open }: SessionExpiredModalProps) {
                 onClick={handleLogin}
               >
                 <LogIn data-icon="inline-start" />
-                Iniciar sesion de nuevo
+                {tAuth("login.submit")}
               </Button>
             </motion.div>
           </motion.div>

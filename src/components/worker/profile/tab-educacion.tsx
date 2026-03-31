@@ -19,6 +19,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -68,6 +69,8 @@ const modalVariant = {
 /* ------------------------------------------------------------------ */
 
 export function TabEducacion() {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const [entries, setEntries] = useState<EducationEntry[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -142,9 +145,9 @@ export function TabEducacion() {
       <>
         <EmptyState
           icon={GraduationCap}
-          title="No has agregado educacion aun"
+          title={t("profile.education.noEducation")}
           description="Agrega tu formacion academica para fortalecer tu perfil profesional."
-          action={{ label: "Agregar Educacion", onClick: openAdd }}
+          action={{ label: t("profile.education.addEducation"), onClick: openAdd }}
         />
 
         <EducationDialog
@@ -154,6 +157,19 @@ export function TabEducacion() {
           register={register}
           errors={errors}
           onSubmit={handleSubmit(onSubmit)}
+          labels={{
+            addTitle: t("profile.education.addEducation"),
+            editTitle: t("profile.education.editEducation"),
+            institution: t("profile.education.institution"),
+            degree: t("profile.education.degree"),
+            field: t("profile.education.field"),
+            startDate: t("profile.education.startDate"),
+            endDate: t("profile.education.endDate"),
+            description: t("profile.experience.description"),
+            cancel: tc("actions.cancel"),
+            save: tc("actions.save"),
+            add: tc("actions.create"),
+          }}
         />
       </>
     );
@@ -164,11 +180,11 @@ export function TabEducacion() {
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <h3 className="font-heading text-base font-semibold text-foreground">
-          Educacion
+          {t("profile.tabs.education")}
         </h3>
         <Button size="sm" onClick={openAdd}>
           <Plus className="size-4" />
-          Agregar
+          {t("profile.education.addEducation")}
         </Button>
       </div>
 
@@ -197,7 +213,7 @@ export function TabEducacion() {
                       {entry.institution}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {entry.startDate} - {entry.endDate ?? "Actualmente"}
+                      {entry.startDate} - {entry.endDate ?? t("profile.education.current")}
                     </p>
                     {entry.description && (
                       <p className="mt-1.5 text-sm text-muted-foreground">
@@ -236,6 +252,19 @@ export function TabEducacion() {
         register={register}
         errors={errors}
         onSubmit={handleSubmit(onSubmit)}
+        labels={{
+          addTitle: t("profile.education.addEducation"),
+          editTitle: t("profile.education.editEducation"),
+          institution: t("profile.education.institution"),
+          degree: t("profile.education.degree"),
+          field: t("profile.education.field"),
+          startDate: t("profile.education.startDate"),
+          endDate: t("profile.education.endDate"),
+          description: t("profile.experience.description"),
+          cancel: tc("actions.cancel"),
+          save: tc("actions.save"),
+          add: tc("actions.create"),
+        }}
       />
     </>
   );
@@ -245,6 +274,20 @@ export function TabEducacion() {
 /*  Dialog                                                             */
 /* ------------------------------------------------------------------ */
 
+interface EducationDialogLabels {
+  addTitle: string;
+  editTitle: string;
+  institution: string;
+  degree: string;
+  field: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  cancel: string;
+  save: string;
+  add: string;
+}
+
 interface EducationDialogProps {
   open: boolean;
   onOpenChange: (v: boolean) => void;
@@ -252,6 +295,7 @@ interface EducationDialogProps {
   register: ReturnType<typeof useForm<EducationFormValues>>["register"];
   errors: ReturnType<typeof useForm<EducationFormValues>>["formState"]["errors"];
   onSubmit: () => void;
+  labels: EducationDialogLabels;
 }
 
 function EducationDialog({
@@ -261,6 +305,7 @@ function EducationDialog({
   register,
   errors,
   onSubmit,
+  labels,
 }: EducationDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -268,7 +313,7 @@ function EducationDialog({
         <motion.div variants={modalVariant} initial="hidden" animate="visible" exit="exit">
           <DialogHeader>
             <DialogTitle>
-              {editingId ? "Editar Educacion" : "Agregar Educacion"}
+              {editingId ? labels.editTitle : labels.addTitle}
             </DialogTitle>
           </DialogHeader>
 
@@ -280,7 +325,7 @@ function EducationDialog({
             className="mt-4 space-y-4"
           >
             <div className="space-y-1.5">
-              <Label htmlFor="edu-institution">Institucion</Label>
+              <Label htmlFor="edu-institution">{labels.institution}</Label>
               <Input
                 id="edu-institution"
                 placeholder="Ej: Universidad Nacional"
@@ -293,7 +338,7 @@ function EducationDialog({
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="edu-degree">Titulo / Grado</Label>
+              <Label htmlFor="edu-degree">{labels.degree}</Label>
               <Input
                 id="edu-degree"
                 placeholder="Ej: Ingenieria Civil"
@@ -307,7 +352,7 @@ function EducationDialog({
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <Label htmlFor="edu-start">Fecha inicio</Label>
+                <Label htmlFor="edu-start">{labels.startDate}</Label>
                 <Input
                   id="edu-start"
                   type="date"
@@ -320,7 +365,7 @@ function EducationDialog({
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="edu-end">Fecha fin</Label>
+                <Label htmlFor="edu-end">{labels.endDate}</Label>
                 <Input
                   id="edu-end"
                   type="date"
@@ -330,7 +375,7 @@ function EducationDialog({
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="edu-desc">Descripcion</Label>
+              <Label htmlFor="edu-desc">{labels.description}</Label>
               <Textarea
                 id="edu-desc"
                 rows={3}
@@ -346,10 +391,10 @@ function EducationDialog({
                 variant="outline"
                 onClick={() => onOpenChange(false)}
               >
-                Cancelar
+                {labels.cancel}
               </Button>
               <Button type="submit">
-                {editingId ? "Guardar Cambios" : "Agregar"}
+                {editingId ? labels.save : labels.add}
               </Button>
             </DialogFooter>
           </form>

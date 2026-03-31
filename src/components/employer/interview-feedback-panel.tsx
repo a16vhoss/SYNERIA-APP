@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, XCircle, MessageSquare, Save } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,6 +21,8 @@ export function InterviewFeedbackPanel({
   onAccept,
   onReject,
 }: InterviewFeedbackPanelProps) {
+  const t = useTranslations("employer");
+  const tc = useTranslations("common");
   const [feedback, setFeedback] = useState("");
   const [saved, setSaved] = useState(false);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -52,7 +55,7 @@ export function InterviewFeedbackPanel({
       <div className="flex items-center gap-2">
         <MessageSquare className="size-4 text-amber-600" />
         <h4 className="text-sm font-semibold text-foreground">
-          Feedback post-entrevista
+          {t("candidates.interview.feedback")}
         </h4>
         {saved && (
           <motion.span
@@ -62,7 +65,7 @@ export function InterviewFeedbackPanel({
             exit={{ opacity: 0 }}
           >
             <Save className="size-3" />
-            Guardado
+            {tc("saved")}
           </motion.span>
         )}
       </div>
@@ -70,7 +73,7 @@ export function InterviewFeedbackPanel({
       <Textarea
         value={feedback}
         onChange={(e) => setFeedback(e.target.value)}
-        placeholder={`Notas privadas sobre la entrevista con ${candidateName}...`}
+        placeholder={t("candidates.interview.notes")}
         className="min-h-[80px] bg-white/60"
       />
 
@@ -81,7 +84,7 @@ export function InterviewFeedbackPanel({
           onClick={onAccept}
         >
           <CheckCircle2 className="mr-1.5 size-3.5" />
-          Aceptar Candidato
+          {t("candidates.actions.accept")}
         </Button>
         <Button
           size="sm"
@@ -90,7 +93,7 @@ export function InterviewFeedbackPanel({
           onClick={onReject}
         >
           <XCircle className="mr-1.5 size-3.5" />
-          Rechazar Candidato
+          {t("candidates.actions.reject")}
         </Button>
       </div>
     </motion.div>

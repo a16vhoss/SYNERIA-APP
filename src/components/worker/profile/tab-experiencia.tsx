@@ -20,6 +20,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
+import { useTranslations } from "next-intl";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -71,6 +72,8 @@ const modalVariant = {
 /* ------------------------------------------------------------------ */
 
 export function TabExperiencia() {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const [entries, setEntries] = useState<ExperienceEntry[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -156,9 +159,9 @@ export function TabExperiencia() {
       <>
         <EmptyState
           icon={Briefcase}
-          title="No has agregado experiencia laboral aun"
+          title={t("profile.experience.noExperience")}
           description="Agrega tu experiencia para que los empleadores puedan conocer tu trayectoria profesional."
-          action={{ label: "Agregar Experiencia", onClick: openAdd }}
+          action={{ label: t("profile.experience.addExperience"), onClick: openAdd }}
         />
 
         <ExperienceDialog
@@ -170,6 +173,19 @@ export function TabExperiencia() {
           isCurrent={isCurrent}
           setValue={setValue}
           onSubmit={handleSubmit(onSubmit)}
+          labels={{
+            addTitle: t("profile.experience.addExperience"),
+            editTitle: t("profile.experience.editExperience"),
+            position: t("profile.experience.position"),
+            company: t("profile.experience.company"),
+            startDate: t("profile.experience.startDate"),
+            endDate: t("profile.experience.endDate"),
+            current: t("profile.experience.current"),
+            description: t("profile.experience.description"),
+            cancel: tc("actions.cancel"),
+            save: tc("actions.save"),
+            add: tc("actions.create"),
+          }}
         />
       </>
     );
@@ -180,11 +196,11 @@ export function TabExperiencia() {
       {/* Header with add button */}
       <div className="mb-4 flex items-center justify-between">
         <h3 className="font-heading text-base font-semibold text-foreground">
-          Experiencia Laboral
+          {t("profile.tabs.experience")}
         </h3>
         <Button size="sm" onClick={openAdd}>
           <Plus className="size-4" />
-          Agregar
+          {t("profile.experience.addExperience")}
         </Button>
       </div>
 
@@ -211,7 +227,7 @@ export function TabExperiencia() {
                     </h4>
                     <p className="text-sm text-muted-foreground">{entry.company}</p>
                     <p className="text-xs text-muted-foreground">
-                      {entry.startDate} - {entry.current ? "Actualmente" : entry.endDate}
+                      {entry.startDate} - {entry.current ? t("profile.experience.current") : entry.endDate}
                     </p>
                     {entry.description && (
                       <p className="mt-1.5 text-sm text-muted-foreground">
@@ -252,6 +268,19 @@ export function TabExperiencia() {
         isCurrent={isCurrent}
         setValue={setValue}
         onSubmit={handleSubmit(onSubmit)}
+        labels={{
+          addTitle: t("profile.experience.addExperience"),
+          editTitle: t("profile.experience.editExperience"),
+          position: t("profile.experience.position"),
+          company: t("profile.experience.company"),
+          startDate: t("profile.experience.startDate"),
+          endDate: t("profile.experience.endDate"),
+          current: t("profile.experience.current"),
+          description: t("profile.experience.description"),
+          cancel: tc("actions.cancel"),
+          save: tc("actions.save"),
+          add: tc("actions.create"),
+        }}
       />
     </>
   );
@@ -260,6 +289,20 @@ export function TabExperiencia() {
 /* ------------------------------------------------------------------ */
 /*  Dialog                                                             */
 /* ------------------------------------------------------------------ */
+
+interface ExperienceDialogLabels {
+  addTitle: string;
+  editTitle: string;
+  position: string;
+  company: string;
+  startDate: string;
+  endDate: string;
+  current: string;
+  description: string;
+  cancel: string;
+  save: string;
+  add: string;
+}
 
 interface ExperienceDialogProps {
   open: boolean;
@@ -270,6 +313,7 @@ interface ExperienceDialogProps {
   isCurrent: boolean;
   setValue: ReturnType<typeof useForm<ExperienceFormValues>>["setValue"];
   onSubmit: () => void;
+  labels: ExperienceDialogLabels;
 }
 
 function ExperienceDialog({
@@ -281,6 +325,7 @@ function ExperienceDialog({
   isCurrent,
   setValue,
   onSubmit,
+  labels,
 }: ExperienceDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -288,7 +333,7 @@ function ExperienceDialog({
         <motion.div variants={modalVariant} initial="hidden" animate="visible" exit="exit">
           <DialogHeader>
             <DialogTitle>
-              {editingId ? "Editar Experiencia" : "Agregar Experiencia"}
+              {editingId ? labels.editTitle : labels.addTitle}
             </DialogTitle>
           </DialogHeader>
 
@@ -300,7 +345,7 @@ function ExperienceDialog({
             className="mt-4 space-y-4"
           >
             <div className="space-y-1.5">
-              <Label htmlFor="exp-title">Titulo / Cargo</Label>
+              <Label htmlFor="exp-title">{labels.position}</Label>
               <Input
                 id="exp-title"
                 placeholder="Ej: Operador de Maquinaria"
@@ -313,7 +358,7 @@ function ExperienceDialog({
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="exp-company">Empresa</Label>
+              <Label htmlFor="exp-company">{labels.company}</Label>
               <Input
                 id="exp-company"
                 placeholder="Ej: Constructora Alpha S.A."
@@ -327,7 +372,7 @@ function ExperienceDialog({
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <Label htmlFor="exp-start">Fecha inicio</Label>
+                <Label htmlFor="exp-start">{labels.startDate}</Label>
                 <Input
                   id="exp-start"
                   type="date"
@@ -340,7 +385,7 @@ function ExperienceDialog({
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="exp-end">Fecha fin</Label>
+                <Label htmlFor="exp-end">{labels.endDate}</Label>
                 <Input
                   id="exp-end"
                   type="date"
@@ -358,12 +403,12 @@ function ExperienceDialog({
                 }
               />
               <Label className="cursor-pointer text-sm font-normal">
-                Actualmente trabajo aqui
+                {labels.current}
               </Label>
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="exp-desc">Descripcion</Label>
+              <Label htmlFor="exp-desc">{labels.description}</Label>
               <Textarea
                 id="exp-desc"
                 rows={3}
@@ -379,10 +424,10 @@ function ExperienceDialog({
                 variant="outline"
                 onClick={() => onOpenChange(false)}
               >
-                Cancelar
+                {labels.cancel}
               </Button>
               <Button type="submit">
-                {editingId ? "Guardar Cambios" : "Agregar"}
+                {editingId ? labels.save : labels.add}
               </Button>
             </DialogFooter>
           </form>
