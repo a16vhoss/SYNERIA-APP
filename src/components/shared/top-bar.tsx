@@ -33,6 +33,8 @@ interface TopBarProps {
   userAvatarUrl?: string;
   /** User role label */
   userRole?: string;
+  /** Link for profile navigation */
+  profileHref?: string;
   className?: string;
 }
 
@@ -55,6 +57,7 @@ export function TopBar({
   userInitials = "U",
   userAvatarUrl,
   userRole = "Worker",
+  profileHref = "/profile",
   className,
 }: TopBarProps) {
   const [currentLang, setCurrentLang] = useState<string>("es");
@@ -195,18 +198,27 @@ export function TopBar({
               <p className="text-xs text-muted-foreground">{userRole}</p>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                window.location.href = profileHref;
+              }}
+            >
               <User className="mr-2 h-4 w-4" />
               Mi Perfil
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                window.location.href = profileHref;
+              }}
+            >
               <Settings className="mr-2 h-4 w-4" />
               Configuracion
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               variant="destructive"
-              onClick={() => {
+              onClick={async () => {
+                await fetch("/api/auth/signout", { method: "POST" });
                 window.location.href = "/login";
               }}
             >
