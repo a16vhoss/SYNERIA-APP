@@ -270,9 +270,12 @@ CREATE TABLE connections (
     created_at      TIMESTAMPTZ DEFAULT now(),
     updated_at      TIMESTAMPTZ DEFAULT now(),
 
-    CONSTRAINT no_self_connection CHECK (requester_id != addressee_id),
-    CONSTRAINT unique_connection_pair UNIQUE (LEAST(requester_id, addressee_id), GREATEST(requester_id, addressee_id))
+    CONSTRAINT no_self_connection CHECK (requester_id != addressee_id)
 );
+
+-- Unique index on the pair regardless of order (replaces inline UNIQUE constraint)
+CREATE UNIQUE INDEX idx_connections_unique_pair
+  ON connections (LEAST(requester_id, addressee_id), GREATEST(requester_id, addressee_id));
 
 -- --------------------------------------------------------------------------
 -- endorsements
