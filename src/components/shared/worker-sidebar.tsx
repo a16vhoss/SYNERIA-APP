@@ -51,7 +51,7 @@ const principalItems: NavItem[] = [
 ];
 
 const supportItems: NavItem[] = [
-  { label: "Configuracion", href: "/profile", icon: Settings },
+  { label: "Configuracion", href: "/profile?tab=configuracion", icon: Settings },
 ];
 
 // ── Animations ─────────────────────────────────────────────────────

@@ -51,7 +51,7 @@ const principalItems: NavItem[] = [
 ];
 
 const supportItems: NavItem[] = [
-  { label: "Configuracion", href: "/employer/company-profile", icon: Settings },
+  { label: "Configuracion", href: "/employer/profile?tab=configuracion", icon: Settings },
 ];
 
 // ── Animations ─────────────────────────────────────────────────────
@@ -147,8 +147,9 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
   const { displayName, initials, roleLabel } = useProfile();
 
   const isActive = (href: string) => {
-    if (href === "/employer/dashboard") return pathname === "/employer/dashboard";
-    return pathname.startsWith(href);
+    const hrefPath = href.split("?")[0];
+    if (hrefPath === "/employer/dashboard") return pathname === "/employer/dashboard";
+    return pathname.startsWith(hrefPath);
   };
 
   return (

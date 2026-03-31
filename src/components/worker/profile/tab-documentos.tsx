@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/shared/glass-card";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { toast } from "sonner";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -66,7 +67,11 @@ const cardVariant = {
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-export function TabDocumentos() {
+interface TabDocumentosProps {
+  onAvatarChange?: (url: string) => void;
+}
+
+export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
   const [files, setFiles] = useState<Record<string, UploadedFile | null>>({
     passport: null,
     cv: null,
@@ -76,8 +81,11 @@ export function TabDocumentos() {
   const [uploading, setUploading] = useState<Record<string, boolean>>({});
   const [userId, setUserId] = useState<string | null>(null);
 
-  // Load existing documents from profile on mount
+  // Initialize storage bucket + load existing documents on mount
   useEffect(() => {
+    // Ensure storage bucket exists
+    fetch("/api/storage/init", { method: "POST" }).catch(() => {});
+
     async function loadDocuments() {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
@@ -149,13 +157,26 @@ export function TabDocumentos() {
         if (v) docsToSave[k] = v;
       }
 
-      await supabase
+      // If this is a profile photo, also update avatar_url
+      const updateData: Record<string, unknown> = { documents: docsToSave };
+      if (key === "photo") {
+        updateData.avatar_url = urlData.publicUrl;
+        onAvatarChange?.(urlData.publicUrl);
+      }
+
+      const { error: updateError } = await supabase
         .from("profiles")
-        .update({ documents: docsToSave })
+        .update(updateData)
         .eq("id", userId);
 
+      if (updateError) throw updateError;
+
+      toast.success("Documento subido correctamente");
     } catch (err) {
       console.error("Error uploading document:", err);
+      toast.error(
+        `Error al subir documento: ${err instanceof Error ? err.message : "Error desconocido"}`
+      );
     } finally {
       setUploading((prev) => ({ ...prev, [key]: false }));
     }
@@ -294,7 +315,10 @@ function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove }: Documen
         type="file"
         className="hidden"
         accept={slot.accept}
-        onChange={(e) => onUpload(e.target.files)}
+        onChange={(e) => {
+          onUpload(e.target.files);
+          e.target.value = "";
+        }}
       />
 
       {/* Action buttons */}

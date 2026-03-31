@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProfileHeader } from "@/components/worker/profile/profile-header";
 import { ProfileTabs, type ProfileTabId } from "@/components/worker/profile/profile-tabs";
@@ -40,7 +41,21 @@ interface ProfileClientProps {
 }
 
 export function ProfileClient({ profile, completionPercentage }: ProfileClientProps) {
-  const [activeTab, setActiveTab] = useState<ProfileTabId>("info");
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab") as ProfileTabId | null;
+  const [activeTab, setActiveTab] = useState<ProfileTabId>(
+    tabParam && ["info", "experiencia", "educacion", "documentos", "configuracion"].includes(tabParam)
+      ? tabParam
+      : "info"
+  );
+
+  useEffect(() => {
+    if (tabParam && ["info", "experiencia", "educacion", "documentos", "configuracion"].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [tabParam]);
+
+  const [avatarUrl, setAvatarUrl] = useState<string | null | undefined>(profile.avatar_url);
 
   const nameParts = profile.full_name.split(" ");
   const firstName = nameParts[0] || "";
@@ -51,7 +66,7 @@ export function ProfileClient({ profile, completionPercentage }: ProfileClientPr
       <ProfileHeader
         firstName={firstName}
         lastName={lastName}
-        avatarUrl={profile.avatar_url}
+        avatarUrl={avatarUrl}
         city={profile.city || ""}
         country={profile.country || ""}
         profileCompletion={completionPercentage}
@@ -83,7 +98,7 @@ export function ProfileClient({ profile, completionPercentage }: ProfileClientPr
           )}
           {activeTab === "experiencia" && <TabExperiencia />}
           {activeTab === "educacion" && <TabEducacion />}
-          {activeTab === "documentos" && <TabDocumentos />}
+          {activeTab === "documentos" && <TabDocumentos onAvatarChange={setAvatarUrl} />}
           {activeTab === "configuracion" && <TabConfiguracion />}
         </motion.div>
       </AnimatePresence>

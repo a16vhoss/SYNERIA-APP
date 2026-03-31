@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // ── Types ──────────────────────────────────────────────────────────
 
@@ -60,7 +60,13 @@ export function TopBar({
   profileHref = "/profile",
   className,
 }: TopBarProps) {
-  const [currentLang, setCurrentLang] = useState<string>("es");
+  const [currentLang, setCurrentLang] = useState<string>(() => {
+    if (typeof document !== "undefined") {
+      const match = document.cookie.match(/NEXT_LOCALE=(\w+)/);
+      return match ? match[1] : "es";
+    }
+    return "es";
+  });
 
   return (
     <motion.header
@@ -159,7 +165,11 @@ export function TopBar({
             {languages.map((lang) => (
               <DropdownMenuItem
                 key={lang.code}
-                onClick={() => setCurrentLang(lang.code)}
+                onClick={() => {
+                  setCurrentLang(lang.code);
+                  document.cookie = `NEXT_LOCALE=${lang.code};path=/;max-age=${60 * 60 * 24 * 365}`;
+                  window.location.reload();
+                }}
                 className={cn(
                   lang.code === currentLang && "bg-brand-50 text-brand-700"
                 )}
