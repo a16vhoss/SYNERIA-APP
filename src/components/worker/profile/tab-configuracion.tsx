@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Bell, Globe, Trash2, AlertTriangle, Loader2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
@@ -23,6 +23,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import { createClient } from "@/lib/supabase/client";
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -46,57 +47,81 @@ const LANGUAGES = [
   { value: "ar", label: "العربية" },
 ];
 
-interface TabConfiguracionProps {
-  initialNotifJobs?: boolean;
-  initialNotifApplications?: boolean;
-  initialFrequency?: string;
-  initialLanguage?: string;
-  onSave?: (data: ConfigData) => void;
-  onDeleteAccount?: () => void;
-}
-
-interface ConfigData {
-  notifJobs: boolean;
-  notifApplications: boolean;
-  frequency: string;
-  language: string;
-}
-
-export function TabConfiguracion({
-  initialNotifJobs = true,
-  initialNotifApplications = true,
-  initialFrequency = "semanal",
-  initialLanguage = "es",
-  onSave,
-  onDeleteAccount,
-}: TabConfiguracionProps) {
-  const [notifJobs, setNotifJobs] = useState(initialNotifJobs);
-  const [notifApplications, setNotifApplications] = useState(initialNotifApplications);
-  const [frequency, setFrequency] = useState(initialFrequency);
-  const [language, setLanguage] = useState(initialLanguage);
+export function TabConfiguracion() {
+  const [notifJobs, setNotifJobs] = useState(true);
+  const [notifApplications, setNotifApplications] = useState(true);
+  const [frequency, setFrequency] = useState("semanal");
+  const [language, setLanguage] = useState("es");
   const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState("");
   const [deleting, setDeleting] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+
+  // Load settings from profile on mount
+  useEffect(() => {
+    async function loadSettings() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      setUserId(user.id);
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("settings")
+        .eq("id", user.id)
+        .single();
+
+      if (profile?.settings && typeof profile.settings === "object") {
+        const s = profile.settings as Record<string, unknown>;
+        if (typeof s.notifJobs === "boolean") setNotifJobs(s.notifJobs);
+        if (typeof s.notifApplications === "boolean") setNotifApplications(s.notifApplications);
+        if (typeof s.frequency === "string") setFrequency(s.frequency);
+        if (typeof s.language === "string") setLanguage(s.language);
+      }
+      setLoading(false);
+    }
+    loadSettings();
+  }, []);
 
   async function handleSave() {
+    if (!userId) return;
     setSaving(true);
     try {
-      await onSave?.({ notifJobs, notifApplications, frequency, language });
+      const supabase = createClient();
+      const settings = { notifJobs, notifApplications, frequency, language };
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({ settings })
+        .eq("id", userId);
+
+      if (error) throw error;
+
+      // Persist language preference via cookie and reload to apply
+      document.cookie = `NEXT_LOCALE=${language};path=/;max-age=${60 * 60 * 24 * 365}`;
       toast.success("Configuracion guardada");
-    } catch {
-      toast.error("Error al guardar");
+
+      // Reload after a short delay so the toast is visible
+      setTimeout(() => window.location.reload(), 800);
+    } catch (err) {
+      console.error("Error saving settings:", err);
+      toast.error("Error al guardar configuracion");
     } finally {
       setSaving(false);
     }
   }
 
   async function handleDelete() {
-    if (deleteConfirm !== "ELIMINAR") return;
+    if (deleteConfirm !== "ELIMINAR" || !userId) return;
     setDeleting(true);
     try {
-      await onDeleteAccount?.();
-      toast.success("Cuenta eliminada");
+      const supabase = createClient();
+      // Sign out and redirect — actual account deletion requires admin/edge function
+      await supabase.auth.signOut();
+      toast.success("Sesion cerrada");
+      window.location.href = "/login";
     } catch {
       toast.error("Error al eliminar cuenta");
     } finally {
