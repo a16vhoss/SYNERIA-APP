@@ -91,7 +91,7 @@ export function CompanyProfileClient({
           city: data.city,
           website: data.website,
           logo_letter: data.name?.charAt(0) ?? "E",
-          logo_gradient: data.logoGradient,
+          logo_gradient: data.logo_gradient,
         })
         .eq("owner_id", user.id);
 
