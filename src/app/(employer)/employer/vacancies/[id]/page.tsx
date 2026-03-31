@@ -95,7 +95,7 @@ export default function VacancyDetailPage({
 
         // Fetch vacancy
         const { data: vacancyData } = await supabase
-          .from("vacancies")
+          .from("jobs")
           .select("*")
           .eq("id", id)
           .single();
@@ -108,7 +108,7 @@ export default function VacancyDetailPage({
             country: vacancyData.country ?? "",
             city: vacancyData.city ?? "",
             sector: vacancyData.sector ?? "",
-            contract_type: vacancyData.contract_type ?? "full_time",
+            contract_type: vacancyData.job_type ?? "full_time",
             salary_min: vacancyData.salary_min ?? null,
             salary_max: vacancyData.salary_max ?? null,
             description: vacancyData.description ?? "",
@@ -122,7 +122,7 @@ export default function VacancyDetailPage({
           const { data: candidatesData } = await supabase
             .from("applications")
             .select("*")
-            .eq("vacancy_id", id);
+            .eq("job_id", id);
 
           setCandidates(
             (candidatesData ?? []).map((c: Record<string, unknown>) => ({

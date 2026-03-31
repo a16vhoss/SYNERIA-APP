@@ -87,7 +87,7 @@ export default function PublicCompanyPage({
 
           // Fetch active vacancies for this company
           const { data: vacanciesData } = await supabase
-            .from("vacancies")
+            .from("jobs")
             .select("*")
             .eq("company_id", companyId)
             .eq("status", "active");

@@ -22,14 +22,14 @@ async function getEmployerData() {
       };
     }
 
-    // Try to fetch the employer's company
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("*, companies(*)")
-      .eq("id", user.id)
+    // Fetch the employer's company
+    const { data: company } = await supabase
+      .from("companies")
+      .select("*")
+      .eq("owner_id", user.id)
       .single();
 
-    if (!profile?.companies) {
+    if (!company) {
       return {
         company: { id: "", name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
         vacancies: [],
@@ -37,8 +37,6 @@ async function getEmployerData() {
         stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },
       };
     }
-
-    const company = profile.companies;
 
     // Fetch vacancies for this company
     const { data: vacancies } = await supabase
