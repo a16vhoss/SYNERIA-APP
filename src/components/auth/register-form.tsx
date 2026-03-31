@@ -147,43 +147,39 @@ export function RegisterForm() {
       className="w-full space-y-5"
     >
       {/* Header */}
-      <motion.div variants={fadeUp} className="space-y-2">
+      <div className="space-y-2">
         <h2 className="font-heading text-2xl font-bold text-foreground">
           Crea tu cuenta
         </h2>
         <p className="text-sm text-muted-foreground">
           Unete a miles de profesionales y empresas en Syneria
         </p>
-      </motion.div>
+      </div>
 
       {/* Error */}
       {error && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive"
-        >
+        <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
           {error}
-        </motion.div>
+        </div>
       )}
 
       {/* Role Selector */}
-      <motion.div variants={fadeUp}>
+      <div>
         <RoleSelector value={role} onChange={setRole} />
-      </motion.div>
+      </div>
 
       <AnimatePresence mode="wait">
         <motion.form
           key={role}
-          initial={{ opacity: 0, x: role === "worker" ? -10 : 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: role === "worker" ? 10 : -10 }}
-          transition={{ duration: 0.25 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-4"
         >
           {/* Full Name */}
-          <motion.div variants={fadeUp} className="space-y-2">
+          <div className="space-y-2">
             <Label htmlFor="register-name">Nombre completo</Label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -201,10 +197,10 @@ export function RegisterForm() {
                 {errors.fullName.message}
               </p>
             )}
-          </motion.div>
+          </div>
 
           {/* Email */}
-          <motion.div variants={fadeUp} className="space-y-2">
+          <div className="space-y-2">
             <Label htmlFor="register-email">Correo electronico</Label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -222,10 +218,10 @@ export function RegisterForm() {
                 {errors.email.message}
               </p>
             )}
-          </motion.div>
+          </div>
 
           {/* Password */}
-          <motion.div variants={fadeUp} className="space-y-2">
+          <div className="space-y-2">
             <Label htmlFor="register-password">Contrasena</Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -256,10 +252,10 @@ export function RegisterForm() {
               </p>
             )}
             <PasswordStrengthIndicator password={passwordValue || ""} />
-          </motion.div>
+          </div>
 
           {/* Confirm Password */}
-          <motion.div variants={fadeUp} className="space-y-2">
+          <div className="space-y-2">
             <Label htmlFor="register-confirm">Confirmar contrasena</Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -289,10 +285,10 @@ export function RegisterForm() {
                 {errors.confirmPassword.message}
               </p>
             )}
-          </motion.div>
+          </div>
 
           {/* Country */}
-          <motion.div variants={fadeUp} className="space-y-2">
+          <div className="space-y-2">
             <Label>Pais</Label>
             <Select
               value={countryValue}
@@ -317,10 +313,10 @@ export function RegisterForm() {
                 {errors.country.message}
               </p>
             )}
-          </motion.div>
+          </div>
 
           {/* Terms */}
-          <motion.div variants={fadeUp} className="flex items-start gap-2">
+          <div className="flex items-start gap-2">
             <Checkbox
               id="register-terms"
               checked={termsValue}
@@ -350,18 +346,16 @@ export function RegisterForm() {
                 Politica de Privacidad
               </Link>
             </label>
-          </motion.div>
+          </div>
           {errors.terms && (
             <p className="text-xs text-destructive">{errors.terms.message}</p>
           )}
 
           {/* Submit */}
-          <motion.div variants={fadeUp}>
-            <motion.button
+          <div>
+            <button
               type="submit"
               disabled={loading}
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.98 }}
               className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-brand-700 text-sm font-semibold text-white transition-colors hover:bg-brand-800 disabled:pointer-events-none disabled:opacity-50"
             >
               {loading ? (
@@ -369,17 +363,17 @@ export function RegisterForm() {
               ) : (
                 "Crear Cuenta"
               )}
-            </motion.button>
-          </motion.div>
+            </button>
+          </div>
 
           {/* OAuth */}
-          <motion.div variants={fadeUp}>
+          <div>
             <OAuthButtons
               onGoogle={signInWithGoogle}
               onLinkedIn={signInWithLinkedIn}
               loading={loading}
             />
-          </motion.div>
+          </div>
         </motion.form>
       </AnimatePresence>
     </motion.div>
