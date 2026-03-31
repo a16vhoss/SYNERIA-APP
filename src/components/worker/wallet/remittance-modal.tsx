@@ -172,7 +172,7 @@ export function RemittanceModal({
             >
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">
-                  Tasa de cambio
+                  {t("wallet.swap.rate")}
                 </span>
                 <span className="font-medium">
                   1 USD = {selectedCountry.rate.toLocaleString()}{" "}
@@ -181,13 +181,13 @@ export function RemittanceModal({
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">
-                  Comision (2.5%)
+                  {t("wallet.remittance.estimatedFee")} (2.5%)
                 </span>
                 <span className="font-medium">${fee.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">
-                  Monto en moneda local
+                  {t("wallet.swap.youReceive")}
                 </span>
                 <span className="font-semibold text-brand-600">
                   {localAmount.toLocaleString("en-US", {
@@ -199,7 +199,7 @@ export function RemittanceModal({
               <div className="border-t border-foreground/10 pt-2">
                 <div className="flex justify-between text-sm">
                   <span className="font-medium text-foreground">
-                    Total a deducir
+                    {t("wallet.transactions.amount")}
                   </span>
                   <span
                     className={cn(
@@ -213,7 +213,7 @@ export function RemittanceModal({
               </div>
               {insufficient && (
                 <p className="text-xs font-medium text-rose-600">
-                  Saldo insuficiente. Balance actual: ${balance.toFixed(2)}
+                  {t("wallet.balance")}: ${balance.toFixed(2)}
                 </p>
               )}
             </motion.div>
@@ -227,7 +227,7 @@ export function RemittanceModal({
             disabled={insufficient || parsedAmount <= 0 || !recipient || !country}
           >
             <Send className="size-4" />
-            Enviar Remesa
+            {t("wallet.remittance.title")}
           </Button>
         </DialogFooter>
       </DialogContent>

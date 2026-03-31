@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -70,6 +71,8 @@ export function ConversationList({
   onSelect,
   loading = false,
 }: ConversationListProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const [search, setSearch] = useState("");
 
   const filtered = conversations.filter((c) =>
@@ -86,7 +89,7 @@ export function ConversationList({
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Buscar conversacion..."
+            placeholder={t("messages.searchConversations")}
             className="h-9 w-full bg-transparent px-2.5 text-sm text-foreground outline-none placeholder:text-muted-foreground"
           />
         </div>
@@ -115,13 +118,13 @@ export function ConversationList({
             </div>
             <p className="text-sm font-medium text-foreground">
               {search
-                ? "Sin resultados"
-                : "No tienes conversaciones"}
+                ? tc("empty.noSearchResults")
+                : t("messages.noConversations")}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
               {search
-                ? "Intenta con otro termino"
-                : "Inicia una conversacion desde el perfil de un candidato"}
+                ? tc("empty.noSearchResults")
+                : t("messages.startConversation")}
             </p>
           </motion.div>
         ) : (
