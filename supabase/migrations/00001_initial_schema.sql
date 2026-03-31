@@ -9,6 +9,15 @@
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+-- Helper immutable functions for unique index on connections
+CREATE OR REPLACE FUNCTION public.least_uuid(a UUID, b UUID) RETURNS UUID AS $$
+  SELECT CASE WHEN a < b THEN a ELSE b END;
+$$ LANGUAGE sql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION public.greatest_uuid(a UUID, b UUID) RETURNS UUID AS $$
+  SELECT CASE WHEN a > b THEN a ELSE b END;
+$$ LANGUAGE sql IMMUTABLE;
+
 -- ============================================================================
 -- 2. TABLES
 -- ============================================================================
@@ -275,7 +284,7 @@ CREATE TABLE connections (
 
 -- Unique index on the pair regardless of order (replaces inline UNIQUE constraint)
 CREATE UNIQUE INDEX idx_connections_unique_pair
-  ON connections (LEAST(requester_id, addressee_id), GREATEST(requester_id, addressee_id));
+  ON connections (public.least_uuid(requester_id, addressee_id), public.greatest_uuid(requester_id, addressee_id));
 
 -- --------------------------------------------------------------------------
 -- endorsements
@@ -395,7 +404,7 @@ CREATE INDEX idx_notifications_unread ON notifications (user_id, created_at DESC
 -- messages
 CREATE INDEX idx_messages_sender ON messages (sender_id);
 CREATE INDEX idx_messages_receiver ON messages (receiver_id);
-CREATE INDEX idx_messages_conversation ON messages (LEAST(sender_id, receiver_id), GREATEST(sender_id, receiver_id), created_at DESC);
+CREATE INDEX idx_messages_conversation ON messages (public.least_uuid(sender_id, receiver_id), public.greatest_uuid(sender_id, receiver_id), created_at DESC);
 CREATE INDEX idx_messages_unread ON messages (receiver_id, created_at DESC) WHERE read = false;
 
 -- saved_jobs
