@@ -44,6 +44,8 @@ type ContractFilter = "todos" | "activo" | "completado" | "pendiente";
 
 interface WalletClientProps {
   initialContracts: ContractData[];
+  walletData?: { balance: number; currency: string; cardLastFour: string; cardExpiry: string };
+  transactionData?: { id: string; type: string; amount: number; currency: string; description: string; recipientName?: string; recipientCountry?: string; status: string; createdAt: string }[];
 }
 
 /* ------------------------------------------------------------------ */
@@ -66,7 +68,7 @@ const contractTabs: { key: ContractFilter; label: string }[] = [
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-export function WalletClient({ initialContracts }: WalletClientProps) {
+export function WalletClient({ initialContracts, walletData, transactionData }: WalletClientProps) {
   const [activeMainTab, setActiveMainTab] = useState<MainTab>("wallet");
 
   /* Wallet modals */
@@ -248,6 +250,7 @@ export function WalletClient({ initialContracts }: WalletClientProps) {
           >
             {/* Balance Card */}
             <BalanceCard
+              balance={walletData?.balance}
               onSendMoney={() => setRemittanceOpen(true)}
               onReceive={() => toast.info("Comparte tu ID de wallet para recibir pagos")}
             />

@@ -16,7 +16,6 @@ import {
   DollarSign,
   Briefcase,
   FileText,
-  Users,
   Clock,
 } from "lucide-react";
 
@@ -31,11 +30,10 @@ import {
   type EditVacancyFormData,
 } from "@/components/employer/edit-vacancy-modal";
 import {
-  MOCK_VACANCIES,
-  MOCK_CANDIDATES,
   type MockVacancy,
   type MockCandidate,
 } from "@/lib/constants/mock-data";
+import { createClient } from "@/lib/supabase/client";
 import { JOB_TYPES } from "@/lib/constants/countries";
 
 // ── Animation variants ───────────────────────────────────────────────
@@ -87,12 +85,70 @@ export default function VacancyDetailPage({
 
   const [vacancy, setVacancy] = useState<MockVacancy | null>(null);
   const [candidates, setCandidates] = useState<MockCandidate[]>([]);
+  const [loading, setLoading] = useState(true);
   const [editOpen, setEditOpen] = useState(false);
 
   useEffect(() => {
-    const found = MOCK_VACANCIES.find((v) => v.id === id);
-    setVacancy(found ?? null);
-    setCandidates(MOCK_CANDIDATES.filter((c) => c.vacancy_id === id));
+    async function fetchData() {
+      try {
+        const supabase = createClient();
+
+        // Fetch vacancy
+        const { data: vacancyData } = await supabase
+          .from("vacancies")
+          .select("*")
+          .eq("id", id)
+          .single();
+
+        if (vacancyData) {
+          setVacancy({
+            id: vacancyData.id,
+            title: vacancyData.title ?? "",
+            location: `${vacancyData.city ?? ""}, ${vacancyData.country ?? ""}`,
+            country: vacancyData.country ?? "",
+            city: vacancyData.city ?? "",
+            sector: vacancyData.sector ?? "",
+            contract_type: vacancyData.contract_type ?? "full_time",
+            salary_min: vacancyData.salary_min ?? null,
+            salary_max: vacancyData.salary_max ?? null,
+            description: vacancyData.description ?? "",
+            status: (vacancyData.status as MockVacancy["status"]) ?? "active",
+            applications_count: vacancyData.applications_count ?? 0,
+            published_at: vacancyData.created_at ?? new Date().toISOString(),
+            company_id: vacancyData.company_id ?? "",
+          });
+
+          // Fetch candidates (applications) for this vacancy
+          const { data: candidatesData } = await supabase
+            .from("applications")
+            .select("*")
+            .eq("vacancy_id", id);
+
+          setCandidates(
+            (candidatesData ?? []).map((c: Record<string, unknown>) => ({
+              id: c.id as string,
+              name: (c.name as string) ?? (c.full_name as string) ?? "Candidato",
+              email: (c.email as string) ?? "",
+              avatar_url: (c.avatar_url as string) ?? null,
+              role_applied: (c.role_applied as string) ?? "",
+              vacancy_id: (c.vacancy_id as string) ?? id,
+              status: (c.status as MockCandidate["status"]) ?? "pending",
+              applied_at: (c.applied_at as string) ?? (c.created_at as string) ?? new Date().toISOString(),
+              rating: (c.rating as number) ?? 0,
+            }))
+          );
+        } else {
+          setVacancy(null);
+        }
+      } catch {
+        setVacancy(null);
+        setCandidates([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
   }, [id]);
 
   function handleStatusChange(_id: string, newStatus: MockVacancy["status"]) {
@@ -128,6 +184,14 @@ export default function VacancyDetailPage({
 
   function getContractLabel(value: string) {
     return JOB_TYPES.find((j) => j.value === value)?.label ?? value;
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="size-8 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" />
+      </div>
+    );
   }
 
   if (!vacancy) {

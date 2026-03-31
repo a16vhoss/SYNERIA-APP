@@ -29,7 +29,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { createContract } from "@/lib/actions/contracts";
 import type { ContractData } from "@/lib/actions/contracts";
-import { MOCK_CANDIDATES } from "@/lib/constants/mock-data";
 
 /* ------------------------------------------------------------------ */
 /*  Schema                                                             */
@@ -67,14 +66,6 @@ const AVAILABLE_BENEFITS = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Accepted candidates (for selector)                                 */
-/* ------------------------------------------------------------------ */
-
-const acceptedCandidates = MOCK_CANDIDATES.filter(
-  (c) => c.status === "accepted"
-);
-
-/* ------------------------------------------------------------------ */
 /*  Animation                                                          */
 /* ------------------------------------------------------------------ */
 
@@ -100,12 +91,14 @@ interface CreateContractFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onCreated: (contract: ContractData) => void;
+  acceptedCandidates?: { id: string; name: string; role_applied: string }[];
 }
 
 export function CreateContractForm({
   open,
   onOpenChange,
   onCreated,
+  acceptedCandidates = [],
 }: CreateContractFormProps) {
   const [selectedBenefits, setSelectedBenefits] = useState<string[]>([]);
   const [step, setStep] = useState<"form" | "preview">("form");
@@ -148,7 +141,7 @@ export function CreateContractForm({
     const result = await createContract({
       worker_id: "usr_002",
       worker_name: data.worker_name,
-      employer_id: "comp-001",
+      employer_id: "",
       company_name: "Tech Employer Test",
       company_letter: "T",
       company_gradient: "green",

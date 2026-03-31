@@ -4,10 +4,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Briefcase, Users, UserCheck } from "lucide-react";
 
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { DashboardHeader } from "@/components/employer/dashboard-header";
 import { DashboardStats } from "@/components/employer/dashboard-stats";
 import { VacanciesTable } from "@/components/employer/vacancies-table";
 import { CreateVacancyModal } from "@/components/employer/create-vacancy-modal";
+import { createJob } from "@/lib/actions/jobs";
 import type { MockCompany, MockVacancy } from "@/lib/constants/mock-data";
 
 interface EmployerDashboardClientProps {
@@ -131,9 +134,26 @@ export function EmployerDashboardClient({
       <CreateVacancyModal
         open={showCreateModal}
         onOpenChange={setShowCreateModal}
-        onSubmit={(data) => {
-          console.log("New vacancy:", data);
-          // In production this would call a server action
+        onSubmit={async (data) => {
+          try {
+            await createJob({
+              title: data.title,
+              description: data.description ?? "",
+              sector: data.sector,
+              contract_type: data.contractType,
+              country: data.country,
+              city: data.city,
+              salary_min: data.salaryMin?.toString(),
+              salary_max: data.salaryMax?.toString(),
+              requirements: data.requirements,
+              benefits: data.benefits,
+            });
+            toast.success("Vacante publicada correctamente");
+            setShowCreateModal(false);
+            window.location.reload();
+          } catch {
+            toast.error("Error al publicar vacante");
+          }
         }}
       />
     </div>

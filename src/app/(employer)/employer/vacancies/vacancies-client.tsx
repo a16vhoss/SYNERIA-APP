@@ -37,6 +37,7 @@ import {
   EditVacancyModal,
   type EditVacancyFormData,
 } from "@/components/employer/edit-vacancy-modal";
+import { createJob, updateJob, updateJobStatus, deleteJob } from "@/lib/actions/jobs";
 import type { MockVacancy } from "@/lib/constants/mock-data";
 
 // ── Types ────────────────────────────────────────────────────────────
@@ -179,25 +180,25 @@ export function VacanciesClient({
     []
   );
 
-  function handleCreate(data: Record<string, unknown>) {
-    const newVacancy: MockVacancy = {
-      id: `vac-${Date.now()}`,
-      title: (data.title as string) ?? "",
-      description: (data.description as string) ?? "",
-      sector: (data.sector as string) ?? "",
-      contract_type: (data.contract_type as string) ?? "full_time",
-      country: (data.country as string) ?? "",
-      city: (data.city as string) ?? "",
-      location: `${data.city ?? ""}, ${data.country ?? ""}`,
-      salary_min: data.salary_min ? Number(data.salary_min) : null,
-      salary_max: data.salary_max ? Number(data.salary_max) : null,
-      status: "active",
-      applications_count: 0,
-      published_at: new Date().toISOString(),
-      company_id: "comp-001",
-    };
-    setVacancies((prev) => [newVacancy, ...prev]);
-    toast.success("Vacante publicada correctamente");
+  async function handleCreate(data: Record<string, unknown>) {
+    try {
+      const newVacancy = await createJob({
+        title: (data.title as string) ?? "",
+        description: (data.description as string) ?? "",
+        sector: (data.sector as string) ?? "",
+        contract_type: (data.contractType as string) ?? (data.contract_type as string) ?? "full_time",
+        country: (data.country as string) ?? "",
+        city: (data.city as string) ?? "",
+        salary_min: data.salaryMin?.toString() ?? data.salary_min?.toString(),
+        salary_max: data.salaryMax?.toString() ?? data.salary_max?.toString(),
+        requirements: (data.requirements as string) ?? "",
+        benefits: (data.benefits as string) ?? "",
+      });
+      setVacancies((prev) => [newVacancy, ...prev]);
+      toast.success("Vacante publicada correctamente");
+    } catch {
+      toast.error("Error al crear la vacante");
+    }
   }
 
   function handleEdit(id: string, data: EditVacancyFormData) {

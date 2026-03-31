@@ -17,6 +17,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { COUNTRIES } from "@/lib/constants/countries";
+import { createClient } from "@/lib/supabase/client";
 
 /* ------------------------------------------------------------------ */
 /*  Schema                                                             */
@@ -56,6 +57,8 @@ const fadeUp = {
 
 export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
   const [selectedCountry, setSelectedCountry] = useState(defaultValues.country);
+  const [saving, setSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   const {
     register,
@@ -70,9 +73,33 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
 
   const bioValue = watch("bio") ?? "";
 
-  function onSubmit(data: PersonalInfoValues) {
-    // For now, just log the data (no Supabase call yet)
-    console.log("Profile updated:", data);
+  async function onSubmit(data: PersonalInfoValues) {
+    setSaving(true);
+    setSaveMessage(null);
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("No autenticado");
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({
+          full_name: data.fullName.trim(),
+          phone: data.phone,
+          country: data.country,
+          city: data.city,
+          date_of_birth: data.dateOfBirth || null,
+          bio: data.bio,
+        })
+        .eq("id", user.id);
+
+      if (error) throw error;
+      setSaveMessage({ type: "success", text: "Perfil actualizado correctamente" });
+    } catch (err) {
+      setSaveMessage({ type: "error", text: err instanceof Error ? err.message : "Error al guardar" });
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -88,7 +115,7 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
           <Label htmlFor="fullName">Nombre completo</Label>
           <Input
             id="fullName"
-            placeholder="Ana Socia"
+            placeholder="Tu nombre"
             {...register("fullName")}
             aria-invalid={!!errors.fullName}
           />
@@ -200,6 +227,21 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
         </motion.div>
       </motion.div>
 
+      {/* Save message */}
+      {saveMessage && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`mt-4 rounded-lg px-4 py-2 text-sm ${
+            saveMessage.type === "success"
+              ? "bg-green-50 text-green-700 border border-green-200"
+              : "bg-red-50 text-red-700 border border-red-200"
+          }`}
+        >
+          {saveMessage.text}
+        </motion.div>
+      )}
+
       {/* Buttons */}
       <motion.div
         className="mt-6 flex justify-end gap-3"
@@ -210,7 +252,9 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
         <Button type="button" variant="outline">
           Cancelar
         </Button>
-        <Button type="submit">Actualizar Datos</Button>
+        <Button type="submit" disabled={saving}>
+          {saving ? "Guardando..." : "Actualizar Datos"}
+        </Button>
       </motion.div>
     </form>
   );

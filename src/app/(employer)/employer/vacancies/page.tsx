@@ -1,8 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import {
-  MOCK_VACANCIES,
-  type MockVacancy,
-} from "@/lib/constants/mock-data";
+import { type MockVacancy } from "@/lib/constants/mock-data";
 import { VacanciesClient } from "./vacancies-client";
 
 export const metadata = {
@@ -17,59 +14,35 @@ async function getVacancies(): Promise<MockVacancy[]> {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) return MOCK_VACANCIES;
+    if (!user) return [];
 
-    // Get employer's company
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("*, companies(*)")
-      .eq("id", user.id)
-      .single();
-
-    if (!profile?.companies) return MOCK_VACANCIES;
-
-    const company = profile.companies;
-
-    // Fetch vacancies
-    const { data: vacancies } = await supabase
-      .from("vacancies")
-      .select("*")
-      .eq("company_id", company.id)
+    // Fetch jobs created by this employer
+    const { data: jobs } = await supabase
+      .from("jobs")
+      .select("*, applications(count)")
+      .eq("employer_id", user.id)
       .order("created_at", { ascending: false });
 
-    if (!vacancies || vacancies.length === 0) return MOCK_VACANCIES;
+    if (!jobs || jobs.length === 0) return [];
 
-    // Fetch application counts
-    const vacancyIds = vacancies.map((v: { id: string }) => v.id);
-    const { data: applications } = await supabase
-      .from("applications")
-      .select("vacancy_id")
-      .in("vacancy_id", vacancyIds);
-
-    const appCounts: Record<string, number> = {};
-    for (const app of applications ?? []) {
-      appCounts[app.vacancy_id] = (appCounts[app.vacancy_id] ?? 0) + 1;
-    }
-
-    return vacancies.map((v: Record<string, unknown>) => ({
-      id: v.id as string,
-      title: (v.title as string) ?? "",
-      location: `${v.city ?? ""}, ${v.country ?? ""}`,
-      country: (v.country as string) ?? "",
-      city: (v.city as string) ?? "",
-      sector: (v.sector as string) ?? "",
-      contract_type: (v.contract_type as string) ?? "full_time",
-      salary_min: (v.salary_min as number) ?? null,
-      salary_max: (v.salary_max as number) ?? null,
-      description: (v.description as string) ?? "",
-      status:
-        (v.status as "active" | "paused" | "closed" | "draft") ?? "active",
-      applications_count: appCounts[v.id as string] ?? 0,
-      published_at: (v.created_at as string) ?? new Date().toISOString(),
-      company_id: (v.company_id as string) ?? "",
+    return jobs.map((j) => ({
+      id: j.id,
+      title: j.title ?? "",
+      location: `${j.city ?? ""}, ${j.country ?? ""}`,
+      country: j.country ?? "",
+      city: j.city ?? "",
+      sector: j.sector ?? "",
+      contract_type: j.job_type ?? "full_time",
+      salary_min: j.salary_min ?? null,
+      salary_max: j.salary_max ?? null,
+      description: j.description ?? "",
+      status: (j.status as "active" | "paused" | "closed" | "draft") ?? "active",
+      applications_count: (j.applications as unknown as { count: number }[])?.[0]?.count ?? j.applicants_count ?? 0,
+      published_at: j.created_at ?? new Date().toISOString(),
+      company_id: j.company_id ?? "",
     }));
   } catch {
-    return MOCK_VACANCIES;
+    return [];
   }
 }
 

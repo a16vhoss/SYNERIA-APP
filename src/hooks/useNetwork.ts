@@ -1,25 +1,21 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import {
-  MOCK_CONNECTIONS,
-  MOCK_SUGGESTIONS,
-  MOCK_REQUESTS,
-  MOCK_ENDORSEMENTS,
-  type NetworkConnection,
-  type NetworkSuggestion,
-  type NetworkRequest,
-  type SkillEndorsement,
+import type {
+  NetworkConnection,
+  NetworkSuggestion,
+  NetworkRequest,
+  SkillEndorsement,
 } from "@/lib/constants/mock-data";
 
 export function useNetwork() {
   const [connections, setConnections] =
-    useState<NetworkConnection[]>(MOCK_CONNECTIONS);
+    useState<NetworkConnection[]>([]);
   const [suggestions, setSuggestions] =
-    useState<NetworkSuggestion[]>(MOCK_SUGGESTIONS);
-  const [requests, setRequests] = useState<NetworkRequest[]>(MOCK_REQUESTS);
+    useState<NetworkSuggestion[]>([]);
+  const [requests, setRequests] = useState<NetworkRequest[]>([]);
   const [endorsements, setEndorsements] =
-    useState<SkillEndorsement[]>(MOCK_ENDORSEMENTS);
+    useState<SkillEndorsement[]>([]);
 
   /* -- Connection actions ------------------------------------------ */
 

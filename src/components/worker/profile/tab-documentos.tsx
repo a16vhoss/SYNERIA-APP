@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   FileText,
@@ -9,11 +9,13 @@ import {
   Upload,
   CheckCircle,
   X,
+  Loader2,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/shared/glass-card";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/client";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -29,6 +31,7 @@ interface DocumentSlot {
 interface UploadedFile {
   name: string;
   size: string;
+  url?: string;
 }
 
 const DOCUMENT_SLOTS: DocumentSlot[] = [
@@ -37,6 +40,8 @@ const DOCUMENT_SLOTS: DocumentSlot[] = [
   { key: "certifications", label: "Certificaciones", icon: Award, accept: ".pdf,.jpg,.jpeg,.png" },
   { key: "photo", label: "Foto de Perfil", icon: Camera, accept: ".jpg,.jpeg,.png,.webp" },
 ];
+
+const BUCKET_NAME = "documents";
 
 /* ------------------------------------------------------------------ */
 /*  Animations                                                         */
@@ -68,21 +73,124 @@ export function TabDocumentos() {
     certifications: null,
     photo: null,
   });
+  const [uploading, setUploading] = useState<Record<string, boolean>>({});
+  const [userId, setUserId] = useState<string | null>(null);
 
-  function handleUpload(key: string, fileList: FileList | null) {
-    if (!fileList || fileList.length === 0) return;
+  // Load existing documents from profile on mount
+  useEffect(() => {
+    async function loadDocuments() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      setUserId(user.id);
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("documents")
+        .eq("id", user.id)
+        .single();
+
+      if (profile?.documents && typeof profile.documents === "object") {
+        const docs = profile.documents as Record<string, { name: string; size: string; url: string }>;
+        const loaded: Record<string, UploadedFile | null> = {
+          passport: null,
+          cv: null,
+          certifications: null,
+          photo: null,
+        };
+        for (const key of Object.keys(loaded)) {
+          if (docs[key]) {
+            loaded[key] = docs[key];
+          }
+        }
+        setFiles(loaded);
+      }
+    }
+    loadDocuments();
+  }, []);
+
+  async function handleUpload(key: string, fileList: FileList | null) {
+    if (!fileList || fileList.length === 0 || !userId) return;
     const file = fileList[0];
     const sizeKB = Math.round(file.size / 1024);
     const sizeLabel = sizeKB > 1024 ? `${(sizeKB / 1024).toFixed(1)} MB` : `${sizeKB} KB`;
 
-    setFiles((prev) => ({
-      ...prev,
-      [key]: { name: file.name, size: sizeLabel },
-    }));
+    setUploading((prev) => ({ ...prev, [key]: true }));
+
+    try {
+      const supabase = createClient();
+      const ext = file.name.split(".").pop();
+      const filePath = `${userId}/${key}.${ext}`;
+
+      // Upload to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from(BUCKET_NAME)
+        .upload(filePath, file, { upsert: true });
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL
+      const { data: urlData } = supabase.storage
+        .from(BUCKET_NAME)
+        .getPublicUrl(filePath);
+
+      const uploadedFile: UploadedFile = {
+        name: file.name,
+        size: sizeLabel,
+        url: urlData.publicUrl,
+      };
+
+      const newFiles = { ...files, [key]: uploadedFile };
+      setFiles(newFiles);
+
+      // Save document metadata to profile
+      const docsToSave: Record<string, UploadedFile> = {};
+      for (const [k, v] of Object.entries(newFiles)) {
+        if (v) docsToSave[k] = v;
+      }
+
+      await supabase
+        .from("profiles")
+        .update({ documents: docsToSave })
+        .eq("id", userId);
+
+    } catch (err) {
+      console.error("Error uploading document:", err);
+    } finally {
+      setUploading((prev) => ({ ...prev, [key]: false }));
+    }
   }
 
-  function handleRemove(key: string) {
-    setFiles((prev) => ({ ...prev, [key]: null }));
+  async function handleRemove(key: string) {
+    if (!userId) return;
+
+    try {
+      const supabase = createClient();
+
+      // Remove from storage (try common extensions)
+      for (const ext of ["pdf", "jpg", "jpeg", "png", "doc", "docx", "webp"]) {
+        await supabase.storage
+          .from(BUCKET_NAME)
+          .remove([`${userId}/${key}.${ext}`]);
+      }
+
+      const newFiles = { ...files, [key]: null };
+      setFiles(newFiles);
+
+      // Update profile
+      const docsToSave: Record<string, UploadedFile> = {};
+      for (const [k, v] of Object.entries(newFiles)) {
+        if (v) docsToSave[k] = v;
+      }
+
+      await supabase
+        .from("profiles")
+        .update({ documents: docsToSave })
+        .eq("id", userId);
+
+    } catch (err) {
+      console.error("Error removing document:", err);
+    }
   }
 
   return (
@@ -94,11 +202,13 @@ export function TabDocumentos() {
     >
       {DOCUMENT_SLOTS.map((slot) => {
         const uploaded = files[slot.key];
+        const isUploading = uploading[slot.key] ?? false;
         return (
           <motion.div key={slot.key} variants={cardVariant}>
             <DocumentCard
               slot={slot}
               uploaded={uploaded}
+              uploading={isUploading}
               onUpload={(fileList) => handleUpload(slot.key, fileList)}
               onRemove={() => handleRemove(slot.key)}
             />
@@ -116,11 +226,12 @@ export function TabDocumentos() {
 interface DocumentCardProps {
   slot: DocumentSlot;
   uploaded: UploadedFile | null;
+  uploading: boolean;
   onUpload: (files: FileList | null) => void;
   onRemove: () => void;
 }
 
-function DocumentCard({ slot, uploaded, onUpload, onRemove }: DocumentCardProps) {
+function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove }: DocumentCardProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const Icon = slot.icon;
 
@@ -136,13 +247,18 @@ function DocumentCard({ slot, uploaded, onUpload, onRemove }: DocumentCardProps)
             {slot.label}
           </h4>
           <p className="text-xs text-muted-foreground">
-            {uploaded ? "Archivo subido" : "Pendiente"}
+            {uploading ? "Subiendo..." : uploaded ? "Archivo subido" : "Pendiente"}
           </p>
         </div>
       </div>
 
       {/* Upload area or file preview */}
-      {uploaded ? (
+      {uploading ? (
+        <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-brand-300 bg-brand-50/50 px-4 py-5">
+          <Loader2 className="size-5 animate-spin text-brand-500" />
+          <span className="ml-2 text-xs font-medium text-brand-600">Subiendo archivo...</span>
+        </div>
+      ) : uploaded ? (
         <div className="flex items-center justify-between rounded-lg border border-brand-200 bg-brand-50 px-3 py-2">
           <div className="flex items-center gap-2">
             <CheckCircle className="size-4 text-brand-500" />
@@ -189,6 +305,7 @@ function DocumentCard({ slot, uploaded, onUpload, onRemove }: DocumentCardProps)
             variant="outline"
             className="w-full"
             onClick={() => inputRef.current?.click()}
+            disabled={uploading}
           >
             Reemplazar archivo
           </Button>
@@ -197,6 +314,7 @@ function DocumentCard({ slot, uploaded, onUpload, onRemove }: DocumentCardProps)
             size="xs"
             className="w-full"
             onClick={() => inputRef.current?.click()}
+            disabled={uploading}
           >
             Buscar archivo
           </Button>

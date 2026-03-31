@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Users } from "lucide-react";
 import { PageHeader } from "@/components/shared/page-header";
@@ -15,11 +15,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 import type { MockCandidate } from "@/lib/constants/mock-data";
-import {
-  MOCK_CANDIDATES,
-  MOCK_VACANCIES,
-} from "@/lib/constants/mock-data";
+import { updateApplicationStatus } from "@/lib/actions/applications";
 
 type StatusFilter = "all" | "pending" | "reviewing" | "interview" | "accepted" | "rejected";
 
@@ -54,16 +52,17 @@ const cardVariants = {
   },
 };
 
-export function CandidatesClient() {
-  const [candidates, setCandidates] = useState<MockCandidate[]>([]);
+interface CandidatesClientProps {
+  initialCandidates?: MockCandidate[];
+  vacancies?: { id: string; title: string }[];
+}
+
+export function CandidatesClient({ initialCandidates, vacancies = [] }: CandidatesClientProps = {}) {
+  const [candidates, setCandidates] = useState<MockCandidate[]>(initialCandidates ?? []);
   const [vacancyFilter, setVacancyFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [search, setSearch] = useState("");
   const [scheduleTarget, setScheduleTarget] = useState<MockCandidate | null>(null);
-
-  useEffect(() => {
-    setCandidates([...MOCK_CANDIDATES]);
-  }, []);
 
   const filtered = useMemo(() => {
     let result = candidates;
@@ -86,10 +85,21 @@ export function CandidatesClient() {
     return result;
   }, [candidates, vacancyFilter, statusFilter, search]);
 
-  function handleStatusChange(candidateId: string, newStatus: MockCandidate["status"]) {
+  async function handleStatusChange(candidateId: string, newStatus: MockCandidate["status"]) {
+    // Optimistic update
     setCandidates((prev) =>
       prev.map((c) => (c.id === candidateId ? { ...c, status: newStatus } : c))
     );
+    try {
+      await updateApplicationStatus(candidateId, newStatus);
+      toast.success(`Candidato ${newStatus === "accepted" ? "aceptado" : newStatus === "rejected" ? "rechazado" : "actualizado"}`);
+    } catch {
+      // Rollback on error
+      setCandidates((prev) =>
+        prev.map((c) => (c.id === candidateId ? { ...c, status: "pending" } : c))
+      );
+      toast.error("Error al actualizar estado");
+    }
   }
 
   function handleScheduleInterview(candidate: MockCandidate) {
@@ -133,7 +143,7 @@ export function CandidatesClient() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todas las vacantes</SelectItem>
-            {MOCK_VACANCIES.map((vac) => (
+            {vacancies.map((vac) => (
               <SelectItem key={vac.id} value={vac.id}>
                 {vac.title}
               </SelectItem>

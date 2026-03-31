@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Building2 } from "lucide-react";
 
+import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -76,12 +77,29 @@ export function CompanyProfileClient({
   async function onSubmit(data: CompanyFormValues) {
     setIsSaving(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("No autenticado");
+
+      const { error } = await supabase
+        .from("companies")
+        .update({
+          name: data.name,
+          description: data.description,
+          sector: data.sector,
+          country: data.country,
+          city: data.city,
+          website: data.website,
+          logo_letter: data.name?.charAt(0) ?? "E",
+          logo_gradient: data.logoGradient,
+        })
+        .eq("owner_id", user.id);
+
+      if (error) throw error;
       toast.success("Perfil de empresa actualizado correctamente");
       reset(data);
-    } catch {
-      toast.error("Error al guardar los cambios");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Error al guardar los cambios");
     } finally {
       setIsSaving(false);
     }

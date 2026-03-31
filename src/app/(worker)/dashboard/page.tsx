@@ -1,10 +1,4 @@
 import { createClient } from "@/lib/supabase/server";
-import {
-  MOCK_PROFILE,
-  MOCK_STATS,
-  MOCK_JOBS,
-  MOCK_UPCOMING_INTERVIEW,
-} from "@/lib/constants/mock-data";
 import { WorkerDashboardClient } from "./client";
 
 /* ------------------------------------------------------------------ */
@@ -94,7 +88,7 @@ async function getDashboardData() {
     }));
 
     return {
-      firstName: profile?.first_name ?? "Usuario",
+      firstName: profile?.full_name?.split(" ")[0] ?? "Usuario",
       stats: {
         availableJobs: jobsCount ?? 0,
         myApplications: applicationsCount ?? 0,
@@ -113,18 +107,16 @@ async function getDashboardData() {
         : null,
     };
   } catch {
-    // Supabase not configured or no auth – return mock data
     return {
-      firstName: MOCK_PROFILE.firstName,
-      stats: MOCK_STATS,
-      jobs: MOCK_JOBS.slice(0, 3),
-      interview: {
-        id: MOCK_UPCOMING_INTERVIEW.id,
-        companyName: MOCK_UPCOMING_INTERVIEW.companyName,
-        jobTitle: MOCK_UPCOMING_INTERVIEW.jobTitle,
-        date: MOCK_UPCOMING_INTERVIEW.date,
-        time: MOCK_UPCOMING_INTERVIEW.time,
+      firstName: "Usuario",
+      stats: {
+        availableJobs: 0,
+        myApplications: 0,
+        notifications: 0,
+        profileCompletion: 0,
       },
+      jobs: [],
+      interview: null,
     };
   }
 }

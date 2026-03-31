@@ -14,7 +14,6 @@ import { RequestCard } from "@/components/worker/network/request-card";
 import { EndorsementSection } from "@/components/worker/network/endorsement-section";
 import { ActivityFeed } from "@/components/worker/network/activity-feed";
 import { useNetwork } from "@/hooks/useNetwork";
-import { MOCK_NETWORK_ACTIVITY } from "@/lib/constants/mock-data";
 
 /* ------------------------------------------------------------------ */
 /*  Tab definitions                                                    */
@@ -211,7 +210,7 @@ export function NetworkClient() {
                   <h3 className="mb-3 font-heading text-base font-semibold text-foreground">
                     Actividad reciente
                   </h3>
-                  <ActivityFeed activities={MOCK_NETWORK_ACTIVITY} />
+                  <ActivityFeed activities={[]} />
                 </GlassCard>
               </div>
             </div>

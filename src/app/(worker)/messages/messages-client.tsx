@@ -10,9 +10,7 @@ import { ChatView } from "@/components/shared/messaging/chat-view";
 import { useMessages } from "@/hooks/useMessages";
 import type { Conversation } from "@/lib/actions/messages";
 
-const CURRENT_USER_ID = "usr_001";
-
-export function WorkerMessagesClient() {
+export function WorkerMessagesClient({ currentUserId }: { currentUserId?: string }) {
   const {
     conversations,
     activeConversation,
@@ -30,8 +28,8 @@ export function WorkerMessagesClient() {
     (conversation: Conversation) => {
       setActiveConversationId(conversation.id);
       setMobileShowChat(true);
-      // Mark messages as read
-      markAsRead(conversation.id);
+      // Mark messages as read -- conversation.id is now the other user's id
+      markAsRead(conversation.participantId);
     },
     [setActiveConversationId, markAsRead]
   );
@@ -85,7 +83,7 @@ export function WorkerMessagesClient() {
             <ChatView
               conversation={activeConversation}
               messages={messages}
-              currentUserId={CURRENT_USER_ID}
+              currentUserId={currentUserId ?? ""}
               onSend={handleSend}
               onBack={handleBack}
             />

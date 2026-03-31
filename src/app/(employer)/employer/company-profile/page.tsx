@@ -1,4 +1,4 @@
-import { MOCK_COMPANY } from "@/lib/constants/mock-data";
+import { createClient } from "@/lib/supabase/server";
 import { CompanyProfileClient } from "./company-profile-client";
 
 export const metadata = {
@@ -6,20 +6,46 @@ export const metadata = {
   description: "Configura el perfil publico de tu empresa",
 };
 
-export default function CompanyProfilePage() {
-  // In production this would fetch from Supabase via server action
-  const company = MOCK_COMPANY;
+async function getCompanyData() {
+  try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("No auth");
 
-  const initialData = {
-    name: company.name,
-    description: company.description,
-    sector: company.sector,
-    country: company.country,
-    city: company.city,
-    website: "",
-    employees_count: undefined,
-    logo_gradient: "green",
-  };
+    const { data: company } = await supabase
+      .from("companies")
+      .select("*")
+      .eq("owner_id", user.id)
+      .single();
+
+    if (!company) throw new Error("No company");
+
+    return {
+      name: company.name ?? "",
+      description: company.description ?? "",
+      sector: company.sector ?? "",
+      country: company.country ?? "",
+      city: company.city ?? "",
+      website: company.website ?? "",
+      employees_count: company.employees_count ?? undefined,
+      logo_gradient: company.logo_gradient ?? "green",
+    };
+  } catch {
+    return {
+      name: "",
+      description: "",
+      sector: "",
+      country: "",
+      city: "",
+      website: "",
+      employees_count: undefined,
+      logo_gradient: "green",
+    };
+  }
+}
+
+export default async function CompanyProfilePage() {
+  const initialData = await getCompanyData();
 
   return <CompanyProfileClient initialData={initialData} />;
 }

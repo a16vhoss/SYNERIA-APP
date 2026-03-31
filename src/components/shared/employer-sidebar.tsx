@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useProfile } from "@/hooks/useProfile";
 
 // ── Navigation config ──────────────────────────────────────────────
 
@@ -143,6 +144,7 @@ function SidebarNavItem({
 
 function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
   const pathname = usePathname();
+  const { displayName, initials, roleLabel } = useProfile();
 
   const isActive = (href: string) => {
     if (href === "/employer/dashboard") return pathname === "/employer/dashboard";
@@ -233,14 +235,14 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
           <Avatar size="default">
             <AvatarImage src="" alt="Empresa" />
             <AvatarFallback className="bg-brand-100 text-brand-700 text-xs font-semibold">
-              EM
+              {initials}
             </AvatarFallback>
           </Avatar>
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-medium text-foreground">
-              Empresa S.A.
+              {displayName}
             </p>
-            <p className="truncate text-xs text-muted-foreground">Employer</p>
+            <p className="truncate text-xs text-muted-foreground">{roleLabel}</p>
           </div>
         </div>
       </div>

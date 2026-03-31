@@ -7,6 +7,7 @@ import {
   EmployerMobileSidebar,
 } from "@/components/shared/employer-sidebar";
 import { TopBar } from "@/components/shared/top-bar";
+import { useProfile } from "@/hooks/useProfile";
 
 const pageTransition = {
   initial: { opacity: 0, y: 6 },
@@ -21,6 +22,7 @@ export default function EmployerLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const { displayName, initials, roleLabel } = useProfile();
 
   return (
     <div className="min-h-screen bg-cream">
@@ -32,9 +34,9 @@ export default function EmployerLayout({
         {/* Top bar */}
         <TopBar
           mobileMenuTrigger={<EmployerMobileSidebar />}
-          userName="Empresa S.A."
-          userInitials="EM"
-          userRole="Employer"
+          userName={displayName}
+          userInitials={initials}
+          userRole={roleLabel}
           unreadCount={0}
         />
 

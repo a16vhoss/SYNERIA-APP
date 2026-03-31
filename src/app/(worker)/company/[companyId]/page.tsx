@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { use, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MessageSquare, Briefcase } from "lucide-react";
 
@@ -9,10 +9,7 @@ import { CompanyStats } from "@/components/employer/company-stats";
 import { GlassCard } from "@/components/shared/glass-card";
 import { JobCard } from "@/components/shared/job-card";
 import { EmptyState } from "@/components/shared/empty-state";
-import {
-  MOCK_COMPANY,
-  MOCK_VACANCIES,
-} from "@/lib/constants/mock-data";
+import { createClient } from "@/lib/supabase/client";
 import { COUNTRIES } from "@/lib/constants/countries";
 
 const stagger = {
@@ -32,6 +29,27 @@ const fadeUp = {
   },
 };
 
+interface CompanyData {
+  id: string;
+  name: string;
+  sector: string;
+  logo_url: string | null;
+  verified: boolean;
+  country: string;
+  city: string;
+  description: string;
+}
+
+interface VacancyData {
+  id: string;
+  title: string;
+  location: string;
+  salary_min: number | null;
+  salary_max: number | null;
+  status: string;
+  company_id: string;
+}
+
 export default function PublicCompanyPage({
   params,
 }: {
@@ -39,16 +57,88 @@ export default function PublicCompanyPage({
 }) {
   const { companyId } = use(params);
 
-  // In production, fetch company by companyId from Supabase
-  const company = MOCK_COMPANY;
+  const [company, setCompany] = useState<CompanyData | null>(null);
+  const [activeVacancies, setActiveVacancies] = useState<VacancyData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const supabase = createClient();
+
+        // Fetch company
+        const { data: companyData } = await supabase
+          .from("companies")
+          .select("*")
+          .eq("id", companyId)
+          .single();
+
+        if (companyData) {
+          setCompany({
+            id: companyData.id,
+            name: companyData.name ?? "",
+            sector: companyData.sector ?? "",
+            logo_url: companyData.logo_url ?? null,
+            verified: companyData.verified ?? false,
+            country: companyData.country ?? "",
+            city: companyData.city ?? "",
+            description: companyData.description ?? "",
+          });
+
+          // Fetch active vacancies for this company
+          const { data: vacanciesData } = await supabase
+            .from("vacancies")
+            .select("*")
+            .eq("company_id", companyId)
+            .eq("status", "active");
+
+          setActiveVacancies(
+            (vacanciesData ?? []).map((v: Record<string, unknown>) => ({
+              id: v.id as string,
+              title: (v.title as string) ?? "",
+              location: `${(v.city as string) ?? ""}, ${(v.country as string) ?? ""}`,
+              salary_min: (v.salary_min as number) ?? null,
+              salary_max: (v.salary_max as number) ?? null,
+              status: (v.status as string) ?? "active",
+              company_id: (v.company_id as string) ?? "",
+            }))
+          );
+        }
+      } catch {
+        // Supabase not available — leave defaults
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [companyId]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="size-8 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (!company) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20">
+        <Briefcase className="mb-4 size-12 text-muted-foreground" />
+        <h2 className="font-heading text-xl font-bold text-foreground">
+          Empresa no encontrada
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          La empresa que buscas no existe o no esta disponible.
+        </p>
+      </div>
+    );
+  }
+
   const countryName =
     COUNTRIES.find((c) => c.code === company.country)?.name ?? company.country;
   const location = `${company.city}, ${countryName}`;
-
-  // Get active jobs for this company
-  const activeVacancies = MOCK_VACANCIES.filter(
-    (v) => v.company_id === company.id && v.status === "active"
-  );
 
   // Mock rating
   const avgRating = 4.3;
@@ -92,7 +182,7 @@ export default function PublicCompanyPage({
       {/* Stats */}
       <motion.div variants={fadeUp}>
         <CompanyStats
-          employeesCount={120}
+          employeesCount={0}
           activeJobs={activeVacancies.length}
           avgRating={avgRating}
         />

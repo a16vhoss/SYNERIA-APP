@@ -7,6 +7,7 @@ import {
   WorkerMobileSidebar,
 } from "@/components/shared/worker-sidebar";
 import { TopBar } from "@/components/shared/top-bar";
+import { useProfile } from "@/hooks/useProfile";
 
 const pageTransition = {
   initial: { opacity: 0, y: 6 },
@@ -21,6 +22,7 @@ export default function WorkerLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const { displayName, initials, roleLabel } = useProfile();
 
   return (
     <div className="min-h-screen bg-cream">
@@ -32,9 +34,9 @@ export default function WorkerLayout({
         {/* Top bar */}
         <TopBar
           mobileMenuTrigger={<WorkerMobileSidebar />}
-          userName="Ana Sofia"
-          userInitials="AS"
-          userRole="Worker"
+          userName={displayName}
+          userInitials={initials}
+          userRole={roleLabel}
           unreadCount={0}
         />
 

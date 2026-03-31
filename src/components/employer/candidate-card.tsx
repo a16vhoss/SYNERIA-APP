@@ -44,33 +44,6 @@ function formatDate(dateStr: string): string {
   });
 }
 
-// Mock cover letter / motivation data
-const MOCK_DETAILS: Record<
-  string,
-  { coverLetter: string; motivation: string; cvLink: string }
-> = {
-  "cand-001": {
-    coverLetter:
-      "Soy un profesional con 5 anos de experiencia en construccion. He trabajado en proyectos residenciales y comerciales. Me interesa crecer profesionalmente en el sector.",
-    motivation:
-      "Busco oportunidades internacionales que me permitan ampliar mi experiencia y contribuir con mis habilidades tecnicas.",
-    cvLink: "#",
-  },
-  "cand-002": {
-    coverLetter:
-      "Cuento con experiencia en hoteleria de alto nivel. Domino espanol, ingles y frances. Me apasiona brindar un servicio excepcional.",
-    motivation:
-      "El puesto en Barcelona representa la oportunidad perfecta para combinar mi experiencia con mi amor por la cultura espanola.",
-    cvLink: "#",
-  },
-  "cand-003": {
-    coverLetter:
-      "Operador certificado con licencia para maquinaria pesada. He trabajado en obras civiles de gran envergadura.",
-    motivation:
-      "Alemania ofrece un entorno profesional que valoro mucho. Quiero aportar mi experiencia a proyectos de primer nivel.",
-    cvLink: "#",
-  },
-};
 
 interface CandidateCardProps {
   candidate: MockCandidate;
@@ -84,7 +57,13 @@ export function CandidateCard({
   onScheduleInterview,
 }: CandidateCardProps) {
   const [expanded, setExpanded] = useState(false);
-  const details = MOCK_DETAILS[candidate.id];
+  const details = (candidate as any).cover_letter
+    ? {
+        coverLetter: (candidate as any).cover_letter ?? "",
+        motivation: (candidate as any).motivation ?? "",
+        cvLink: (candidate as any).cv_url ?? "#",
+      }
+    : null;
   const canSchedule =
     candidate.status === "pending" || candidate.status === "reviewing";
   const showFeedback = candidate.status === "interview";

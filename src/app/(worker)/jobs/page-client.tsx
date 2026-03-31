@@ -18,41 +18,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { MOCK_JOBS, MOCK_VACANCIES } from "@/lib/constants/mock-data";
 import { COUNTRIES } from "@/lib/constants/countries";
 
 /* ------------------------------------------------------------------ */
-/*  Build a unified list of searchable jobs from both mock sources     */
+/*  Enriched job type                                                  */
 /* ------------------------------------------------------------------ */
-
-const GRADIENT_CYCLE: JobData["companyGradient"][] = [
-  "green",
-  "orange",
-  "purple",
-  "blue",
-  "red",
-  "teal",
-];
-
-function vacancyToJobData(v: (typeof MOCK_VACANCIES)[number], idx: number): JobData {
-  return {
-    id: v.id,
-    companyName: "Tech Employer Test",
-    companyLetter: "T",
-    companyGradient: GRADIENT_CYCLE[idx % GRADIENT_CYCLE.length],
-    title: v.title,
-    location: v.location,
-    salary: v.salary_min
-      ? `$${v.salary_min.toLocaleString()}/mes`
-      : "A convenir",
-    tags: [],
-    _sector: v.sector,
-    _country: v.country,
-    _contractType: v.contract_type,
-    _salaryNum: v.salary_min ?? 0,
-    _publishedAt: v.published_at,
-  } as JobData & Record<string, unknown>;
-}
 
 type EnrichedJob = JobData & {
   _sector?: string;
@@ -62,48 +32,49 @@ type EnrichedJob = JobData & {
   _publishedAt?: string;
 };
 
-function enrichMockJob(j: JobData): EnrichedJob {
-  const salaryNum = parseInt(j.salary.replace(/[^0-9]/g, ""), 10) || 0;
-  // Derive country from location text
-  const locationLower = j.location.toLowerCase();
-  let countryCode = "";
-  if (locationLower.includes("chile")) countryCode = "CL";
-  else if (locationLower.includes("peru")) countryCode = "PE";
-  else if (locationLower.includes("colombia")) countryCode = "CO";
-
-  // Derive sector from tags/title
-  let sector = "";
-  const titleLower = j.title.toLowerCase();
-  if (titleLower.includes("construc")) sector = "Construccion";
-  else if (titleLower.includes("maquinaria") || titleLower.includes("operador"))
-    sector = "Construccion";
-  else if (titleLower.includes("electric")) sector = "Energia";
-  else if (titleLower.includes("agricol") || titleLower.includes("agro"))
-    sector = "Agricultura";
-  else if (titleLower.includes("solda")) sector = "Manufactura";
-
-  return {
-    ...j,
-    _sector: sector,
-    _country: countryCode,
-    _contractType: "full_time",
-    _salaryNum: salaryNum,
-    _publishedAt: "2026-03-20",
-  };
-}
-
-const ALL_JOBS: EnrichedJob[] = [
-  ...MOCK_JOBS.map(enrichMockJob),
-  ...MOCK_VACANCIES.map((v, i) => vacancyToJobData(v, i) as EnrichedJob),
-];
-
 const ITEMS_PER_PAGE = 6;
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-export function JobsPageClient() {
+interface JobsPageClientProps {
+  realJobs?: {
+    id: string;
+    companyName: string;
+    companyLetter: string;
+    companyGradient: string;
+    title: string;
+    location: string;
+    salary: string;
+    tags: { label: string; variant: string }[];
+    sector: string;
+    country: string;
+    salaryMin: number;
+  }[] | null;
+}
+
+export function JobsPageClient({ realJobs }: JobsPageClientProps = {}) {
+  const ALL_JOBS: EnrichedJob[] = useMemo(() => {
+    if (realJobs?.length) {
+      return realJobs.map((j) => ({
+        id: j.id,
+        companyName: j.companyName,
+        companyLetter: j.companyLetter,
+        companyGradient: j.companyGradient as JobData["companyGradient"],
+        title: j.title,
+        location: j.location,
+        salary: j.salary,
+        tags: j.tags as JobData["tags"],
+        _sector: j.sector,
+        _country: j.country,
+        _contractType: "full_time",
+        _salaryNum: j.salaryMin,
+        _publishedAt: new Date().toISOString(),
+      }));
+    }
+    return [];
+  }, [realJobs]);
   const router = useRouter();
 
   // Search & filter state

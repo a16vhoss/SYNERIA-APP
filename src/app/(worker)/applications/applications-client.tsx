@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { FolderOpen, Search } from "lucide-react";
+import { FolderOpen } from "lucide-react";
 import { PageHeader } from "@/components/shared/page-header";
 import { StatusBadge } from "@/components/shared/status-badge";
 import { EmptyState } from "@/components/shared/empty-state";
@@ -25,8 +25,8 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import type { MockApplication } from "@/lib/constants/mock-data";
-import { MOCK_APPLICATIONS } from "@/lib/constants/mock-data";
 import type { InterviewData } from "@/lib/actions/applications";
+import { respondToInterview } from "@/lib/actions/applications";
 
 type StatusFilter = "all" | "pending" | "reviewing" | "interview" | "accepted" | "rejected";
 
@@ -39,25 +39,36 @@ const STATUS_OPTIONS: { value: StatusFilter; label: string }[] = [
   { value: "rejected", label: "Rechazada" },
 ];
 
-const COMPANY_GRADIENTS: Record<string, "green" | "orange" | "purple" | "blue" | "teal" | "red"> = {
-  "Constructora Alpha S.A.": "green",
-  "Minera del Sur": "orange",
-  "Volta SA": "purple",
-  "PetroLatam": "blue",
-  "AgroExport Ltda.": "teal",
+const GRADIENT_MAP: Record<string, "green" | "orange" | "purple" | "blue" | "teal" | "red"> = {
+  green: "green",
+  orange: "orange",
+  purple: "purple",
+  blue: "blue",
+  teal: "teal",
+  red: "red",
 };
 
-// Mock interviews mapped by application id
-const MOCK_INTERVIEWS: Record<string, InterviewData> = {
-  app_002: {
-    applicationId: "app_002",
-    date: "2026-04-01",
-    time: "10:00",
-    videoLink: "https://meet.google.com/abc-defg-hij",
-    notes: "Por favor tener disponible tu CV y documentos de identidad.",
-    confirmed: null,
-  },
-};
+function resolveGradient(app: MockApplication): "green" | "orange" | "purple" | "blue" | "teal" | "red" {
+  // Use real logo_gradient from Supabase if available (attached as _logoGradient)
+  const extra = app as MockApplication & { _logoGradient?: string };
+  if (extra._logoGradient && GRADIENT_MAP[extra._logoGradient]) {
+    return GRADIENT_MAP[extra._logoGradient];
+  }
+  // Fallback: derive from company name hash
+  const gradients: ("green" | "orange" | "purple" | "blue" | "teal" | "red")[] = [
+    "green", "orange", "purple", "blue", "teal", "red",
+  ];
+  let hash = 0;
+  for (let i = 0; i < app.companyName.length; i++) {
+    hash = app.companyName.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return gradients[Math.abs(hash) % gradients.length];
+}
+
+function resolveLetter(app: MockApplication): string {
+  const extra = app as MockApplication & { _logoLetter?: string };
+  return extra._logoLetter ?? app.companyName.charAt(0);
+}
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr + "T00:00:00");
@@ -82,17 +93,21 @@ const rowVariants = {
   }),
 };
 
-export function ApplicationsClient() {
+interface ApplicationsClientProps {
+  initialApplications: MockApplication[];
+  initialInterviews: Record<string, InterviewData>;
+}
+
+export function ApplicationsClient({
+  initialApplications,
+  initialInterviews,
+}: ApplicationsClientProps) {
   const router = useRouter();
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
-  const [applications, setApplications] = useState<MockApplication[]>([]);
+  const [applications] = useState<MockApplication[]>(initialApplications);
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [interviews, setInterviews] = useState<Record<string, InterviewData>>(MOCK_INTERVIEWS);
-
-  useEffect(() => {
-    // In production: fetch from server action
-    setApplications([...MOCK_APPLICATIONS]);
-  }, []);
+  const [interviews, setInterviews] = useState<Record<string, InterviewData>>(initialInterviews);
+  const [isPending, startTransition] = useTransition();
 
   const filtered =
     statusFilter === "all"
@@ -108,6 +123,7 @@ export function ApplicationsClient() {
   }
 
   function handleInterviewResponse(applicationId: string, confirmed: boolean) {
+    // Optimistic update
     setInterviews((prev) => ({
       ...prev,
       [applicationId]: {
@@ -115,6 +131,23 @@ export function ApplicationsClient() {
         confirmed,
       },
     }));
+
+    // Persist to Supabase via server action
+    startTransition(async () => {
+      try {
+        await respondToInterview(applicationId, confirmed);
+      } catch (err) {
+        console.error("Failed to update interview response:", err);
+        // Revert optimistic update on error
+        setInterviews((prev) => ({
+          ...prev,
+          [applicationId]: {
+            ...prev[applicationId],
+            confirmed: null,
+          },
+        }));
+      }
+    });
   }
 
   return (
@@ -200,8 +233,8 @@ export function ApplicationsClient() {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <CompanyAvatar
-                          letter={app.companyName.charAt(0)}
-                          gradient={COMPANY_GRADIENTS[app.companyName] ?? "green"}
+                          letter={resolveLetter(app)}
+                          gradient={resolveGradient(app)}
                           size="sm"
                         />
                         <span className="text-sm text-muted-foreground">

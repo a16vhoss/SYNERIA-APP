@@ -20,8 +20,6 @@ interface UseMessagesReturn {
   refreshConversations: () => Promise<void>;
 }
 
-const CURRENT_USER_ID = "usr_001";
-
 export function useMessages(): UseMessagesReturn {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeConversationId, setActiveConversationId] = useState<
@@ -37,7 +35,7 @@ export function useMessages(): UseMessagesReturn {
   const refreshConversations = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await fetchConversations(CURRENT_USER_ID);
+      const data = await fetchConversations();
       setConversations(data);
     } finally {
       setLoading(false);
@@ -54,6 +52,7 @@ export function useMessages(): UseMessagesReturn {
     let cancelled = false;
 
     async function load() {
+      // activeConversationId is now the other user's id
       const data = await fetchMessages(activeConversationId!);
       if (!cancelled) setMessages(data);
     }
@@ -71,11 +70,11 @@ export function useMessages(): UseMessagesReturn {
 
   const sendMessage = useCallback(
     async (receiverId: string, content: string) => {
-      const newMsg = await sendMsg(CURRENT_USER_ID, receiverId, content);
+      const newMsg = await sendMsg(receiverId, content);
       setMessages((prev) => [...prev, newMsg]);
 
       // Refresh conversations to update last message
-      const updated = await fetchConversations(CURRENT_USER_ID);
+      const updated = await fetchConversations();
       setConversations(updated);
     },
     []
@@ -83,26 +82,23 @@ export function useMessages(): UseMessagesReturn {
 
   const handleMarkAsRead = useCallback(
     async (conversationId: string) => {
-      const convMessages = messages.filter(
-        (m) =>
-          m.conversationId === conversationId &&
-          m.senderId !== CURRENT_USER_ID &&
-          !m.read
-      );
-      if (convMessages.length === 0) return;
+      // conversationId is now the other user's id (participantId)
+      await markRead(conversationId);
 
-      const ids = convMessages.map((m) => m.id);
-      await markRead(ids);
-
+      // Optimistically mark local messages as read
       setMessages((prev) =>
-        prev.map((m) => (ids.includes(m.id) ? { ...m, read: true } : m))
+        prev.map((m) =>
+          m.conversationId === conversationId && !m.read
+            ? { ...m, read: true }
+            : m
+        )
       );
 
       // Refresh conversations to update unread counts
-      const updated = await fetchConversations(CURRENT_USER_ID);
+      const updated = await fetchConversations();
       setConversations(updated);
     },
-    [messages]
+    []
   );
 
   return {

@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from "react";
 import type { MockNotification } from "@/lib/constants/mock-data";
-import { MOCK_NOTIFICATIONS } from "@/lib/constants/mock-data";
+import { createClient } from "@/lib/supabase/client";
 
 interface UseNotificationsReturn {
   notifications: MockNotification[];
@@ -17,15 +17,38 @@ export function useNotifications(): UseNotificationsReturn {
   const [isLoading, setIsLoading] = useState(true);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Initial fetch (mock)
+  // Fetch notifications from Supabase
   useEffect(() => {
     async function fetchNotifications() {
       setIsLoading(true);
       try {
-        // In production: fetch from Supabase
-        // const { data } = await supabase.from('notifications').select('*').eq('user_id', userId)
-        await new Promise((r) => setTimeout(r, 300)); // simulate latency
-        setNotifications([...MOCK_NOTIFICATIONS]);
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+          setNotifications([]);
+          return;
+        }
+        const { data } = await supabase
+          .from("notifications")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false })
+          .limit(50);
+
+        if (data) {
+          setNotifications(
+            data.map((n: any) => ({
+              id: n.id,
+              type: n.type ?? "info",
+              title: n.title ?? "",
+              message: n.message ?? "",
+              read: n.read ?? false,
+              createdAt: n.created_at ?? new Date().toISOString(),
+            }))
+          );
+        }
+      } catch {
+        setNotifications([]);
       } finally {
         setIsLoading(false);
       }
@@ -33,7 +56,7 @@ export function useNotifications(): UseNotificationsReturn {
 
     fetchNotifications();
 
-    // Poll every 30 seconds (will replace with Supabase Realtime later)
+    // Poll every 30 seconds
     pollRef.current = setInterval(fetchNotifications, 30_000);
 
     return () => {

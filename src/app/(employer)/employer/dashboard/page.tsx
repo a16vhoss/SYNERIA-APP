@@ -1,10 +1,4 @@
 import { createClient } from "@/lib/supabase/server";
-import {
-  MOCK_COMPANY,
-  MOCK_VACANCIES,
-  MOCK_CANDIDATES,
-  getMockEmployerStats,
-} from "@/lib/constants/mock-data";
 import { EmployerDashboardClient } from "./dashboard-client";
 
 export const metadata = {
@@ -20,7 +14,12 @@ async function getEmployerData() {
     } = await supabase.auth.getUser();
 
     if (!user) {
-      return { company: MOCK_COMPANY, vacancies: MOCK_VACANCIES, candidates: MOCK_CANDIDATES, stats: getMockEmployerStats() };
+      return {
+        company: { name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false },
+        vacancies: [],
+        candidates: [],
+        stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },
+      };
     }
 
     // Try to fetch the employer's company
@@ -31,7 +30,12 @@ async function getEmployerData() {
       .single();
 
     if (!profile?.companies) {
-      return { company: MOCK_COMPANY, vacancies: MOCK_VACANCIES, candidates: MOCK_CANDIDATES, stats: getMockEmployerStats() };
+      return {
+        company: { name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false },
+        vacancies: [],
+        candidates: [],
+        stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },
+      };
     }
 
     const company = profile.companies;
@@ -44,7 +48,21 @@ async function getEmployerData() {
       .order("created_at", { ascending: false });
 
     if (!vacancies || vacancies.length === 0) {
-      return { company: MOCK_COMPANY, vacancies: MOCK_VACANCIES, candidates: MOCK_CANDIDATES, stats: getMockEmployerStats() };
+      return {
+        company: {
+          id: company.id,
+          name: company.name ?? "Mi Empresa",
+          sector: company.sector ?? "",
+          logo_url: company.logo_url ?? null,
+          verified: company.verified ?? false,
+          country: company.country ?? "",
+          city: company.city ?? "",
+          description: company.description ?? "",
+        },
+        vacancies: [],
+        candidates: [],
+        stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },
+      };
     }
 
     // Fetch candidates for employer's vacancies
@@ -66,13 +84,13 @@ async function getEmployerData() {
     return {
       company: {
         id: company.id,
-        name: company.name ?? MOCK_COMPANY.name,
-        sector: company.sector ?? MOCK_COMPANY.sector,
+        name: company.name ?? "Mi Empresa",
+        sector: company.sector ?? "",
         logo_url: company.logo_url ?? null,
         verified: company.verified ?? false,
-        country: company.country ?? MOCK_COMPANY.country,
-        city: company.city ?? MOCK_COMPANY.city,
-        description: company.description ?? MOCK_COMPANY.description,
+        country: company.country ?? "",
+        city: company.city ?? "",
+        description: company.description ?? "",
       },
       vacancies: vacancies.map((v: Record<string, unknown>) => ({
         id: v.id as string,
@@ -94,12 +112,11 @@ async function getEmployerData() {
       stats,
     };
   } catch {
-    // Fallback to mock data if Supabase is not configured
     return {
-      company: MOCK_COMPANY,
-      vacancies: MOCK_VACANCIES,
-      candidates: MOCK_CANDIDATES,
-      stats: getMockEmployerStats(),
+      company: { name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false },
+      vacancies: [],
+      candidates: [],
+      stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },
     };
   }
 }

@@ -26,10 +26,8 @@ import {
   type CompanyInfo,
 } from "@/components/worker/job-detail-sidebar";
 import { ApplyModal } from "@/components/worker/apply-modal";
-import { MOCK_JOBS } from "@/lib/constants/mock-data";
-
 /* ------------------------------------------------------------------ */
-/*  Extended mock data for the detail page                             */
+/*  Job detail types                                                   */
 /* ------------------------------------------------------------------ */
 
 interface JobDetail {
@@ -65,126 +63,25 @@ interface JobDetail {
   };
 }
 
-const MOCK_JOB_DETAILS: Record<string, JobDetail> = {
-  job_001: {
-    id: "job_001",
-    title: "Ayudante de Construccion Senior",
-    companyName: "Constructora Alpha S.A.",
-    companyLetter: "C",
-    companyGradient: "green",
-    sector: "Construccion",
-    location: "Santiago, Chile",
-    flag: "\uD83C\uDDE8\uD83C\uDDF1",
-    postedAgo: "Hace 3 dias",
-    salary: "$3,200/mes + beneficios",
-    tags: [
-      { label: "Jornada Completa", variant: "default" },
-      { label: "Visa", variant: "visa" },
-      { label: "Alojamiento", variant: "housing" },
-      { label: "Urgente", variant: "urgent" },
-    ],
-    description:
-      "Estamos buscando un Ayudante de Construccion Senior experimentado para unirse a nuestro equipo de trabajo en Santiago de Chile. El candidato ideal tendra experiencia previa en el sector de la construccion, especificamente en proyectos habitacionales e infraestructura de gran escala.\n\nEl puesto ofrece excelentes condiciones laborales, incluyendo visa de trabajo patrocinada, alojamiento proporcionado por la empresa y un paquete completo de beneficios.\n\nNuestro equipo trabaja en algunos de los proyectos de construccion mas importantes de la region, brindando oportunidades de crecimiento profesional y desarrollo de habilidades.",
-    responsibilities: [
-      "Asistir en todas las fases de construccion de proyectos habitacionales",
-      "Preparar materiales y herramientas necesarias para la obra",
-      "Mantener el area de trabajo limpia y segura",
-      "Colaborar con otros miembros del equipo de construccion",
-      "Reportar al supervisor de obra sobre el avance diario",
-      "Seguir estrictamente los protocolos de seguridad en obra",
-      "Participar en capacitaciones y entrenamientos de seguridad",
-    ],
-    requirements: [
-      "Minimo 3 anos de experiencia en construccion",
-      "Conocimiento basico de herramientas de construccion",
-      "Capacidad para realizar trabajo fisico demandante",
-      "Disponibilidad para trabajar en horarios rotativos",
-      "Documentacion vigente para trabajar en el extranjero",
-      "Espanol fluido (ingles basico es un plus)",
-      "Certificaciones de seguridad laboral (deseable)",
-    ],
-    benefits: [
-      "Salario competitivo de $3,200/mes",
-      "Visa de trabajo patrocinada por la empresa",
-      "Alojamiento gratuito proporcionado",
-      "Seguro medico completo",
-      "Bonos por desempeno trimestral",
-      "Transporte ida y vuelta al sitio de obra",
-      "Capacitacion continua y certificaciones",
-      "Oportunidades de ascenso interno",
-    ],
-    summary: {
-      sector: "Construccion",
-      type: "Jornada Completa",
-      experience: "3+ anos",
-      languages: "Espanol (Ingles basico)",
-      startDate: "Inmediata",
-      duration: "12 meses (renovable)",
-    },
-    company: {
-      id: "comp-001",
-      name: "Constructora Alpha S.A.",
-      description:
-        "Empresa lider en construccion e infraestructura con mas de 20 anos de experiencia en Latinoamerica.",
-      employees: "500+",
-      rating: 4.5,
-    },
-  },
-};
-
-function getJobDetail(id: string): JobDetail {
-  if (MOCK_JOB_DETAILS[id]) return MOCK_JOB_DETAILS[id];
-
-  // Generate a detail from MOCK_JOBS if available
-  const job = MOCK_JOBS.find((j) => j.id === id);
+function buildJobDetail(data: JobDetailClientProps["jobData"]): JobDetail {
   return {
-    id: id,
-    title: job?.title ?? "Puesto de Trabajo",
-    companyName: job?.companyName ?? "Empresa",
-    companyLetter: job?.companyLetter ?? "E",
-    companyGradient: job?.companyGradient ?? "green",
-    sector: "Construccion",
-    location: job?.location ?? "Ubicacion por definir",
-    flag: "\uD83C\uDDE8\uD83C\uDDF1",
-    postedAgo: "Hace 5 dias",
-    salary: job?.salary ?? "$2,500/mes",
-    tags: job?.tags?.map((t) => ({ label: t.label, variant: t.variant ?? "default" })) ?? [],
-    description:
-      "Descripcion detallada del puesto de trabajo. Buscamos un profesional con experiencia para unirse a nuestro equipo en un ambiente dinamico y colaborativo.\n\nOfrecemos excelentes condiciones laborales y oportunidades de desarrollo profesional.",
-    responsibilities: [
-      "Ejecutar tareas asignadas segun el plan de trabajo",
-      "Colaborar con el equipo en proyectos activos",
-      "Mantener altos estandares de calidad en el trabajo",
-      "Reportar avances al supervisor directo",
-    ],
-    requirements: [
-      "Experiencia previa en el area",
-      "Disponibilidad para trabajo presencial",
-      "Buenas habilidades de comunicacion",
-      "Documentacion al dia",
-    ],
-    benefits: [
-      "Salario competitivo",
-      "Seguro medico",
-      "Oportunidades de crecimiento",
-      "Ambiente laboral positivo",
-    ],
-    summary: {
-      sector: "General",
-      type: "Jornada Completa",
-      experience: "2+ anos",
-      languages: "Espanol",
-      startDate: "Por definir",
-      duration: "Indefinido",
-    },
-    company: {
-      id: "comp-001",
-      name: job?.companyName ?? "Empresa",
-      description:
-        "Empresa con presencia en el mercado latinoamericano.",
-      employees: "100+",
-      rating: 4.0,
-    },
+    id: data.id,
+    title: data.title,
+    companyName: data.companyName,
+    companyLetter: data.companyLetter,
+    companyGradient: data.companyGradient as JobDetail["companyGradient"],
+    sector: data.sector,
+    location: data.location,
+    flag: data.flag,
+    postedAgo: data.postedAgo,
+    salary: data.salary,
+    tags: data.tags,
+    description: data.description,
+    responsibilities: data.responsibilities,
+    requirements: data.requirements,
+    benefits: data.benefits,
+    summary: data.summary,
+    company: data.company,
   };
 }
 
@@ -201,10 +98,43 @@ const tagColors: Record<string, string> = {
 
 interface JobDetailClientProps {
   jobId: string;
+  jobData: {
+    id: string;
+    title: string;
+    companyName: string;
+    companyLetter: string;
+    companyGradient: string;
+    sector: string;
+    location: string;
+    flag: string;
+    postedAgo: string;
+    salary: string;
+    tags: { label: string; variant: string }[];
+    description: string;
+    responsibilities: string[];
+    requirements: string[];
+    benefits: string[];
+    summary: {
+      sector: string;
+      type: string;
+      experience: string;
+      languages: string;
+      startDate: string;
+      duration: string;
+    };
+    company: {
+      id: string;
+      name: string;
+      description: string;
+      employees: string;
+      rating: number;
+    };
+  };
+  similarJobs?: { id: string; title: string; salary: string; companyName: string }[];
 }
 
-export function JobDetailClient({ jobId }: JobDetailClientProps) {
-  const job = getJobDetail(jobId);
+export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }: JobDetailClientProps) {
+  const job = buildJobDetail(jobData);
   const [saved, setSaved] = useState(false);
   const [applyOpen, setApplyOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -224,16 +154,14 @@ export function JobDetailClient({ jobId }: JobDetailClientProps) {
     { icon: Clock, label: "Duracion", value: job.summary.duration },
   ];
 
-  const similarJobs: SimilarJob[] = MOCK_JOBS.filter((j) => j.id !== jobId)
-    .slice(0, 3)
-    .map((j) => ({
-      id: j.id,
-      title: j.title,
-      companyName: j.companyName,
-      companyLetter: j.companyLetter,
-      companyGradient: j.companyGradient ?? "green",
-      salary: j.salary,
-    }));
+  const similarJobs: SimilarJob[] = (similarJobsProp ?? []).map((j) => ({
+    id: j.id,
+    title: j.title,
+    companyName: j.companyName,
+    companyLetter: j.companyName.charAt(0),
+    companyGradient: "green",
+    salary: j.salary,
+  }));
 
   const companyInfo: CompanyInfo = {
     id: job.company.id,
@@ -406,6 +334,7 @@ export function JobDetailClient({ jobId }: JobDetailClientProps) {
       <ApplyModal
         open={applyOpen}
         onOpenChange={setApplyOpen}
+        jobId={jobId}
         jobTitle={job.title}
         companyName={job.companyName}
       />
