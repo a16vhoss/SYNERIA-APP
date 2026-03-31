@@ -1,0 +1,231 @@
+{
+  "dashboard": {
+    "welcome": "Willkommen, {name}!",
+    "subtitle": "Ueberblick ueber Ihr Unternehmen",
+    "stats": {
+      "activeVacancies": "Aktive Stellenangebote",
+      "totalCandidates": "Kandidaten insgesamt",
+      "activeContracts": "Aktive Vertraege",
+      "totalSpent": "Gesamtausgaben"
+    },
+    "recentVacancies": "Neueste Stellenangebote",
+    "recentApplications": "Neueste Bewerbungen",
+    "pendingActions": "Ausstehende Aktionen",
+    "vacanciesTable": {
+      "title": "Titel",
+      "applicants": "Bewerber",
+      "status": "Status",
+      "posted": "Veroeffentlicht",
+      "actions": "Aktionen"
+    }
+  },
+  "vacancies": {
+    "title": "Stellenangebote",
+    "create": {
+      "title": "Stellenangebot erstellen",
+      "jobTitle": "Stellentitel",
+      "jobTitlePlaceholder": "Z.B.: Frontend Entwickler",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Beschreiben Sie die Stelle...",
+      "requirements": "Anforderungen",
+      "requirementsPlaceholder": "Listen Sie die Anforderungen auf...",
+      "benefits": "Vorteile",
+      "benefitsPlaceholder": "Listen Sie die Vorteile auf...",
+      "category": "Kategorie",
+      "location": "Standort",
+      "locationType": "Standorttyp",
+      "remote": "Remote",
+      "onSite": "Vor Ort",
+      "hybrid": "Hybrid",
+      "salary": "Gehalt",
+      "salaryMin": "Mindestgehalt",
+      "salaryMax": "Hoechstgehalt",
+      "currency": "Waehrung",
+      "type": "Beschaeftigungsart",
+      "fullTime": "Vollzeit",
+      "partTime": "Teilzeit",
+      "contract": "Vertrag",
+      "freelance": "Freiberuflich",
+      "experience": "Erfahrungsstufe",
+      "skills": "Erforderliche Faehigkeiten",
+      "deadline": "Bewerbungsfrist",
+      "publish": "Stelle veroeffentlichen",
+      "saveDraft": "Als Entwurf speichern",
+      "publishing": "Wird veroeffentlicht...",
+      "success": "Stelle erfolgreich erstellt",
+      "error": "Fehler beim Erstellen der Stelle"
+    },
+    "edit": {
+      "title": "Stelle bearbeiten",
+      "save": "Aenderungen speichern",
+      "saving": "Wird gespeichert...",
+      "success": "Stelle erfolgreich aktualisiert",
+      "error": "Fehler beim Aktualisieren der Stelle"
+    },
+    "status": {
+      "publish": "Veroeffentlichen",
+      "unpublish": "Zurueckziehen",
+      "close": "Stelle schliessen",
+      "reopen": "Stelle wieder eroeffnen",
+      "delete": "Stelle loeschen",
+      "deleteConfirm": "Sind Sie sicher, dass Sie diese Stelle loeschen moechten?",
+      "duplicate": "Stelle duplizieren"
+    },
+    "empty": "Sie haben noch keine Stellen erstellt",
+    "emptyAction": "Erste Stelle erstellen"
+  },
+  "candidates": {
+    "title": "Kandidaten",
+    "filters": {
+      "status": "Status",
+      "vacancy": "Stelle",
+      "rating": "Bewertung",
+      "date": "Bewerbungsdatum",
+      "search": "Kandidaten suchen..."
+    },
+    "actions": {
+      "viewProfile": "Profil ansehen",
+      "viewResume": "Lebenslauf ansehen",
+      "viewCoverLetter": "Anschreiben ansehen",
+      "scheduleInterview": "Vorstellungsgespraech planen",
+      "sendMessage": "Nachricht senden",
+      "accept": "Akzeptieren",
+      "reject": "Ablehnen",
+      "shortlist": "Vorauswahl",
+      "moveToInterview": "Zum Vorstellungsgespraech",
+      "makeOffer": "Angebot machen"
+    },
+    "interview": {
+      "schedule": "Vorstellungsgespraech planen",
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "duration": "Dauer",
+      "type": "Typ",
+      "inPerson": "Persoenlich",
+      "video": "Videoanruf",
+      "phone": "Telefon",
+      "location": "Ort",
+      "link": "Meeting-Link",
+      "notes": "Notizen",
+      "notesPlaceholder": "Zusaetzliche Notizen...",
+      "confirm": "Vorstellungsgespraech bestaetigen",
+      "cancel": "Vorstellungsgespraech absagen",
+      "reschedule": "Verschieben"
+    },
+    "empty": "Keine Kandidaten fuer diese Stelle",
+    "pipeline": {
+      "applied": "Beworben",
+      "screening": "Vorauswahl",
+      "interview": "Vorstellungsgespraech",
+      "offer": "Angebot",
+      "hired": "Eingestellt",
+      "rejected": "Abgelehnt"
+    }
+  },
+  "contracts": {
+    "title": "Vertraege",
+    "create": {
+      "title": "Vertrag erstellen",
+      "worker": "Arbeitnehmer",
+      "selectWorker": "Arbeitnehmer auswaehlen",
+      "vacancy": "Zugehoerige Stelle",
+      "startDate": "Startdatum",
+      "endDate": "Enddatum",
+      "rate": "Tarif",
+      "rateType": "Tarifart",
+      "hourly": "Pro Stunde",
+      "monthly": "Monatlich",
+      "fixed": "Festpreis",
+      "scope": "Arbeitsumfang",
+      "scopePlaceholder": "Beschreiben Sie den Umfang...",
+      "deliverables": "Lieferobjekte",
+      "deliverablesPlaceholder": "Listen Sie die Lieferobjekte auf...",
+      "paymentTerms": "Zahlungsbedingungen",
+      "create": "Vertrag erstellen",
+      "creating": "Wird erstellt...",
+      "success": "Vertrag erfolgreich erstellt",
+      "error": "Fehler beim Erstellen des Vertrags"
+    },
+    "manage": {
+      "view": "Vertrag ansehen",
+      "edit": "Vertrag bearbeiten",
+      "terminate": "Vertrag kuendigen",
+      "terminateConfirm": "Sind Sie sicher, dass Sie diesen Vertrag kuendigen moechten?",
+      "renew": "Vertrag verlaengern",
+      "extend": "Frist verlaengern",
+      "addMilestone": "Meilenstein hinzufuegen",
+      "milestones": "Meilensteine",
+      "milestoneName": "Meilensteinname",
+      "milestoneAmount": "Betrag",
+      "milestoneDeadline": "Frist"
+    },
+    "payments": {
+      "title": "Zahlungen",
+      "sendPayment": "Zahlung senden",
+      "amount": "Betrag",
+      "description": "Beschreibung",
+      "confirm": "Zahlung bestaetigen",
+      "history": "Zahlungsverlauf",
+      "pending": "Ausstehende Zahlungen",
+      "completed": "Abgeschlossene Zahlungen"
+    }
+  },
+  "wallet": {
+    "title": "Firmen-Wallet",
+    "balance": "Verfuegbares Guthaben",
+    "totalSpent": "Gesamtausgaben",
+    "pendingPayments": "Ausstehende Zahlungen",
+    "deposit": {
+      "title": "Guthaben einzahlen",
+      "amount": "Betrag",
+      "method": "Zahlungsmethode",
+      "creditCard": "Kreditkarte",
+      "bankTransfer": "Bankueberweisung",
+      "crypto": "Kryptowaehrung",
+      "deposit": "Einzahlen",
+      "depositing": "Wird verarbeitet...",
+      "success": "Einzahlung erfolgreich",
+      "error": "Fehler bei der Einzahlung"
+    },
+    "sendPayment": {
+      "title": "Zahlung senden",
+      "worker": "Arbeitnehmer",
+      "selectWorker": "Arbeitnehmer auswaehlen",
+      "contract": "Vertrag",
+      "selectContract": "Vertrag auswaehlen",
+      "amount": "Betrag",
+      "description": "Beschreibung",
+      "send": "Zahlung senden",
+      "sending": "Wird gesendet...",
+      "success": "Zahlung erfolgreich gesendet",
+      "error": "Fehler beim Senden der Zahlung"
+    }
+  },
+  "companyProfile": {
+    "title": "Unternehmensprofil",
+    "logo": "Firmenlogo",
+    "changeLogo": "Logo aendern",
+    "companyName": "Firmenname",
+    "industry": "Branche",
+    "size": "Unternehmensgroesse",
+    "sizeOptions": {
+      "startup": "1-10 Mitarbeiter",
+      "small": "11-50 Mitarbeiter",
+      "medium": "51-200 Mitarbeiter",
+      "large": "201-1000 Mitarbeiter",
+      "enterprise": "1000+ Mitarbeiter"
+    },
+    "website": "Webseite",
+    "description": "Unternehmensbeschreibung",
+    "descriptionPlaceholder": "Beschreiben Sie Ihr Unternehmen...",
+    "location": "Standort",
+    "foundedYear": "Gruendungsjahr",
+    "taxId": "Steuernummer",
+    "contactEmail": "Kontakt-E-Mail",
+    "contactPhone": "Kontakttelefon",
+    "socialMedia": "Soziale Medien",
+    "save": "Profil speichern",
+    "saving": "Wird gespeichert...",
+    "success": "Profil erfolgreich aktualisiert"
+  }
+}

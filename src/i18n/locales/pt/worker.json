@@ -1,0 +1,350 @@
+{
+  "dashboard": {
+    "greeting": "Ola, {name}!",
+    "subtitle": "Aqui esta um resumo da sua atividade",
+    "stats": {
+      "applications": "Candidaturas",
+      "interviews": "Entrevistas",
+      "activeContracts": "Contratos Ativos",
+      "earnings": "Ganhos"
+    },
+    "recommendedJobs": "Vagas Recomendadas",
+    "recentActivity": "Atividade Recente",
+    "upcomingInterviews": "Proximas Entrevistas",
+    "pendingActions": "Acoes Pendentes",
+    "profileCompletion": "Completar Perfil",
+    "profileCompletionDesc": "Complete seu perfil para melhorar suas oportunidades",
+    "noRecommendations": "Nenhuma recomendacao no momento",
+    "viewAllJobs": "Ver todas as vagas"
+  },
+  "jobs": {
+    "title": "Buscar Vagas",
+    "searchPlaceholder": "Buscar por titulo, empresa ou habilidade...",
+    "filters": {
+      "title": "Filtros",
+      "category": "Categoria",
+      "location": "Localizacao",
+      "salary": "Salario",
+      "salaryRange": "Faixa salarial",
+      "type": "Tipo",
+      "fullTime": "Tempo integral",
+      "partTime": "Meio periodo",
+      "contract": "Contrato",
+      "freelance": "Freelancer",
+      "remote": "Remoto",
+      "onSite": "Presencial",
+      "hybrid": "Hibrido",
+      "experience": "Experiencia",
+      "entry": "Junior",
+      "mid": "Pleno",
+      "senior": "Senior",
+      "postedDate": "Data de publicacao",
+      "last24h": "Ultimas 24 horas",
+      "lastWeek": "Ultima semana",
+      "lastMonth": "Ultimo mes"
+    },
+    "detail": {
+      "aboutJob": "Sobre a vaga",
+      "requirements": "Requisitos",
+      "benefits": "Beneficios",
+      "aboutCompany": "Sobre a empresa",
+      "salary": "Salario",
+      "location": "Localizacao",
+      "type": "Tipo de vaga",
+      "postedOn": "Publicado em",
+      "applicants": "Candidatos",
+      "applyNow": "Candidatar-se agora",
+      "saveJob": "Salvar vaga",
+      "savedJob": "Vaga salva",
+      "shareJob": "Compartilhar vaga",
+      "reportJob": "Denunciar vaga",
+      "similarJobs": "Vagas similares",
+      "alreadyApplied": "Voce ja se candidatou a esta vaga"
+    },
+    "apply": {
+      "title": "Candidatar-se a {jobTitle}",
+      "coverLetter": "Carta de apresentacao",
+      "coverLetterPlaceholder": "Conte-nos por que voce e ideal para esta vaga...",
+      "resume": "Curriculo",
+      "uploadResume": "Enviar curriculo",
+      "expectedSalary": "Salario esperado",
+      "availability": "Disponibilidade",
+      "startDate": "Data de inicio",
+      "submit": "Enviar Candidatura",
+      "submitting": "Enviando...",
+      "success": "Candidatura enviada com sucesso",
+      "error": "Erro ao enviar candidatura"
+    }
+  },
+  "applications": {
+    "title": "Minhas Candidaturas",
+    "table": {
+      "position": "Cargo",
+      "company": "Empresa",
+      "date": "Data",
+      "status": "Status",
+      "salary": "Salario",
+      "actions": "Acoes"
+    },
+    "statuses": {
+      "sent": "Enviada",
+      "viewed": "Visualizada",
+      "inReview": "Em Analise",
+      "interview": "Entrevista",
+      "offer": "Oferta",
+      "accepted": "Aceita",
+      "rejected": "Rejeitada",
+      "withdrawn": "Retirada"
+    },
+    "empty": "Voce ainda nao se candidatou a nenhuma vaga",
+    "emptyAction": "Explorar vagas",
+    "withdraw": "Retirar candidatura",
+    "withdrawConfirm": "Tem certeza de que deseja retirar esta candidatura?"
+  },
+  "profile": {
+    "title": "Meu Perfil",
+    "tabs": {
+      "personal": "Informacoes Pessoais",
+      "experience": "Experiencia",
+      "education": "Formacao",
+      "skills": "Habilidades",
+      "documents": "Documentos"
+    },
+    "personal": {
+      "avatar": "Foto de perfil",
+      "changeAvatar": "Alterar foto",
+      "firstName": "Nome",
+      "lastName": "Sobrenome",
+      "email": "Email",
+      "phone": "Telefone",
+      "country": "Pais",
+      "city": "Cidade",
+      "bio": "Biografia",
+      "bioPlaceholder": "Conte-nos sobre voce...",
+      "headline": "Titulo profissional",
+      "headlinePlaceholder": "Ex: Desenvolvedor Full Stack",
+      "website": "Site",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    },
+    "experience": {
+      "addExperience": "Adicionar experiencia",
+      "editExperience": "Editar experiencia",
+      "company": "Empresa",
+      "position": "Cargo",
+      "startDate": "Data de inicio",
+      "endDate": "Data de termino",
+      "current": "Emprego atual",
+      "description": "Descricao",
+      "noExperience": "Voce ainda nao adicionou experiencia profissional"
+    },
+    "education": {
+      "addEducation": "Adicionar formacao",
+      "editEducation": "Editar formacao",
+      "institution": "Instituicao",
+      "degree": "Grau",
+      "field": "Area de estudo",
+      "startDate": "Data de inicio",
+      "endDate": "Data de termino",
+      "current": "Em andamento",
+      "noEducation": "Voce ainda nao adicionou formacao"
+    },
+    "skills": {
+      "addSkill": "Adicionar habilidade",
+      "searchSkills": "Buscar habilidades...",
+      "level": "Nivel",
+      "beginner": "Iniciante",
+      "intermediate": "Intermediario",
+      "advanced": "Avancado",
+      "expert": "Especialista",
+      "endorsements": "Recomendacoes",
+      "noSkills": "Voce ainda nao adicionou habilidades"
+    },
+    "documents": {
+      "uploadDocument": "Enviar documento",
+      "resume": "Curriculo",
+      "certificate": "Certificado",
+      "id": "Identificacao",
+      "other": "Outro",
+      "noDocuments": "Voce ainda nao enviou documentos"
+    }
+  },
+  "wallet": {
+    "title": "Carteira",
+    "balance": "Saldo Disponivel",
+    "totalEarnings": "Ganhos Totais",
+    "pendingPayments": "Pagamentos Pendentes",
+    "tabs": {
+      "overview": "Resumo",
+      "transactions": "Transacoes",
+      "remittance": "Remessas",
+      "swap": "Cambio",
+      "card": "Cartao"
+    },
+    "transactions": {
+      "title": "Historico de Transacoes",
+      "date": "Data",
+      "description": "Descricao",
+      "amount": "Valor",
+      "type": "Tipo",
+      "status": "Status",
+      "income": "Receita",
+      "withdrawal": "Saque",
+      "fee": "Taxa"
+    },
+    "remittance": {
+      "title": "Enviar Remessa",
+      "recipient": "Destinatario",
+      "amount": "Valor",
+      "country": "Pais de destino",
+      "method": "Metodo de envio",
+      "bankTransfer": "Transferencia bancaria",
+      "mobileMoney": "Dinheiro movel",
+      "cashPickup": "Retirada em dinheiro",
+      "estimatedFee": "Taxa estimada",
+      "estimatedDelivery": "Tempo estimado de entrega",
+      "send": "Enviar",
+      "confirmSend": "Confirmar envio"
+    },
+    "swap": {
+      "title": "Cambio de Moedas",
+      "from": "De",
+      "to": "Para",
+      "amount": "Valor",
+      "rate": "Taxa de cambio",
+      "youReceive": "Voce recebe",
+      "execute": "Executar cambio"
+    },
+    "card": {
+      "title": "Cartao Virtual",
+      "cardNumber": "Numero do cartao",
+      "expiry": "Validade",
+      "cvv": "CVV",
+      "requestCard": "Solicitar cartao",
+      "freeze": "Bloquear cartao",
+      "unfreeze": "Desbloquear cartao",
+      "spendingLimit": "Limite de gastos",
+      "monthlySpent": "Gasto mensal"
+    }
+  },
+  "contracts": {
+    "title": "Meus Contratos",
+    "statuses": {
+      "draft": "Rascunho",
+      "pending": "Pendente de Assinatura",
+      "active": "Ativo",
+      "completed": "Concluido",
+      "cancelled": "Cancelado",
+      "disputed": "Em Disputa",
+      "expired": "Expirado"
+    },
+    "detail": {
+      "employer": "Empregador",
+      "startDate": "Data de inicio",
+      "endDate": "Data de termino",
+      "rate": "Tarifa",
+      "totalValue": "Valor total",
+      "paymentTerms": "Termos de pagamento",
+      "scope": "Escopo do trabalho",
+      "deliverables": "Entregas"
+    },
+    "sign": {
+      "title": "Assinar Contrato",
+      "review": "Revisar contrato",
+      "agree": "Li e concordo com os termos",
+      "sign": "Assinar",
+      "signing": "Assinando...",
+      "signed": "Contrato assinado com sucesso"
+    },
+    "cancel": {
+      "title": "Cancelar Contrato",
+      "reason": "Motivo do cancelamento",
+      "reasonPlaceholder": "Explique o motivo...",
+      "confirm": "Confirmar cancelamento",
+      "warning": "Esta acao nao pode ser desfeita"
+    },
+    "renew": {
+      "title": "Renovar Contrato",
+      "newEndDate": "Nova data de termino",
+      "newTerms": "Novos termos (opcional)",
+      "submit": "Solicitar renovacao"
+    }
+  },
+  "messages": {
+    "title": "Mensagens",
+    "conversations": "Conversas",
+    "searchConversations": "Buscar conversas...",
+    "newMessage": "Nova mensagem",
+    "typePlaceholder": "Digite uma mensagem...",
+    "send": "Enviar",
+    "noConversations": "Voce nao tem conversas",
+    "noMessages": "Nenhuma mensagem nesta conversa",
+    "online": "Online",
+    "offline": "Offline",
+    "typing": "Digitando...",
+    "delivered": "Entregue",
+    "read": "Lido",
+    "attachFile": "Anexar arquivo",
+    "startConversation": "Iniciar conversa"
+  },
+  "network": {
+    "title": "Minha Rede",
+    "tabs": {
+      "connections": "Conexoes",
+      "suggestions": "Sugestoes",
+      "requests": "Solicitacoes",
+      "endorsements": "Recomendacoes"
+    },
+    "connections": {
+      "title": "Minhas Conexoes",
+      "search": "Buscar conexoes...",
+      "message": "Enviar mensagem",
+      "remove": "Remover conexao",
+      "removeConfirm": "Tem certeza de que deseja remover esta conexao?"
+    },
+    "suggestions": {
+      "title": "Pessoas que voce talvez conheca",
+      "connect": "Conectar",
+      "ignore": "Ignorar",
+      "mutualConnections": "{count} conexoes em comum"
+    },
+    "requests": {
+      "title": "Solicitacoes de Conexao",
+      "accept": "Aceitar",
+      "decline": "Recusar",
+      "noRequests": "Voce nao tem solicitacoes pendentes"
+    },
+    "endorsements": {
+      "title": "Recomendacoes Recebidas",
+      "endorse": "Recomendar",
+      "endorseSkill": "Recomendar habilidade",
+      "noEndorsements": "Voce ainda nao tem recomendacoes"
+    }
+  },
+  "reviews": {
+    "title": "Avaliacoes",
+    "rating": "Avaliacao",
+    "ratingLabels": {
+      "terrible": "Terrivel",
+      "bad": "Ruim",
+      "average": "Regular",
+      "good": "Bom",
+      "excellent": "Excelente"
+    },
+    "tags": {
+      "punctual": "Pontual",
+      "professional": "Profissional",
+      "communicative": "Comunicativo",
+      "skilled": "Habilidoso",
+      "reliable": "Confiavel",
+      "friendly": "Amigavel"
+    },
+    "writeReview": "Escrever avaliacao",
+    "comment": "Comentario",
+    "commentPlaceholder": "Compartilhe sua experiencia...",
+    "submit": "Enviar avaliacao",
+    "submitting": "Enviando...",
+    "success": "Avaliacao enviada com sucesso",
+    "noReviews": "Voce ainda nao tem avaliacoes"
+  }
+}

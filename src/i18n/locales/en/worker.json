@@ -1,0 +1,350 @@
+{
+  "dashboard": {
+    "greeting": "Hello, {name}!",
+    "subtitle": "Here's a summary of your activity",
+    "stats": {
+      "applications": "Applications",
+      "interviews": "Interviews",
+      "activeContracts": "Active Contracts",
+      "earnings": "Earnings"
+    },
+    "recommendedJobs": "Recommended Jobs",
+    "recentActivity": "Recent Activity",
+    "upcomingInterviews": "Upcoming Interviews",
+    "pendingActions": "Pending Actions",
+    "profileCompletion": "Complete Profile",
+    "profileCompletionDesc": "Complete your profile to improve your opportunities",
+    "noRecommendations": "No recommendations at the moment",
+    "viewAllJobs": "View all jobs"
+  },
+  "jobs": {
+    "title": "Search Jobs",
+    "searchPlaceholder": "Search by title, company, or skill...",
+    "filters": {
+      "title": "Filters",
+      "category": "Category",
+      "location": "Location",
+      "salary": "Salary",
+      "salaryRange": "Salary range",
+      "type": "Type",
+      "fullTime": "Full-time",
+      "partTime": "Part-time",
+      "contract": "Contract",
+      "freelance": "Freelance",
+      "remote": "Remote",
+      "onSite": "On-site",
+      "hybrid": "Hybrid",
+      "experience": "Experience",
+      "entry": "Junior",
+      "mid": "Mid-level",
+      "senior": "Senior",
+      "postedDate": "Posted date",
+      "last24h": "Last 24 hours",
+      "lastWeek": "Last week",
+      "lastMonth": "Last month"
+    },
+    "detail": {
+      "aboutJob": "About the job",
+      "requirements": "Requirements",
+      "benefits": "Benefits",
+      "aboutCompany": "About the company",
+      "salary": "Salary",
+      "location": "Location",
+      "type": "Job type",
+      "postedOn": "Posted on",
+      "applicants": "Applicants",
+      "applyNow": "Apply now",
+      "saveJob": "Save job",
+      "savedJob": "Job saved",
+      "shareJob": "Share job",
+      "reportJob": "Report job",
+      "similarJobs": "Similar jobs",
+      "alreadyApplied": "You have already applied to this job"
+    },
+    "apply": {
+      "title": "Apply to {jobTitle}",
+      "coverLetter": "Cover letter",
+      "coverLetterPlaceholder": "Tell us why you're a great fit for this role...",
+      "resume": "Resume",
+      "uploadResume": "Upload resume",
+      "expectedSalary": "Expected salary",
+      "availability": "Availability",
+      "startDate": "Start date",
+      "submit": "Submit Application",
+      "submitting": "Submitting...",
+      "success": "Application submitted successfully",
+      "error": "Error submitting application"
+    }
+  },
+  "applications": {
+    "title": "My Applications",
+    "table": {
+      "position": "Position",
+      "company": "Company",
+      "date": "Date",
+      "status": "Status",
+      "salary": "Salary",
+      "actions": "Actions"
+    },
+    "statuses": {
+      "sent": "Sent",
+      "viewed": "Viewed",
+      "inReview": "In Review",
+      "interview": "Interview",
+      "offer": "Offer",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "withdrawn": "Withdrawn"
+    },
+    "empty": "You haven't applied to any jobs yet",
+    "emptyAction": "Explore jobs",
+    "withdraw": "Withdraw application",
+    "withdrawConfirm": "Are you sure you want to withdraw this application?"
+  },
+  "profile": {
+    "title": "My Profile",
+    "tabs": {
+      "personal": "Personal Information",
+      "experience": "Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "documents": "Documents"
+    },
+    "personal": {
+      "avatar": "Profile photo",
+      "changeAvatar": "Change photo",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "country": "Country",
+      "city": "City",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us about yourself...",
+      "headline": "Professional headline",
+      "headlinePlaceholder": "E.g., Full Stack Developer",
+      "website": "Website",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    },
+    "experience": {
+      "addExperience": "Add experience",
+      "editExperience": "Edit experience",
+      "company": "Company",
+      "position": "Position",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "current": "Current position",
+      "description": "Description",
+      "noExperience": "You haven't added any work experience yet"
+    },
+    "education": {
+      "addEducation": "Add education",
+      "editEducation": "Edit education",
+      "institution": "Institution",
+      "degree": "Degree",
+      "field": "Field of study",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "current": "Currently studying",
+      "noEducation": "You haven't added any education yet"
+    },
+    "skills": {
+      "addSkill": "Add skill",
+      "searchSkills": "Search skills...",
+      "level": "Level",
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "expert": "Expert",
+      "endorsements": "Endorsements",
+      "noSkills": "You haven't added any skills yet"
+    },
+    "documents": {
+      "uploadDocument": "Upload document",
+      "resume": "Resume",
+      "certificate": "Certificate",
+      "id": "ID",
+      "other": "Other",
+      "noDocuments": "You haven't uploaded any documents yet"
+    }
+  },
+  "wallet": {
+    "title": "Wallet",
+    "balance": "Available Balance",
+    "totalEarnings": "Total Earnings",
+    "pendingPayments": "Pending Payments",
+    "tabs": {
+      "overview": "Overview",
+      "transactions": "Transactions",
+      "remittance": "Remittance",
+      "swap": "Swap",
+      "card": "Card"
+    },
+    "transactions": {
+      "title": "Transaction History",
+      "date": "Date",
+      "description": "Description",
+      "amount": "Amount",
+      "type": "Type",
+      "status": "Status",
+      "income": "Income",
+      "withdrawal": "Withdrawal",
+      "fee": "Fee"
+    },
+    "remittance": {
+      "title": "Send Remittance",
+      "recipient": "Recipient",
+      "amount": "Amount",
+      "country": "Destination country",
+      "method": "Delivery method",
+      "bankTransfer": "Bank transfer",
+      "mobileMoney": "Mobile money",
+      "cashPickup": "Cash pickup",
+      "estimatedFee": "Estimated fee",
+      "estimatedDelivery": "Estimated delivery time",
+      "send": "Send",
+      "confirmSend": "Confirm transfer"
+    },
+    "swap": {
+      "title": "Currency Exchange",
+      "from": "From",
+      "to": "To",
+      "amount": "Amount",
+      "rate": "Exchange rate",
+      "youReceive": "You receive",
+      "execute": "Execute swap"
+    },
+    "card": {
+      "title": "Virtual Card",
+      "cardNumber": "Card number",
+      "expiry": "Expiry",
+      "cvv": "CVV",
+      "requestCard": "Request card",
+      "freeze": "Freeze card",
+      "unfreeze": "Unfreeze card",
+      "spendingLimit": "Spending limit",
+      "monthlySpent": "Monthly spending"
+    }
+  },
+  "contracts": {
+    "title": "My Contracts",
+    "statuses": {
+      "draft": "Draft",
+      "pending": "Pending Signature",
+      "active": "Active",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "disputed": "In Dispute",
+      "expired": "Expired"
+    },
+    "detail": {
+      "employer": "Employer",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "rate": "Rate",
+      "totalValue": "Total value",
+      "paymentTerms": "Payment terms",
+      "scope": "Scope of work",
+      "deliverables": "Deliverables"
+    },
+    "sign": {
+      "title": "Sign Contract",
+      "review": "Review contract",
+      "agree": "I have read and agree to the terms",
+      "sign": "Sign",
+      "signing": "Signing...",
+      "signed": "Contract signed successfully"
+    },
+    "cancel": {
+      "title": "Cancel Contract",
+      "reason": "Cancellation reason",
+      "reasonPlaceholder": "Explain the reason...",
+      "confirm": "Confirm cancellation",
+      "warning": "This action cannot be undone"
+    },
+    "renew": {
+      "title": "Renew Contract",
+      "newEndDate": "New end date",
+      "newTerms": "New terms (optional)",
+      "submit": "Request renewal"
+    }
+  },
+  "messages": {
+    "title": "Messages",
+    "conversations": "Conversations",
+    "searchConversations": "Search conversations...",
+    "newMessage": "New message",
+    "typePlaceholder": "Type a message...",
+    "send": "Send",
+    "noConversations": "You have no conversations",
+    "noMessages": "No messages in this conversation",
+    "online": "Online",
+    "offline": "Offline",
+    "typing": "Typing...",
+    "delivered": "Delivered",
+    "read": "Read",
+    "attachFile": "Attach file",
+    "startConversation": "Start conversation"
+  },
+  "network": {
+    "title": "My Network",
+    "tabs": {
+      "connections": "Connections",
+      "suggestions": "Suggestions",
+      "requests": "Requests",
+      "endorsements": "Endorsements"
+    },
+    "connections": {
+      "title": "My Connections",
+      "search": "Search connections...",
+      "message": "Send message",
+      "remove": "Remove connection",
+      "removeConfirm": "Are you sure you want to remove this connection?"
+    },
+    "suggestions": {
+      "title": "People you may know",
+      "connect": "Connect",
+      "ignore": "Ignore",
+      "mutualConnections": "{count} mutual connections"
+    },
+    "requests": {
+      "title": "Connection Requests",
+      "accept": "Accept",
+      "decline": "Decline",
+      "noRequests": "You have no pending requests"
+    },
+    "endorsements": {
+      "title": "Endorsements Received",
+      "endorse": "Endorse",
+      "endorseSkill": "Endorse skill",
+      "noEndorsements": "You have no endorsements yet"
+    }
+  },
+  "reviews": {
+    "title": "Reviews",
+    "rating": "Rating",
+    "ratingLabels": {
+      "terrible": "Terrible",
+      "bad": "Bad",
+      "average": "Average",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "tags": {
+      "punctual": "Punctual",
+      "professional": "Professional",
+      "communicative": "Communicative",
+      "skilled": "Skilled",
+      "reliable": "Reliable",
+      "friendly": "Friendly"
+    },
+    "writeReview": "Write review",
+    "comment": "Comment",
+    "commentPlaceholder": "Share your experience...",
+    "submit": "Submit review",
+    "submitting": "Submitting...",
+    "success": "Review submitted successfully",
+    "noReviews": "You have no reviews yet"
+  }
+}

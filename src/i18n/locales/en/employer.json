@@ -1,0 +1,231 @@
+{
+  "dashboard": {
+    "welcome": "Welcome, {name}!",
+    "subtitle": "Your company overview",
+    "stats": {
+      "activeVacancies": "Active Vacancies",
+      "totalCandidates": "Total Candidates",
+      "activeContracts": "Active Contracts",
+      "totalSpent": "Total Spent"
+    },
+    "recentVacancies": "Recent Vacancies",
+    "recentApplications": "Recent Applications",
+    "pendingActions": "Pending Actions",
+    "vacanciesTable": {
+      "title": "Title",
+      "applicants": "Applicants",
+      "status": "Status",
+      "posted": "Posted",
+      "actions": "Actions"
+    }
+  },
+  "vacancies": {
+    "title": "Vacancies",
+    "create": {
+      "title": "Create Vacancy",
+      "jobTitle": "Job title",
+      "jobTitlePlaceholder": "E.g., Frontend Developer",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the position...",
+      "requirements": "Requirements",
+      "requirementsPlaceholder": "List the requirements...",
+      "benefits": "Benefits",
+      "benefitsPlaceholder": "List the benefits...",
+      "category": "Category",
+      "location": "Location",
+      "locationType": "Location type",
+      "remote": "Remote",
+      "onSite": "On-site",
+      "hybrid": "Hybrid",
+      "salary": "Salary",
+      "salaryMin": "Minimum salary",
+      "salaryMax": "Maximum salary",
+      "currency": "Currency",
+      "type": "Employment type",
+      "fullTime": "Full-time",
+      "partTime": "Part-time",
+      "contract": "Contract",
+      "freelance": "Freelance",
+      "experience": "Experience level",
+      "skills": "Required skills",
+      "deadline": "Deadline",
+      "publish": "Publish vacancy",
+      "saveDraft": "Save as draft",
+      "publishing": "Publishing...",
+      "success": "Vacancy created successfully",
+      "error": "Error creating vacancy"
+    },
+    "edit": {
+      "title": "Edit Vacancy",
+      "save": "Save changes",
+      "saving": "Saving...",
+      "success": "Vacancy updated successfully",
+      "error": "Error updating vacancy"
+    },
+    "status": {
+      "publish": "Publish",
+      "unpublish": "Unpublish",
+      "close": "Close vacancy",
+      "reopen": "Reopen vacancy",
+      "delete": "Delete vacancy",
+      "deleteConfirm": "Are you sure you want to delete this vacancy?",
+      "duplicate": "Duplicate vacancy"
+    },
+    "empty": "You haven't created any vacancies yet",
+    "emptyAction": "Create first vacancy"
+  },
+  "candidates": {
+    "title": "Candidates",
+    "filters": {
+      "status": "Status",
+      "vacancy": "Vacancy",
+      "rating": "Rating",
+      "date": "Application date",
+      "search": "Search candidates..."
+    },
+    "actions": {
+      "viewProfile": "View profile",
+      "viewResume": "View resume",
+      "viewCoverLetter": "View cover letter",
+      "scheduleInterview": "Schedule interview",
+      "sendMessage": "Send message",
+      "accept": "Accept",
+      "reject": "Reject",
+      "shortlist": "Shortlist",
+      "moveToInterview": "Move to interview",
+      "makeOffer": "Make offer"
+    },
+    "interview": {
+      "schedule": "Schedule Interview",
+      "date": "Date",
+      "time": "Time",
+      "duration": "Duration",
+      "type": "Type",
+      "inPerson": "In person",
+      "video": "Video call",
+      "phone": "Phone",
+      "location": "Location",
+      "link": "Meeting link",
+      "notes": "Notes",
+      "notesPlaceholder": "Additional notes...",
+      "confirm": "Confirm interview",
+      "cancel": "Cancel interview",
+      "reschedule": "Reschedule"
+    },
+    "empty": "No candidates for this vacancy",
+    "pipeline": {
+      "applied": "Applied",
+      "screening": "Screening",
+      "interview": "Interview",
+      "offer": "Offer",
+      "hired": "Hired",
+      "rejected": "Rejected"
+    }
+  },
+  "contracts": {
+    "title": "Contracts",
+    "create": {
+      "title": "Create Contract",
+      "worker": "Worker",
+      "selectWorker": "Select worker",
+      "vacancy": "Associated vacancy",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "rate": "Rate",
+      "rateType": "Rate type",
+      "hourly": "Hourly",
+      "monthly": "Monthly",
+      "fixed": "Fixed price",
+      "scope": "Scope of work",
+      "scopePlaceholder": "Describe the scope...",
+      "deliverables": "Deliverables",
+      "deliverablesPlaceholder": "List the deliverables...",
+      "paymentTerms": "Payment terms",
+      "create": "Create contract",
+      "creating": "Creating...",
+      "success": "Contract created successfully",
+      "error": "Error creating contract"
+    },
+    "manage": {
+      "view": "View contract",
+      "edit": "Edit contract",
+      "terminate": "Terminate contract",
+      "terminateConfirm": "Are you sure you want to terminate this contract?",
+      "renew": "Renew contract",
+      "extend": "Extend deadline",
+      "addMilestone": "Add milestone",
+      "milestones": "Milestones",
+      "milestoneName": "Milestone name",
+      "milestoneAmount": "Amount",
+      "milestoneDeadline": "Deadline"
+    },
+    "payments": {
+      "title": "Payments",
+      "sendPayment": "Send payment",
+      "amount": "Amount",
+      "description": "Description",
+      "confirm": "Confirm payment",
+      "history": "Payment history",
+      "pending": "Pending payments",
+      "completed": "Completed payments"
+    }
+  },
+  "wallet": {
+    "title": "Company Wallet",
+    "balance": "Available Balance",
+    "totalSpent": "Total Spent",
+    "pendingPayments": "Pending Payments",
+    "deposit": {
+      "title": "Deposit Funds",
+      "amount": "Amount",
+      "method": "Payment method",
+      "creditCard": "Credit card",
+      "bankTransfer": "Bank transfer",
+      "crypto": "Cryptocurrency",
+      "deposit": "Deposit",
+      "depositing": "Processing...",
+      "success": "Deposit completed successfully",
+      "error": "Error processing deposit"
+    },
+    "sendPayment": {
+      "title": "Send Payment",
+      "worker": "Worker",
+      "selectWorker": "Select worker",
+      "contract": "Contract",
+      "selectContract": "Select contract",
+      "amount": "Amount",
+      "description": "Description",
+      "send": "Send payment",
+      "sending": "Sending...",
+      "success": "Payment sent successfully",
+      "error": "Error sending payment"
+    }
+  },
+  "companyProfile": {
+    "title": "Company Profile",
+    "logo": "Company logo",
+    "changeLogo": "Change logo",
+    "companyName": "Company name",
+    "industry": "Industry",
+    "size": "Company size",
+    "sizeOptions": {
+      "startup": "1-10 employees",
+      "small": "11-50 employees",
+      "medium": "51-200 employees",
+      "large": "201-1000 employees",
+      "enterprise": "1000+ employees"
+    },
+    "website": "Website",
+    "description": "Company description",
+    "descriptionPlaceholder": "Describe your company...",
+    "location": "Location",
+    "foundedYear": "Year founded",
+    "taxId": "Tax ID",
+    "contactEmail": "Contact email",
+    "contactPhone": "Contact phone",
+    "socialMedia": "Social media",
+    "save": "Save profile",
+    "saving": "Saving...",
+    "success": "Profile updated successfully"
+  }
+}

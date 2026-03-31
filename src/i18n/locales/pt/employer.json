@@ -1,0 +1,231 @@
+{
+  "dashboard": {
+    "welcome": "Bem-vindo, {name}!",
+    "subtitle": "Resumo da sua empresa",
+    "stats": {
+      "activeVacancies": "Vagas Ativas",
+      "totalCandidates": "Total de Candidatos",
+      "activeContracts": "Contratos Ativos",
+      "totalSpent": "Total Gasto"
+    },
+    "recentVacancies": "Vagas Recentes",
+    "recentApplications": "Candidaturas Recentes",
+    "pendingActions": "Acoes Pendentes",
+    "vacanciesTable": {
+      "title": "Titulo",
+      "applicants": "Candidatos",
+      "status": "Status",
+      "posted": "Publicado",
+      "actions": "Acoes"
+    }
+  },
+  "vacancies": {
+    "title": "Vagas",
+    "create": {
+      "title": "Criar Vaga",
+      "jobTitle": "Titulo da vaga",
+      "jobTitlePlaceholder": "Ex: Desenvolvedor Frontend",
+      "description": "Descricao",
+      "descriptionPlaceholder": "Descreva a posicao...",
+      "requirements": "Requisitos",
+      "requirementsPlaceholder": "Liste os requisitos...",
+      "benefits": "Beneficios",
+      "benefitsPlaceholder": "Liste os beneficios...",
+      "category": "Categoria",
+      "location": "Localizacao",
+      "locationType": "Tipo de localizacao",
+      "remote": "Remoto",
+      "onSite": "Presencial",
+      "hybrid": "Hibrido",
+      "salary": "Salario",
+      "salaryMin": "Salario minimo",
+      "salaryMax": "Salario maximo",
+      "currency": "Moeda",
+      "type": "Tipo de emprego",
+      "fullTime": "Tempo integral",
+      "partTime": "Meio periodo",
+      "contract": "Contrato",
+      "freelance": "Freelancer",
+      "experience": "Nivel de experiencia",
+      "skills": "Habilidades necessarias",
+      "deadline": "Prazo",
+      "publish": "Publicar vaga",
+      "saveDraft": "Salvar como rascunho",
+      "publishing": "Publicando...",
+      "success": "Vaga criada com sucesso",
+      "error": "Erro ao criar a vaga"
+    },
+    "edit": {
+      "title": "Editar Vaga",
+      "save": "Salvar alteracoes",
+      "saving": "Salvando...",
+      "success": "Vaga atualizada com sucesso",
+      "error": "Erro ao atualizar a vaga"
+    },
+    "status": {
+      "publish": "Publicar",
+      "unpublish": "Despublicar",
+      "close": "Fechar vaga",
+      "reopen": "Reabrir vaga",
+      "delete": "Excluir vaga",
+      "deleteConfirm": "Tem certeza de que deseja excluir esta vaga?",
+      "duplicate": "Duplicar vaga"
+    },
+    "empty": "Voce ainda nao criou vagas",
+    "emptyAction": "Criar primeira vaga"
+  },
+  "candidates": {
+    "title": "Candidatos",
+    "filters": {
+      "status": "Status",
+      "vacancy": "Vaga",
+      "rating": "Avaliacao",
+      "date": "Data da candidatura",
+      "search": "Buscar candidatos..."
+    },
+    "actions": {
+      "viewProfile": "Ver perfil",
+      "viewResume": "Ver curriculo",
+      "viewCoverLetter": "Ver carta",
+      "scheduleInterview": "Agendar entrevista",
+      "sendMessage": "Enviar mensagem",
+      "accept": "Aceitar",
+      "reject": "Rejeitar",
+      "shortlist": "Pre-selecionar",
+      "moveToInterview": "Mover para entrevista",
+      "makeOffer": "Fazer oferta"
+    },
+    "interview": {
+      "schedule": "Agendar Entrevista",
+      "date": "Data",
+      "time": "Hora",
+      "duration": "Duracao",
+      "type": "Tipo",
+      "inPerson": "Presencial",
+      "video": "Videochamada",
+      "phone": "Telefone",
+      "location": "Local",
+      "link": "Link da reuniao",
+      "notes": "Notas",
+      "notesPlaceholder": "Notas adicionais...",
+      "confirm": "Confirmar entrevista",
+      "cancel": "Cancelar entrevista",
+      "reschedule": "Reagendar"
+    },
+    "empty": "Nenhum candidato para esta vaga",
+    "pipeline": {
+      "applied": "Candidatados",
+      "screening": "Triagem",
+      "interview": "Entrevista",
+      "offer": "Oferta",
+      "hired": "Contratados",
+      "rejected": "Rejeitados"
+    }
+  },
+  "contracts": {
+    "title": "Contratos",
+    "create": {
+      "title": "Criar Contrato",
+      "worker": "Trabalhador",
+      "selectWorker": "Selecionar trabalhador",
+      "vacancy": "Vaga associada",
+      "startDate": "Data de inicio",
+      "endDate": "Data de termino",
+      "rate": "Tarifa",
+      "rateType": "Tipo de tarifa",
+      "hourly": "Por hora",
+      "monthly": "Mensal",
+      "fixed": "Preco fixo",
+      "scope": "Escopo do trabalho",
+      "scopePlaceholder": "Descreva o escopo...",
+      "deliverables": "Entregas",
+      "deliverablesPlaceholder": "Liste as entregas...",
+      "paymentTerms": "Termos de pagamento",
+      "create": "Criar contrato",
+      "creating": "Criando...",
+      "success": "Contrato criado com sucesso",
+      "error": "Erro ao criar o contrato"
+    },
+    "manage": {
+      "view": "Ver contrato",
+      "edit": "Editar contrato",
+      "terminate": "Encerrar contrato",
+      "terminateConfirm": "Tem certeza de que deseja encerrar este contrato?",
+      "renew": "Renovar contrato",
+      "extend": "Estender prazo",
+      "addMilestone": "Adicionar marco",
+      "milestones": "Marcos",
+      "milestoneName": "Nome do marco",
+      "milestoneAmount": "Valor",
+      "milestoneDeadline": "Prazo"
+    },
+    "payments": {
+      "title": "Pagamentos",
+      "sendPayment": "Enviar pagamento",
+      "amount": "Valor",
+      "description": "Descricao",
+      "confirm": "Confirmar pagamento",
+      "history": "Historico de pagamentos",
+      "pending": "Pagamentos pendentes",
+      "completed": "Pagamentos concluidos"
+    }
+  },
+  "wallet": {
+    "title": "Carteira da Empresa",
+    "balance": "Saldo Disponivel",
+    "totalSpent": "Total Gasto",
+    "pendingPayments": "Pagamentos Pendentes",
+    "deposit": {
+      "title": "Depositar Fundos",
+      "amount": "Valor",
+      "method": "Metodo de pagamento",
+      "creditCard": "Cartao de credito",
+      "bankTransfer": "Transferencia bancaria",
+      "crypto": "Criptomoeda",
+      "deposit": "Depositar",
+      "depositing": "Processando...",
+      "success": "Deposito realizado com sucesso",
+      "error": "Erro ao processar o deposito"
+    },
+    "sendPayment": {
+      "title": "Enviar Pagamento",
+      "worker": "Trabalhador",
+      "selectWorker": "Selecionar trabalhador",
+      "contract": "Contrato",
+      "selectContract": "Selecionar contrato",
+      "amount": "Valor",
+      "description": "Descricao",
+      "send": "Enviar pagamento",
+      "sending": "Enviando...",
+      "success": "Pagamento enviado com sucesso",
+      "error": "Erro ao enviar o pagamento"
+    }
+  },
+  "companyProfile": {
+    "title": "Perfil da Empresa",
+    "logo": "Logo da empresa",
+    "changeLogo": "Alterar logo",
+    "companyName": "Nome da empresa",
+    "industry": "Industria",
+    "size": "Tamanho da empresa",
+    "sizeOptions": {
+      "startup": "1-10 funcionarios",
+      "small": "11-50 funcionarios",
+      "medium": "51-200 funcionarios",
+      "large": "201-1000 funcionarios",
+      "enterprise": "1000+ funcionarios"
+    },
+    "website": "Site",
+    "description": "Descricao da empresa",
+    "descriptionPlaceholder": "Descreva sua empresa...",
+    "location": "Localizacao",
+    "foundedYear": "Ano de fundacao",
+    "taxId": "CNPJ",
+    "contactEmail": "Email de contato",
+    "contactPhone": "Telefone de contato",
+    "socialMedia": "Redes sociais",
+    "save": "Salvar perfil",
+    "saving": "Salvando...",
+    "success": "Perfil atualizado com sucesso"
+  }
+}

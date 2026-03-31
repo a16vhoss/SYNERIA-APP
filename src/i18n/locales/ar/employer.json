@@ -1,0 +1,231 @@
+{
+  "dashboard": {
+    "welcome": "مرحباً، {name}!",
+    "subtitle": "نظرة عامة على شركتك",
+    "stats": {
+      "activeVacancies": "الوظائف الشاغرة النشطة",
+      "totalCandidates": "إجمالي المرشحين",
+      "activeContracts": "العقود النشطة",
+      "totalSpent": "إجمالي الإنفاق"
+    },
+    "recentVacancies": "أحدث الوظائف الشاغرة",
+    "recentApplications": "أحدث الطلبات",
+    "pendingActions": "إجراءات معلقة",
+    "vacanciesTable": {
+      "title": "العنوان",
+      "applicants": "المتقدمون",
+      "status": "الحالة",
+      "posted": "تاريخ النشر",
+      "actions": "الإجراءات"
+    }
+  },
+  "vacancies": {
+    "title": "الوظائف الشاغرة",
+    "create": {
+      "title": "إنشاء وظيفة شاغرة",
+      "jobTitle": "عنوان الوظيفة",
+      "jobTitlePlaceholder": "مثال: مطور واجهات أمامية",
+      "description": "الوصف",
+      "descriptionPlaceholder": "صف الوظيفة...",
+      "requirements": "المتطلبات",
+      "requirementsPlaceholder": "اذكر المتطلبات...",
+      "benefits": "المزايا",
+      "benefitsPlaceholder": "اذكر المزايا...",
+      "category": "الفئة",
+      "location": "الموقع",
+      "locationType": "نوع الموقع",
+      "remote": "عن بُعد",
+      "onSite": "في الموقع",
+      "hybrid": "هجين",
+      "salary": "الراتب",
+      "salaryMin": "الحد الأدنى للراتب",
+      "salaryMax": "الحد الأقصى للراتب",
+      "currency": "العملة",
+      "type": "نوع التوظيف",
+      "fullTime": "دوام كامل",
+      "partTime": "دوام جزئي",
+      "contract": "عقد",
+      "freelance": "عمل حر",
+      "experience": "مستوى الخبرة",
+      "skills": "المهارات المطلوبة",
+      "deadline": "الموعد النهائي",
+      "publish": "نشر الوظيفة",
+      "saveDraft": "حفظ كمسودة",
+      "publishing": "جاري النشر...",
+      "success": "تم إنشاء الوظيفة بنجاح",
+      "error": "خطأ في إنشاء الوظيفة"
+    },
+    "edit": {
+      "title": "تعديل الوظيفة",
+      "save": "حفظ التغييرات",
+      "saving": "جاري الحفظ...",
+      "success": "تم تحديث الوظيفة بنجاح",
+      "error": "خطأ في تحديث الوظيفة"
+    },
+    "status": {
+      "publish": "نشر",
+      "unpublish": "إلغاء النشر",
+      "close": "إغلاق الوظيفة",
+      "reopen": "إعادة فتح الوظيفة",
+      "delete": "حذف الوظيفة",
+      "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذه الوظيفة؟",
+      "duplicate": "تكرار الوظيفة"
+    },
+    "empty": "لم تنشئ أي وظائف شاغرة بعد",
+    "emptyAction": "إنشاء أول وظيفة"
+  },
+  "candidates": {
+    "title": "المرشحون",
+    "filters": {
+      "status": "الحالة",
+      "vacancy": "الوظيفة",
+      "rating": "التقييم",
+      "date": "تاريخ التقديم",
+      "search": "البحث عن مرشحين..."
+    },
+    "actions": {
+      "viewProfile": "عرض الملف الشخصي",
+      "viewResume": "عرض السيرة الذاتية",
+      "viewCoverLetter": "عرض خطاب التقديم",
+      "scheduleInterview": "جدولة مقابلة",
+      "sendMessage": "إرسال رسالة",
+      "accept": "قبول",
+      "reject": "رفض",
+      "shortlist": "القائمة المختصرة",
+      "moveToInterview": "نقل للمقابلة",
+      "makeOffer": "تقديم عرض"
+    },
+    "interview": {
+      "schedule": "جدولة مقابلة",
+      "date": "التاريخ",
+      "time": "الوقت",
+      "duration": "المدة",
+      "type": "النوع",
+      "inPerson": "شخصياً",
+      "video": "مكالمة فيديو",
+      "phone": "هاتف",
+      "location": "الموقع",
+      "link": "رابط الاجتماع",
+      "notes": "ملاحظات",
+      "notesPlaceholder": "ملاحظات إضافية...",
+      "confirm": "تأكيد المقابلة",
+      "cancel": "إلغاء المقابلة",
+      "reschedule": "إعادة الجدولة"
+    },
+    "empty": "لا يوجد مرشحون لهذه الوظيفة",
+    "pipeline": {
+      "applied": "متقدمون",
+      "screening": "فرز",
+      "interview": "مقابلة",
+      "offer": "عرض",
+      "hired": "تم التوظيف",
+      "rejected": "مرفوضون"
+    }
+  },
+  "contracts": {
+    "title": "العقود",
+    "create": {
+      "title": "إنشاء عقد",
+      "worker": "العامل",
+      "selectWorker": "اختيار عامل",
+      "vacancy": "الوظيفة المرتبطة",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "rate": "المعدل",
+      "rateType": "نوع المعدل",
+      "hourly": "بالساعة",
+      "monthly": "شهري",
+      "fixed": "سعر ثابت",
+      "scope": "نطاق العمل",
+      "scopePlaceholder": "صف النطاق...",
+      "deliverables": "المخرجات",
+      "deliverablesPlaceholder": "اذكر المخرجات...",
+      "paymentTerms": "شروط الدفع",
+      "create": "إنشاء العقد",
+      "creating": "جاري الإنشاء...",
+      "success": "تم إنشاء العقد بنجاح",
+      "error": "خطأ في إنشاء العقد"
+    },
+    "manage": {
+      "view": "عرض العقد",
+      "edit": "تعديل العقد",
+      "terminate": "إنهاء العقد",
+      "terminateConfirm": "هل أنت متأكد أنك تريد إنهاء هذا العقد؟",
+      "renew": "تجديد العقد",
+      "extend": "تمديد المهلة",
+      "addMilestone": "إضافة مرحلة",
+      "milestones": "المراحل",
+      "milestoneName": "اسم المرحلة",
+      "milestoneAmount": "المبلغ",
+      "milestoneDeadline": "الموعد النهائي"
+    },
+    "payments": {
+      "title": "المدفوعات",
+      "sendPayment": "إرسال دفعة",
+      "amount": "المبلغ",
+      "description": "الوصف",
+      "confirm": "تأكيد الدفع",
+      "history": "سجل المدفوعات",
+      "pending": "مدفوعات معلقة",
+      "completed": "مدفوعات مكتملة"
+    }
+  },
+  "wallet": {
+    "title": "محفظة الشركة",
+    "balance": "الرصيد المتاح",
+    "totalSpent": "إجمالي الإنفاق",
+    "pendingPayments": "المدفوعات المعلقة",
+    "deposit": {
+      "title": "إيداع أموال",
+      "amount": "المبلغ",
+      "method": "طريقة الدفع",
+      "creditCard": "بطاقة ائتمان",
+      "bankTransfer": "تحويل بنكي",
+      "crypto": "عملة رقمية",
+      "deposit": "إيداع",
+      "depositing": "جاري المعالجة...",
+      "success": "تم الإيداع بنجاح",
+      "error": "خطأ في معالجة الإيداع"
+    },
+    "sendPayment": {
+      "title": "إرسال دفعة",
+      "worker": "العامل",
+      "selectWorker": "اختيار عامل",
+      "contract": "العقد",
+      "selectContract": "اختيار عقد",
+      "amount": "المبلغ",
+      "description": "الوصف",
+      "send": "إرسال الدفعة",
+      "sending": "جاري الإرسال...",
+      "success": "تم إرسال الدفعة بنجاح",
+      "error": "خطأ في إرسال الدفعة"
+    }
+  },
+  "companyProfile": {
+    "title": "ملف الشركة",
+    "logo": "شعار الشركة",
+    "changeLogo": "تغيير الشعار",
+    "companyName": "اسم الشركة",
+    "industry": "الصناعة",
+    "size": "حجم الشركة",
+    "sizeOptions": {
+      "startup": "1-10 موظفين",
+      "small": "11-50 موظفاً",
+      "medium": "51-200 موظف",
+      "large": "201-1000 موظف",
+      "enterprise": "+1000 موظف"
+    },
+    "website": "الموقع الإلكتروني",
+    "description": "وصف الشركة",
+    "descriptionPlaceholder": "صف شركتك...",
+    "location": "الموقع",
+    "foundedYear": "سنة التأسيس",
+    "taxId": "الرقم الضريبي",
+    "contactEmail": "البريد الإلكتروني للتواصل",
+    "contactPhone": "هاتف التواصل",
+    "socialMedia": "وسائل التواصل الاجتماعي",
+    "save": "حفظ الملف",
+    "saving": "جاري الحفظ...",
+    "success": "تم تحديث الملف بنجاح"
+  }
+}

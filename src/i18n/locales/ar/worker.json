@@ -1,0 +1,350 @@
+{
+  "dashboard": {
+    "greeting": "مرحباً، {name}!",
+    "subtitle": "إليك ملخص نشاطك",
+    "stats": {
+      "applications": "الطلبات",
+      "interviews": "المقابلات",
+      "activeContracts": "العقود النشطة",
+      "earnings": "الأرباح"
+    },
+    "recommendedJobs": "وظائف موصى بها",
+    "recentActivity": "النشاط الأخير",
+    "upcomingInterviews": "المقابلات القادمة",
+    "pendingActions": "إجراءات معلقة",
+    "profileCompletion": "إكمال الملف الشخصي",
+    "profileCompletionDesc": "أكمل ملفك الشخصي لتحسين فرصك",
+    "noRecommendations": "لا توجد توصيات حالياً",
+    "viewAllJobs": "عرض جميع الوظائف"
+  },
+  "jobs": {
+    "title": "البحث عن وظائف",
+    "searchPlaceholder": "البحث حسب العنوان أو الشركة أو المهارة...",
+    "filters": {
+      "title": "الفلاتر",
+      "category": "الفئة",
+      "location": "الموقع",
+      "salary": "الراتب",
+      "salaryRange": "نطاق الراتب",
+      "type": "النوع",
+      "fullTime": "دوام كامل",
+      "partTime": "دوام جزئي",
+      "contract": "عقد",
+      "freelance": "عمل حر",
+      "remote": "عن بُعد",
+      "onSite": "في الموقع",
+      "hybrid": "هجين",
+      "experience": "الخبرة",
+      "entry": "مبتدئ",
+      "mid": "متوسط",
+      "senior": "خبير",
+      "postedDate": "تاريخ النشر",
+      "last24h": "آخر 24 ساعة",
+      "lastWeek": "الأسبوع الماضي",
+      "lastMonth": "الشهر الماضي"
+    },
+    "detail": {
+      "aboutJob": "حول الوظيفة",
+      "requirements": "المتطلبات",
+      "benefits": "المزايا",
+      "aboutCompany": "حول الشركة",
+      "salary": "الراتب",
+      "location": "الموقع",
+      "type": "نوع الوظيفة",
+      "postedOn": "نُشر في",
+      "applicants": "المتقدمون",
+      "applyNow": "تقدم الآن",
+      "saveJob": "حفظ الوظيفة",
+      "savedJob": "تم حفظ الوظيفة",
+      "shareJob": "مشاركة الوظيفة",
+      "reportJob": "الإبلاغ عن الوظيفة",
+      "similarJobs": "وظائف مشابهة",
+      "alreadyApplied": "لقد تقدمت بالفعل لهذه الوظيفة"
+    },
+    "apply": {
+      "title": "التقدم لـ {jobTitle}",
+      "coverLetter": "خطاب التقديم",
+      "coverLetterPlaceholder": "أخبرنا لماذا أنت مناسب لهذا المنصب...",
+      "resume": "السيرة الذاتية",
+      "uploadResume": "رفع السيرة الذاتية",
+      "expectedSalary": "الراتب المتوقع",
+      "availability": "التوافر",
+      "startDate": "تاريخ البدء",
+      "submit": "إرسال الطلب",
+      "submitting": "جاري الإرسال...",
+      "success": "تم إرسال الطلب بنجاح",
+      "error": "خطأ في إرسال الطلب"
+    }
+  },
+  "applications": {
+    "title": "طلباتي",
+    "table": {
+      "position": "المنصب",
+      "company": "الشركة",
+      "date": "التاريخ",
+      "status": "الحالة",
+      "salary": "الراتب",
+      "actions": "الإجراءات"
+    },
+    "statuses": {
+      "sent": "مرسل",
+      "viewed": "تمت المشاهدة",
+      "inReview": "قيد المراجعة",
+      "interview": "مقابلة",
+      "offer": "عرض",
+      "accepted": "مقبول",
+      "rejected": "مرفوض",
+      "withdrawn": "منسحب"
+    },
+    "empty": "لم تتقدم لأي وظيفة بعد",
+    "emptyAction": "استكشاف الوظائف",
+    "withdraw": "سحب الطلب",
+    "withdrawConfirm": "هل أنت متأكد أنك تريد سحب هذا الطلب؟"
+  },
+  "profile": {
+    "title": "ملفي الشخصي",
+    "tabs": {
+      "personal": "المعلومات الشخصية",
+      "experience": "الخبرة",
+      "education": "التعليم",
+      "skills": "المهارات",
+      "documents": "المستندات"
+    },
+    "personal": {
+      "avatar": "الصورة الشخصية",
+      "changeAvatar": "تغيير الصورة",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "country": "البلد",
+      "city": "المدينة",
+      "bio": "نبذة",
+      "bioPlaceholder": "أخبرنا عن نفسك...",
+      "headline": "العنوان المهني",
+      "headlinePlaceholder": "مثال: مطور Full Stack",
+      "website": "الموقع الإلكتروني",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    },
+    "experience": {
+      "addExperience": "إضافة خبرة",
+      "editExperience": "تعديل الخبرة",
+      "company": "الشركة",
+      "position": "المنصب",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "current": "الوظيفة الحالية",
+      "description": "الوصف",
+      "noExperience": "لم تضف أي خبرة عملية بعد"
+    },
+    "education": {
+      "addEducation": "إضافة تعليم",
+      "editEducation": "تعديل التعليم",
+      "institution": "المؤسسة",
+      "degree": "الدرجة",
+      "field": "مجال الدراسة",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "current": "مستمر",
+      "noEducation": "لم تضف أي تعليم بعد"
+    },
+    "skills": {
+      "addSkill": "إضافة مهارة",
+      "searchSkills": "البحث عن مهارات...",
+      "level": "المستوى",
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط",
+      "advanced": "متقدم",
+      "expert": "خبير",
+      "endorsements": "التوصيات",
+      "noSkills": "لم تضف أي مهارات بعد"
+    },
+    "documents": {
+      "uploadDocument": "رفع مستند",
+      "resume": "السيرة الذاتية",
+      "certificate": "شهادة",
+      "id": "هوية",
+      "other": "أخرى",
+      "noDocuments": "لم ترفع أي مستندات بعد"
+    }
+  },
+  "wallet": {
+    "title": "المحفظة",
+    "balance": "الرصيد المتاح",
+    "totalEarnings": "إجمالي الأرباح",
+    "pendingPayments": "المدفوعات المعلقة",
+    "tabs": {
+      "overview": "نظرة عامة",
+      "transactions": "المعاملات",
+      "remittance": "التحويلات",
+      "swap": "تبادل العملات",
+      "card": "البطاقة"
+    },
+    "transactions": {
+      "title": "سجل المعاملات",
+      "date": "التاريخ",
+      "description": "الوصف",
+      "amount": "المبلغ",
+      "type": "النوع",
+      "status": "الحالة",
+      "income": "دخل",
+      "withdrawal": "سحب",
+      "fee": "رسوم"
+    },
+    "remittance": {
+      "title": "إرسال حوالة",
+      "recipient": "المستلم",
+      "amount": "المبلغ",
+      "country": "بلد الوجهة",
+      "method": "طريقة الإرسال",
+      "bankTransfer": "تحويل بنكي",
+      "mobileMoney": "أموال الهاتف",
+      "cashPickup": "استلام نقدي",
+      "estimatedFee": "الرسوم المقدرة",
+      "estimatedDelivery": "وقت التسليم المقدر",
+      "send": "إرسال",
+      "confirmSend": "تأكيد الإرسال"
+    },
+    "swap": {
+      "title": "تبادل العملات",
+      "from": "من",
+      "to": "إلى",
+      "amount": "المبلغ",
+      "rate": "سعر الصرف",
+      "youReceive": "تتلقى",
+      "execute": "تنفيذ التبادل"
+    },
+    "card": {
+      "title": "البطاقة الافتراضية",
+      "cardNumber": "رقم البطاقة",
+      "expiry": "تاريخ الانتهاء",
+      "cvv": "CVV",
+      "requestCard": "طلب بطاقة",
+      "freeze": "تجميد البطاقة",
+      "unfreeze": "إلغاء تجميد البطاقة",
+      "spendingLimit": "حد الإنفاق",
+      "monthlySpent": "الإنفاق الشهري"
+    }
+  },
+  "contracts": {
+    "title": "عقودي",
+    "statuses": {
+      "draft": "مسودة",
+      "pending": "بانتظار التوقيع",
+      "active": "نشط",
+      "completed": "مكتمل",
+      "cancelled": "ملغي",
+      "disputed": "في نزاع",
+      "expired": "منتهي الصلاحية"
+    },
+    "detail": {
+      "employer": "صاحب العمل",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "rate": "المعدل",
+      "totalValue": "القيمة الإجمالية",
+      "paymentTerms": "شروط الدفع",
+      "scope": "نطاق العمل",
+      "deliverables": "المخرجات"
+    },
+    "sign": {
+      "title": "توقيع العقد",
+      "review": "مراجعة العقد",
+      "agree": "قرأت وأوافق على الشروط",
+      "sign": "توقيع",
+      "signing": "جاري التوقيع...",
+      "signed": "تم توقيع العقد بنجاح"
+    },
+    "cancel": {
+      "title": "إلغاء العقد",
+      "reason": "سبب الإلغاء",
+      "reasonPlaceholder": "اشرح السبب...",
+      "confirm": "تأكيد الإلغاء",
+      "warning": "لا يمكن التراجع عن هذا الإجراء"
+    },
+    "renew": {
+      "title": "تجديد العقد",
+      "newEndDate": "تاريخ انتهاء جديد",
+      "newTerms": "شروط جديدة (اختياري)",
+      "submit": "طلب التجديد"
+    }
+  },
+  "messages": {
+    "title": "الرسائل",
+    "conversations": "المحادثات",
+    "searchConversations": "البحث في المحادثات...",
+    "newMessage": "رسالة جديدة",
+    "typePlaceholder": "اكتب رسالة...",
+    "send": "إرسال",
+    "noConversations": "ليس لديك محادثات",
+    "noMessages": "لا توجد رسائل في هذه المحادثة",
+    "online": "متصل",
+    "offline": "غير متصل",
+    "typing": "يكتب...",
+    "delivered": "تم التسليم",
+    "read": "مقروء",
+    "attachFile": "إرفاق ملف",
+    "startConversation": "بدء محادثة"
+  },
+  "network": {
+    "title": "شبكتي",
+    "tabs": {
+      "connections": "الاتصالات",
+      "suggestions": "الاقتراحات",
+      "requests": "الطلبات",
+      "endorsements": "التوصيات"
+    },
+    "connections": {
+      "title": "اتصالاتي",
+      "search": "البحث في الاتصالات...",
+      "message": "إرسال رسالة",
+      "remove": "إزالة الاتصال",
+      "removeConfirm": "هل أنت متأكد أنك تريد إزالة هذا الاتصال؟"
+    },
+    "suggestions": {
+      "title": "أشخاص قد تعرفهم",
+      "connect": "اتصال",
+      "ignore": "تجاهل",
+      "mutualConnections": "{count} اتصالات مشتركة"
+    },
+    "requests": {
+      "title": "طلبات الاتصال",
+      "accept": "قبول",
+      "decline": "رفض",
+      "noRequests": "لا توجد طلبات معلقة"
+    },
+    "endorsements": {
+      "title": "التوصيات المستلمة",
+      "endorse": "توصية",
+      "endorseSkill": "توصية بمهارة",
+      "noEndorsements": "لا توجد توصيات بعد"
+    }
+  },
+  "reviews": {
+    "title": "التقييمات",
+    "rating": "التقييم",
+    "ratingLabels": {
+      "terrible": "سيء جداً",
+      "bad": "سيء",
+      "average": "متوسط",
+      "good": "جيد",
+      "excellent": "ممتاز"
+    },
+    "tags": {
+      "punctual": "دقيق في المواعيد",
+      "professional": "محترف",
+      "communicative": "تواصلي",
+      "skilled": "ماهر",
+      "reliable": "موثوق",
+      "friendly": "ودود"
+    },
+    "writeReview": "كتابة تقييم",
+    "comment": "تعليق",
+    "commentPlaceholder": "شارك تجربتك...",
+    "submit": "إرسال التقييم",
+    "submitting": "جاري الإرسال...",
+    "success": "تم إرسال التقييم بنجاح",
+    "noReviews": "لا توجد تقييمات بعد"
+  }
+}
