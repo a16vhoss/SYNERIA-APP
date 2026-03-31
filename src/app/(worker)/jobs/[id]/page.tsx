@@ -16,7 +16,9 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
     .eq("id", id)
     .single();
 
-  if (!job) return notFound();
+  if (!job) {
+    return notFound();
+  }
 
   const { data: similarJobs } = await supabase
     .from("jobs")
@@ -34,7 +36,7 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
     companyLetter: company?.logo_letter ?? (company?.name?.charAt(0) ?? "E"),
     companyGradient: company?.logo_gradient ?? "green",
     sector: job.sector ?? "General",
-    location: job.location ?? "Ubicacion por definir",
+    location: `${job.city ?? ""}, ${job.country ?? ""}`.replace(/^, |, $/g, "") || "Ubicacion por definir",
     flag: "",
     postedAgo: job.created_at
       ? `Hace ${Math.max(1, Math.round((Date.now() - new Date(job.created_at).getTime()) / 86400000))} dias`
@@ -49,9 +51,9 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
     benefits: (job.benefits as string[]) ?? [],
     summary: {
       sector: job.sector ?? "General",
-      type: job.contract_type === "full_time" ? "Jornada Completa" : "Medio Tiempo",
+      type: job.job_type === "full_time" ? "Jornada Completa" : "Medio Tiempo",
       experience: job.experience_required ?? "No especificada",
-      languages: job.languages ?? "Espanol",
+      languages: Array.isArray(job.languages_required) ? job.languages_required.join(", ") : "Espanol",
       startDate: job.start_date ?? "Por definir",
       duration: job.duration ?? "Indefinido",
     },

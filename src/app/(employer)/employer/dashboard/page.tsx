@@ -42,9 +42,9 @@ async function getEmployerData() {
 
     // Fetch vacancies for this company
     const { data: vacancies } = await supabase
-      .from("vacancies")
+      .from("jobs")
       .select("*")
-      .eq("company_id", company.id)
+      .eq("employer_id", user.id)
       .order("created_at", { ascending: false });
 
     if (!vacancies || vacancies.length === 0) {
@@ -70,7 +70,7 @@ async function getEmployerData() {
     const { data: candidates } = await supabase
       .from("applications")
       .select("*")
-      .in("vacancy_id", vacancyIds);
+      .in("job_id", vacancyIds);
 
     const candidatesList = candidates ?? [];
 
@@ -104,7 +104,7 @@ async function getEmployerData() {
         salary_max: (v.salary_max as number) ?? null,
         description: (v.description as string) ?? "",
         status: (v.status as "active" | "paused" | "closed" | "draft") ?? "active",
-        applications_count: candidatesList.filter((c: { vacancy_id: string }) => c.vacancy_id === v.id).length,
+        applications_count: candidatesList.filter((c: { job_id: string }) => c.job_id === v.id).length,
         published_at: (v.created_at as string) ?? new Date().toISOString(),
         company_id: (v.company_id as string) ?? "",
       })),
