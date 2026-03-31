@@ -45,6 +45,7 @@ const principalItems: NavItem[] = [
   { label: "Candidatos", href: "/employer/candidates", icon: Users, badge: 0 },
   { label: "Contratos", href: "/employer/contracts", icon: FileSignature },
   { label: "Wallet", href: "/employer/wallet", icon: Wallet },
+  { label: "Mi Perfil", href: "/employer/profile", icon: UserCircle },
   { label: "Perfil Empresa", href: "/employer/company-profile", icon: Building2 },
   { label: "Mensajes", href: "/employer/messages", icon: MessageSquare, badge: 0 },
 ];

@@ -37,7 +37,7 @@ export default function EmployerLayout({
           userName={displayName}
           userInitials={initials}
           userRole={roleLabel}
-          profileHref="/employer/company-profile"
+          profileHref="/employer/profile"
           unreadCount={0}
         />
 
