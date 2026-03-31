@@ -433,7 +433,7 @@ CREATE INDEX idx_reviews_company ON reviews (company_id);
 CREATE INDEX idx_network_activity_actor ON network_activity (actor_id);
 CREATE INDEX idx_network_activity_type ON network_activity (activity_type);
 CREATE INDEX idx_network_activity_created ON network_activity (created_at DESC);
-CREATE INDEX idx_network_activity_active ON network_activity (actor_id, created_at DESC) WHERE expires_at > now();
+CREATE INDEX idx_network_activity_active ON network_activity (actor_id, created_at DESC, expires_at);
 
 
 -- ============================================================================
