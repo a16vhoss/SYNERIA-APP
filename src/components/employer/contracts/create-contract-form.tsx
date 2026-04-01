@@ -532,27 +532,27 @@ export function CreateContractForm({
                 </div>
                 <div>
                   <p className="text-xs font-medium text-muted-foreground">
-                    Fin
+                    {t("contracts.create.endDate")}
                   </p>
                   <p className="text-foreground">{formValues.end_date}</p>
                 </div>
               </div>
               <div>
                 <p className="text-xs font-medium text-muted-foreground">
-                  Horario
+                  {t("contracts.create.schedule")}
                 </p>
                 <p className="text-foreground">{formValues.work_schedule}</p>
               </div>
               <div>
                 <p className="text-xs font-medium text-muted-foreground">
-                  Terminos
+                  {t("contracts.create.terms")}
                 </p>
                 <p className="text-sm text-foreground">{formValues.terms}</p>
               </div>
               {selectedBenefits.length > 0 && (
                 <div>
                   <p className="text-xs font-medium text-muted-foreground">
-                    Beneficios
+                    {t("vacancies.create.benefits")}
                   </p>
                   <div className="mt-1 flex flex-wrap gap-1.5">
                     {selectedBenefits.map((b) => (
@@ -568,7 +568,7 @@ export function CreateContractForm({
               )}
               {formValues.visa_sponsorship && (
                 <p className="text-xs font-medium text-emerald-600">
-                  Patrocinio de visa incluido
+                  {t("contracts.create.visaSponsorshipIncluded")}
                 </p>
               )}
             </div>
@@ -578,14 +578,14 @@ export function CreateContractForm({
                 variant="outline"
                 onClick={() => setStep("form")}
               >
-                Editar
+                {t("vacancies.edit.title")}
               </Button>
               <Button
                 onClick={handleSubmit(onFormSubmit)}
                 disabled={isSubmitting}
                 className="bg-brand-600 text-white hover:bg-brand-700"
               >
-                {isSubmitting ? "Enviando..." : "Enviar Contrato"}
+                {isSubmitting ? t("contracts.create.sending") : t("contracts.create.send")}
               </Button>
             </DialogFooter>
           </div>

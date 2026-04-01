@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { RefreshCw, DollarSign, Calendar, FileText } from "lucide-react";
 
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -86,6 +87,8 @@ export function RenewContractForm({
   parentContract,
   onRenewed,
 }: RenewContractFormProps) {
+  const t = useTranslations("employer");
+  const tc = useTranslations("common");
   const [selectedBenefits, setSelectedBenefits] = useState<string[]>([]);
 
   const {
@@ -152,14 +155,14 @@ export function RenewContractForm({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-heading text-lg font-bold">
             <RefreshCw className="size-5 text-brand-600" />
-            Renovar Contrato
+            {t("contracts.manage.renew")}
           </DialogTitle>
         </DialogHeader>
 
         {/* Parent contract info */}
         <div className="rounded-lg bg-muted/50 p-3">
           <p className="text-xs font-medium text-muted-foreground">
-            Contrato original
+            {t("contracts.manage.originalContract")}
           </p>
           <p className="font-semibold text-foreground">
             {parentContract.worker_name} - {parentContract.position}
@@ -185,7 +188,7 @@ export function RenewContractForm({
               className="flex items-center gap-2 text-sm font-semibold text-brand-700"
             >
               <DollarSign className="size-4" />
-              Salario
+              {t("vacancies.create.salary")}
             </motion.p>
 
             <motion.div
@@ -194,7 +197,7 @@ export function RenewContractForm({
               className="grid grid-cols-2 gap-3"
             >
               <div>
-                <Label htmlFor="salary">Salario Mensual</Label>
+                <Label htmlFor="salary">{t("contracts.create.salary")}</Label>
                 <div className="relative mt-1">
                   <DollarSign className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
@@ -212,7 +215,7 @@ export function RenewContractForm({
                 )}
               </div>
               <div>
-                <Label htmlFor="currency">Moneda</Label>
+                <Label htmlFor="currency">{t("contracts.create.currency")}</Label>
                 <select
                   id="currency"
                   {...register("currency")}
@@ -243,7 +246,7 @@ export function RenewContractForm({
               className="flex items-center gap-2 text-sm font-semibold text-brand-700"
             >
               <Calendar className="size-4" />
-              Nuevas Fechas
+              {t("contracts.create.dates")}
             </motion.p>
 
             <motion.div
@@ -252,7 +255,7 @@ export function RenewContractForm({
               className="grid grid-cols-2 gap-3"
             >
               <div>
-                <Label htmlFor="start_date">Fecha de Inicio</Label>
+                <Label htmlFor="start_date">{t("contracts.create.startDate")}</Label>
                 <Input
                   id="start_date"
                   type="date"
@@ -266,7 +269,7 @@ export function RenewContractForm({
                 )}
               </div>
               <div>
-                <Label htmlFor="end_date">Fecha de Fin</Label>
+                <Label htmlFor="end_date">{t("contracts.create.endDate")}</Label>
                 <Input
                   id="end_date"
                   type="date"
@@ -294,11 +297,11 @@ export function RenewContractForm({
               className="flex items-center gap-2 text-sm font-semibold text-brand-700"
             >
               <FileText className="size-4" />
-              Terminos y Beneficios
+              {t("contracts.create.termsAndBenefits")}
             </motion.p>
 
             <motion.div custom={5} variants={fieldVariants}>
-              <Label htmlFor="terms">Terminos del Contrato</Label>
+              <Label htmlFor="terms">{t("contracts.create.terms")}</Label>
               <Textarea
                 id="terms"
                 placeholder="Describe los nuevos terminos..."
@@ -313,7 +316,7 @@ export function RenewContractForm({
             </motion.div>
 
             <motion.div custom={6} variants={fieldVariants}>
-              <Label className="mb-2 block">Beneficios</Label>
+              <Label className="mb-2 block">{t("vacancies.create.benefits")}</Label>
               <div className="grid grid-cols-2 gap-2">
                 {AVAILABLE_BENEFITS.map((benefit) => (
                   <label
@@ -337,7 +340,7 @@ export function RenewContractForm({
               variant="outline"
               onClick={() => handleClose(false)}
             >
-              Cancelar
+              {tc("cancel")}
             </Button>
             <Button
               type="submit"
@@ -345,7 +348,7 @@ export function RenewContractForm({
               className="bg-brand-600 text-white hover:bg-brand-700"
             >
               <RefreshCw className="size-4" data-icon="inline-start" />
-              {isSubmitting ? "Enviando..." : "Enviar Renovacion"}
+              {isSubmitting ? t("contracts.create.sending") : t("contracts.manage.sendRenewal")}
             </Button>
           </DialogFooter>
         </form>

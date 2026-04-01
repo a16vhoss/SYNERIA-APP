@@ -19,6 +19,7 @@ import {
   Clock,
 } from "lucide-react";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/shared/page-header";
@@ -82,6 +83,7 @@ export default function VacancyDetailPage({
 }) {
   const { id } = use(params);
   const router = useRouter();
+  const t = useTranslations("employer");
 
   const [vacancy, setVacancy] = useState<MockVacancy | null>(null);
   const [candidates, setCandidates] = useState<MockCandidate[]>([]);
@@ -171,7 +173,7 @@ export default function VacancyDetailPage({
         salary_max: data.salary_max ? Number(data.salary_max) : prev.salary_max,
       };
     });
-    toast.success("Vacante actualizada correctamente");
+    toast.success(t("vacancies.edit.success"));
   }
 
   function formatDate(dateStr: string) {
@@ -203,10 +205,10 @@ export default function VacancyDetailPage({
       >
         <Briefcase className="mb-4 size-12 text-muted-foreground" />
         <h2 className="font-heading text-xl font-bold text-foreground">
-          Vacante no encontrada
+          {t("vacancies.notFound")}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          La vacante que buscas no existe o ha sido eliminada.
+          {t("vacancies.notFoundDescription")}
         </p>
         <Button
           variant="outline"
@@ -214,7 +216,7 @@ export default function VacancyDetailPage({
           onClick={() => router.push("/vacancies")}
         >
           <ArrowLeft className="size-4" data-icon="inline-start" />
-          Volver a Vacantes
+          {t("vacancies.backToList")}
         </Button>
       </motion.div>
     );
@@ -243,7 +245,7 @@ export default function VacancyDetailPage({
           className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 hover:underline"
         >
           <ArrowLeft className="size-4" />
-          Volver a Vacantes
+          {t("vacancies.backToList")}
         </Link>
 
         <PageHeader title={vacancy.title}>
@@ -259,12 +261,12 @@ export default function VacancyDetailPage({
               onClick={() => setEditOpen(true)}
             >
               <Pencil className="size-3.5" data-icon="inline-start" />
-              Editar
+              {t("vacancies.edit.title")}
             </Button>
             <Link href={`/jobs/${vacancy.id}`} target="_blank">
               <Button size="sm" variant="ghost">
                 <ExternalLink className="size-3.5" data-icon="inline-start" />
-                Ver como candidato
+                {t("vacancies.viewAsCandidate")}
               </Button>
             </Link>
           </div>
@@ -278,7 +280,7 @@ export default function VacancyDetailPage({
           {/* Description card */}
           <GlassCard hover={false}>
             <h3 className="mb-3 font-heading text-base font-semibold text-foreground">
-              Descripcion del Puesto
+              {t("vacancies.create.description")}
             </h3>
             <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
               {vacancy.description}
@@ -288,37 +290,37 @@ export default function VacancyDetailPage({
           {/* Detail cards */}
           <GlassCard hover={false}>
             <h3 className="mb-4 font-heading text-base font-semibold text-foreground">
-              Detalles
+              {t("vacancies.details")}
             </h3>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <DetailRow
                 icon={MapPin}
-                label="Ubicacion"
+                label={t("vacancies.create.location")}
                 value={vacancy.location}
               />
               <DetailRow
                 icon={Briefcase}
-                label="Sector"
+                label={t("vacancies.create.category")}
                 value={vacancy.sector}
               />
               <DetailRow
                 icon={FileText}
-                label="Tipo de Contrato"
+                label={t("vacancies.create.type")}
                 value={getContractLabel(vacancy.contract_type)}
               />
               <DetailRow
                 icon={DollarSign}
-                label="Rango Salarial"
+                label={t("vacancies.create.salary")}
                 value={salaryRange}
               />
               <DetailRow
                 icon={Calendar}
-                label="Fecha de Publicacion"
+                label={t("dashboard.vacanciesTable.posted")}
                 value={formatDate(vacancy.published_at)}
               />
               <DetailRow
                 icon={Clock}
-                label="Ultima Actualizacion"
+                label={t("vacancies.lastUpdated")}
                 value={formatDate(vacancy.published_at)}
               />
             </div>
