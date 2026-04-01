@@ -7,6 +7,7 @@ interface UserProfile {
   firstName: string;
   lastName: string;
   role: string;
+  activeRole: string;
   avatarUrl: string | null;
 }
 
@@ -26,7 +27,7 @@ export function useProfile() {
 
         const { data } = await supabase
           .from("profiles")
-          .select("full_name, role, avatar_url")
+          .select("full_name, role, active_role, avatar_url")
           .eq("id", user.id)
           .single();
 
@@ -36,6 +37,7 @@ export function useProfile() {
             firstName: parts[0] ?? "Usuario",
             lastName: parts.slice(1).join(" ") ?? "",
             role: data.role ?? "worker",
+            activeRole: data.active_role ?? data.role ?? "worker",
             avatarUrl: data.avatar_url ?? null,
           });
         } else {
@@ -47,6 +49,7 @@ export function useProfile() {
             firstName: parts[0] ?? "Usuario",
             lastName: parts.slice(1).join(" ") ?? "",
             role: meta?.role ?? "worker",
+            activeRole: meta?.role ?? "worker",
             avatarUrl: meta?.avatar_url ?? null,
           });
         }
@@ -69,7 +72,7 @@ export function useProfile() {
     : "U";
 
   const roleLabel =
-    profile?.role === "employer" ? "Empresa" : "Worker";
+    profile?.activeRole === "employer" ? "Empresa" : "Worker";
 
   return {
     profile,
@@ -78,5 +81,6 @@ export function useProfile() {
     initials,
     roleLabel,
     avatarUrl: profile?.avatarUrl ?? null,
+    activeRole: (profile?.activeRole ?? "worker") as "worker" | "employer",
   };
 }
