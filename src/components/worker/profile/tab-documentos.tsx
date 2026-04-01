@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   FileText,
@@ -70,6 +71,7 @@ interface TabDocumentosProps {
 export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
   const t = useTranslations("worker");
   const tc = useTranslations("common");
+  const router = useRouter();
 
   const DOCUMENT_SLOTS: DocumentSlot[] = [
     { key: "passport", label: "Pasaporte", icon: FileText, accept: ".pdf,.jpg,.jpeg,.png" },
@@ -176,6 +178,11 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
         .eq("id", userId);
 
       if (updateError) throw updateError;
+
+      // Refresh server data so sidebar/topbar avatars update
+      if (key === "photo") {
+        router.refresh();
+      }
 
       toast.success(tc("misc.savedSuccessfully"));
     } catch (err) {
