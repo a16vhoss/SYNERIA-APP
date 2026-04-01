@@ -167,11 +167,10 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
 
       // If this is a profile photo, also update avatar_url
       const updateData: Record<string, unknown> = { documents: docsToSave };
+      let newAvatarUrl: string | null = null;
       if (key === "photo") {
-        // Add cache-bust param to force browser to load the new image
-        const avatarUrlWithCacheBust = `${urlData.publicUrl}?t=${Date.now()}`;
-        updateData.avatar_url = avatarUrlWithCacheBust;
-        onAvatarChange?.(avatarUrlWithCacheBust);
+        newAvatarUrl = `${urlData.publicUrl}?t=${Date.now()}`;
+        updateData.avatar_url = newAvatarUrl;
       }
 
       const { error: updateError } = await supabase
@@ -181,8 +180,10 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
 
       if (updateError) throw updateError;
 
-      // Refresh server data so sidebar/topbar avatars update
-      if (key === "photo") {
+      // After DB is updated, update the UI
+      if (key === "photo" && newAvatarUrl) {
+        console.log("[TabDocumentos] avatar_url saved:", newAvatarUrl);
+        onAvatarChange?.(newAvatarUrl);
         router.refresh();
       }
 
