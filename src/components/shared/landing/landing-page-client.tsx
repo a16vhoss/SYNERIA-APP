@@ -9,10 +9,12 @@ import { HowItWorksSection } from "./how-it-works-section";
 import { TestimonialsSection } from "./testimonials-section";
 import { CtaSection } from "./cta-section";
 import { LandingFooter } from "./landing-footer";
+import { LanguageSelectorModal } from "./language-selector-modal";
 
 export function LandingPageClient() {
   return (
     <div className="min-h-screen overflow-x-hidden">
+      <LanguageSelectorModal />
       <LandingNav />
       <main>
         <HeroSection />

@@ -8,8 +8,8 @@
     "myProfile": "Mi Perfil",
     "documents": "Documentos",
     "messages": "Mensajes",
-    "settings": "Configuracion",
-    "logout": "Cerrar Sesion",
+    "settings": "Configuración",
+    "logout": "Cerrar Sesión",
     "contracts": "Contratos",
     "company": "Empresa",
     "vacancies": "Vacantes",
@@ -19,15 +19,15 @@
   },
   "footer": {
     "about": "Acerca de",
-    "terms": "Terminos de Servicio",
-    "privacy": "Politica de Privacidad",
+    "terms": "Términos de Servicio",
+    "privacy": "Política de Privacidad",
     "contact": "Contacto",
     "support": "Soporte",
     "blog": "Blog",
     "careers": "Carreras",
     "faq": "Preguntas Frecuentes",
     "copyright": "Todos los derechos reservados",
-    "builtWith": "Hecho con amor en Latinoamerica"
+    "builtWith": "Hecho con amor en Latinoamérica"
   },
   "actions": {
     "save": "Guardar",
@@ -36,7 +36,7 @@
     "delete": "Eliminar",
     "send": "Enviar",
     "search": "Buscar",
-    "viewMore": "Ver mas",
+    "viewMore": "Ver más",
     "apply": "Aplicar",
     "close": "Cerrar",
     "confirm": "Confirmar",
@@ -80,7 +80,7 @@
     "closed": "Cerrado",
     "completed": "Completado",
     "draft": "Borrador",
-    "cancellationRequested": "Cancelacion Solicitada",
+    "cancellationRequested": "Cancelación Solicitada",
     "inDispute": "En Disputa",
     "expired": "Expirado",
     "inProgress": "En Progreso",
@@ -90,41 +90,41 @@
     "unpublished": "No Publicado",
     "verified": "Verificado",
     "unverified": "No Verificado",
-    "online": "En Linea",
+    "online": "En Línea",
     "offline": "Desconectado"
   },
   "validation": {
     "required": "Campo requerido",
-    "invalidEmail": "Email invalido",
-    "minLength": "Minimo {min} caracteres",
-    "maxLength": "Maximo {max} caracteres",
-    "passwordMismatch": "Las contrasenas no coinciden",
-    "invalidUrl": "URL invalida",
-    "invalidPhone": "Numero de telefono invalido",
-    "invalidDate": "Fecha invalida",
+    "invalidEmail": "Email inválido",
+    "minLength": "Mínimo {min} caracteres",
+    "maxLength": "Máximo {max} caracteres",
+    "passwordMismatch": "Las contraseñas no coinciden",
+    "invalidUrl": "URL inválida",
+    "invalidPhone": "Número de teléfono inválido",
+    "invalidDate": "Fecha inválida",
     "fileTooLarge": "El archivo es demasiado grande (max {max}MB)",
     "invalidFileType": "Tipo de archivo no permitido",
-    "minValue": "El valor minimo es {min}",
-    "maxValue": "El valor maximo es {max}",
-    "alphanumeric": "Solo se permiten letras y numeros",
-    "numeric": "Solo se permiten numeros",
-    "uniqueEmail": "Este email ya esta registrado",
-    "termsRequired": "Debes aceptar los terminos y condiciones"
+    "minValue": "El valor mínimo es {min}",
+    "maxValue": "El valor máximo es {max}",
+    "alphanumeric": "Solo se permiten letras y números",
+    "numeric": "Solo se permiten números",
+    "uniqueEmail": "Este email ya está registrado",
+    "termsRequired": "Debes aceptar los términos y condiciones"
   },
   "time": {
     "justNow": "Justo ahora",
     "minutesAgo": "Hace {count} {count, plural, one {minuto} other {minutos}}",
     "hoursAgo": "Hace {count} {count, plural, one {hora} other {horas}}",
     "yesterday": "Ayer",
-    "daysAgo": "Hace {count} {count, plural, one {dia} other {dias}}",
+    "daysAgo": "Hace {count} {count, plural, one {día} other {días}}",
     "weeksAgo": "Hace {count} {count, plural, one {semana} other {semanas}}",
     "monthsAgo": "Hace {count} {count, plural, one {mes} other {meses}}",
-    "yearsAgo": "Hace {count} {count, plural, one {ano} other {anos}}",
+    "yearsAgo": "Hace {count} {count, plural, one {año} other {años}}",
     "today": "Hoy",
-    "tomorrow": "Manana",
+    "tomorrow": "Mañana",
     "thisWeek": "Esta semana",
     "thisMonth": "Este mes",
-    "thisYear": "Este ano"
+    "thisYear": "Este año"
   },
   "empty": {
     "noResults": "Sin resultados",
@@ -136,18 +136,18 @@
     "noConnections": "Sin conexiones",
     "noTransactions": "Sin transacciones",
     "noDocuments": "Sin documentos",
-    "noReviews": "Sin resenas",
+    "noReviews": "Sin reseñas",
     "noCandidates": "Sin candidatos",
     "noVacancies": "Sin vacantes",
     "noData": "Sin datos disponibles",
-    "noSearchResults": "No se encontraron resultados para tu busqueda"
+    "noSearchResults": "No se encontraron resultados para tu búsqueda"
   },
   "misc": {
     "loading": "Cargando...",
     "error": "Error",
-    "success": "Exito",
+    "success": "Éxito",
     "warning": "Advertencia",
-    "info": "Informacion",
+    "info": "Información",
     "or": "o",
     "and": "y",
     "of": "de",
@@ -156,29 +156,29 @@
     "in": "en",
     "at": "a las",
     "by": "por",
-    "yes": "Si",
+    "yes": "Sí",
     "no": "No",
     "all": "Todos",
     "none": "Ninguno",
     "other": "Otro",
-    "more": "Mas",
+    "more": "Más",
     "less": "Menos",
-    "showMore": "Mostrar mas",
+    "showMore": "Mostrar más",
     "showLess": "Mostrar menos",
     "resultsCount": "{count} {count, plural, one {resultado} other {resultados}}",
-    "page": "Pagina",
+    "page": "Página",
     "of_pages": "de {total}",
-    "itemsPerPage": "Elementos por pagina",
+    "itemsPerPage": "Elementos por página",
     "selected": "{count} seleccionados",
     "copiedToClipboard": "Copiado al portapapeles",
     "savedSuccessfully": "Guardado exitosamente",
     "deletedSuccessfully": "Eliminado exitosamente",
     "updatedSuccessfully": "Actualizado exitosamente",
-    "errorOccurred": "Ocurrio un error. Intenta de nuevo.",
-    "sessionExpired": "Tu sesion ha expirado. Inicia sesion de nuevo.",
-    "confirmDelete": "Estas seguro de que quieres eliminar esto?",
+    "errorOccurred": "Ocurrió un error. Intenta de nuevo.",
+    "sessionExpired": "Tu sesión ha expirado. Inicia sesión de nuevo.",
+    "confirmDelete": "Estás seguro de que quieres eliminar esto?",
     "unsavedChanges": "Tienes cambios sin guardar. Quieres salir?",
-    "comingSoon": "Proximamente",
+    "comingSoon": "Próximamente",
     "beta": "Beta",
     "new": "Nuevo",
     "premium": "Premium"
@@ -189,12 +189,12 @@
       "jobs": "Empleos",
       "companies": "Empresas",
       "sectors": "Sectores",
-      "login": "Iniciar Sesion"
+      "login": "Iniciar Sesión"
     },
     "hero": {
       "tagline": "Plataforma Global de Empleo",
       "headingLine1": "El Futuro del Trabajo es Global.",
-      "headingLine2": "Y Empieza Aqui.",
+      "headingLine2": "Y Empieza Aquí.",
       "subtitle": "La plataforma que conecta trabajadores migrantes con empleadores internacionales. Contratos digitales, wallet integrada y soporte en 6 idiomas.",
       "connectWith": "Conecta con",
       "rotatingWords": {
@@ -205,46 +205,46 @@
       },
       "exploreJobs": "Explorar Empleos",
       "postJob": "Publicar Empleo",
-      "presentIn": "Presente en 28 paises",
+      "presentIn": "Presente en 28 países",
       "workers": "+12,500 trabajadores",
       "companiesCount": "+3,200 empresas"
     },
     "features": {
       "badge": "Todo en una plataforma",
       "title": "La Plataforma",
-      "subtitle": "Herramientas poderosas para trabajadores y empresas, disenadas para el mercado laboral global.",
+      "subtitle": "Herramientas poderosas para trabajadores y empresas, diseñadas para el mercado laboral global.",
       "smartSearch": {
-        "title": "Busqueda Inteligente de Empleos",
-        "description": "Encuentra oportunidades que coincidan con tu perfil, habilidades y paises de interes. Filtros avanzados por sector, salario y tipo de contrato."
+        "title": "Búsqueda Inteligente de Empleos",
+        "description": "Encuentra oportunidades que coincidan con tu perfil, habilidades y países de interés. Filtros avanzados por sector, salario y tipo de contrato."
       },
       "wallet": {
         "title": "Wallet Digital Integrada",
-        "description": "Gestiona tus ingresos, recibe pagos y envia remesas internacionales desde una sola plataforma con comisiones minimas."
+        "description": "Gestiona tus ingresos, recibe pagos y envía remesas internacionales desde una sola plataforma con comisiones mínimas."
       },
       "contracts": {
         "title": "Contratos Digitales con Blockchain",
-        "description": "Firma contratos digitalmente con verificacion inmutable. Transparencia total en terminos, beneficios y condiciones laborales."
+        "description": "Firma contratos digitalmente con verificación inmutable. Transparencia total en términos, beneficios y condiciones laborales."
       },
       "documents": {
-        "title": "Verificacion de Documentos",
-        "description": "Sube y verifica tu pasaporte, certificaciones y documentos laborales. Perfiles verificados generan mas confianza con empleadores."
+        "title": "Verificación de Documentos",
+        "description": "Sube y verifica tu pasaporte, certificaciones y documentos laborales. Perfiles verificados generan más confianza con empleadores."
       },
       "multilingual": {
-        "title": "Soporte Multilingue",
-        "description": "Plataforma disponible en 6 idiomas: Espanol, Ingles, Portugues, Frances, Aleman y Arabe. Comunicacion sin barreras."
+        "title": "Soporte Multilingüe",
+        "description": "Plataforma disponible en 6 idiomas: Español, Inglés, Portugués, Francés, Alemán y Árabe. Comunicación sin barreras."
       },
       "network": {
         "title": "Red Profesional Global",
-        "description": "Conecta con profesionales de 28 paises. Construye tu red, comparte experiencias y accede a oportunidades exclusivas."
+        "description": "Conecta con profesionales de 28 países. Construye tu red, comparte experiencias y accede a oportunidades exclusivas."
       }
     },
     "howItWorks": {
       "badge": "Proceso simple",
-      "title": "Como Funciona",
+      "title": "Cómo Funciona",
       "subtitle": "En 5 pasos simples, conecta tu talento con oportunidades globales.",
       "step1": {
         "title": "Crea tu cuenta",
-        "description": "Registrate como trabajador o empresa en menos de 2 minutos. Selecciona tu rol y comienza."
+        "description": "Regístrate como trabajador o empresa en menos de 2 minutos. Selecciona tu rol y comienza."
       },
       "step2": {
         "title": "Completa tu perfil",
@@ -252,11 +252,11 @@
       },
       "step3": {
         "title": "Busca empleos",
-        "description": "Explora empleos filtrados por sector, pais y salario. Nuestro sistema te sugiere las mejores coincidencias."
+        "description": "Explora empleos filtrados por sector, país y salario. Nuestro sistema te sugiere las mejores coincidencias."
       },
       "step4": {
         "title": "Aplica y conecta",
-        "description": "Envia tu aplicacion directamente. Comunicate con empleadores y firma contratos digitales seguros."
+        "description": "Envía tu aplicación directamente. Comunícate con empleadores y firma contratos digitales seguros."
       },
       "step5": {
         "title": "Trabaja globalmente",
@@ -266,34 +266,34 @@
     "testimonials": {
       "badge": "Historias reales",
       "title": "Lo que dicen nuestros usuarios",
-      "subtitle": "Miles de trabajadores y empresas ya confian en Syneria para conectar talento global.",
+      "subtitle": "Miles de trabajadores y empresas ya confían en Syneria para conectar talento global.",
       "testimonial1": {
-        "quote": "Gracias a Syneria encontre un trabajo estable en Alemania en menos de 3 semanas. El proceso fue transparente y el contrato digital me dio mucha confianza.",
-        "name": "Carlos Ramirez",
+        "quote": "Gracias a Syneria encontré un trabajo estable en Alemania en menos de 3 semanas. El proceso fue transparente y el contrato digital me dio mucha confianza.",
+        "name": "Carlos Ramírez",
         "role": "Electricista Industrial",
         "country": "Colombia"
       },
       "testimonial2": {
-        "quote": "Como empresa, Syneria nos permite acceder a talento calificado de toda Latinoamerica. Los perfiles verificados y el sistema de contratos ahorran semanas de trabajo.",
+        "quote": "Como empresa, Syneria nos permite acceder a talento calificado de toda Latinoamérica. Los perfiles verificados y el sistema de contratos ahorran semanas de trabajo.",
         "name": "Sarah Mueller",
         "role": "HR Manager - BauTech GmbH",
         "country": "Alemania"
       },
       "testimonial3": {
-        "quote": "La wallet integrada es increible. Recibo mi salario y puedo enviar remesas a mi familia directamente desde la plataforma. Todo en un solo lugar.",
-        "name": "Maria Gonzalez",
+        "quote": "La wallet integrada es increíble. Recibo mi salario y puedo enviar remesas a mi familia directamente desde la plataforma. Todo en un solo lugar.",
+        "name": "María González",
         "role": "Chef Profesional",
-        "country": "Mexico"
+        "country": "México"
       }
     },
     "cta": {
-      "badge": "Unete hoy gratis",
+      "badge": "Únete hoy gratis",
       "title": "Tu Talento, Tu Mundo,",
-      "titleHighlight": "Tu Economia",
-      "subtitle": "Registrate gratis y accede a miles de oportunidades laborales en 28 paises. Tu carrera internacional comienza hoy.",
+      "titleHighlight": "Tu Economía",
+      "subtitle": "Regístrate gratis y accede a miles de oportunidades laborales en 28 países. Tu carrera internacional comienza hoy.",
       "createAccount": "Crear Cuenta Gratis",
       "iAmCompany": "Soy Empresa",
-      "noCreditCard": "Sin tarjeta de credito",
+      "noCreditCard": "Sin tarjeta de crédito",
       "registerIn2Min": "Registro en 2 minutos",
       "support6Languages": "Soporte 6 idiomas"
     }

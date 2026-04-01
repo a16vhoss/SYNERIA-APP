@@ -7,3 +7,4 @@ export { HowItWorksSection } from "./how-it-works-section";
 export { TestimonialsSection } from "./testimonials-section";
 export { CtaSection } from "./cta-section";
 export { LandingFooter } from "./landing-footer";
+export { LanguageSelectorModal } from "./language-selector-modal";
