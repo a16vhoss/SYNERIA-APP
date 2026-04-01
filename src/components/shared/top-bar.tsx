@@ -50,6 +50,8 @@ const languages = [
   { code: "en", label: "English" },
   { code: "pt", label: "Português" },
   { code: "fr", label: "Français" },
+  { code: "de", label: "Deutsch" },
+  { code: "ar", label: "العربية" },
 ] as const;
 
 // ── Component ──────────────────────────────────────────────────────
