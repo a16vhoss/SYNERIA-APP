@@ -33,11 +33,11 @@ export async function middleware(request: NextRequest) {
     if (user && pathname === "/") {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("role")
+        .select("active_role")
         .eq("id", user.id)
         .single();
       const dest =
-        profile?.role === "employer" ? "/employer/dashboard" : "/dashboard";
+        profile?.active_role === "employer" ? "/employer/dashboard" : "/dashboard";
       return NextResponse.redirect(new URL(dest, request.url));
     }
     return response;
@@ -48,11 +48,11 @@ export async function middleware(request: NextRequest) {
     if (user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("role")
+        .select("active_role")
         .eq("id", user.id)
         .single();
       const dest =
-        profile?.role === "employer" ? "/employer/dashboard" : "/dashboard";
+        profile?.active_role === "employer" ? "/employer/dashboard" : "/dashboard";
       return NextResponse.redirect(new URL(dest, request.url));
     }
     return response;
@@ -68,11 +68,11 @@ export async function middleware(request: NextRequest) {
   // Role-based routing
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role")
+    .select("active_role")
     .eq("id", user.id)
     .single();
 
-  const role = profile?.role;
+  const role = profile?.active_role;
 
   if (role === "worker" && pathname.startsWith(EMPLOYER_PREFIX)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
