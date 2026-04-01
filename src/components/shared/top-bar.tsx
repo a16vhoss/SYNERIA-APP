@@ -11,6 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuLabel,
+  DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -143,7 +144,9 @@ export function TopBar({
             </AnimatePresence>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" sideOffset={8} className="w-72">
-            <DropdownMenuLabel>{t("nav.notifications")}</DropdownMenuLabel>
+            <DropdownMenuGroup>
+              <DropdownMenuLabel>{t("nav.notifications")}</DropdownMenuLabel>
+            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <div className="px-3 py-6 text-center text-sm text-muted-foreground">
               {t("empty.noNotifications")}
@@ -206,10 +209,12 @@ export function TopBar({
             <ChevronDown className="hidden h-3 w-3 text-muted-foreground sm:block" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" sideOffset={8} className="w-48">
-            <DropdownMenuLabel className="font-normal">
-              <p className="text-sm font-medium">{userName}</p>
-              <p className="text-xs text-muted-foreground">{userRole}</p>
-            </DropdownMenuLabel>
+            <DropdownMenuGroup>
+              <DropdownMenuLabel className="font-normal">
+                <p className="text-sm font-medium">{userName}</p>
+                <p className="text-xs text-muted-foreground">{userRole}</p>
+              </DropdownMenuLabel>
+            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
