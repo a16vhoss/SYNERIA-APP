@@ -22,7 +22,7 @@ export default function WorkerLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const { displayName, initials, roleLabel, avatarUrl } = useProfile();
+  const { displayName, initials, roleLabel, activeRole, avatarUrl } = useProfile();
 
   return (
     <div className="min-h-screen bg-cream">
@@ -38,6 +38,7 @@ export default function WorkerLayout({
           userInitials={initials}
           userAvatarUrl={avatarUrl ?? undefined}
           userRole={roleLabel}
+          activeRole={activeRole}
           unreadCount={0}
         />
 
