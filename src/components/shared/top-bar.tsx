@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Bell, Search, Globe, ChevronDown, User, Settings, LogOut } from "lucide-react";
+import { RoleSwitchButton } from "@/components/shared/role-switch-button";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -35,6 +36,8 @@ interface TopBarProps {
   userAvatarUrl?: string;
   /** User role label */
   userRole?: string;
+  /** Active role for switch button */
+  activeRole?: "worker" | "employer";
   /** Link for profile navigation */
   profileHref?: string;
   className?: string;
@@ -59,6 +62,7 @@ export function TopBar({
   userInitials = "U",
   userAvatarUrl,
   userRole = "Worker",
+  activeRole = "worker",
   profileHref = "/profile",
   className,
 }: TopBarProps) {
@@ -208,13 +212,17 @@ export function TopBar({
             </div>
             <ChevronDown className="hidden h-3 w-3 text-muted-foreground sm:block" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" sideOffset={8} className="w-48">
+          <DropdownMenuContent align="end" sideOffset={8} className="w-56">
             <DropdownMenuGroup>
               <DropdownMenuLabel className="font-normal">
                 <p className="text-sm font-medium">{userName}</p>
                 <p className="text-xs text-muted-foreground">{userRole}</p>
               </DropdownMenuLabel>
             </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <div className="px-1 py-1">
+              <RoleSwitchButton activeRole={activeRole} />
+            </div>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
