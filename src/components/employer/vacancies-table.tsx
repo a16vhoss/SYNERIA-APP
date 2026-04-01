@@ -265,7 +265,7 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <Link
-                          href={`/employer/vacancies/${vacancy.id}/edit`}
+                          href={`/employer/vacancies/${vacancy.id}`}
                           className="text-sm font-medium text-brand-600 hover:text-brand-700 hover:underline"
                         >
                           {t("vacancies.edit.title")}
@@ -294,7 +294,7 @@ export function VacanciesTable({ vacancies, onCreateVacancy }: VacanciesTablePro
                           )}
                         </Button>
                         <Link
-                          href={`/employer/vacancies/${vacancy.id}/candidates`}
+                          href={`/employer/candidates`}
                           className="text-sm font-medium text-brand-600 hover:text-brand-700 hover:underline"
                         >
                           {t("candidates.title")}
