@@ -18,14 +18,14 @@ export async function GET(request: Request) {
       if (user) {
         const { data: profile } = await supabase
           .from("profiles")
-          .select("role, profile_complete")
+          .select("active_role, profile_complete")
           .eq("id", user.id)
           .single();
 
         if (profile) {
           let redirect: string;
 
-          if (profile.role === "employer") {
+          if (profile.active_role === "employer") {
             redirect = profile.profile_complete
               ? "/employer/dashboard"
               : "/employer/company-profile";

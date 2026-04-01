@@ -38,12 +38,12 @@ export function useAuth() {
         if (user) {
           const { data: profile } = await supabase
             .from("profiles")
-            .select("role")
+            .select("active_role")
             .eq("id", user.id)
             .single();
 
           const dest =
-            profile?.role === "employer" ? "/employer/dashboard" : "/dashboard";
+            profile?.active_role === "employer" ? "/employer/dashboard" : "/dashboard";
           router.push(dest);
           router.refresh();
         }
