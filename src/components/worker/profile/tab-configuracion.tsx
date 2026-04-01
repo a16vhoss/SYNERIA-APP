@@ -40,10 +40,10 @@ const fadeUp = {
 };
 
 const LANGUAGES = [
-  { value: "es", label: "Espanol" },
+  { value: "es", label: "Español" },
   { value: "en", label: "English" },
-  { value: "pt", label: "Portugues" },
-  { value: "fr", label: "Francais" },
+  { value: "pt", label: "Português" },
+  { value: "fr", label: "Français" },
   { value: "de", label: "Deutsch" },
   { value: "ar", label: "العربية" },
 ];

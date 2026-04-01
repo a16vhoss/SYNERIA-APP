@@ -43,10 +43,10 @@ interface TopBarProps {
 // ── Language options ───────────────────────────────────────────────
 
 const languages = [
-  { code: "es", label: "Espanol" },
+  { code: "es", label: "Español" },
   { code: "en", label: "English" },
-  { code: "pt", label: "Portugues" },
-  { code: "fr", label: "Francais" },
+  { code: "pt", label: "Português" },
+  { code: "fr", label: "Français" },
 ] as const;
 
 // ── Component ──────────────────────────────────────────────────────

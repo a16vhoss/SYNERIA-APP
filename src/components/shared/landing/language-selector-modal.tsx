@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Globe } from "lucide-react";
 
 const LANGUAGES = [
-  { code: "es", label: "Espanol", flag: "\uD83C\uDDEA\uD83C\uDDF8" },
+  { code: "es", label: "Español", flag: "\uD83C\uDDEA\uD83C\uDDF8" },
   { code: "en", label: "English", flag: "\uD83C\uDDEC\uD83C\uDDE7" },
-  { code: "pt", label: "Portugues", flag: "\uD83C\uDDE7\uD83C\uDDF7" },
-  { code: "fr", label: "Francais", flag: "\uD83C\uDDEB\uD83C\uDDF7" },
+  { code: "pt", label: "Português", flag: "\uD83C\uDDE7\uD83C\uDDF7" },
+  { code: "fr", label: "Français", flag: "\uD83C\uDDEB\uD83C\uDDF7" },
   { code: "de", label: "Deutsch", flag: "\uD83C\uDDE9\uD83C\uDDEA" },
   { code: "ar", label: "\u0627\u0644\u0639\u0631\u0628\u064A\u0629", flag: "\uD83C\uDDF8\uD83C\uDDE6" },
 ] as const;
