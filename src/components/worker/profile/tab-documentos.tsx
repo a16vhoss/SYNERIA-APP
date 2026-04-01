@@ -168,8 +168,10 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
       // If this is a profile photo, also update avatar_url
       const updateData: Record<string, unknown> = { documents: docsToSave };
       if (key === "photo") {
-        updateData.avatar_url = urlData.publicUrl;
-        onAvatarChange?.(urlData.publicUrl);
+        // Add cache-bust param to force browser to load the new image
+        const avatarUrlWithCacheBust = `${urlData.publicUrl}?t=${Date.now()}`;
+        updateData.avatar_url = avatarUrlWithCacheBust;
+        onAvatarChange?.(avatarUrlWithCacheBust);
       }
 
       const { error: updateError } = await supabase
