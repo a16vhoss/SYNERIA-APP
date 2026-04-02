@@ -1,0 +1,98 @@
+<h2>Dropdown con Role Switch</h2>
+<p class="subtitle">Así se vería el botón de cambio de rol en el menú del avatar — funciona en ambas direcciones</p>
+
+<div class="split">
+  <!-- Worker view -->
+  <div class="mockup">
+    <div class="mockup-header">Vista actual: Worker</div>
+    <div class="mockup-body" style="padding: 0; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.12); max-width: 260px; margin: 0 auto; overflow: hidden;">
+      <!-- User info header -->
+      <div style="padding: 16px 16px 12px; border-bottom: 1px solid #e5e5e5;">
+        <div style="font-weight: 600; font-size: 15px; color: #1a1a1a;">Soña Hamue</div>
+        <div style="font-size: 12px; color: #888; margin-top: 2px;">Worker</div>
+      </div>
+
+      <!-- Role switch button -->
+      <div style="padding: 8px 12px; border-bottom: 1px solid #e5e5e5;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: linear-gradient(135deg, #f0fdf4, #e8f5e9); border-radius: 8px; cursor: pointer; border: 1px solid #bbf7d0;">
+          <div style="width: 28px; height: 28px; background: #16a34a; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M4 4l17 17"/></svg>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #16a34a;">Cambiar a Empresa</div>
+            <div style="font-size: 11px; color: #666;">Publicar vacantes y contratar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu items -->
+      <div style="padding: 4px 0;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size: 14px; color: #333;">Mi Perfil</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span style="font-size: 14px; color: #333;">Configuración</span>
+        </div>
+        <div style="height: 1px; background: #e5e5e5; margin: 4px 0;"></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          <span style="font-size: 14px; color: #ef4444;">Cerrar Sesión</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Employer view -->
+  <div class="mockup">
+    <div class="mockup-header">Vista actual: Empresa</div>
+    <div class="mockup-body" style="padding: 0; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.12); max-width: 260px; margin: 0 auto; overflow: hidden;">
+      <!-- User info header -->
+      <div style="padding: 16px 16px 12px; border-bottom: 1px solid #e5e5e5;">
+        <div style="font-weight: 600; font-size: 15px; color: #1a1a1a;">Soña Hamue</div>
+        <div style="font-size: 12px; color: #888; margin-top: 2px;">Empresa</div>
+      </div>
+
+      <!-- Role switch button -->
+      <div style="padding: 8px 12px; border-bottom: 1px solid #e5e5e5;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: linear-gradient(135deg, #eff6ff, #e0f2fe); border-radius: 8px; cursor: pointer; border: 1px solid #93c5fd;">
+          <div style="width: 28px; height: 28px; background: #2563eb; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M4 4l17 17"/></svg>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #2563eb;">Cambiar a Worker</div>
+            <div style="font-size: 11px; color: #666;">Buscar empleos y aplicar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu items -->
+      <div style="padding: 4px 0;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size: 14px; color: #333;">Mi Perfil</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span style="font-size: 14px; color: #333;">Configuración</span>
+        </div>
+        <div style="height: 1px; background: #e5e5e5; margin: 4px 0;"></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          <span style="font-size: 14px; color: #ef4444;">Cerrar Sesión</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 24px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+  <h3 style="margin: 0 0 8px;">Comportamiento</h3>
+  <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #555; line-height: 1.8;">
+    <li><strong>Worker → Empresa:</strong> Botón verde. Primera vez → redirige a completar perfil de empresa. Luego → directo al dashboard employer.</li>
+    <li><strong>Empresa → Worker:</strong> Botón azul. Primera vez → redirige a completar perfil worker. Luego → directo al dashboard worker.</li>
+    <li>El cambio es instantáneo — un click y se redirige al portal correspondiente.</li>
+    <li>Los datos personales (nombre, teléfono, país) se comparten entre ambos roles.</li>
+  </ul>
+</div>

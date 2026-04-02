@@ -366,6 +366,7 @@ function getTimeAgo(dateStr: string): string {
   return `Hace ${days}d`;
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface PublicProfile {
   id: string;
   full_name: string;
@@ -376,9 +377,9 @@ export interface PublicProfile {
   country: string | null;
   city: string | null;
   skills: string[];
-  languages: Record<string, unknown>[];
+  languages: any[];
   experience_years: number;
-  education: Record<string, unknown>[];
+  education: any[];
   certifications: string[];
   availability: string;
   desired_salary: number | null;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
@@ -72,7 +73,7 @@ export async function getFeedItems(filters?: {
 
     const { data } = await query;
     for (const item of data ?? []) {
-      const profile = item.user as Record<string, unknown> | undefined;
+      const profile = item.user as any;
       items.push({
         id: item.id,
         type: "activity",
@@ -110,7 +111,7 @@ export async function getFeedItems(filters?: {
 
     const { data } = await query;
     for (const item of data ?? []) {
-      const profile = item.user as Record<string, unknown> | undefined;
+      const profile = item.user as any;
       items.push({
         id: item.id,
         type: "portfolio",
@@ -148,8 +149,8 @@ export async function getFeedItems(filters?: {
 
     const { data } = await query;
     for (const item of data ?? []) {
-      const profile = item.author as Record<string, unknown> | undefined;
-      const group = item.group as Record<string, unknown> | undefined;
+      const profile = item.author as any;
+      const group = item.group as any;
       items.push({
         id: item.id,
         type: "group_post",
