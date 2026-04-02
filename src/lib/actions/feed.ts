@@ -229,7 +229,10 @@ export async function getComments(postId: string, postType: string): Promise<{
     .order("created_at", { ascending: true });
 
   if (error) throw new Error(error.message);
-  return data ?? [];
+  return (data ?? []).map((row) => ({
+    ...row,
+    author: Array.isArray(row.author) ? row.author[0] : row.author,
+  }));
 }
 
 export async function addComment(postId: string, postType: string, content: string): Promise<void> {

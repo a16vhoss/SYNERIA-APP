@@ -2,8 +2,9 @@
 
 import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Users, Award, Inbox, Compass, Network } from "lucide-react";
+import { Users, Award, Inbox, Compass, Network, Rss, UsersRound } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PageHeader } from "@/components/shared/page-header";
 import { SearchInput } from "@/components/shared/search-input";
@@ -29,6 +30,7 @@ type TabId = "my-network" | "discover" | "requests";
 export function NetworkClient() {
   const t = useTranslations("worker");
   const tc = useTranslations("common");
+  const router = useRouter();
   const {
     connections,
     suggestions,
@@ -144,6 +146,29 @@ export function NetworkClient() {
             )}
           </button>
         ))}
+
+        {/* Divider */}
+        <div className="mx-2 h-5 w-px bg-border" />
+
+        {/* Feed link */}
+        <button
+          type="button"
+          onClick={() => router.push("/network/feed")}
+          className="relative flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <Rss className="size-4" />
+          Feed
+        </button>
+
+        {/* Groups link */}
+        <button
+          type="button"
+          onClick={() => router.push("/network/groups")}
+          className="relative flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <UsersRound className="size-4" />
+          Grupos
+        </button>
       </div>
 
       {/* Tab content */}

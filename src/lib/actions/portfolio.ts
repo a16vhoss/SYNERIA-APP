@@ -149,7 +149,7 @@ export async function uploadPortfolioFile(
   if (file.size > limit.maxSize) {
     throw new Error(`File too large. Max ${limit.maxSize / (1024 * 1024)}MB`);
   }
-  if (!limit.mimeTypes.includes(file.type)) {
+  if (!(limit.mimeTypes as readonly string[]).includes(file.type)) {
     throw new Error(`Invalid file type: ${file.type}`);
   }
 
