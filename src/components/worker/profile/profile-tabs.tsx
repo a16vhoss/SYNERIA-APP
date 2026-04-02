@@ -9,6 +9,7 @@ export type ProfileTabId =
   | "experiencia"
   | "educacion"
   | "documentos"
+  | "portfolio"
   | "configuracion";
 
 interface Tab {
@@ -30,6 +31,7 @@ export function ProfileTabs({ activeTab, onTabChange }: ProfileTabsProps) {
     { id: "experiencia", label: t("profile.tabs.experience") },
     { id: "educacion", label: t("profile.tabs.education") },
     { id: "documentos", label: t("profile.tabs.documents") },
+    { id: "portfolio", label: t("profile.tabs.portfolio") },
     { id: "configuracion", label: tc("nav.settings") },
   ];
   return (

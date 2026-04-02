@@ -144,7 +144,8 @@
       "education": "Educación",
       "skills": "Habilidades",
       "documents": "Documentos",
-      "settings": "Configuración"
+      "settings": "Configuración",
+      "portfolio": "Portfolio"
     },
     "tabsAriaLabel": "Tabs de perfil",
     "personal": {
@@ -242,6 +243,19 @@
       "saveSettings": "Guardar Configuración",
       "sessionClosed": "Sesión cerrada",
       "saveSuccess": "Configuración guardada"
+    },
+    "portfolio": {
+      "photos": "Fotos",
+      "videos": "Videos",
+      "documents": "Documentos",
+      "uploading": "Subiendo",
+      "emptyTitle": "Tu portfolio está vacío",
+      "emptyDescription": "Sube fotos, videos o documentos para mostrar tu trabajo a los empleadores.",
+      "editItem": "Editar elemento",
+      "tags": "Etiquetas",
+      "addTag": "Añadir etiqueta...",
+      "fieldTitle": "Título",
+      "fieldDescription": "Descripción"
     }
   },
   "wallet": {

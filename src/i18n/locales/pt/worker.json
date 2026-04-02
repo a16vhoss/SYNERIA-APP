@@ -129,7 +129,8 @@
       "education": "Educação",
       "skills": "Habilidades",
       "documents": "Documentos",
-      "settings": "Configurações"
+      "settings": "Configurações",
+      "portfolio": "Portfólio"
     },
     "personal": {
       "avatar": "Foto de perfil",
@@ -227,7 +228,20 @@
       "typeDeletePlaceholder": "Digite \"EXCLUIR\"",
       "weekly": "Semanal"
     },
-    "tabsAriaLabel": "Abas do perfil"
+    "tabsAriaLabel": "Abas do perfil",
+    "portfolio": {
+      "photos": "Fotos",
+      "videos": "Vídeos",
+      "documents": "Documentos",
+      "uploading": "A carregar",
+      "emptyTitle": "O seu portfólio está vazio",
+      "emptyDescription": "Carregue fotos, vídeos ou documentos para mostrar o seu trabalho aos empregadores.",
+      "editItem": "Editar item",
+      "tags": "Etiquetas",
+      "addTag": "Adicionar etiqueta...",
+      "fieldTitle": "Título",
+      "fieldDescription": "Descrição"
+    }
   },
   "wallet": {
     "title": "Carteira",

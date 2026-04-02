@@ -144,7 +144,8 @@
       "education": "Ausbildung",
       "skills": "Faehigkeiten",
       "documents": "Dokumente",
-      "settings": "Einstellungen"
+      "settings": "Einstellungen",
+      "portfolio": "Portfolio"
     },
     "tabsAriaLabel": "Profil-Tabs",
     "personal": {
@@ -242,6 +243,19 @@
       "saveSettings": "Einstellungen speichern",
       "sessionClosed": "Sitzung geschlossen",
       "saveSuccess": "Einstellungen gespeichert"
+    },
+    "portfolio": {
+      "photos": "Fotos",
+      "videos": "Videos",
+      "documents": "Dokumente",
+      "uploading": "Hochladen",
+      "emptyTitle": "Ihr Portfolio ist leer",
+      "emptyDescription": "Laden Sie Fotos, Videos oder Dokumente hoch, um Ihre Arbeit Arbeitgebern zu präsentieren.",
+      "editItem": "Element bearbeiten",
+      "tags": "Tags",
+      "addTag": "Tag hinzufügen...",
+      "fieldTitle": "Titel",
+      "fieldDescription": "Beschreibung"
     }
   },
   "wallet": {

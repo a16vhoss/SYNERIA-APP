@@ -129,7 +129,8 @@
       "education": "التعليم",
       "skills": "المهارات",
       "documents": "المستندات",
-      "settings": "الإعدادات"
+      "settings": "الإعدادات",
+      "portfolio": "المحفظة"
     },
     "personal": {
       "avatar": "صورة الملف الشخصي",
@@ -227,7 +228,20 @@
       "typeDeletePlaceholder": "اكتب \"حذف\"",
       "weekly": "أسبوعي"
     },
-    "tabsAriaLabel": "تبويبات الملف الشخصي"
+    "tabsAriaLabel": "تبويبات الملف الشخصي",
+    "portfolio": {
+      "photos": "صور",
+      "videos": "فيديوهات",
+      "documents": "وثائق",
+      "uploading": "جارٍ التحميل",
+      "emptyTitle": "محفظتك فارغة",
+      "emptyDescription": "ارفع صورًا أو مقاطع فيديو أو وثائق لعرض أعمالك على أصحاب العمل.",
+      "editItem": "تعديل العنصر",
+      "tags": "الوسوم",
+      "addTag": "أضف وسمًا...",
+      "fieldTitle": "العنوان",
+      "fieldDescription": "الوصف"
+    }
   },
   "wallet": {
     "title": "المحفظة",

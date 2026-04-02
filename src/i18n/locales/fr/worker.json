@@ -129,7 +129,8 @@
       "education": "Formation",
       "skills": "Compétences",
       "documents": "Documents",
-      "settings": "Paramètres"
+      "settings": "Paramètres",
+      "portfolio": "Portfolio"
     },
     "personal": {
       "avatar": "Photo de profil",
@@ -227,7 +228,20 @@
       "typeDeletePlaceholder": "Tapez \"SUPPRIMER\"",
       "weekly": "Hebdomadaire"
     },
-    "tabsAriaLabel": "Onglets du profil"
+    "tabsAriaLabel": "Onglets du profil",
+    "portfolio": {
+      "photos": "Photos",
+      "videos": "Vidéos",
+      "documents": "Documents",
+      "uploading": "Téléchargement",
+      "emptyTitle": "Votre portfolio est vide",
+      "emptyDescription": "Téléchargez des photos, vidéos ou documents pour montrer votre travail aux employeurs.",
+      "editItem": "Modifier l'élément",
+      "tags": "Tags",
+      "addTag": "Ajouter un tag...",
+      "fieldTitle": "Titre",
+      "fieldDescription": "Description"
+    }
   },
   "wallet": {
     "title": "Portefeuille",
