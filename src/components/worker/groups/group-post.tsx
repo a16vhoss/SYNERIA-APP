@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Heart, MessageSquare, ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -51,21 +52,26 @@ export function GroupPostCard({ post }: GroupPostCardProps) {
     >
       {/* Author row */}
       <div className="flex items-center gap-3">
-        {author?.avatar_url ? (
-          <img
-            src={author.avatar_url}
-            alt={author.full_name}
-            className="size-10 rounded-full object-cover ring-2 ring-border"
-          />
-        ) : (
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-brand-700 text-sm font-bold text-white ring-2 ring-border">
-            {initials}
-          </div>
-        )}
+        <Link href={`/workers/${post.author_id}`} className="shrink-0 hover:opacity-80 transition-opacity">
+          {author?.avatar_url ? (
+            <img
+              src={author.avatar_url}
+              alt={author.full_name}
+              className="size-10 rounded-full object-cover ring-2 ring-border"
+            />
+          ) : (
+            <div className="flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-brand-700 text-sm font-bold text-white ring-2 ring-border">
+              {initials}
+            </div>
+          )}
+        </Link>
         <div className="flex min-w-0 flex-col">
-          <span className="truncate text-sm font-semibold text-foreground">
+          <Link
+            href={`/workers/${post.author_id}`}
+            className="truncate text-sm font-semibold text-foreground hover:underline"
+          >
             {author?.full_name ?? "Usuario"}
-          </span>
+          </Link>
           <span className="text-xs text-muted-foreground">{formattedDate}</span>
         </div>
       </div>

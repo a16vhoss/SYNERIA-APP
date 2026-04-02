@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
@@ -131,8 +132,10 @@ export function ConnectionCard({
 
       {/* Actions */}
       <div className="flex items-center gap-2 pt-1">
-        <Button variant="outline" size="sm" className="flex-1">
-          {tc("actions.viewProfile")}
+        <Button variant="outline" size="sm" className="flex-1" asChild>
+          <Link href={`/workers/${connection.id}`}>
+            {tc("actions.viewProfile")}
+          </Link>
         </Button>
         <Button variant="ghost" size="icon-sm">
           <MessageSquare className="size-4" />

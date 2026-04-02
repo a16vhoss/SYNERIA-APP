@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { X, MapPin, UserPlus } from "lucide-react";
@@ -79,7 +80,10 @@ export function SuggestionCard({
       </Button>
 
       {/* Avatar + Name */}
-      <div className="flex items-center gap-3">
+      <Link
+        href={`/workers/${suggestion.id}`}
+        className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+      >
         <CompanyAvatar
           letter={suggestion.avatarLetter}
           gradient={suggestion.avatarGradient}
@@ -94,7 +98,7 @@ export function SuggestionCard({
             {suggestion.city}, {suggestion.country}
           </span>
         </div>
-      </div>
+      </Link>
 
       {/* Skills */}
       {suggestion.skills.length > 0 && (
