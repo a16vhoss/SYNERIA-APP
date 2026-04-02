@@ -11,6 +11,7 @@ import { TabEducacion } from "@/components/worker/profile/tab-educacion";
 import { TabDocumentos } from "@/components/worker/profile/tab-documentos";
 import { TabConfiguracion } from "@/components/worker/profile/tab-configuracion";
 import { TabPortfolio } from "@/components/worker/profile/tab-portfolio";
+import { TabRecomendaciones } from "@/components/worker/profile/tab-recomendaciones";
 
 interface ProfileData {
   id: string;
@@ -45,13 +46,13 @@ export function ProfileClient({ profile, completionPercentage }: ProfileClientPr
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab") as ProfileTabId | null;
   const [activeTab, setActiveTab] = useState<ProfileTabId>(
-    tabParam && ["info", "experiencia", "educacion", "documentos", "portfolio", "configuracion"].includes(tabParam)
+    tabParam && ["info", "experiencia", "educacion", "documentos", "portfolio", "recomendaciones", "configuracion"].includes(tabParam)
       ? tabParam
       : "info"
   );
 
   useEffect(() => {
-    if (tabParam && ["info", "experiencia", "educacion", "documentos", "portfolio", "configuracion"].includes(tabParam)) {
+    if (tabParam && ["info", "experiencia", "educacion", "documentos", "portfolio", "recomendaciones", "configuracion"].includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [tabParam]);
@@ -101,6 +102,7 @@ export function ProfileClient({ profile, completionPercentage }: ProfileClientPr
           {activeTab === "educacion" && <TabEducacion />}
           {activeTab === "documentos" && <TabDocumentos onAvatarChange={setAvatarUrl} />}
           {activeTab === "portfolio" && <TabPortfolio profileId={profile.id} />}
+          {activeTab === "recomendaciones" && <TabRecomendaciones profileId={profile.id} />}
           {activeTab === "configuracion" && <TabConfiguracion />}
         </motion.div>
       </AnimatePresence>

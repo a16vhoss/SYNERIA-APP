@@ -130,7 +130,8 @@
       "skills": "Compétences",
       "documents": "Documents",
       "settings": "Paramètres",
-      "portfolio": "Portfolio"
+      "portfolio": "Portfolio",
+      "recommendations": "Recommandations"
     },
     "personal": {
       "avatar": "Photo de profil",

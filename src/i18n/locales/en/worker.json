@@ -145,7 +145,8 @@
       "skills": "Skills",
       "documents": "Documents",
       "settings": "Settings",
-      "portfolio": "Portfolio"
+      "portfolio": "Portfolio",
+      "recommendations": "Recommendations"
     },
     "tabsAriaLabel": "Profile tabs",
     "personal": {
