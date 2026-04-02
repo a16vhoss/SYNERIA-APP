@@ -132,11 +132,11 @@ export function ConnectionCard({
 
       {/* Actions */}
       <div className="flex items-center gap-2 pt-1">
-        <Button variant="outline" size="sm" className="flex-1" asChild>
-          <Link href={`/workers/${connection.id}`}>
+        <Link href={`/workers/${connection.id}`} className="flex-1">
+          <Button variant="outline" size="sm" className="w-full">
             {tc("actions.viewProfile")}
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <Button variant="ghost" size="icon-sm">
           <MessageSquare className="size-4" />
         </Button>
