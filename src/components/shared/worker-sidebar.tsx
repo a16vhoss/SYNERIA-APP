@@ -15,7 +15,6 @@ import {
   Settings,
   LogOut,
   Menu,
-  Crown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/shared/logo";
@@ -216,30 +215,10 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
         {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Premium badge */}
-        <motion.div
-          variants={itemVariants}
-          whileHover={{ scale: 1.02 }}
-          className="mx-1 mt-4 cursor-pointer rounded-xl border border-brand-200 bg-gradient-to-br from-brand-50 to-cream p-3"
-        >
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600">
-              <Crown className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-brand-700">
-                Syneria Premium
-              </p>
-              <p className="text-[10px] text-muted-foreground">
-                {t("premium.unlockAll")}
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </motion.nav>
 
       {/* User section */}
-      <div className="border-t border-brand-100 px-4 py-3">
+      <Link href="/profile" onClick={onItemClick} className="block border-t border-brand-100 px-4 py-3 transition-colors hover:bg-brand-50/60">
         <div className="flex items-center gap-3">
           <Avatar size="default">
             {avatarUrl && <AvatarImage src={avatarUrl} alt="User" />}
@@ -254,7 +233,7 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
             <p className="truncate text-xs text-muted-foreground">{roleLabel}</p>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

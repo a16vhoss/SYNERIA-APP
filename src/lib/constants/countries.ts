@@ -25,7 +25,7 @@ export const COUNTRIES = [
   { code: "BR", name: "Brasil", flag: "\u{1F1E7}\u{1F1F7}" },
   { code: "EC", name: "Ecuador", flag: "\u{1F1EA}\u{1F1E8}" },
   { code: "VE", name: "Venezuela", flag: "\u{1F1FB}\u{1F1EA}" },
-  { code: "CZ", name: "República Checa", flag: "🇨🇿" },
+  { code: "CZ", name: "Republica Checa", flag: "\u{1F1E8}\u{1F1FF}" },
   { code: "DO", name: "Republica Dominicana", flag: "\u{1F1E9}\u{1F1F4}" },
   { code: "GT", name: "Guatemala", flag: "\u{1F1EC}\u{1F1F9}" },
   { code: "HN", name: "Honduras", flag: "\u{1F1ED}\u{1F1F3}" },

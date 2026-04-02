@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 
 interface OAuthButtonsProps {
   onGoogle: () => void;
-  onLinkedIn: () => void;
+  onLinkedIn?: () => void;
   loading?: boolean;
   disabled?: boolean;
 }
@@ -83,24 +83,6 @@ export function OAuthButtons({
         )}
       </motion.button>
 
-      {/* LinkedIn */}
-      <motion.button
-        type="button"
-        onClick={onLinkedIn}
-        disabled={loading || disabled}
-        whileHover={{ y: -1, boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
-        whileTap={{ scale: 0.98 }}
-        className="flex h-11 w-full items-center justify-center gap-3 rounded-xl border border-border bg-white text-sm font-medium text-foreground transition-colors hover:bg-muted/50 disabled:pointer-events-none disabled:opacity-50"
-      >
-        {loading ? (
-          <Loader2 className="size-4 animate-spin" />
-        ) : (
-          <>
-            <LinkedInIcon />
-            <span>{t("oauth.continueWithLinkedin")}</span>
-          </>
-        )}
-      </motion.button>
     </div>
   );
 }

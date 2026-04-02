@@ -98,7 +98,7 @@ export function JobFilters({
             <SelectItem value="all">{t("jobs.filters.location")}</SelectItem>
             {COUNTRIES.map((c) => (
               <SelectItem key={c.code} value={c.code}>
-                {c.flag} {c.name}
+                {c.flag} {tc(`countries.${c.code}`)}
               </SelectItem>
             ))}
           </SelectContent>

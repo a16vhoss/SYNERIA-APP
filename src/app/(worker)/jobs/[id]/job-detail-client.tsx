@@ -178,7 +178,7 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
 
   return (
     <>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 overflow-x-hidden">
         {/* Breadcrumb */}
         <motion.nav
           className="flex items-center gap-1.5 text-sm text-muted-foreground"
@@ -204,7 +204,7 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
           <div className="flex flex-col gap-6">
             {/* Job Header Card */}
             <motion.div
-              className="rounded-xl bg-card p-6 ring-1 ring-foreground/10 shadow-[var(--shadow-card)]"
+              className="rounded-xl bg-card p-4 sm:p-6 ring-1 ring-foreground/10 shadow-[var(--shadow-card)]"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 24 }}
@@ -228,7 +228,7 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
                 </div>
 
                 {/* Title */}
-                <h1 className="font-heading text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                <h1 className="font-heading text-xl font-bold tracking-tight text-foreground sm:text-2xl md:text-3xl break-words">
                   {job.title}
                 </h1>
 
@@ -267,12 +267,12 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
 
                 {/* Action buttons */}
                 <div className="flex flex-wrap gap-2">
-                  <Button onClick={() => setApplyOpen(true)} size="lg">
+                  <Button onClick={() => setApplyOpen(true)} size="default" className="sm:size-auto">
                     {t("jobs.detail.applyNow")}
                   </Button>
                   <Button
                     variant="outline"
-                    size="lg"
+                    size="default"
                     onClick={() => setSaved(!saved)}
                   >
                     {saved ? (
@@ -284,7 +284,7 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
                   </Button>
                   <Button
                     variant="outline"
-                    size="lg"
+                    size="default"
                     onClick={handleShare}
                   >
                     <Share2 className="mr-1.5 size-4" />
@@ -296,7 +296,7 @@ export function JobDetailClient({ jobId, jobData, similarJobs: similarJobsProp }
 
             {/* Content tabs */}
             <motion.div
-              className="rounded-xl bg-card p-6 ring-1 ring-foreground/10 shadow-[var(--shadow-card)]"
+              className="rounded-xl bg-card p-4 sm:p-6 ring-1 ring-foreground/10 shadow-[var(--shadow-card)]"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
