@@ -376,9 +376,9 @@ export interface PublicProfile {
   country: string | null;
   city: string | null;
   skills: string[];
-  languages: any[];
+  languages: Record<string, unknown>[];
   experience_years: number;
-  education: any[];
+  education: Record<string, unknown>[];
   certifications: string[];
   availability: string;
   desired_salary: number | null;
