@@ -365,3 +365,64 @@ function getTimeAgo(dateStr: string): string {
   const days = Math.floor(hours / 24);
   return `Hace ${days}d`;
 }
+
+export interface PublicProfile {
+  id: string;
+  full_name: string;
+  email: string;
+  avatar_url: string | null;
+  bio: string | null;
+  phone: string | null;
+  country: string | null;
+  city: string | null;
+  skills: string[];
+  languages: any[];
+  experience_years: number;
+  education: any[];
+  certifications: string[];
+  availability: string;
+  desired_salary: number | null;
+  passport_verified: boolean;
+  profile_complete: boolean;
+  rating: number | null;
+  jobs_completed: number;
+  desired_countries: string[];
+  desired_sectors: string[];
+  created_at: string;
+}
+
+export async function getPublicProfile(userId: string): Promise<PublicProfile> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", userId)
+    .single();
+
+  if (error) throw new Error("Profile not found");
+  return data;
+}
+
+export async function getConnectionStatus(userId: string): Promise<{
+  status: "none" | "pending_sent" | "pending_received" | "accepted" | "blocked";
+  connectionId: string | null;
+}> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { status: "none", connectionId: null };
+
+  const { data } = await supabase
+    .from("connections")
+    .select("id, status, requester_id")
+    .or(
+      `and(requester_id.eq.${user.id},addressee_id.eq.${userId}),and(requester_id.eq.${userId},addressee_id.eq.${user.id})`
+    )
+    .single();
+
+  if (!data) return { status: "none", connectionId: null };
+
+  if (data.status === "accepted") return { status: "accepted", connectionId: data.id };
+  if (data.status === "blocked") return { status: "blocked", connectionId: data.id };
+  if (data.requester_id === user.id) return { status: "pending_sent", connectionId: data.id };
+  return { status: "pending_received", connectionId: data.id };
+}
