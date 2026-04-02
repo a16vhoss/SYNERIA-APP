@@ -1,18 +1,20 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const TABS = [
-  { label: "Panel", href: "/dashboard" },
-  { label: "Buscar Empleos", href: "/jobs" },
-  { label: "Mis Aplicaciones", href: "/applications" },
-] as const;
-
 export function DashboardTabs() {
+  const t = useTranslations("worker");
   const pathname = usePathname();
+
+  const TABS = [
+    { label: t("dashboard.tabs.panel"), href: "/dashboard" },
+    { label: t("dashboard.tabs.searchJobs"), href: "/jobs" },
+    { label: t("dashboard.tabs.myApplications"), href: "/applications" },
+  ] as const;
 
   // Determine active tab – default to "Panel" when on /dashboard
   const activeHref =

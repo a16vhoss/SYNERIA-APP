@@ -11,6 +11,7 @@ import {
 import { ArrowUpRight, ArrowDownLeft, TrendingUp } from "lucide-react";
 import { AreaChart, Area, ResponsiveContainer } from "recharts";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -102,6 +103,7 @@ export function BalanceCard({
   onSendMoney,
   onReceive,
 }: BalanceCardProps) {
+  const t = useTranslations("worker");
   const [chartReady, setChartReady] = useState(false);
 
   useEffect(() => {
@@ -127,7 +129,7 @@ export function BalanceCard({
               <TrendingUp className="size-4 text-brand-600" />
             </div>
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Balance Total
+              {t("wallet.totalBalance")}
             </span>
           </div>
 
@@ -163,7 +165,7 @@ export function BalanceCard({
               onClick={onSendMoney}
             >
               <ArrowUpRight className="size-4" />
-              Enviar Dinero
+              {t("wallet.sendMoney")}
             </Button>
             <Button
               variant="outline"
@@ -172,7 +174,7 @@ export function BalanceCard({
               onClick={onReceive}
             >
               <ArrowDownLeft className="size-4" />
-              Recibir
+              {t("wallet.receive")}
             </Button>
           </motion.div>
         </div>

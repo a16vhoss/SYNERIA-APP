@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   MapPin,
@@ -32,6 +33,8 @@ export function ConnectionCard({
   index = 0,
   onRemove,
 }: ConnectionCardProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const connectedDate = new Date(connection.connectedSince);
   const formattedDate = connectedDate.toLocaleDateString("es-ES", {
     month: "short",
@@ -96,7 +99,7 @@ export function ConnectionCard({
               onClick={() => onRemove?.(connection.id)}
             >
               <Trash2 className="mr-2 size-4" />
-              Eliminar conexion
+              {t("network.removeConnection")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -116,12 +119,12 @@ export function ConnectionCard({
         </span>
         <span className="flex items-center gap-1">
           <Calendar className="size-3" />
-          Conectados desde {formattedDate}
+          {t("network.connectedSince")} {formattedDate}
         </span>
         {connection.mutualConnections > 0 && (
           <span className="flex items-center gap-1">
             <Users className="size-3" />
-            {connection.mutualConnections} conexiones mutuas
+            {connection.mutualConnections} {t("network.mutualConnections")}
           </span>
         )}
       </div>
@@ -129,7 +132,7 @@ export function ConnectionCard({
       {/* Actions */}
       <div className="flex items-center gap-2 pt-1">
         <Button variant="outline" size="sm" className="flex-1">
-          Ver Perfil
+          {tc("actions.viewProfile")}
         </Button>
         <Button variant="ghost" size="icon-sm">
           <MessageSquare className="size-4" />

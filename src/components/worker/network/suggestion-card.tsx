@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { X, MapPin, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -8,12 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { NetworkSuggestion } from "@/lib/constants/mock-data";
 
-const reasonLabels: Record<NetworkSuggestion["reason"], string> = {
-  same_company: "Misma empresa",
-  same_country: "Mismo pais",
-  same_sector: "Mismo sector",
-  mutual_connections: "conexiones mutuas",
-};
+/* Reason labels are resolved inside the component via useTranslations */
 
 const reasonColors: Record<NetworkSuggestion["reason"], string> = {
   same_company: "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300",
@@ -35,12 +31,21 @@ export function SuggestionCard({
   onConnect,
   onDismiss,
 }: SuggestionCardProps) {
+  const t = useTranslations("worker");
+
+  const reasonLabelMap: Record<NetworkSuggestion["reason"], string> = {
+    same_company: t("network.sameCompany"),
+    same_country: t("network.sameCountry"),
+    same_sector: t("network.sameSector"),
+    mutual_connections: t("network.mutualConnections"),
+  };
+
   const reasonText =
     suggestion.reason === "mutual_connections"
-      ? `${suggestion.mutualConnections} ${reasonLabels[suggestion.reason]}`
+      ? `${suggestion.mutualConnections} ${reasonLabelMap[suggestion.reason]}`
       : suggestion.reason === "same_company" && suggestion.reasonDetail
         ? suggestion.reasonDetail
-        : reasonLabels[suggestion.reason];
+        : reasonLabelMap[suggestion.reason];
 
   return (
     <motion.div
@@ -119,7 +124,7 @@ export function SuggestionCard({
         onClick={() => onConnect?.(suggestion.id)}
       >
         <UserPlus className="mr-1.5 size-3.5" />
-        Conectar
+        {t("network.connect")}
       </Button>
     </motion.div>
   );

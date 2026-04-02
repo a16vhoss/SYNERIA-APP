@@ -2,6 +2,7 @@
   "dashboard": {
     "welcome": "Willkommen, {name}!",
     "subtitle": "Ueberblick ueber Ihr Unternehmen",
+    "defaultCompanyName": "Mein Unternehmen",
     "stats": {
       "activeVacancies": "Aktive Stellenangebote",
       "totalCandidates": "Kandidaten insgesamt",
@@ -21,6 +22,17 @@
   },
   "vacancies": {
     "title": "Stellenangebote",
+    "viewDetail": "Detail anzeigen",
+    "bulkPaused": "{count} Stelle(n) pausiert",
+    "bulkClosed": "{count} Stelle(n) geschlossen",
+    "salaryRange": "{currency} {min} - {max} /Monat",
+    "salaryFrom": "Ab {currency} {amount} /Monat",
+    "salaryUpTo": "Bis {currency} {amount} /Monat",
+    "salaryNotSpecified": "Nicht angegeben",
+    "applications": "Bewerbungen",
+    "noCandidatesYet": "Noch keine Kandidaten fuer diese Stelle.",
+    "viewAllCandidates": "Alle Kandidaten anzeigen ({count})",
+    "summary": "Zusammenfassung",
     "create": {
       "title": "Stellenangebot erstellen",
       "jobTitle": "Stellentitel",
@@ -53,7 +65,22 @@
       "saveDraft": "Als Entwurf speichern",
       "publishing": "Wird veroeffentlicht...",
       "success": "Stelle erfolgreich erstellt",
-      "error": "Fehler beim Erstellen der Stelle"
+      "error": "Fehler beim Erstellen der Stelle",
+      "errors": {
+        "selectSector": "Waehlen Sie eine Branche",
+        "selectType": "Waehlen Sie einen Typ",
+        "selectCountry": "Waehlen Sie ein Land",
+        "minChars2": "Mindestens 2 Zeichen",
+        "fieldRequired": "Pflichtfeld",
+        "minChars3": "Mindestens 3 Zeichen",
+        "minChars10": "Mindestens 10 Zeichen"
+      },
+      "selectSectorPlaceholder": "Branche waehlen",
+      "selectCountryPlaceholder": "Land waehlen",
+      "cityLabel": "Stadt",
+      "cityPlaceholder": "Stadt",
+      "salaryMinPlaceholder": "Mindestgehalt",
+      "salaryMaxPlaceholder": "Hoechstgehalt"
     },
     "edit": {
       "title": "Stelle bearbeiten",
@@ -69,7 +96,8 @@
       "reopen": "Stelle wieder eroeffnen",
       "delete": "Stelle loeschen",
       "deleteConfirm": "Sind Sie sicher, dass Sie diese Stelle loeschen moechten?",
-      "duplicate": "Stelle duplizieren"
+      "duplicate": "Stelle duplizieren",
+      "closeWarning": "Diese Stelle hat {count} aktive Bewerbungen. Die Kandidaten werden ueber die Schliessung benachrichtigt."
     },
     "empty": "Sie haben noch keine Stellen erstellt",
     "emptyAction": "Erste Stelle erstellen"
@@ -110,7 +138,13 @@
       "notesPlaceholder": "Zusaetzliche Notizen...",
       "confirm": "Vorstellungsgespraech bestaetigen",
       "cancel": "Vorstellungsgespraech absagen",
-      "reschedule": "Verschieben"
+      "reschedule": "Verschieben",
+      "errors": {
+        "selectDate": "Waehlen Sie ein Datum",
+        "enterTime": "Zeit eingeben",
+        "enterValidUrl": "Gueltige URL eingeben",
+        "maxChars500": "Maximal 500 Zeichen"
+      }
     },
     "empty": "Keine Kandidaten fuer diese Stelle",
     "pipeline": {
@@ -119,7 +153,10 @@
       "interview": "Vorstellungsgespraech",
       "offer": "Angebot",
       "hired": "Eingestellt",
-      "rejected": "Abgelehnt"
+      "rejected": "Abgelehnt",
+      "pending": "Ausstehend",
+      "reviewing": "In Pruefung",
+      "accepted": "Akzeptiert"
     }
   },
   "contracts": {
@@ -144,7 +181,38 @@
       "create": "Vertrag erstellen",
       "creating": "Wird erstellt...",
       "success": "Vertrag erfolgreich erstellt",
-      "error": "Fehler beim Erstellen des Vertrags"
+      "error": "Fehler beim Erstellen des Vertrags",
+      "errors": {
+        "selectWorker": "Waehlen Sie einen Arbeitnehmer",
+        "minChars3": "Mindestens 3 Zeichen",
+        "enterSchedule": "Zeitplan eingeben",
+        "enterCountry": "Land eingeben",
+        "enterCity": "Stadt eingeben",
+        "enterSalary": "Gehalt eingeben",
+        "selectCurrency": "Waehrung waehlen",
+        "enterStartDate": "Startdatum eingeben",
+        "enterEndDate": "Enddatum eingeben",
+        "minChars10": "Mindestens 10 Zeichen"
+      },
+      "benefits": {
+        "housing": "Unterkunft",
+        "healthInsurance": "Krankenversicherung",
+        "transport": "Transport",
+        "meals": "Verpflegung",
+        "training": "Ausbildung",
+        "tools": "Werkzeuge",
+        "laptop": "Laptop",
+        "extraVacation": "Zusaetzlicher Urlaub"
+      },
+      "positionPlaceholder": "z.B. Bauassistent",
+      "schedulePlaceholder": "z.B. Montag bis Freitag, 9:00 - 18:00",
+      "defaultSchedule": "Montag bis Freitag, 9:00 - 18:00",
+      "countryPlaceholder": "Land",
+      "cityPlaceholder": "Stadt",
+      "termsPlaceholder": "Beschreiben Sie die Vertragsbedingungen..."
+    },
+    "renew": {
+      "termsPlaceholder": "Beschreiben Sie die neuen Bedingungen..."
     },
     "manage": {
       "view": "Vertrag ansehen",
@@ -198,7 +266,9 @@
       "send": "Zahlung senden",
       "sending": "Wird gesendet...",
       "success": "Zahlung erfolgreich gesendet",
-      "error": "Fehler beim Senden der Zahlung"
+      "error": "Fehler beim Senden der Zahlung",
+      "monthlyPaymentDescription": "Monatliche Zahlung {month}",
+      "descriptionPlaceholder": "Zahlungsbeschreibung"
     }
   },
   "companyProfile": {
@@ -226,6 +296,20 @@
     "socialMedia": "Soziale Medien",
     "save": "Profil speichern",
     "saving": "Wird gespeichert...",
-    "success": "Profil erfolgreich aktualisiert"
+    "success": "Profil erfolgreich aktualisiert",
+    "namePlaceholder": "z.B. Mein Unternehmen GmbH",
+    "descriptionFieldPlaceholder": "Beschreiben Sie kurz Ihr Unternehmen...",
+    "cityPlaceholder": "z.B. Berlin",
+    "websitePlaceholder": "https://www.meinunternehmen.de",
+    "employeesPlaceholder": "z.B. 50",
+    "gradients": {
+      "green": "Gruen",
+      "orange": "Orange",
+      "purple": "Lila",
+      "blue": "Blau",
+      "red": "Rot",
+      "teal": "Blaugruen"
+    },
+    "gradientAriaLabel": "Farbverlauf {name}"
   }
 }

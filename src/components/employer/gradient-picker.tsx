@@ -2,15 +2,16 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 const GRADIENT_OPTIONS = [
-  { key: "green", from: "from-brand-500", to: "to-brand-700", label: "Verde" },
-  { key: "orange", from: "from-amber-400", to: "to-orange-600", label: "Naranja" },
-  { key: "purple", from: "from-violet-400", to: "to-purple-700", label: "Purpura" },
-  { key: "blue", from: "from-sky-400", to: "to-blue-600", label: "Azul" },
-  { key: "red", from: "from-rose-400", to: "to-red-600", label: "Rojo" },
-  { key: "teal", from: "from-teal-400", to: "to-emerald-600", label: "Teal" },
+  { key: "green", from: "from-brand-500", to: "to-brand-700" },
+  { key: "orange", from: "from-amber-400", to: "to-orange-600" },
+  { key: "purple", from: "from-violet-400", to: "to-purple-700" },
+  { key: "blue", from: "from-sky-400", to: "to-blue-600" },
+  { key: "red", from: "from-rose-400", to: "to-red-600" },
+  { key: "teal", from: "from-teal-400", to: "to-emerald-600" },
 ] as const;
 
 interface GradientPickerProps {
@@ -19,10 +20,13 @@ interface GradientPickerProps {
 }
 
 export function GradientPicker({ value, onChange }: GradientPickerProps) {
+  const t = useTranslations("employer");
+
   return (
     <div className="flex flex-wrap gap-3">
       {GRADIENT_OPTIONS.map((gradient, index) => {
         const isSelected = value === gradient.key;
+        const gradientLabel = t(`companyProfile.gradients.${gradient.key}`);
         return (
           <motion.button
             key={gradient.key}
@@ -46,7 +50,7 @@ export function GradientPicker({ value, onChange }: GradientPickerProps) {
             }}
             whileHover={{ scale: 1.15 }}
             whileTap={{ scale: 0.95 }}
-            aria-label={`Gradiente ${gradient.label}`}
+            aria-label={t("companyProfile.gradientAriaLabel", { name: gradientLabel })}
           >
             {isSelected && (
               <motion.span

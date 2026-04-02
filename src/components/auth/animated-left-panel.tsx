@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { AnimatedCounter } from "@/components/shared/animated-counter";
 
-const rotatingWords = [
-  "profesionales",
-  "oportunidades",
-  "empresas",
-  "talento",
-];
+const WORD_KEYS = [
+  "professionals",
+  "opportunities",
+  "companies",
+  "talent",
+] as const;
 
 function FloatingShape({
   className,
@@ -37,11 +38,12 @@ function FloatingShape({
 }
 
 export function AnimatedLeftPanel() {
+  const t = useTranslations("auth");
   const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % rotatingWords.length);
+      setWordIndex((prev) => (prev + 1) % WORD_KEYS.length);
     }, 2800);
     return () => clearInterval(interval);
   }, []);
@@ -96,7 +98,7 @@ export function AnimatedLeftPanel() {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="text-sm font-medium uppercase tracking-widest text-brand-300"
         >
-          Tu plataforma global de talento
+          {t("leftPanel.tagline")}
         </motion.p>
 
         <div className="space-y-2">
@@ -106,21 +108,21 @@ export function AnimatedLeftPanel() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="font-heading text-4xl font-bold leading-tight text-white lg:text-5xl"
           >
-            Conecta con
+            {t("leftPanel.connectWith")}
           </motion.h1>
 
           {/* Rotating word */}
           <div className="h-14 lg:h-16">
             <AnimatePresence mode="wait">
               <motion.span
-                key={rotatingWords[wordIndex]}
+                key={WORD_KEYS[wordIndex]}
                 initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="block font-heading text-4xl font-bold text-brand-300 lg:text-5xl"
               >
-                {rotatingWords[wordIndex]}
+                {t(`leftPanel.words.${WORD_KEYS[wordIndex]}`)}
               </motion.span>
             </AnimatePresence>
           </div>
@@ -132,8 +134,7 @@ export function AnimatedLeftPanel() {
           transition={{ delay: 0.6 }}
           className="max-w-md text-sm leading-relaxed text-white/70"
         >
-          Miles de trabajadores y empleadores ya confian en Syneria para
-          construir el futuro del trabajo sin fronteras.
+          {t("leftPanel.description")}
         </motion.p>
       </div>
 
@@ -152,7 +153,7 @@ export function AnimatedLeftPanel() {
             className="font-heading text-3xl font-bold text-brand-300"
           />
           <p className="text-sm text-white/60">
-            Profesionales conectados globalmente
+            {t("leftPanel.connectedProfessionals")}
           </p>
         </motion.div>
 
@@ -224,8 +225,7 @@ export function AnimatedLeftPanel() {
           className="space-y-3 border-t border-white/10 pt-6"
         >
           <p className="text-sm italic leading-relaxed text-white/60">
-            &ldquo;Syneria me ayudo a encontrar trabajo remoto desde
-            Colombia en solo 2 semanas.&rdquo;
+            &ldquo;{t("leftPanel.testimonial.quote")}&rdquo;
           </p>
           <div className="flex items-center gap-3">
             <div className="flex size-8 items-center justify-center rounded-full bg-brand-500/30 text-xs font-semibold text-white">
@@ -233,10 +233,10 @@ export function AnimatedLeftPanel() {
             </div>
             <div>
               <p className="text-xs font-medium text-white/80">
-                Maria Rodriguez
+                {t("leftPanel.testimonial.name")}
               </p>
               <p className="text-xs text-white/40">
-                Desarrolladora Frontend
+                {t("leftPanel.testimonial.role")}
               </p>
             </div>
           </div>

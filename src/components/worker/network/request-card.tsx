@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, X, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -33,6 +34,7 @@ export function RequestCard({
   onReject,
   onCancel,
 }: RequestCardProps) {
+  const t = useTranslations("worker");
   const isIncoming = request.direction === "incoming";
 
   return (
@@ -80,7 +82,7 @@ export function RequestCard({
 
           {!isIncoming && (
             <span className="text-xs text-muted-foreground">
-              Solicitud pendiente
+              {t("network.pendingRequest")}
             </span>
           )}
 
@@ -93,7 +95,7 @@ export function RequestCard({
                   onClick={() => onAccept?.(request.id)}
                 >
                   <Check className="mr-1 size-3.5" />
-                  Aceptar
+                  {t("network.requests.accept")}
                 </Button>
                 <Button
                   variant="outline"
@@ -101,7 +103,7 @@ export function RequestCard({
                   onClick={() => onReject?.(request.id)}
                 >
                   <X className="mr-1 size-3.5" />
-                  Rechazar
+                  {t("network.requests.decline")}
                 </Button>
               </>
             ) : (
@@ -111,7 +113,7 @@ export function RequestCard({
                 onClick={() => onCancel?.(request.id)}
               >
                 <X className="mr-1 size-3.5" />
-                Cancelar solicitud
+                {t("network.cancelRequest")}
               </Button>
             )}
           </div>

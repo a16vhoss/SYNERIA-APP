@@ -5,8 +5,10 @@ import { motion } from "framer-motion";
 import { Logo } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function NotFound() {
+  const t = useTranslations("common");
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
       <Logo size="lg" className="mb-12" />
@@ -34,10 +36,10 @@ export default function NotFound() {
         transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
       >
         <h2 className="font-heading text-2xl font-semibold text-foreground">
-          Pagina no encontrada
+          {t("pages.notFound")}
         </h2>
         <p className="max-w-sm text-sm text-muted-foreground">
-          La pagina que buscas no existe o fue movida a otra ubicacion.
+          {t("pages.notFoundDesc")}
         </p>
       </motion.div>
 
@@ -50,7 +52,7 @@ export default function NotFound() {
       >
         <Button size="lg" render={<Link href="/" />}>
           <Home data-icon="inline-start" />
-          Volver al inicio
+          {t("pages.backToHome")}
         </Button>
       </motion.div>
     </div>

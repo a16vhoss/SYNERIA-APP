@@ -1,12 +1,17 @@
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
 import { ProfileClient } from "@/app/(worker)/profile/profile-client";
 import { calculateProfileCompleteness } from "@/lib/utils/profile-completeness";
 
-export const metadata = {
-  title: "Mi Perfil | Syneria",
-};
+export async function generateMetadata() {
+  const t = await getTranslations("common");
+  return { title: `${t("nav.myProfile")} | Syneria` };
+}
 
 async function getProfile() {
+  const tc = await getTranslations("common");
+  const defaultUserName = tc("user");
+
   try {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
@@ -22,7 +27,7 @@ async function getProfile() {
 
     return {
       id: user.id,
-      full_name: profile.full_name || "Usuario",
+      full_name: profile.full_name || defaultUserName,
       email: user.email ?? "",
       phone: profile.phone ?? "",
       country: profile.country ?? "",
@@ -45,7 +50,7 @@ async function getProfile() {
     };
   } catch {
     return {
-      id: "", full_name: "Usuario", email: "", phone: "", country: "", city: "",
+      id: "", full_name: defaultUserName, email: "", phone: "", country: "", city: "",
       bio: "", date_of_birth: "", avatar_url: null, skills: [], languages: [],
       experience_years: 0, education: [], certifications: [], availability: "immediate",
       desired_salary: 0, passport_verified: false, profile_complete: false,

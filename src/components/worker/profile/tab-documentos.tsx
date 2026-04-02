@@ -74,7 +74,7 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
   const router = useRouter();
 
   const DOCUMENT_SLOTS: DocumentSlot[] = [
-    { key: "passport", label: "Pasaporte", icon: FileText, accept: ".pdf,.jpg,.jpeg,.png" },
+    { key: "passport", label: t("profile.documents.passport"), icon: FileText, accept: ".pdf,.jpg,.jpeg,.png" },
     { key: "cv", label: t("profile.documents.resume"), icon: FileText, accept: ".pdf,.doc,.docx" },
     { key: "certifications", label: t("profile.documents.certificate"), icon: Award, accept: ".pdf,.jpg,.jpeg,.png" },
     { key: "photo", label: t("profile.personal.avatar"), icon: Camera, accept: ".jpg,.jpeg,.png,.webp" },
@@ -191,7 +191,7 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
     } catch (err) {
       console.error("Error uploading document:", err);
       toast.error(
-        `Error al subir documento: ${err instanceof Error ? err.message : "Error desconocido"}`
+        `${t("profile.documents.uploadError")}: ${err instanceof Error ? err.message : tc("misc.error")}`
       );
     } finally {
       setUploading((prev) => ({ ...prev, [key]: false }));
@@ -255,6 +255,7 @@ export function TabDocumentos({ onAvatarChange }: TabDocumentosProps = {}) {
                 uploadFile: tc("actions.upload"),
                 searchFile: tc("actions.search"),
                 replaceFile: tc("actions.update"),
+                dragOrClick: t("profile.documents.dragOrClick"),
               }}
             />
           </motion.div>
@@ -275,6 +276,7 @@ interface DocumentCardLabels {
   uploadFile: string;
   searchFile: string;
   replaceFile: string;
+  dragOrClick: string;
 }
 
 interface DocumentCardProps {
@@ -339,7 +341,7 @@ function DocumentCard({ slot, uploaded, uploading, onUpload, onRemove, labels }:
         >
           <Upload className="size-5" />
           <span className="text-xs font-medium">{labels.uploadFile}</span>
-          <span className="text-[10px]">Arrastra o haz click</span>
+          <span className="text-[10px]">{labels.dragOrClick}</span>
         </button>
       )}
 

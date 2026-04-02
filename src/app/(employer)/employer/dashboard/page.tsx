@@ -1,11 +1,16 @@
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
 import { EmployerDashboardClient } from "./dashboard-client";
 
-export const metadata = {
-  title: "Dashboard Employer | Syneria",
-};
+export async function generateMetadata() {
+  const t = await getTranslations("common");
+  return { title: `${t("nav.dashboard")} | Syneria` };
+}
 
 async function getEmployerData() {
+  const t = await getTranslations("employer");
+  const defaultCompanyName = t("dashboard.defaultCompanyName");
+
   try {
     const supabase = await createClient();
 
@@ -15,7 +20,7 @@ async function getEmployerData() {
 
     if (!user) {
       return {
-        company: { id: "", name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
+        company: { id: "", name: defaultCompanyName, sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
         vacancies: [],
         candidates: [],
         stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },
@@ -31,7 +36,7 @@ async function getEmployerData() {
 
     if (!company) {
       return {
-        company: { id: "", name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
+        company: { id: "", name: defaultCompanyName, sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
         vacancies: [],
         candidates: [],
         stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },
@@ -49,7 +54,7 @@ async function getEmployerData() {
       return {
         company: {
           id: company.id,
-          name: company.name ?? "Mi Empresa",
+          name: company.name ?? defaultCompanyName,
           sector: company.sector ?? "",
           logo_url: company.logo_url ?? null,
           verified: company.verified ?? false,
@@ -82,7 +87,7 @@ async function getEmployerData() {
     return {
       company: {
         id: company.id,
-        name: company.name ?? "Mi Empresa",
+        name: company.name ?? defaultCompanyName,
         sector: company.sector ?? "",
         logo_url: company.logo_url ?? null,
         verified: company.verified ?? false,
@@ -111,7 +116,7 @@ async function getEmployerData() {
     };
   } catch {
     return {
-      company: { id: "", name: "Mi Empresa", sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
+      company: { id: "", name: defaultCompanyName, sector: "", country: "", city: "", description: "", verified: false, logo_url: null },
       vacancies: [],
       candidates: [],
       stats: { activeVacancies: 0, totalCandidates: 0, inInterview: 0, accepted: 0 },

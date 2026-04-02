@@ -30,19 +30,21 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
-const applySchema = z.object({
-  coverLetter: z
-    .string()
-    .min(10, "La carta debe tener al menos 10 caracteres")
-    .max(2000, "Maximo 2000 caracteres"),
-  motivation: z
-    .string()
-    .min(10, "La motivacion debe tener al menos 10 caracteres")
-    .max(1000, "Maximo 1000 caracteres"),
-  availability: z.date({ message: "Selecciona una fecha de disponibilidad" }).optional(),
-});
+function createApplySchema(tc: ReturnType<typeof useTranslations>) {
+  return z.object({
+    coverLetter: z
+      .string()
+      .min(10, tc("validation.minLength", { min: 10 }))
+      .max(2000, tc("validation.maxLength", { max: 2000 })),
+    motivation: z
+      .string()
+      .min(10, tc("validation.minLength", { min: 10 }))
+      .max(1000, tc("validation.maxLength", { max: 1000 })),
+    availability: z.date({ message: tc("validation.required") }).optional(),
+  });
+}
 
-type ApplyFormValues = z.infer<typeof applySchema>;
+type ApplyFormValues = z.infer<ReturnType<typeof createApplySchema>>;
 
 interface ApplyModalProps {
   open: boolean;
@@ -61,6 +63,7 @@ export function ApplyModal({
 }: ApplyModalProps) {
   const t = useTranslations("worker");
   const tc = useTranslations("common");
+  const applySchema = createApplySchema(tc);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [submitted, setSubmitted] = useState(false);

@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { CompanyAvatar } from "@/components/shared/company-avatar";
 import { ProgressBar } from "@/components/shared/progress-bar";
 import { ContractStatusBadge } from "./contract-status-badge";
+import { useTranslations } from "next-intl";
 import type { ContractData } from "@/lib/actions/contracts";
 
 interface ContractCardProps {
@@ -60,6 +61,8 @@ export function ContractCard({
   onRespondCancel,
 }: ContractCardProps) {
   const [expanded, setExpanded] = useState(false);
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
 
   const progress = getTimeProgress(contract.start_date, contract.end_date);
   const daysRemaining = getDaysRemaining(contract.end_date);
@@ -113,7 +116,7 @@ export function ContractCard({
           </span>
           <span className="inline-flex items-center gap-1">
             <DollarSign className="size-3" />
-            {contract.currency} ${contract.salary.toLocaleString()}/mes
+            {contract.currency} ${contract.salary.toLocaleString()}{tc("misc.perMonth")}
           </span>
         </div>
 
@@ -124,12 +127,12 @@ export function ContractCard({
             <ProgressBar
               value={progress}
               color={progress > 80 ? "warning" : "primary"}
-              label="Progreso del contrato"
+              label={t("contracts.progress")}
               showPercentage
             />
             <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
               <Clock className="size-3" />
-              {daysRemaining} dias restantes
+              {t("contracts.daysRemaining", { count: daysRemaining })}
             </div>
           </div>
         )}
@@ -140,7 +143,7 @@ export function ContractCard({
           onClick={() => setExpanded(!expanded)}
           className="flex w-full items-center justify-between rounded-lg border border-foreground/5 bg-muted/30 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:bg-muted/50"
         >
-          <span>Terminos del Contrato</span>
+          <span>{t("contracts.terms")}</span>
           <motion.div
             animate={{ rotate: expanded ? 180 : 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
@@ -172,11 +175,11 @@ export function ContractCard({
                 </div>
                 {contract.visa_sponsorship && (
                   <p className="text-xs font-medium text-emerald-600">
-                    Patrocinio de visa incluido
+                    {t("contracts.visaSponsorship")}
                   </p>
                 )}
                 <p className="text-xs">
-                  <span className="font-medium text-foreground">Horario:</span>{" "}
+                  <span className="font-medium text-foreground">{t("contracts.schedule")}</span>{" "}
                   {contract.work_schedule}
                 </p>
               </div>
@@ -194,7 +197,7 @@ export function ContractCard({
               size="sm"
             >
               <FileSignature className="size-3.5" data-icon="inline-start" />
-              Firmar Digitalmente
+              {t("contracts.signDigitally")}
             </Button>
           )}
 
@@ -202,7 +205,7 @@ export function ContractCard({
           {contract.status === "pendiente" && role === "employer" && (
             <span className="inline-flex items-center gap-1.5 text-xs text-amber-600">
               <Clock className="size-3.5" />
-              Esperando firma del trabajador
+              {t("contracts.awaitingSignature")}
             </span>
           )}
 
@@ -217,12 +220,12 @@ export function ContractCard({
                   className="border-red-200 text-red-600 hover:bg-red-50"
                 >
                   <Ban className="size-3.5" data-icon="inline-start" />
-                  Solicitar Cancelacion
+                  {t("contracts.requestCancellation")}
                 </Button>
               )}
               <Button variant="outline" size="sm">
                 <Eye className="size-3.5" data-icon="inline-start" />
-                Ver Detalles
+                {tc("actions.viewDetails")}
               </Button>
             </>
           )}
@@ -235,7 +238,7 @@ export function ContractCard({
               onClick={() => onRespondCancel(contract)}
               className="border-orange-200 text-orange-600 hover:bg-orange-50"
             >
-              Responder Solicitud
+              {t("contracts.respondToRequest")}
             </Button>
           )}
 
@@ -249,12 +252,12 @@ export function ContractCard({
                   onClick={() => onReview(contract)}
                 >
                   <Star className="size-3.5" data-icon="inline-start" />
-                  Dejar Resena
+                  {t("reviews.leaveReview")}
                 </Button>
               )}
               <Button variant="outline" size="sm">
                 <Download className="size-3.5" data-icon="inline-start" />
-                Descargar PDF
+                {tc("actions.downloadPDF")}
               </Button>
               {onRenew && role === "employer" && (
                 <Button
@@ -264,7 +267,7 @@ export function ContractCard({
                   className="border-brand-200 text-brand-600 hover:bg-brand-50"
                 >
                   <RefreshCw className="size-3.5" data-icon="inline-start" />
-                  Renovar Contrato
+                  {t("contracts.renewContract")}
                 </Button>
               )}
             </>

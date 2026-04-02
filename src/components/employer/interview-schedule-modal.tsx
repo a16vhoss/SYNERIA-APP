@@ -28,14 +28,16 @@ import {
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
-const scheduleSchema = z.object({
-  date: z.date({ message: "Selecciona una fecha" }),
-  time: z.string().min(1, "Ingresa la hora"),
-  videoLink: z.url("Ingresa una URL valida"),
-  notes: z.string().max(500, "Maximo 500 caracteres").optional(),
-});
+function createScheduleSchema(t: (key: string) => string) {
+  return z.object({
+    date: z.date({ message: t("candidates.interview.errors.selectDate") }),
+    time: z.string().min(1, t("candidates.interview.errors.enterTime")),
+    videoLink: z.url(t("candidates.interview.errors.enterValidUrl")),
+    notes: z.string().max(500, t("candidates.interview.errors.maxChars500")).optional(),
+  });
+}
 
-type ScheduleFormValues = z.infer<typeof scheduleSchema>;
+type ScheduleFormValues = z.infer<ReturnType<typeof createScheduleSchema>>;
 
 interface InterviewScheduleModalProps {
   open: boolean;
@@ -52,6 +54,8 @@ export function InterviewScheduleModal({
 }: InterviewScheduleModalProps) {
   const t = useTranslations("employer");
   const [submitted, setSubmitted] = useState(false);
+
+  const scheduleSchema = createScheduleSchema(t);
 
   const {
     register,

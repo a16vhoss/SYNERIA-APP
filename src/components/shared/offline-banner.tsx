@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { WifiOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function OfflineBanner() {
+  const t = useTranslations("common");
   const [isOffline, setIsOffline] = useState(false);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export function OfflineBanner() {
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
         >
           <WifiOff className="size-4" />
-          <span>Sin conexion a internet</span>
+          <span>{t("errors.offline")}</span>
         </motion.div>
       )}
     </AnimatePresence>

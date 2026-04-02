@@ -2,21 +2,37 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const statusConfig = {
-  active: { label: "Activa", bg: "bg-status-active-bg", text: "text-status-active", dot: "bg-status-active" },
-  pending: { label: "Pendiente", bg: "bg-status-pending-bg", text: "text-status-pending", dot: "bg-status-pending" },
-  reviewing: { label: "En Revisión", bg: "bg-sky-100", text: "text-sky-600", dot: "bg-sky-500" },
-  interview: { label: "Entrevista", bg: "bg-violet-100", text: "text-violet-600", dot: "bg-violet-500" },
-  accepted: { label: "Aceptada", bg: "bg-status-active-bg", text: "text-status-active", dot: "bg-status-active" },
-  rejected: { label: "Rechazada", bg: "bg-status-closed-bg", text: "text-status-closed", dot: "bg-status-closed" },
-  paused: { label: "Pausada", bg: "bg-status-paused-bg", text: "text-status-paused", dot: "bg-status-paused" },
-  closed: { label: "Cerrada", bg: "bg-status-closed-bg", text: "text-status-closed", dot: "bg-status-closed" },
-  completed: { label: "Completada", bg: "bg-status-completed-bg", text: "text-status-completed", dot: "bg-status-completed" },
-  draft: { label: "Borrador", bg: "bg-status-paused-bg", text: "text-status-paused", dot: "bg-status-paused" },
-  cancelacion_solicitada: { label: "Cancelación", bg: "bg-amber-100", text: "text-amber-600", dot: "bg-amber-500" },
-  en_disputa: { label: "En Disputa", bg: "bg-status-closed-bg", text: "text-status-closed", dot: "bg-status-closed" },
+  active: { bg: "bg-status-active-bg", text: "text-status-active", dot: "bg-status-active" },
+  pending: { bg: "bg-status-pending-bg", text: "text-status-pending", dot: "bg-status-pending" },
+  reviewing: { bg: "bg-sky-100", text: "text-sky-600", dot: "bg-sky-500" },
+  interview: { bg: "bg-violet-100", text: "text-violet-600", dot: "bg-violet-500" },
+  accepted: { bg: "bg-status-active-bg", text: "text-status-active", dot: "bg-status-active" },
+  rejected: { bg: "bg-status-closed-bg", text: "text-status-closed", dot: "bg-status-closed" },
+  paused: { bg: "bg-status-paused-bg", text: "text-status-paused", dot: "bg-status-paused" },
+  closed: { bg: "bg-status-closed-bg", text: "text-status-closed", dot: "bg-status-closed" },
+  completed: { bg: "bg-status-completed-bg", text: "text-status-completed", dot: "bg-status-completed" },
+  draft: { bg: "bg-status-paused-bg", text: "text-status-paused", dot: "bg-status-paused" },
+  cancelacion_solicitada: { bg: "bg-amber-100", text: "text-amber-600", dot: "bg-amber-500" },
+  en_disputa: { bg: "bg-status-closed-bg", text: "text-status-closed", dot: "bg-status-closed" },
 } as const;
+
+const statusToKey: Record<string, string> = {
+  active: "active",
+  pending: "pending",
+  reviewing: "reviewing",
+  interview: "interview",
+  accepted: "accepted",
+  rejected: "rejected",
+  paused: "paused",
+  closed: "closed",
+  completed: "completed",
+  draft: "draft",
+  cancelacion_solicitada: "cancellationRequested",
+  en_disputa: "inDispute",
+};
 
 type StatusType = keyof typeof statusConfig;
 
@@ -39,7 +55,9 @@ export function StatusBadge({
   dot = true,
   className,
 }: StatusBadgeProps) {
+  const t = useTranslations("common");
   const config = statusConfig[status];
+  const translationKey = statusToKey[status] ?? status;
 
   return (
     <motion.span
@@ -61,7 +79,7 @@ export function StatusBadge({
           transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3 }}
         />
       )}
-      {config.label}
+      {t(`status.${translationKey}`)}
     </motion.span>
   );
 }

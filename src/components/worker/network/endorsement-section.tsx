@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -20,6 +21,8 @@ export function EndorsementSection({
   onEndorse,
   className,
 }: EndorsementSectionProps) {
+  const t = useTranslations("worker");
+
   return (
     <motion.div
       className={cn("flex flex-col gap-4", className)}
@@ -30,7 +33,7 @@ export function EndorsementSection({
       <div className="flex items-center gap-2">
         <Award className="size-5 text-brand-600" />
         <h3 className="font-heading text-base font-semibold text-foreground">
-          Recomendaciones de habilidades
+          {t("network.skillEndorsements")}
         </h3>
       </div>
 
@@ -42,6 +45,7 @@ export function EndorsementSection({
             index={i}
             isConnected={isConnected}
             onEndorse={onEndorse}
+            endorseLabel={t("network.endorse")}
           />
         ))}
       </div>
@@ -58,11 +62,13 @@ function EndorsementItem({
   index,
   isConnected,
   onEndorse,
+  endorseLabel,
 }: {
   endorsement: SkillEndorsement;
   index: number;
   isConnected: boolean;
   onEndorse?: (skillName: string) => void;
+  endorseLabel: string;
 }) {
   const [localCount, setLocalCount] = useState(endorsement.count);
   const [endorsed, setEndorsed] = useState(false);
@@ -143,7 +149,7 @@ function EndorsementItem({
           size="icon-xs"
           onClick={handleEndorse}
           disabled={endorsed}
-          title="Recomendar"
+          title={endorseLabel}
         >
           <Plus className="size-3.5" />
         </Button>

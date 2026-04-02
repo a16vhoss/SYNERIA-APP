@@ -1,10 +1,12 @@
 import { getWorkerContracts } from "@/lib/actions/contracts";
 import { getWallet, getTransactions } from "@/lib/actions/wallet";
 import { WalletClient } from "./wallet-client";
+import { getTranslations } from "next-intl/server";
 
-export const metadata = {
-  title: "Wallet & Contratos | Syneria",
-};
+export async function generateMetadata() {
+  const t = await getTranslations("common");
+  return { title: `${t("nav.wallet")} & ${t("nav.contracts")} | Syneria` };
+}
 
 export default async function WalletPage() {
   const [contracts, wallet, transactions] = await Promise.all([

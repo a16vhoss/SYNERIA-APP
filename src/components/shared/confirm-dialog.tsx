@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -20,11 +21,15 @@ export function ConfirmDialog({
   onOpenChange,
   title,
   description,
-  confirmLabel = "Confirmar",
-  cancelLabel = "Cancelar",
+  confirmLabel,
+  cancelLabel,
   onConfirm,
   variant = "default",
 }: ConfirmDialogProps) {
+  const t = useTranslations("common");
+  const resolvedConfirmLabel = confirmLabel ?? t("actions.confirm");
+  const resolvedCancelLabel = cancelLabel ?? t("actions.cancel");
+
   return (
     <AnimatePresence>
       {open && (
@@ -65,7 +70,7 @@ export function ConfirmDialog({
                   variant="outline"
                   onClick={() => onOpenChange(false)}
                 >
-                  {cancelLabel}
+                  {resolvedCancelLabel}
                 </Button>
                 <Button
                   className={cn(
@@ -77,7 +82,7 @@ export function ConfirmDialog({
                     onOpenChange(false);
                   }}
                 >
-                  {confirmLabel}
+                  {resolvedConfirmLabel}
                 </Button>
               </div>
             </motion.div>

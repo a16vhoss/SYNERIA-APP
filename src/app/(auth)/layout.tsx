@@ -3,12 +3,15 @@
 import { motion } from "framer-motion";
 import { Logo } from "@/components/shared/logo";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const t = useTranslations("common");
+
   return (
     <div className="flex min-h-screen flex-col bg-cream">
       {/* Minimal header with logo */}
@@ -40,7 +43,7 @@ export default function AuthLayout({
         transition={{ delay: 0.5 }}
         className="py-4 text-center text-xs text-muted-foreground"
       >
-        &copy; {new Date().getFullYear()} Syneria. Todos los derechos reservados.
+        &copy; {new Date().getFullYear()} Syneria. {t("misc.allRightsReserved")}
       </motion.footer>
     </div>
   );

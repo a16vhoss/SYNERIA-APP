@@ -36,16 +36,18 @@ export interface ExperienceEntry {
   description: string;
 }
 
-const experienceSchema = z.object({
-  title: z.string().min(2, "Titulo requerido"),
-  company: z.string().min(2, "Empresa requerida"),
-  startDate: z.string().min(1, "Fecha inicio requerida"),
-  endDate: z.string().optional().default(""),
-  current: z.boolean().default(false),
-  description: z.string().max(500).optional().default(""),
-});
+function createExperienceSchema(tc: ReturnType<typeof useTranslations>) {
+  return z.object({
+    title: z.string().min(2, tc("validation.required")),
+    company: z.string().min(2, tc("validation.required")),
+    startDate: z.string().min(1, tc("validation.required")),
+    endDate: z.string().optional().default(""),
+    current: z.boolean().default(false),
+    description: z.string().max(500).optional().default(""),
+  });
+}
 
-type ExperienceFormValues = z.infer<typeof experienceSchema>;
+type ExperienceFormValues = z.infer<ReturnType<typeof createExperienceSchema>>;
 
 /* ------------------------------------------------------------------ */
 /*  Animations                                                         */
@@ -74,6 +76,7 @@ const modalVariant = {
 export function TabExperiencia() {
   const t = useTranslations("worker");
   const tc = useTranslations("common");
+  const experienceSchema = createExperienceSchema(tc);
   const [entries, setEntries] = useState<ExperienceEntry[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -160,7 +163,7 @@ export function TabExperiencia() {
         <EmptyState
           icon={Briefcase}
           title={t("profile.experience.noExperience")}
-          description="Agrega tu experiencia para que los empleadores puedan conocer tu trayectoria profesional."
+          description={t("profile.experience.emptyDescription")}
           action={{ label: t("profile.experience.addExperience"), onClick: openAdd }}
         />
 
@@ -185,6 +188,9 @@ export function TabExperiencia() {
             cancel: tc("actions.cancel"),
             save: tc("actions.save"),
             add: tc("actions.create"),
+            positionPlaceholder: t("profile.experience.positionPlaceholder"),
+            companyPlaceholder: t("profile.experience.companyPlaceholder"),
+            descriptionPlaceholder: t("profile.experience.descriptionPlaceholder"),
           }}
         />
       </>
@@ -280,6 +286,9 @@ export function TabExperiencia() {
           cancel: tc("actions.cancel"),
           save: tc("actions.save"),
           add: tc("actions.create"),
+          positionPlaceholder: t("profile.experience.positionPlaceholder"),
+          companyPlaceholder: t("profile.experience.companyPlaceholder"),
+          descriptionPlaceholder: t("profile.experience.descriptionPlaceholder"),
         }}
       />
     </>
@@ -302,6 +311,9 @@ interface ExperienceDialogLabels {
   cancel: string;
   save: string;
   add: string;
+  positionPlaceholder: string;
+  companyPlaceholder: string;
+  descriptionPlaceholder: string;
 }
 
 interface ExperienceDialogProps {
@@ -348,7 +360,7 @@ function ExperienceDialog({
               <Label htmlFor="exp-title">{labels.position}</Label>
               <Input
                 id="exp-title"
-                placeholder="Ej: Operador de Maquinaria"
+                placeholder={labels.positionPlaceholder}
                 {...register("title")}
                 aria-invalid={!!errors.title}
               />
@@ -361,7 +373,7 @@ function ExperienceDialog({
               <Label htmlFor="exp-company">{labels.company}</Label>
               <Input
                 id="exp-company"
-                placeholder="Ej: Constructora Alpha S.A."
+                placeholder={labels.companyPlaceholder}
                 {...register("company")}
                 aria-invalid={!!errors.company}
               />
@@ -413,7 +425,7 @@ function ExperienceDialog({
                 id="exp-desc"
                 rows={3}
                 maxLength={500}
-                placeholder="Describe tus responsabilidades..."
+                placeholder={labels.descriptionPlaceholder}
                 {...register("description")}
               />
             </div>

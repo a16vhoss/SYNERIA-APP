@@ -15,7 +15,10 @@
     "vacancies": "Vacancies",
     "candidates": "Candidates",
     "help": "Help",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "principal": "Main",
+    "support": "Support",
+    "menuTitle": "Navigation menu"
   },
   "footer": {
     "about": "About",
@@ -67,7 +70,13 @@
     "restore": "Restore",
     "print": "Print",
     "export": "Export",
-    "import": "Import"
+    "import": "Import",
+    "viewAll": "View all",
+    "viewDetails": "View Details",
+    "viewProfile": "View Profile",
+    "closeBanner": "Close banner",
+    "downloadPDF": "Download PDF",
+    "searchPlaceholder": "Search..."
   },
   "status": {
     "active": "Active",
@@ -181,7 +190,65 @@
     "comingSoon": "Coming soon",
     "beta": "Beta",
     "new": "New",
-    "premium": "Premium"
+    "premium": "Premium",
+    "saving": "Saving...",
+    "perMonth": "/month",
+    "user": "User",
+    "company": "Company",
+    "recent": "Recent",
+    "allRightsReserved": "All rights reserved."
+  },
+  "errors": {
+    "notAuthenticated": "Not authenticated",
+    "offline": "No internet connection",
+    "saveFailed": "Error saving",
+    "deleteAccountFailed": "Error deleting account",
+    "companyNotFound": "Company not found",
+    "companyNotFoundDesc": "The company you're looking for doesn't exist or is not available.",
+    "unknown": "Unknown error",
+    "somethingWentWrong": "Something went wrong",
+    "errorDesc": "An unexpected error occurred. You can try again or go back to the home page.",
+    "errorDetails": "Error details",
+    "tryAgain": "Try again"
+  },
+  "notifications": {
+    "markAllRead": "Mark all read",
+    "markAsRead": "Mark as read",
+    "unread": "unread"
+  },
+  "roles": {
+    "worker": "Worker",
+    "employer": "Company",
+    "switchToWorker": "Switch to Worker",
+    "switchToEmployer": "Switch to Company",
+    "workerDesc": "Search jobs and apply",
+    "employerDesc": "Post vacancies and hire"
+  },
+  "premium": {
+    "unlockAll": "Unlock everything"
+  },
+  "pages": {
+    "notFound": "Page not found",
+    "notFoundDesc": "The page you're looking for doesn't exist or has been moved.",
+    "backToHome": "Back to home"
+  },
+  "sectors": {
+    "construction": "Construction",
+    "hotelAndTourism": "Hotel & Tourism",
+    "agriculture": "Agriculture",
+    "manufacturing": "Manufacturing",
+    "technology": "Technology",
+    "health": "Health",
+    "transportAndLogistics": "Transport & Logistics",
+    "energy": "Energy",
+    "commerce": "Commerce",
+    "domesticServices": "Domestic Services"
+  },
+  "jobTypes": {
+    "fullTime": "Full Time",
+    "partTime": "Part Time",
+    "contract": "Contract",
+    "seasonal": "Seasonal"
   },
   "landing": {
     "nav": {

@@ -8,8 +8,8 @@
       "activeContracts": "العقود النشطة",
       "totalSpent": "إجمالي الإنفاق"
     },
-    "recentVacancies": "أحدث الوظائف الشاغرة",
-    "recentApplications": "أحدث الطلبات",
+    "recentVacancies": "الوظائف الشاغرة الأخيرة",
+    "recentApplications": "الطلبات الأخيرة",
     "pendingActions": "إجراءات معلقة",
     "vacanciesTable": {
       "title": "العنوان",
@@ -17,13 +17,14 @@
       "status": "الحالة",
       "posted": "تاريخ النشر",
       "actions": "الإجراءات"
-    }
+    },
+    "defaultCompanyName": "شركتي"
   },
   "vacancies": {
     "title": "الوظائف الشاغرة",
     "create": {
       "title": "إنشاء وظيفة شاغرة",
-      "jobTitle": "عنوان الوظيفة",
+      "jobTitle": "المسمى الوظيفي",
       "jobTitlePlaceholder": "مثال: مطور واجهات أمامية",
       "description": "الوصف",
       "descriptionPlaceholder": "صف الوظيفة...",
@@ -51,14 +52,29 @@
       "deadline": "الموعد النهائي",
       "publish": "نشر الوظيفة",
       "saveDraft": "حفظ كمسودة",
-      "publishing": "جاري النشر...",
+      "publishing": "جارٍ النشر...",
       "success": "تم إنشاء الوظيفة بنجاح",
-      "error": "خطأ في إنشاء الوظيفة"
+      "error": "خطأ في إنشاء الوظيفة",
+      "cityLabel": "المدينة",
+      "cityPlaceholder": "المدينة",
+      "errors": {
+        "fieldRequired": "حقل مطلوب",
+        "minChars10": "10 أحرف كحد أدنى",
+        "minChars2": "حرفان كحد أدنى",
+        "minChars3": "3 أحرف كحد أدنى",
+        "selectCountry": "اختر دولة",
+        "selectSector": "اختر قطاعاً",
+        "selectType": "اختر نوعاً"
+      },
+      "salaryMaxPlaceholder": "الحد الأقصى للراتب",
+      "salaryMinPlaceholder": "الحد الأدنى للراتب",
+      "selectCountryPlaceholder": "اختر الدولة",
+      "selectSectorPlaceholder": "اختر القطاع"
     },
     "edit": {
       "title": "تعديل الوظيفة",
       "save": "حفظ التغييرات",
-      "saving": "جاري الحفظ...",
+      "saving": "جارٍ الحفظ...",
       "success": "تم تحديث الوظيفة بنجاح",
       "error": "خطأ في تحديث الوظيفة"
     },
@@ -69,10 +85,22 @@
       "reopen": "إعادة فتح الوظيفة",
       "delete": "حذف الوظيفة",
       "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذه الوظيفة؟",
-      "duplicate": "تكرار الوظيفة"
+      "duplicate": "تكرار الوظيفة",
+      "closeWarning": "هذه الوظيفة لديها {count} طلبات نشطة. سيتم إخطار المرشحين بالإغلاق."
     },
     "empty": "لم تنشئ أي وظائف شاغرة بعد",
-    "emptyAction": "إنشاء أول وظيفة"
+    "emptyAction": "إنشاء أول وظيفة",
+    "applications": "الطلبات",
+    "bulkClosed": "تم إغلاق {count} وظيفة (وظائف)",
+    "bulkPaused": "تم إيقاف {count} وظيفة (وظائف) مؤقتاً",
+    "noCandidatesYet": "لا يوجد مرشحون لهذه الوظيفة بعد.",
+    "salaryFrom": "من {currency} {amount} /شهرياً",
+    "salaryNotSpecified": "غير محدد",
+    "salaryRange": "{currency} {min} - {max} /شهرياً",
+    "salaryUpTo": "حتى {currency} {amount} /شهرياً",
+    "summary": "ملخص",
+    "viewAllCandidates": "عرض جميع المرشحين ({count})",
+    "viewDetail": "عرض التفاصيل"
   },
   "candidates": {
     "title": "المرشحون",
@@ -86,12 +114,12 @@
     "actions": {
       "viewProfile": "عرض الملف الشخصي",
       "viewResume": "عرض السيرة الذاتية",
-      "viewCoverLetter": "عرض خطاب التقديم",
+      "viewCoverLetter": "عرض خطاب التغطية",
       "scheduleInterview": "جدولة مقابلة",
       "sendMessage": "إرسال رسالة",
       "accept": "قبول",
       "reject": "رفض",
-      "shortlist": "القائمة المختصرة",
+      "shortlist": "قائمة مختصرة",
       "moveToInterview": "نقل للمقابلة",
       "makeOffer": "تقديم عرض"
     },
@@ -101,7 +129,7 @@
       "time": "الوقت",
       "duration": "المدة",
       "type": "النوع",
-      "inPerson": "شخصياً",
+      "inPerson": "حضوري",
       "video": "مكالمة فيديو",
       "phone": "هاتف",
       "location": "الموقع",
@@ -110,16 +138,25 @@
       "notesPlaceholder": "ملاحظات إضافية...",
       "confirm": "تأكيد المقابلة",
       "cancel": "إلغاء المقابلة",
-      "reschedule": "إعادة الجدولة"
+      "reschedule": "إعادة الجدولة",
+      "errors": {
+        "enterTime": "أدخل الوقت",
+        "enterValidUrl": "أدخل رابطاً صالحاً",
+        "maxChars500": "500 حرف كحد أقصى",
+        "selectDate": "اختر تاريخاً"
+      }
     },
     "empty": "لا يوجد مرشحون لهذه الوظيفة",
     "pipeline": {
-      "applied": "متقدمون",
+      "applied": "تقدم",
       "screening": "فرز",
       "interview": "مقابلة",
       "offer": "عرض",
       "hired": "تم التوظيف",
-      "rejected": "مرفوضون"
+      "rejected": "مرفوض",
+      "accepted": "مقبول",
+      "pending": "معلق",
+      "reviewing": "قيد المراجعة"
     }
   },
   "contracts": {
@@ -127,7 +164,7 @@
     "create": {
       "title": "إنشاء عقد",
       "worker": "العامل",
-      "selectWorker": "اختيار عامل",
+      "selectWorker": "اختيار العامل",
       "vacancy": "الوظيفة المرتبطة",
       "startDate": "تاريخ البدء",
       "endDate": "تاريخ الانتهاء",
@@ -142,9 +179,37 @@
       "deliverablesPlaceholder": "اذكر المخرجات...",
       "paymentTerms": "شروط الدفع",
       "create": "إنشاء العقد",
-      "creating": "جاري الإنشاء...",
+      "creating": "جارٍ الإنشاء...",
       "success": "تم إنشاء العقد بنجاح",
-      "error": "خطأ في إنشاء العقد"
+      "error": "خطأ في إنشاء العقد",
+      "benefits": {
+        "extraVacation": "إجازات إضافية",
+        "healthInsurance": "تأمين صحي",
+        "housing": "سكن",
+        "laptop": "حاسوب محمول",
+        "meals": "وجبات",
+        "tools": "أدوات",
+        "training": "تدريب",
+        "transport": "مواصلات"
+      },
+      "cityPlaceholder": "المدينة",
+      "countryPlaceholder": "الدولة",
+      "defaultSchedule": "الاثنين إلى الجمعة، 9:00 - 18:00",
+      "errors": {
+        "enterCity": "أدخل المدينة",
+        "enterCountry": "أدخل الدولة",
+        "enterEndDate": "أدخل تاريخ الانتهاء",
+        "enterSalary": "أدخل الراتب",
+        "enterSchedule": "أدخل جدولاً",
+        "enterStartDate": "أدخل تاريخ البدء",
+        "minChars10": "10 أحرف كحد أدنى",
+        "minChars3": "3 أحرف كحد أدنى",
+        "selectCurrency": "اختر العملة",
+        "selectWorker": "اختر عاملاً"
+      },
+      "positionPlaceholder": "مثال: مساعد بناء",
+      "schedulePlaceholder": "مثال: الاثنين إلى الجمعة، 9:00 - 18:00",
+      "termsPlaceholder": "صف الشروط والأحكام..."
     },
     "manage": {
       "view": "عرض العقد",
@@ -152,7 +217,7 @@
       "terminate": "إنهاء العقد",
       "terminateConfirm": "هل أنت متأكد أنك تريد إنهاء هذا العقد؟",
       "renew": "تجديد العقد",
-      "extend": "تمديد المهلة",
+      "extend": "تمديد الموعد النهائي",
       "addMilestone": "إضافة مرحلة",
       "milestones": "المراحل",
       "milestoneName": "اسم المرحلة",
@@ -168,6 +233,9 @@
       "history": "سجل المدفوعات",
       "pending": "مدفوعات معلقة",
       "completed": "مدفوعات مكتملة"
+    },
+    "renew": {
+      "termsPlaceholder": "صف الشروط الجديدة..."
     }
   },
   "wallet": {
@@ -183,22 +251,24 @@
       "bankTransfer": "تحويل بنكي",
       "crypto": "عملة رقمية",
       "deposit": "إيداع",
-      "depositing": "جاري المعالجة...",
+      "depositing": "جارٍ المعالجة...",
       "success": "تم الإيداع بنجاح",
       "error": "خطأ في معالجة الإيداع"
     },
     "sendPayment": {
       "title": "إرسال دفعة",
       "worker": "العامل",
-      "selectWorker": "اختيار عامل",
+      "selectWorker": "اختيار العامل",
       "contract": "العقد",
-      "selectContract": "اختيار عقد",
+      "selectContract": "اختيار العقد",
       "amount": "المبلغ",
       "description": "الوصف",
       "send": "إرسال الدفعة",
-      "sending": "جاري الإرسال...",
+      "sending": "جارٍ الإرسال...",
       "success": "تم إرسال الدفعة بنجاح",
-      "error": "خطأ في إرسال الدفعة"
+      "error": "خطأ في إرسال الدفعة",
+      "descriptionPlaceholder": "وصف الدفعة",
+      "monthlyPaymentDescription": "الدفعة الشهرية {month}"
     }
   },
   "companyProfile": {
@@ -206,7 +276,7 @@
     "logo": "شعار الشركة",
     "changeLogo": "تغيير الشعار",
     "companyName": "اسم الشركة",
-    "industry": "الصناعة",
+    "industry": "القطاع",
     "size": "حجم الشركة",
     "sizeOptions": {
       "startup": "1-10 موظفين",
@@ -225,7 +295,21 @@
     "contactPhone": "هاتف التواصل",
     "socialMedia": "وسائل التواصل الاجتماعي",
     "save": "حفظ الملف",
-    "saving": "جاري الحفظ...",
-    "success": "تم تحديث الملف بنجاح"
+    "saving": "جارٍ الحفظ...",
+    "success": "تم تحديث الملف بنجاح",
+    "namePlaceholder": "مثال: شركتي المحدودة",
+    "descriptionFieldPlaceholder": "صف شركتك بإيجاز...",
+    "cityPlaceholder": "مثال: الرياض",
+    "websitePlaceholder": "https://www.mycompany.com",
+    "employeesPlaceholder": "مثال: 50",
+    "gradients": {
+      "green": "أخضر",
+      "orange": "برتقالي",
+      "purple": "بنفسجي",
+      "blue": "أزرق",
+      "red": "أحمر",
+      "teal": "أخضر مائي"
+    },
+    "gradientAriaLabel": "تدرج {name}"
   }
 }

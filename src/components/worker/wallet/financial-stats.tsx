@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   DollarSign,
@@ -46,53 +47,55 @@ interface FinancialStat {
   showChart?: boolean;
 }
 
-const stats: FinancialStat[] = [
-  {
-    id: "earned",
-    label: "Ganado este mes",
-    value: 3200,
-    prefix: "$",
-    suffix: "",
-    icon: DollarSign,
-    color: "text-emerald-600",
-    bgColor: "bg-emerald-100",
-    detail: "+45% vs mes anterior",
-  },
-  {
-    id: "remittances",
-    label: "Remesas enviadas",
-    value: 800,
-    prefix: "$",
-    suffix: "",
-    icon: Send,
-    color: "text-sky-600",
-    bgColor: "bg-sky-100",
-    detail: "2 transferencias",
-  },
-  {
-    id: "fees",
-    label: "Comisiones ahorradas",
-    value: 120,
-    prefix: "$",
-    suffix: "",
-    icon: Percent,
-    color: "text-violet-600",
-    bgColor: "bg-violet-100",
-    detail: "vs servicios tradicionales",
-  },
-  {
-    id: "payments",
-    label: "Pagos recibidos",
-    value: 6,
-    prefix: "",
-    suffix: "",
-    icon: BarChart3,
-    color: "text-brand-600",
-    bgColor: "bg-brand-100",
-    detail: "",
-    showChart: true,
-  },
-];
+function getStats(t: ReturnType<typeof useTranslations>): FinancialStat[] {
+  return [
+    {
+      id: "earned",
+      label: t("wallet.stats.earnedThisMonth"),
+      value: 3200,
+      prefix: "$",
+      suffix: "",
+      icon: DollarSign,
+      color: "text-emerald-600",
+      bgColor: "bg-emerald-100",
+      detail: t("wallet.stats.vsLastMonth"),
+    },
+    {
+      id: "remittances",
+      label: t("wallet.stats.remittancesSent"),
+      value: 800,
+      prefix: "$",
+      suffix: "",
+      icon: Send,
+      color: "text-sky-600",
+      bgColor: "bg-sky-100",
+      detail: t("wallet.stats.transfers", { count: 2 }),
+    },
+    {
+      id: "fees",
+      label: t("wallet.stats.feesSaved"),
+      value: 120,
+      prefix: "$",
+      suffix: "",
+      icon: Percent,
+      color: "text-violet-600",
+      bgColor: "bg-violet-100",
+      detail: t("wallet.stats.vsTraditional"),
+    },
+    {
+      id: "payments",
+      label: t("wallet.stats.paymentsReceived"),
+      value: 6,
+      prefix: "",
+      suffix: "",
+      icon: BarChart3,
+      color: "text-brand-600",
+      bgColor: "bg-brand-100",
+      detail: "",
+      showChart: true,
+    },
+  ];
+}
 
 /* ------------------------------------------------------------------ */
 /*  Animation variants                                                 */
@@ -118,10 +121,13 @@ const cardVariants = {
 /* ------------------------------------------------------------------ */
 
 export function FinancialStats() {
+  const t = useTranslations("worker");
+  const stats = getStats(t);
+
   return (
     <motion.div className="space-y-4" initial="hidden" animate="show">
       <h2 className="font-heading text-lg font-bold text-foreground">
-        Estadisticas Financieras
+        {t("wallet.stats.title")}
       </h2>
 
       <motion.div

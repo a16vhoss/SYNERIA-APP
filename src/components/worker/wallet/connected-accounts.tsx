@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Building2, Plus, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
@@ -23,13 +24,13 @@ const mockAccounts: ConnectedAccount[] = [
     id: "a1",
     bankName: "Banco Santander",
     lastFour: "7832",
-    type: "Cuenta Corriente",
+    type: "checking",
   },
   {
     id: "a2",
     bankName: "UBS Switzerland",
     lastFour: "4501",
-    type: "Cuenta Ahorro",
+    type: "savings",
   },
 ];
 
@@ -56,6 +57,9 @@ const itemVariants = {
 /* ------------------------------------------------------------------ */
 
 export function ConnectedAccounts() {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
+
   return (
     <motion.div
       className="space-y-4"
@@ -64,7 +68,7 @@ export function ConnectedAccounts() {
       animate="show"
     >
       <h3 className="font-heading text-base font-bold text-foreground">
-        Cuentas Conectadas
+        {t("wallet.connectedAccounts")}
       </h3>
 
       <div className="space-y-3">
@@ -82,12 +86,12 @@ export function ConnectedAccounts() {
                 {account.bankName}
               </p>
               <p className="text-xs text-muted-foreground">
-                ****{account.lastFour} &middot; {account.type}
+                ****{account.lastFour} &middot; {t(`wallet.accountTypes.${account.type}`)}
               </p>
             </div>
             <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
               <CheckCircle2 className="size-3" />
-              Conectada
+              {tc("status.active")}
             </span>
           </motion.div>
         ))}
@@ -97,11 +101,11 @@ export function ConnectedAccounts() {
             variant="outline"
             className="w-full gap-2 border-dashed"
             onClick={() =>
-              toast.info("Conexion bancaria disponible proximamente")
+              toast.info(t("wallet.bankConnectionSoon"))
             }
           >
             <Plus className="size-4" />
-            Agregar cuenta bancaria
+            {t("wallet.addBankAccount")}
           </Button>
         </motion.div>
       </div>

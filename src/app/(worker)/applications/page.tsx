@@ -3,10 +3,12 @@ import {
   getApplicationInterviews,
 } from "@/lib/actions/applications";
 import { ApplicationsClient } from "./applications-client";
+import { getTranslations } from "next-intl/server";
 
-export const metadata = {
-  title: "Mis Aplicaciones | Syneria",
-};
+export async function generateMetadata() {
+  const t = await getTranslations("common");
+  return { title: `${t("nav.myApplications")} | Syneria` };
+}
 
 export default async function ApplicationsPage() {
   const [applications, interviews] = await Promise.all([

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowDownLeft,
@@ -143,18 +144,22 @@ const mockTransactions: Transaction[] = [
 /*  Filter tabs                                                        */
 /* ------------------------------------------------------------------ */
 
-const filterTabs: { key: FilterTab; label: string }[] = [
-  { key: "todas", label: "Todas" },
-  { key: "ingresos", label: "Ingresos" },
-  { key: "enviadas", label: "Enviadas" },
-];
+/* Filter tabs labels are resolved inside component */
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
 export function TransactionList() {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
   const [activeFilter, setActiveFilter] = useState<FilterTab>("todas");
+
+  const filterTabs: { key: FilterTab; label: string }[] = [
+    { key: "todas", label: tc("misc.all") },
+    { key: "ingresos", label: t("wallet.transactions.filterIncome") },
+    { key: "enviadas", label: t("wallet.transactions.sent") },
+  ];
 
   const filtered = mockTransactions.filter((tx) => {
     if (activeFilter === "todas") return true;
@@ -172,7 +177,7 @@ export function TransactionList() {
       {/* Header + Filter */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="font-heading text-lg font-bold text-foreground">
-          Transacciones Recientes
+          {t("wallet.transactions.recentTitle")}
         </h2>
 
         <div className="flex items-center gap-1 rounded-xl bg-card p-1 shadow-[var(--shadow-card)] ring-1 ring-foreground/5">
@@ -221,7 +226,7 @@ export function TransactionList() {
           >
             {filtered.length === 0 ? (
               <div className="p-8 text-center text-sm text-muted-foreground">
-                No hay transacciones en esta categoria.
+                {t("wallet.transactions.empty")}
               </div>
             ) : (
               filtered.map((tx, i) => {

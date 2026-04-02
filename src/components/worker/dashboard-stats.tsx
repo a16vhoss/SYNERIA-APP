@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Briefcase, FileText, Bell, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -64,9 +65,11 @@ function ProgressRing({
 
 function ProfileStatCard({
   percentage,
+  label,
   className,
 }: {
   percentage: number;
+  label: string;
   className?: string;
 }) {
   return (
@@ -93,7 +96,7 @@ function ProfileStatCard({
       <ProgressRing percentage={percentage} />
 
       {/* Label */}
-      <span className="text-sm text-muted-foreground">Perfil completado</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </motion.div>
   );
 }
@@ -129,6 +132,8 @@ export function DashboardStats({
   notifications,
   profileCompletion,
 }: DashboardStatsProps) {
+  const t = useTranslations("worker");
+
   return (
     <motion.div
       className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
@@ -139,7 +144,7 @@ export function DashboardStats({
       <motion.div variants={item}>
         <StatCard
           icon={Briefcase}
-          label="Empleos disponibles"
+          label={t("dashboard.availableJobs")}
           value={availableJobs}
           variant="default"
         />
@@ -147,7 +152,7 @@ export function DashboardStats({
       <motion.div variants={item}>
         <StatCard
           icon={FileText}
-          label="Mis aplicaciones"
+          label={t("dashboard.myApplications")}
           value={myApplications}
           variant="blue"
         />
@@ -155,13 +160,13 @@ export function DashboardStats({
       <motion.div variants={item}>
         <StatCard
           icon={Bell}
-          label="Notificaciones"
+          label={t("dashboard.notifications")}
           value={notifications}
           variant="orange"
         />
       </motion.div>
       <motion.div variants={item}>
-        <ProfileStatCard percentage={profileCompletion} />
+        <ProfileStatCard percentage={profileCompletion} label={t("dashboard.profileCompleted")} />
       </motion.div>
     </motion.div>
   );

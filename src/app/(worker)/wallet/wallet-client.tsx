@@ -390,7 +390,7 @@ export function WalletClient({ initialContracts, walletData, transactionData }: 
                 {t("contracts.title")}
               </h2>
               <span className="text-sm text-muted-foreground">
-                {filtered.length} contrato(s)
+                {filtered.length} {t("contracts.contractCount")}
               </span>
             </div>
 

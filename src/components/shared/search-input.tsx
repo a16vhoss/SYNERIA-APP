@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface SearchInputProps {
   placeholder?: string;
@@ -17,14 +18,17 @@ interface SearchInputProps {
 }
 
 export function SearchInput({
-  placeholder = "Buscar...",
+  placeholder,
   value: controlledValue,
   onChange,
   onSearch,
   showButton = false,
-  buttonLabel = "Buscar",
+  buttonLabel,
   className,
 }: SearchInputProps) {
+  const t = useTranslations("common");
+  const resolvedPlaceholder = placeholder ?? t("actions.searchPlaceholder");
+  const resolvedButtonLabel = buttonLabel ?? t("actions.search");
   const [internalValue, setInternalValue] = useState("");
   const [focused, setFocused] = useState(false);
   const value = controlledValue ?? internalValue;
@@ -65,13 +69,13 @@ export function SearchInput({
           onKeyDown={handleKeyDown}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          placeholder={placeholder}
+          placeholder={resolvedPlaceholder}
           className="h-9 w-full bg-transparent px-2.5 text-sm text-foreground outline-none placeholder:text-muted-foreground"
         />
       </div>
 
       {showButton && (
-        <Button onClick={() => onSearch?.(value)}>{buttonLabel}</Button>
+        <Button onClick={() => onSearch?.(value)}>{resolvedButtonLabel}</Button>
       )}
     </motion.div>
   );

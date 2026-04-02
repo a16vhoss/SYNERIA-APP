@@ -77,14 +77,14 @@ export function QuickActions({ onAction }: QuickActionsProps) {
     },
     {
       id: "microseguros",
-      label: "Microseguros",
+      label: t("wallet.quickActions.microInsurance"),
       icon: Shield,
       color: "text-violet-600",
       bgColor: "bg-violet-100",
     },
     {
       id: "recargas",
-      label: "Recargas",
+      label: t("wallet.quickActions.topUps"),
       icon: Smartphone,
       color: "text-amber-600",
       bgColor: "bg-amber-100",

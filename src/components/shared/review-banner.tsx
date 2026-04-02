@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Star, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 interface ReviewBannerProps {
   counterpartyName: string;
@@ -17,6 +18,7 @@ export function ReviewBanner({
   onReview,
   className,
 }: ReviewBannerProps) {
+  const t = useTranslations("worker");
   const [dismissed, setDismissed] = useState(false);
 
   return (
@@ -39,15 +41,15 @@ export function ReviewBanner({
 
           <div className="flex flex-1 flex-col gap-0.5">
             <span className="text-sm font-medium text-foreground">
-              Califica tu experiencia con {counterpartyName}
+              {t("reviews.rateExperience")} {counterpartyName}
             </span>
             <span className="text-xs text-muted-foreground">
-              Tu opinion ayuda a otros trabajadores a tomar mejores decisiones.
+              {t("reviews.rateExperienceDesc")}
             </span>
           </div>
 
           <Button size="sm" onClick={onReview}>
-            Dejar Resena
+            {t("reviews.leaveReview")}
           </Button>
 
           <Button

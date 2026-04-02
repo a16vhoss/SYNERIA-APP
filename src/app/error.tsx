@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Logo } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, AlertTriangle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const shakeVariants = {
   initial: { x: 0 },
@@ -21,6 +22,8 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const t = useTranslations("common");
+
   useEffect(() => {
     console.error("[Syneria Error]", error);
   }, [error]);
@@ -47,11 +50,10 @@ export default function Error({
         transition={{ delay: 0.2, duration: 0.4 }}
       >
         <h2 className="font-heading text-2xl font-semibold text-foreground">
-          Algo salio mal
+          {t("errors.somethingWentWrong")}
         </h2>
         <p className="max-w-sm text-sm text-muted-foreground">
-          Ocurrio un error inesperado. Puedes intentar de nuevo o volver al
-          inicio.
+          {t("errors.errorDesc")}
         </p>
       </motion.div>
 
@@ -64,7 +66,7 @@ export default function Error({
           transition={{ delay: 0.4 }}
         >
           <summary className="cursor-pointer text-xs font-medium text-destructive">
-            Detalles del error
+            {t("errors.errorDetails")}
           </summary>
           <pre className="mt-2 overflow-x-auto text-xs text-destructive/80">
             {error.message}
@@ -82,7 +84,7 @@ export default function Error({
       >
         <Button onClick={reset} size="lg">
           <RefreshCw data-icon="inline-start" />
-          Intentar de nuevo
+          {t("errors.tryAgain")}
         </Button>
       </motion.div>
     </div>

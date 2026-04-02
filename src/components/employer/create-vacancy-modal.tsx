@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 import {
   Dialog,
@@ -19,21 +19,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { COUNTRIES, SECTORS, JOB_TYPES } from "@/lib/constants/countries";
 
-// ── Schema ────────────────────────────────────
-const vacancySchema = z.object({
-  title: z.string().min(3, "Minimo 3 caracteres"),
-  description: z.string().min(10, "Minimo 10 caracteres"),
-  sector: z.string().min(1, "Selecciona un sector"),
-  contract_type: z.string().min(1, "Selecciona un tipo"),
-  country: z.string().min(1, "Selecciona un pais"),
-  city: z.string().min(2, "Minimo 2 caracteres"),
-  salary_min: z.string().optional(),
-  salary_max: z.string().optional(),
-  requirements: z.string().optional(),
-  benefits: z.string().optional(),
-});
-
-type VacancyFormData = z.infer<typeof vacancySchema>;
+// ── Form data type ────────────────────────────────────
+interface VacancyFormData {
+  title: string;
+  description: string;
+  sector: string;
+  contract_type: string;
+  country: string;
+  city: string;
+  salary_min: string;
+  salary_max: string;
+  requirements: string;
+  benefits: string;
+}
 
 interface CreateVacancyModalProps {
   open: boolean;
@@ -56,6 +54,7 @@ export function CreateVacancyModal({
   onSubmit,
 }: CreateVacancyModalProps) {
   const t = useTranslations("employer");
+  const tc = useTranslations("common");
   const {
     register,
     handleSubmit,
@@ -111,7 +110,7 @@ export function CreateVacancyModal({
               <Input
                 id="title"
                 placeholder={t("vacancies.create.jobTitlePlaceholder")}
-                {...register("title", { required: "Campo requerido", minLength: { value: 3, message: "Minimo 3 caracteres" } })}
+                {...register("title", { required: t("vacancies.create.errors.fieldRequired"), minLength: { value: 3, message: t("vacancies.create.errors.minChars3") } })}
                 aria-invalid={!!errors.title}
                 className="mt-1"
               />
@@ -126,7 +125,7 @@ export function CreateVacancyModal({
                 id="description"
                 placeholder={t("vacancies.create.descriptionPlaceholder")}
                 rows={3}
-                {...register("description", { required: "Campo requerido", minLength: { value: 10, message: "Minimo 10 caracteres" } })}
+                {...register("description", { required: t("vacancies.create.errors.fieldRequired"), minLength: { value: 10, message: t("vacancies.create.errors.minChars10") } })}
                 aria-invalid={!!errors.description}
                 className="mt-1"
               />
@@ -144,13 +143,13 @@ export function CreateVacancyModal({
                 <Label htmlFor="sector">{t("vacancies.create.category")}</Label>
                 <select
                   id="sector"
-                  {...register("sector", { required: "Selecciona un sector" })}
+                  {...register("sector", { required: t("vacancies.create.errors.selectSector") })}
                   className="mt-1 h-8 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
-                  <option value="">Seleccionar sector</option>
+                  <option value="">{t("vacancies.create.selectSectorPlaceholder")}</option>
                   {SECTORS.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
+                    <option key={s.value} value={s.value}>
+                      {tc(`sectors.${s.label}`)}
                     </option>
                   ))}
                 </select>
@@ -162,13 +161,13 @@ export function CreateVacancyModal({
                 <Label htmlFor="contract_type">{t("vacancies.create.type")}</Label>
                 <select
                   id="contract_type"
-                  {...register("contract_type", { required: "Selecciona un tipo" })}
+                  {...register("contract_type", { required: t("vacancies.create.errors.selectType") })}
                   className="mt-1 h-8 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
-                  <option value="">Jornada Completa</option>
+                  <option value="">{t("vacancies.create.fullTime")}</option>
                   {JOB_TYPES.map((j) => (
                     <option key={j.value} value={j.value}>
-                      {j.label}
+                      {tc(`jobTypes.${j.label}`)}
                     </option>
                   ))}
                 </select>
@@ -202,10 +201,10 @@ export function CreateVacancyModal({
                 <Label htmlFor="country">{t("companyProfile.location")}</Label>
                 <select
                   id="country"
-                  {...register("country", { required: "Selecciona un pais" })}
+                  {...register("country", { required: t("vacancies.create.errors.selectCountry") })}
                   className="mt-1 h-8 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
-                  <option value="">Seleccionar pais</option>
+                  <option value="">{t("vacancies.create.selectCountryPlaceholder")}</option>
                   {COUNTRIES.map((c) => (
                     <option key={c.code} value={c.code}>
                       {c.flag} {c.name}
@@ -217,11 +216,11 @@ export function CreateVacancyModal({
                 )}
               </div>
               <div>
-                <Label htmlFor="city">Ciudad</Label>
+                <Label htmlFor="city">{t("vacancies.create.cityLabel")}</Label>
                 <Input
                   id="city"
-                  placeholder="Ciudad"
-                  {...register("city", { required: "Campo requerido", minLength: { value: 2, message: "Minimo 2 caracteres" } })}
+                  placeholder={t("vacancies.create.cityPlaceholder")}
+                  {...register("city", { required: t("vacancies.create.errors.fieldRequired"), minLength: { value: 2, message: t("vacancies.create.errors.minChars2") } })}
                   aria-invalid={!!errors.city}
                   className="mt-1"
                 />
@@ -241,7 +240,7 @@ export function CreateVacancyModal({
                 <Input
                   id="salary_min"
                   type="number"
-                  placeholder="Salario minimo"
+                  placeholder={t("vacancies.create.salaryMinPlaceholder")}
                   {...register("salary_min")}
                   className="mt-1"
                 />
@@ -251,7 +250,7 @@ export function CreateVacancyModal({
                 <Input
                   id="salary_max"
                   type="number"
-                  placeholder="Salario maximo"
+                  placeholder={t("vacancies.create.salaryMaxPlaceholder")}
                   {...register("salary_max")}
                   className="mt-1"
                 />

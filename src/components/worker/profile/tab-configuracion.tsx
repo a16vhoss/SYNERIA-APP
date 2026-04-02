@@ -49,6 +49,7 @@ const LANGUAGES = [
 ];
 
 export function TabConfiguracion() {
+  const t = useTranslations("worker");
   const tc = useTranslations("common");
   const [notifJobs, setNotifJobs] = useState(true);
   const [notifApplications, setNotifApplications] = useState(true);
@@ -109,23 +110,23 @@ export function TabConfiguracion() {
       setTimeout(() => window.location.reload(), 800);
     } catch (err) {
       console.error("Error saving settings:", err);
-      toast.error("Error al guardar configuracion");
+      toast.error(tc("misc.error"));
     } finally {
       setSaving(false);
     }
   }
 
   async function handleDelete() {
-    if (deleteConfirm !== "ELIMINAR" || !userId) return;
+    if (deleteConfirm !== t("profile.settings.deleteKeyword") || !userId) return;
     setDeleting(true);
     try {
       const supabase = createClient();
       // Sign out and redirect — actual account deletion requires admin/edge function
       await supabase.auth.signOut();
-      toast.success("Sesion cerrada");
+      toast.success(t("profile.settings.sessionClosed"));
       window.location.href = "/login";
     } catch {
-      toast.error("Error al eliminar cuenta");
+      toast.error(tc("misc.error"));
     } finally {
       setDeleting(false);
       setDeleteOpen(false);
@@ -144,13 +145,13 @@ export function TabConfiguracion() {
         <div className="mb-4 flex items-center gap-2">
           <Bell className="h-5 w-5 text-brand-600" />
           <h3 className="font-heading text-lg font-semibold">
-            Notificaciones por Email
+            {t("profile.settings.emailNotifications")}
           </h3>
         </div>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <Label htmlFor="notif-jobs" className="cursor-pointer">
-              Nuevos empleos compatibles
+              {t("profile.settings.newMatchingJobs")}
             </Label>
             <Switch
               id="notif-jobs"
@@ -160,7 +161,7 @@ export function TabConfiguracion() {
           </div>
           <div className="flex items-center justify-between">
             <Label htmlFor="notif-apps" className="cursor-pointer">
-              Estado de aplicaciones
+              {t("profile.settings.applicationStatus")}
             </Label>
             <Switch
               id="notif-apps"
@@ -170,16 +171,16 @@ export function TabConfiguracion() {
           </div>
           <div className="pt-2">
             <Label className="mb-2 block text-sm text-muted-foreground">
-              Frecuencia
+              {t("profile.settings.frequency")}
             </Label>
             <Select value={frequency} onValueChange={(v) => v && setFrequency(v)}>
               <SelectTrigger className="w-48">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="diaria">Diaria</SelectItem>
-                <SelectItem value="semanal">Semanal</SelectItem>
-                <SelectItem value="mensual">Mensual</SelectItem>
+                <SelectItem value="diaria">{t("profile.settings.daily")}</SelectItem>
+                <SelectItem value="semanal">{t("profile.settings.weekly")}</SelectItem>
+                <SelectItem value="mensual">{t("profile.settings.monthly")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -191,7 +192,7 @@ export function TabConfiguracion() {
         <div className="mb-4 flex items-center gap-2">
           <Globe className="h-5 w-5 text-brand-600" />
           <h3 className="font-heading text-lg font-semibold">
-            Idioma de la plataforma
+            {t("profile.settings.platformLanguage")}
           </h3>
         </div>
         <Select value={language} onValueChange={(v) => v && setLanguage(v)}>
@@ -216,7 +217,7 @@ export function TabConfiguracion() {
           className="bg-brand-600 hover:bg-brand-700"
         >
           {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {tc("actions.save")} {tc("nav.settings")}
+          {t("profile.settings.saveSettings")}
         </Button>
       </motion.div>
 
@@ -228,19 +229,18 @@ export function TabConfiguracion() {
         <div className="mb-2 flex items-center gap-2">
           <AlertTriangle className="h-5 w-5 text-red-500" />
           <h3 className="font-heading text-lg font-semibold text-red-700">
-            Zona de peligro
+            {t("profile.settings.dangerZone")}
           </h3>
         </div>
         <p className="mb-4 text-sm text-red-600">
-          Esta accion es irreversible. Se eliminaran todos tus datos, incluyendo
-          perfil, aplicaciones, contratos y wallet.
+          {t("profile.settings.deleteWarning")}
         </p>
         <Button
           variant="destructive"
           onClick={() => setDeleteOpen(true)}
         >
           <Trash2 className="mr-2 h-4 w-4" />
-          {tc("actions.delete")} mi cuenta
+          {tc("actions.delete")} {t("profile.settings.myAccount")}
         </Button>
       </motion.div>
 
@@ -249,17 +249,16 @@ export function TabConfiguracion() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="text-red-700">
-              Eliminar cuenta permanentemente
+              {t("profile.settings.deleteAccountTitle")}
             </DialogTitle>
             <DialogDescription>
-              Esta accion no se puede deshacer. Escribe{" "}
-              <strong>ELIMINAR</strong> para confirmar.
+              {t("profile.settings.deleteConfirmDesc")}
             </DialogDescription>
           </DialogHeader>
           <Input
             value={deleteConfirm}
             onChange={(e) => setDeleteConfirm(e.target.value)}
-            placeholder='Escribe "ELIMINAR"'
+            placeholder={t("profile.settings.typeDeletePlaceholder")}
             className="border-red-300 focus-visible:ring-red-500"
           />
           <DialogFooter>
@@ -269,10 +268,10 @@ export function TabConfiguracion() {
             <Button
               variant="destructive"
               onClick={handleDelete}
-              disabled={deleteConfirm !== "ELIMINAR" || deleting}
+              disabled={deleteConfirm !== t("profile.settings.deleteKeyword") || deleting}
             >
               {deleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Eliminar permanentemente
+              {t("profile.settings.deletePermanently")}
             </Button>
           </DialogFooter>
         </DialogContent>

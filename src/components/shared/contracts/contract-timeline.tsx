@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import { ContractStatusBadge } from "./contract-status-badge";
 import type { ContractData } from "@/lib/actions/contracts";
 
@@ -30,6 +31,9 @@ export function ContractTimeline({
   currentId,
   className,
 }: ContractTimelineProps) {
+  const tc = useTranslations("common");
+  const tw = useTranslations("worker");
+
   if (contracts.length === 0) return null;
 
   return (
@@ -75,14 +79,14 @@ export function ContractTimeline({
                     {contract.start_date} - {contract.end_date}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {contract.currency} ${contract.salary.toLocaleString()}/mes
+                    {contract.currency} ${contract.salary.toLocaleString()}{tc("misc.perMonth")}
                   </p>
                 </div>
                 <ContractStatusBadge status={contract.status} size="sm" />
               </div>
               {isCurrent && (
                 <p className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-brand-600">
-                  Contrato actual
+                  {tw("contracts.currentContract")}
                 </p>
               )}
             </div>

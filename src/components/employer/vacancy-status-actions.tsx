@@ -170,9 +170,7 @@ export function VacancyStatusActions({
                   <div className="flex items-start gap-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
                     <AlertTriangle className="mt-0.5 size-4 shrink-0" />
                     <span>
-                      Esta vacante tiene{" "}
-                      <strong>{vacancy.applications_count}</strong> aplicaciones
-                      activas. Los candidatos seran notificados del cierre.
+                      {t("vacancies.status.closeWarning", { count: vacancy.applications_count })}
                     </span>
                   </div>
                 )}

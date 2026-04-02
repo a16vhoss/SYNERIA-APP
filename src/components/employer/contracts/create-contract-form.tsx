@@ -32,39 +32,41 @@ import { createContract } from "@/lib/actions/contracts";
 import type { ContractData } from "@/lib/actions/contracts";
 
 /* ------------------------------------------------------------------ */
-/*  Schema                                                             */
+/*  Schema factory                                                     */
 /* ------------------------------------------------------------------ */
 
-const contractSchema = z.object({
-  worker_name: z.string().min(1, "Selecciona un trabajador"),
-  position: z.string().min(3, "Minimo 3 caracteres"),
-  work_schedule: z.string().min(3, "Ingresa un horario"),
-  country: z.string().min(1, "Ingresa el pais"),
-  city: z.string().min(2, "Ingresa la ciudad"),
-  salary: z.string().min(1, "Ingresa el salario"),
-  currency: z.string().min(1, "Selecciona moneda"),
-  start_date: z.string().min(1, "Ingresa fecha de inicio"),
-  end_date: z.string().min(1, "Ingresa fecha de fin"),
-  terms: z.string().min(10, "Minimo 10 caracteres"),
-  visa_sponsorship: z.boolean().optional(),
-});
+function createContractSchema(t: (key: string) => string) {
+  return z.object({
+    worker_name: z.string().min(1, t("contracts.create.errors.selectWorker")),
+    position: z.string().min(3, t("contracts.create.errors.minChars3")),
+    work_schedule: z.string().min(3, t("contracts.create.errors.enterSchedule")),
+    country: z.string().min(1, t("contracts.create.errors.enterCountry")),
+    city: z.string().min(2, t("contracts.create.errors.enterCity")),
+    salary: z.string().min(1, t("contracts.create.errors.enterSalary")),
+    currency: z.string().min(1, t("contracts.create.errors.selectCurrency")),
+    start_date: z.string().min(1, t("contracts.create.errors.enterStartDate")),
+    end_date: z.string().min(1, t("contracts.create.errors.enterEndDate")),
+    terms: z.string().min(10, t("contracts.create.errors.minChars10")),
+    visa_sponsorship: z.boolean().optional(),
+  });
+}
 
-type ContractFormData = z.infer<typeof contractSchema>;
+type ContractFormData = z.infer<ReturnType<typeof createContractSchema>>;
 
 /* ------------------------------------------------------------------ */
-/*  Benefits                                                           */
+/*  Benefits keys                                                      */
 /* ------------------------------------------------------------------ */
 
-const AVAILABLE_BENEFITS = [
-  "Alojamiento",
-  "Seguro Medico",
-  "Transporte",
-  "Comida",
-  "Formacion",
-  "Herramientas",
-  "Laptop",
-  "Vacaciones Extras",
-];
+const BENEFIT_KEYS = [
+  "housing",
+  "healthInsurance",
+  "transport",
+  "meals",
+  "training",
+  "tools",
+  "laptop",
+  "extraVacation",
+] as const;
 
 /* ------------------------------------------------------------------ */
 /*  Animation                                                          */
@@ -106,6 +108,8 @@ export function CreateContractForm({
   const [selectedBenefits, setSelectedBenefits] = useState<string[]>([]);
   const [step, setStep] = useState<"form" | "preview">("form");
 
+  const contractSchema = createContractSchema(t);
+
   const {
     register,
     handleSubmit,
@@ -118,7 +122,7 @@ export function CreateContractForm({
     defaultValues: {
       worker_name: "",
       position: "",
-      work_schedule: "Lunes a Viernes, 9:00 - 18:00",
+      work_schedule: t("contracts.create.defaultSchedule"),
       country: "",
       city: "",
       salary: "",
@@ -132,15 +136,19 @@ export function CreateContractForm({
 
   const formValues = watch();
 
-  function toggleBenefit(benefit: string) {
+  function toggleBenefit(benefitKey: string) {
     setSelectedBenefits((prev) =>
-      prev.includes(benefit)
-        ? prev.filter((b) => b !== benefit)
-        : [...prev, benefit]
+      prev.includes(benefitKey)
+        ? prev.filter((b) => b !== benefitKey)
+        : [...prev, benefitKey]
     );
   }
 
   async function onFormSubmit(data: ContractFormData) {
+    const benefitLabels = selectedBenefits.map((key) =>
+      t(`contracts.create.benefits.${key}`)
+    );
+
     const result = await createContract({
       worker_id: "usr_002",
       worker_name: data.worker_name,
@@ -156,7 +164,7 @@ export function CreateContractForm({
       start_date: data.start_date,
       end_date: data.end_date,
       terms: data.terms,
-      benefits: selectedBenefits,
+      benefits: benefitLabels,
       visa_sponsorship: data.visa_sponsorship ?? false,
       work_schedule: data.work_schedule,
       signature_employer: "signed",
@@ -233,7 +241,7 @@ export function CreateContractForm({
                 <Label htmlFor="position">{t("contracts.create.position")}</Label>
                 <Input
                   id="position"
-                  placeholder="Ej: Asistente de Construccion"
+                  placeholder={t("contracts.create.positionPlaceholder")}
                   {...register("position")}
                   className="mt-1"
                 />
@@ -248,7 +256,7 @@ export function CreateContractForm({
                 <Label htmlFor="work_schedule">{t("contracts.create.schedule")}</Label>
                 <Input
                   id="work_schedule"
-                  placeholder="Ej: Lunes a Viernes, 9:00 - 18:00"
+                  placeholder={t("contracts.create.schedulePlaceholder")}
                   {...register("work_schedule")}
                   className="mt-1"
                 />
@@ -284,7 +292,7 @@ export function CreateContractForm({
                   <Label htmlFor="country">{t("companyProfile.location")}</Label>
                   <Input
                     id="country"
-                    placeholder="Chile"
+                    placeholder={t("contracts.create.countryPlaceholder")}
                     {...register("country")}
                     className="mt-1"
                   />
@@ -298,7 +306,7 @@ export function CreateContractForm({
                   <Label htmlFor="city">{t("vacancies.create.location")}</Label>
                   <Input
                     id="city"
-                    placeholder="Santiago"
+                    placeholder={t("contracts.create.cityPlaceholder")}
                     {...register("city")}
                     className="mt-1"
                   />
@@ -423,7 +431,7 @@ export function CreateContractForm({
                 <Label htmlFor="terms">{t("contracts.create.terms")}</Label>
                 <Textarea
                   id="terms"
-                  placeholder="Describe los terminos y condiciones del contrato..."
+                  placeholder={t("contracts.create.termsPlaceholder")}
                   {...register("terms")}
                   className="mt-1 min-h-24"
                 />
@@ -437,16 +445,16 @@ export function CreateContractForm({
               <motion.div custom={11} variants={sectionVariants}>
                 <Label className="mb-2 block">{t("vacancies.create.benefits")}</Label>
                 <div className="grid grid-cols-2 gap-2">
-                  {AVAILABLE_BENEFITS.map((benefit) => (
+                  {BENEFIT_KEYS.map((benefitKey) => (
                     <label
-                      key={benefit}
+                      key={benefitKey}
                       className="flex cursor-pointer items-center gap-2 rounded-lg border border-foreground/5 p-2 transition-colors hover:bg-muted/50"
                     >
                       <Checkbox
-                        checked={selectedBenefits.includes(benefit)}
-                        onCheckedChange={() => toggleBenefit(benefit)}
+                        checked={selectedBenefits.includes(benefitKey)}
+                        onCheckedChange={() => toggleBenefit(benefitKey)}
                       />
-                      <span className="text-sm">{benefit}</span>
+                      <span className="text-sm">{t(`contracts.create.benefits.${benefitKey}`)}</span>
                     </label>
                   ))}
                 </div>
@@ -519,7 +527,7 @@ export function CreateContractForm({
                     {t("contracts.create.salary")}
                   </p>
                   <p className="text-foreground">
-                    {formValues.currency} ${formValues.salary}/mes
+                    {formValues.currency} ${formValues.salary}
                   </p>
                 </div>
               </div>
@@ -555,12 +563,12 @@ export function CreateContractForm({
                     {t("vacancies.create.benefits")}
                   </p>
                   <div className="mt-1 flex flex-wrap gap-1.5">
-                    {selectedBenefits.map((b) => (
+                    {selectedBenefits.map((key) => (
                       <span
-                        key={b}
+                        key={key}
                         className="rounded-full bg-brand-100 px-2 py-0.5 text-xs font-medium text-brand-700"
                       >
-                        {b}
+                        {t(`contracts.create.benefits.${key}`)}
                       </span>
                     ))}
                   </div>

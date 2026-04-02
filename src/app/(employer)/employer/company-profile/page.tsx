@@ -1,10 +1,13 @@
 import { createClient } from "@/lib/supabase/server";
 import { CompanyProfileClient } from "./company-profile-client";
+import { getTranslations } from "next-intl/server";
 
-export const metadata = {
-  title: "Perfil de Empresa | Syneria",
-  description: "Configura el perfil publico de tu empresa",
-};
+export async function generateMetadata() {
+  const t = await getTranslations("common");
+  return {
+    title: `${t("nav.company")} | Syneria`,
+  };
+}
 
 async function getCompanyData() {
   try {

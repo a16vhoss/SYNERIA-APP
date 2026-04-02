@@ -178,7 +178,7 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
           variants={itemVariants}
           className="mb-1 mt-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60"
         >
-          Principal
+          {t("nav.principal")}
         </motion.p>
         {principalItems.map((item) => (
           <div key={item.href} onClick={onItemClick}>
@@ -191,7 +191,7 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
           variants={itemVariants}
           className="mb-1 mt-6 px-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60"
         >
-          Soporte
+          {t("nav.support")}
         </motion.p>
         {supportItems.map((item) => (
           <div key={item.href} onClick={onItemClick}>
@@ -231,7 +231,7 @@ function SidebarContent({ onItemClick }: { onItemClick?: () => void }) {
                 Syneria Premium
               </p>
               <p className="text-[10px] text-muted-foreground">
-                Desbloquea todo
+                {t("premium.unlockAll")}
               </p>
             </div>
           </div>
@@ -279,6 +279,7 @@ function DesktopSidebar() {
 
 function MobileSidebar() {
   const [open, setOpen] = useState(false);
+  const t = useTranslations("common");
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -295,7 +296,7 @@ function MobileSidebar() {
         <span className="sr-only">Menu</span>
       </SheetTrigger>
       <SheetContent side="left" className="w-[280px] p-0" showCloseButton={false}>
-        <SheetTitle className="sr-only">Menu de navegacion</SheetTitle>
+        <SheetTitle className="sr-only">{t("nav.menuTitle")}</SheetTitle>
         <SidebarContent onItemClick={() => setOpen(false)} />
       </SheetContent>
     </Sheet>

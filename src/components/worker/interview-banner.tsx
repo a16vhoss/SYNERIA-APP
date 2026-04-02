@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Calendar, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -20,6 +21,7 @@ export function InterviewBanner({
   time,
   interviewId,
 }: InterviewBannerProps) {
+  const t = useTranslations("worker");
   const [dismissed, setDismissed] = useState(false);
 
   // Check sessionStorage on mount to persist dismissal within session
@@ -55,10 +57,10 @@ export function InterviewBanner({
           {/* Content */}
           <div className="flex flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-3">
             <p className="text-sm font-semibold text-teal-800">
-              Tienes una entrevista programada
+              {t("interviews.scheduled")}
             </p>
             <span className="text-sm text-teal-600">
-              {date} a las {time} &mdash; {companyName}
+              {date} {t("interviews.atTime")} {time} &mdash; {companyName}
             </span>
           </div>
 
@@ -68,7 +70,7 @@ export function InterviewBanner({
               href={`/applications?interview=${interviewId}`}
               className="rounded-lg bg-teal-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-teal-700"
             >
-              Ver detalles
+              {t("jobs.detail.aboutJob")}
             </Link>
             <button
               onClick={handleDismiss}

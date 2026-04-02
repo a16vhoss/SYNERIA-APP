@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ArrowLeftRight } from "lucide-react";
 import { toast } from "sonner";
@@ -29,13 +30,8 @@ import {
 /*  Currency data                                                      */
 /* ------------------------------------------------------------------ */
 
-const currencies = [
-  { value: "USD", label: "USD - Dolar Americano" },
-  { value: "EUR", label: "EUR - Euro" },
-  { value: "GBP", label: "GBP - Libra Esterlina" },
-  { value: "CHF", label: "CHF - Franco Suizo" },
-  { value: "MXN", label: "MXN - Peso Mexicano" },
-];
+const CURRENCY_KEYS = ["usd", "eur", "gbp", "chf", "mxn"] as const;
+const CURRENCY_VALUES = ["USD", "EUR", "GBP", "CHF", "MXN"] as const;
 
 const exchangeRates: Record<string, Record<string, number>> = {
   USD: { EUR: 0.92, GBP: 0.79, CHF: 0.88, MXN: 17.15 },
@@ -60,6 +56,7 @@ export function CurrencySwapModal({
   open,
   onOpenChange,
 }: CurrencySwapModalProps) {
+  const t = useTranslations("worker");
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("EUR");
   const [amount, setAmount] = useState("");
@@ -77,9 +74,7 @@ export function CurrencySwapModal({
 
   const handleSwap = () => {
     if (!canSwap) return;
-    toast.success(
-      `Cambiaste ${parsedAmount.toFixed(2)} ${fromCurrency} a ${resultAmount.toFixed(2)} ${toCurrency}`
-    );
+    toast.success(t("wallet.swap.success"));
     setAmount("");
     onOpenChange(false);
   };
@@ -95,10 +90,10 @@ export function CurrencySwapModal({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <ArrowLeftRight className="size-5 text-sky-600" />
-            Cambio de Divisa
+            {t("wallet.swap.title")}
           </DialogTitle>
           <DialogDescription>
-            Cambia entre divisas con las mejores tasas del mercado.
+            {t("wallet.swap.description")}
           </DialogDescription>
         </DialogHeader>
 
@@ -110,7 +105,7 @@ export function CurrencySwapModal({
         >
           {/* From */}
           <div className="space-y-1.5">
-            <Label>De</Label>
+            <Label>{t("wallet.swap.from")}</Label>
             <Select
               value={fromCurrency}
               onValueChange={(v) => v && setFromCurrency(v)}
@@ -119,9 +114,9 @@ export function CurrencySwapModal({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {currencies.map((c) => (
-                  <SelectItem key={c.value} value={c.value}>
-                    {c.label}
+                {CURRENCY_VALUES.map((val, i) => (
+                  <SelectItem key={val} value={val}>
+                    {t(`wallet.currencies.${CURRENCY_KEYS[i]}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -130,7 +125,7 @@ export function CurrencySwapModal({
 
           {/* To */}
           <div className="space-y-1.5">
-            <Label>A</Label>
+            <Label>{t("wallet.swap.to")}</Label>
             <Select
               value={toCurrency}
               onValueChange={(v) => v && setToCurrency(v)}
@@ -139,9 +134,9 @@ export function CurrencySwapModal({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {currencies.map((c) => (
-                  <SelectItem key={c.value} value={c.value}>
-                    {c.label}
+                {CURRENCY_VALUES.map((val, i) => (
+                  <SelectItem key={val} value={val}>
+                    {t(`wallet.currencies.${CURRENCY_KEYS[i]}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -150,7 +145,7 @@ export function CurrencySwapModal({
 
           {/* Amount */}
           <div className="space-y-1.5">
-            <Label htmlFor="swap-amount">Monto ({fromCurrency})</Label>
+            <Label htmlFor="swap-amount">{t("wallet.swap.amount")} ({fromCurrency})</Label>
             <Input
               id="swap-amount"
               type="number"
@@ -171,14 +166,14 @@ export function CurrencySwapModal({
               transition={{ duration: 0.2 }}
             >
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Tasa de cambio</span>
+                <span className="text-muted-foreground">{t("wallet.swap.exchangeRate")}</span>
                 <span className="font-medium">
                   1 {fromCurrency} = {rate.toFixed(4)} {toCurrency}
                 </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">
-                  Comision (1%)
+                  {t("wallet.swap.fee")}
                 </span>
                 <span className="font-medium">
                   {fee.toFixed(2)} {fromCurrency}
@@ -187,7 +182,7 @@ export function CurrencySwapModal({
               <div className="border-t border-foreground/10 pt-2">
                 <div className="flex justify-between text-sm">
                   <span className="font-medium text-foreground">
-                    Recibiras
+                    {t("wallet.swap.youWillReceive")}
                   </span>
                   <span className="font-bold text-brand-600">
                     {resultAmount.toFixed(2)} {toCurrency}
@@ -205,7 +200,7 @@ export function CurrencySwapModal({
             disabled={!canSwap}
           >
             <ArrowLeftRight className="size-4" />
-            Cambiar Divisa
+            {t("wallet.swap.swapButton")}
           </Button>
         </DialogFooter>
       </DialogContent>

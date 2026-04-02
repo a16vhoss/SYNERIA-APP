@@ -224,12 +224,12 @@ export default function VacancyDetailPage({
 
   const salaryRange =
     vacancy.salary_min && vacancy.salary_max
-      ? `EUR ${vacancy.salary_min.toLocaleString()} - ${vacancy.salary_max.toLocaleString()} /mes`
+      ? t("vacancies.salaryRange", { currency: "EUR", min: vacancy.salary_min.toLocaleString(), max: vacancy.salary_max.toLocaleString() })
       : vacancy.salary_min
-        ? `Desde EUR ${vacancy.salary_min.toLocaleString()} /mes`
+        ? t("vacancies.salaryFrom", { currency: "EUR", amount: vacancy.salary_min.toLocaleString() })
         : vacancy.salary_max
-          ? `Hasta EUR ${vacancy.salary_max.toLocaleString()} /mes`
-          : "No especificado";
+          ? t("vacancies.salaryUpTo", { currency: "EUR", amount: vacancy.salary_max.toLocaleString() })
+          : t("vacancies.salaryNotSpecified");
 
   return (
     <motion.div
@@ -333,7 +333,7 @@ export default function VacancyDetailPage({
           <GlassCard hover={false}>
             <div className="mb-4 flex items-center justify-between">
               <h3 className="font-heading text-base font-semibold text-foreground">
-                Aplicaciones
+                {t("vacancies.applications")}
               </h3>
               <span className="inline-flex size-8 items-center justify-center rounded-full bg-brand-100 text-sm font-bold text-brand-700">
                 {vacancy.applications_count}
@@ -342,7 +342,7 @@ export default function VacancyDetailPage({
 
             {candidates.length === 0 ? (
               <p className="text-sm text-muted-foreground">
-                Aun no hay candidatos para esta vacante.
+                {t("vacancies.noCandidatesYet")}
               </p>
             ) : (
               <div className="space-y-3">
@@ -375,7 +375,7 @@ export default function VacancyDetailPage({
                     href={`/employer/vacancies/${vacancy.id}/candidates`}
                     className="block text-center text-sm font-medium text-brand-600 hover:text-brand-700 hover:underline"
                   >
-                    Ver todos los candidatos ({candidates.length})
+                    {t("vacancies.viewAllCandidates", { count: candidates.length })}
                   </Link>
                 )}
               </div>
@@ -385,39 +385,39 @@ export default function VacancyDetailPage({
           {/* Quick stats */}
           <GlassCard hover={false}>
             <h3 className="mb-4 font-heading text-base font-semibold text-foreground">
-              Resumen
+              {t("vacancies.summary")}
             </h3>
             <div className="space-y-3">
               <QuickStat
-                label="Pendientes"
+                label={t("candidates.pipeline.pending")}
                 value={
                   candidates.filter((c) => c.status === "pending").length
                 }
                 color="text-amber-600 bg-amber-100"
               />
               <QuickStat
-                label="En Revision"
+                label={t("candidates.pipeline.reviewing")}
                 value={
                   candidates.filter((c) => c.status === "reviewing").length
                 }
                 color="text-sky-600 bg-sky-100"
               />
               <QuickStat
-                label="Entrevista"
+                label={t("candidates.pipeline.interview")}
                 value={
                   candidates.filter((c) => c.status === "interview").length
                 }
                 color="text-violet-600 bg-violet-100"
               />
               <QuickStat
-                label="Aceptados"
+                label={t("candidates.pipeline.accepted")}
                 value={
                   candidates.filter((c) => c.status === "accepted").length
                 }
                 color="text-emerald-600 bg-emerald-100"
               />
               <QuickStat
-                label="Rechazados"
+                label={t("candidates.pipeline.rejected")}
                 value={
                   candidates.filter((c) => c.status === "rejected").length
                 }

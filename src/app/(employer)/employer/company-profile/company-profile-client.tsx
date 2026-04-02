@@ -82,7 +82,7 @@ export function CompanyProfileClient({
     try {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("No autenticado");
+      if (!user) throw new Error(tc("notAuthenticated"));
 
       const { error } = await supabase
         .from("companies")
@@ -178,7 +178,7 @@ export function CompanyProfileClient({
                   </Label>
                   <Input
                     id="name"
-                    placeholder="Ej: Mi Empresa S.A."
+                    placeholder={t("companyProfile.namePlaceholder")}
                     {...register("name")}
                     aria-invalid={!!errors.name}
                   />
@@ -197,7 +197,7 @@ export function CompanyProfileClient({
                   </div>
                   <Textarea
                     id="description"
-                    placeholder="Describe brevemente tu empresa..."
+                    placeholder={t("companyProfile.descriptionFieldPlaceholder")}
                     rows={4}
                     maxLength={500}
                     {...register("description")}
@@ -220,8 +220,8 @@ export function CompanyProfileClient({
                   >
                     <option value="">{t("companyProfile.industry")}</option>
                     {SECTORS.map((sector) => (
-                      <option key={sector} value={sector}>
-                        {sector}
+                      <option key={sector.value} value={sector.value}>
+                        {tc(`sectors.${sector.label}`)}
                       </option>
                     ))}
                   </select>
@@ -254,7 +254,7 @@ export function CompanyProfileClient({
                     <Label htmlFor="city">{t("vacancies.create.location")}</Label>
                     <Input
                       id="city"
-                      placeholder="Ej: Madrid"
+                      placeholder={t("companyProfile.cityPlaceholder")}
                       {...register("city")}
                       aria-invalid={!!errors.city}
                     />
@@ -270,7 +270,7 @@ export function CompanyProfileClient({
                   <Input
                     id="website"
                     type="url"
-                    placeholder="https://www.miempresa.com"
+                    placeholder={t("companyProfile.websitePlaceholder")}
                     {...register("website")}
                     aria-invalid={!!errors.website}
                   />
@@ -286,7 +286,7 @@ export function CompanyProfileClient({
                     id="employees_count"
                     type="number"
                     min={0}
-                    placeholder="Ej: 50"
+                    placeholder={t("companyProfile.employeesPlaceholder")}
                     {...register("employees_count", { valueAsNumber: true })}
                     aria-invalid={!!errors.employees_count}
                   />

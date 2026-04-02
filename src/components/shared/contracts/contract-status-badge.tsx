@@ -2,50 +2,51 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import type { ContractStatus } from "@/lib/actions/contracts";
 
 const statusConfig: Record<
   ContractStatus,
-  { label: string; bg: string; text: string; dot: string }
+  { key: string; bg: string; text: string; dot: string }
 > = {
   pendiente: {
-    label: "PENDIENTE",
+    key: "pending",
     bg: "bg-amber-100",
     text: "text-amber-700",
     dot: "bg-amber-500",
   },
   activo: {
-    label: "ACTIVO",
+    key: "active",
     bg: "bg-emerald-100",
     text: "text-emerald-700",
     dot: "bg-emerald-500",
   },
   completado: {
-    label: "COMPLETADO",
+    key: "completed",
     bg: "bg-sky-100",
     text: "text-sky-700",
     dot: "bg-sky-500",
   },
   expirado: {
-    label: "EXPIRADO",
+    key: "expired",
     bg: "bg-gray-100",
     text: "text-gray-600",
     dot: "bg-gray-400",
   },
   cancelado: {
-    label: "CANCELADO",
+    key: "cancelled",
     bg: "bg-red-100",
     text: "text-red-700",
     dot: "bg-red-500",
   },
   cancelacion_solicitada: {
-    label: "CANCELACION SOLICITADA",
+    key: "cancellationRequested",
     bg: "bg-orange-100",
     text: "text-orange-700",
     dot: "bg-orange-500",
   },
   en_disputa: {
-    label: "EN DISPUTA",
+    key: "inDispute",
     bg: "bg-rose-100",
     text: "text-rose-700",
     dot: "bg-rose-500",
@@ -69,6 +70,7 @@ export function ContractStatusBadge({
   size = "md",
   className,
 }: ContractStatusBadgeProps) {
+  const t = useTranslations("common");
   const config = statusConfig[status];
 
   return (
@@ -89,7 +91,7 @@ export function ContractStatusBadge({
         animate={{ scale: [1, 1.3, 1] }}
         transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3 }}
       />
-      {config.label}
+      {t(`status.${config.key}`)}
     </motion.span>
   );
 }

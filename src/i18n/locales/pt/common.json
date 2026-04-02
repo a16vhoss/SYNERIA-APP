@@ -8,26 +8,29 @@
     "myProfile": "Meu Perfil",
     "documents": "Documentos",
     "messages": "Mensagens",
-    "settings": "Configuracoes",
+    "settings": "Configurações",
     "logout": "Sair",
     "contracts": "Contratos",
     "company": "Empresa",
     "vacancies": "Vagas",
     "candidates": "Candidatos",
     "help": "Ajuda",
-    "notifications": "Notificacoes"
+    "notifications": "Notificações",
+    "principal": "Principal",
+    "support": "Suporte",
+    "menuTitle": "Menu"
   },
   "footer": {
     "about": "Sobre",
-    "terms": "Termos de Servico",
-    "privacy": "Politica de Privacidade",
+    "terms": "Termos de Serviço",
+    "privacy": "Política de Privacidade",
     "contact": "Contato",
     "support": "Suporte",
     "blog": "Blog",
     "careers": "Carreiras",
-    "faq": "Perguntas Frequentes",
+    "faq": "FAQ",
     "copyright": "Todos os direitos reservados",
-    "builtWith": "Feito com amor na America Latina"
+    "builtWith": "Feito com amor na América Latina"
   },
   "actions": {
     "save": "Salvar",
@@ -41,10 +44,10 @@
     "close": "Fechar",
     "confirm": "Confirmar",
     "back": "Voltar",
-    "next": "Proximo",
+    "next": "Próximo",
     "previous": "Anterior",
     "submit": "Enviar",
-    "upload": "Fazer upload",
+    "upload": "Carregar",
     "download": "Baixar",
     "share": "Compartilhar",
     "copy": "Copiar",
@@ -67,18 +70,24 @@
     "restore": "Restaurar",
     "print": "Imprimir",
     "export": "Exportar",
-    "import": "Importar"
+    "import": "Importar",
+    "viewDetails": "Ver detalhes",
+    "viewAll": "Ver tudo",
+    "viewProfile": "Ver perfil",
+    "searchPlaceholder": "Buscar...",
+    "downloadPDF": "Baixar PDF",
+    "closeBanner": "Fechar banner"
   },
   "status": {
     "active": "Ativo",
     "pending": "Pendente",
-    "reviewing": "Em Analise",
+    "reviewing": "Em Análise",
     "interview": "Entrevista",
     "accepted": "Aceito",
     "rejected": "Rejeitado",
     "paused": "Pausado",
     "closed": "Fechado",
-    "completed": "Concluido",
+    "completed": "Concluído",
     "draft": "Rascunho",
     "cancellationRequested": "Cancelamento Solicitado",
     "inDispute": "Em Disputa",
@@ -87,59 +96,59 @@
     "scheduled": "Agendado",
     "cancelled": "Cancelado",
     "published": "Publicado",
-    "unpublished": "Nao Publicado",
+    "unpublished": "Não Publicado",
     "verified": "Verificado",
-    "unverified": "Nao Verificado",
+    "unverified": "Não Verificado",
     "online": "Online",
     "offline": "Offline"
   },
   "validation": {
-    "required": "Campo obrigatorio",
-    "invalidEmail": "Email invalido",
-    "minLength": "Minimo de {min} caracteres",
-    "maxLength": "Maximo de {max} caracteres",
-    "passwordMismatch": "As senhas nao coincidem",
-    "invalidUrl": "URL invalida",
-    "invalidPhone": "Numero de telefone invalido",
-    "invalidDate": "Data invalida",
-    "fileTooLarge": "O arquivo e muito grande (max {max}MB)",
-    "invalidFileType": "Tipo de arquivo nao permitido",
-    "minValue": "O valor minimo e {min}",
-    "maxValue": "O valor maximo e {max}",
-    "alphanumeric": "Apenas letras e numeros sao permitidos",
-    "numeric": "Apenas numeros sao permitidos",
-    "uniqueEmail": "Este email ja esta cadastrado",
-    "termsRequired": "Voce deve aceitar os termos e condicoes"
+    "required": "Este campo é obrigatório",
+    "invalidEmail": "Endereço de e-mail inválido",
+    "minLength": "Deve ter no mínimo {min} caracteres",
+    "maxLength": "Deve ter no máximo {max} caracteres",
+    "passwordMismatch": "As senhas não coincidem",
+    "invalidUrl": "URL inválida",
+    "invalidPhone": "Número de telefone inválido",
+    "invalidDate": "Data inválida",
+    "fileTooLarge": "O arquivo é muito grande (máx. {max}MB)",
+    "invalidFileType": "Tipo de arquivo não permitido",
+    "minValue": "O valor mínimo é {min}",
+    "maxValue": "O valor máximo é {max}",
+    "alphanumeric": "Apenas letras e números são permitidos",
+    "numeric": "Apenas números são permitidos",
+    "uniqueEmail": "Este e-mail já está cadastrado",
+    "termsRequired": "Você deve aceitar os termos e condições"
   },
   "time": {
     "justNow": "Agora mesmo",
-    "minutesAgo": "Ha {count} {count, plural, one {minuto} other {minutos}}",
-    "hoursAgo": "Ha {count} {count, plural, one {hora} other {horas}}",
+    "minutesAgo": "{count} {count, plural, one {minuto} other {minutos}} atrás",
+    "hoursAgo": "{count} {count, plural, one {hora} other {horas}} atrás",
     "yesterday": "Ontem",
-    "daysAgo": "Ha {count} {count, plural, one {dia} other {dias}}",
-    "weeksAgo": "Ha {count} {count, plural, one {semana} other {semanas}}",
-    "monthsAgo": "Ha {count} {count, plural, one {mes} other {meses}}",
-    "yearsAgo": "Ha {count} {count, plural, one {ano} other {anos}}",
+    "daysAgo": "{count} {count, plural, one {dia} other {dias}} atrás",
+    "weeksAgo": "{count} {count, plural, one {semana} other {semanas}} atrás",
+    "monthsAgo": "{count} {count, plural, one {mês} other {meses}} atrás",
+    "yearsAgo": "{count} {count, plural, one {ano} other {anos}} atrás",
     "today": "Hoje",
-    "tomorrow": "Amanha",
+    "tomorrow": "Amanhã",
     "thisWeek": "Esta semana",
-    "thisMonth": "Este mes",
+    "thisMonth": "Este mês",
     "thisYear": "Este ano"
   },
   "empty": {
     "noResults": "Sem resultados",
     "noApplications": "Sem candidaturas",
     "noMessages": "Sem mensagens",
-    "noNotifications": "Sem notificacoes",
+    "noNotifications": "Sem notificações",
     "noContracts": "Sem contratos",
     "noJobs": "Nenhuma vaga encontrada",
-    "noConnections": "Sem conexoes",
-    "noTransactions": "Sem transacoes",
+    "noConnections": "Sem conexões",
+    "noTransactions": "Sem transações",
     "noDocuments": "Sem documentos",
-    "noReviews": "Sem avaliacoes",
+    "noReviews": "Sem avaliações",
     "noCandidates": "Sem candidatos",
     "noVacancies": "Sem vagas",
-    "noData": "Sem dados disponiveis",
+    "noData": "Nenhum dado disponível",
     "noSearchResults": "Nenhum resultado encontrado para sua busca"
   },
   "misc": {
@@ -147,17 +156,17 @@
     "error": "Erro",
     "success": "Sucesso",
     "warning": "Aviso",
-    "info": "Informacao",
+    "info": "Informação",
     "or": "ou",
     "and": "e",
     "of": "de",
     "to": "para",
     "from": "de",
     "in": "em",
-    "at": "as",
+    "at": "em",
     "by": "por",
     "yes": "Sim",
-    "no": "Nao",
+    "no": "Não",
     "all": "Todos",
     "none": "Nenhum",
     "other": "Outro",
@@ -166,26 +175,32 @@
     "showMore": "Mostrar mais",
     "showLess": "Mostrar menos",
     "resultsCount": "{count} {count, plural, one {resultado} other {resultados}}",
-    "page": "Pagina",
+    "page": "Página",
     "of_pages": "de {total}",
-    "itemsPerPage": "Itens por pagina",
-    "selected": "{count} selecionados",
-    "copiedToClipboard": "Copiado para a area de transferencia",
+    "itemsPerPage": "Itens por página",
+    "selected": "{count} selecionado(s)",
+    "copiedToClipboard": "Copiado para a área de transferência",
     "savedSuccessfully": "Salvo com sucesso",
-    "deletedSuccessfully": "Excluido com sucesso",
+    "deletedSuccessfully": "Excluído com sucesso",
     "updatedSuccessfully": "Atualizado com sucesso",
-    "errorOccurred": "Ocorreu um erro. Tente novamente.",
-    "sessionExpired": "Sua sessao expirou. Faca login novamente.",
-    "confirmDelete": "Tem certeza de que deseja excluir isso?",
-    "unsavedChanges": "Voce tem alteracoes nao salvas. Deseja sair?",
+    "errorOccurred": "Ocorreu um erro. Por favor, tente novamente.",
+    "sessionExpired": "Sua sessão expirou. Por favor, faça login novamente.",
+    "confirmDelete": "Tem certeza de que deseja excluir isto?",
+    "unsavedChanges": "Você tem alterações não salvas. Deseja sair?",
     "comingSoon": "Em breve",
     "beta": "Beta",
     "new": "Novo",
-    "premium": "Premium"
+    "premium": "Premium",
+    "allRightsReserved": "Todos os direitos reservados",
+    "saving": "Salvando...",
+    "perMonth": "por mês",
+    "user": "Usuário",
+    "recent": "Recente",
+    "company": "Empresa"
   },
   "landing": {
     "nav": {
-      "home": "Inicio",
+      "home": "Início",
       "jobs": "Vagas",
       "companies": "Empresas",
       "sectors": "Setores",
@@ -193,19 +208,19 @@
     },
     "hero": {
       "tagline": "Plataforma Global de Emprego",
-      "headingLine1": "O Futuro do Trabalho e Global.",
-      "headingLine2": "E Comeca Aqui.",
+      "headingLine1": "O Futuro do Trabalho é Global.",
+      "headingLine2": "E Começa Aqui.",
       "subtitle": "A plataforma que conecta trabalhadores migrantes com empregadores internacionais. Contratos digitais, carteira integrada e suporte em 6 idiomas.",
       "connectWith": "Conecte-se com",
       "rotatingWords": {
         "professionals": "profissionais",
         "opportunities": "oportunidades",
         "companies": "empresas",
-        "globalTalent": "talento global"
+        "globalTalent": "talentos globais"
       },
       "exploreJobs": "Explorar Vagas",
-      "postJob": "Publicar Vaga",
-      "presentIn": "Presente em 28 paises",
+      "postJob": "Publicar uma Vaga",
+      "presentIn": "Presente em 28 países",
       "workers": "+12.500 trabalhadores",
       "companiesCount": "+3.200 empresas"
     },
@@ -215,27 +230,27 @@
       "subtitle": "Ferramentas poderosas para trabalhadores e empresas, projetadas para o mercado de trabalho global.",
       "smartSearch": {
         "title": "Busca Inteligente de Vagas",
-        "description": "Encontre oportunidades que correspondam ao seu perfil, habilidades e paises de interesse. Filtros avancados por setor, salario e tipo de contrato."
+        "description": "Encontre oportunidades que correspondam ao seu perfil, habilidades e países de interesse. Filtros avançados por setor, salário e tipo de contrato."
       },
       "wallet": {
         "title": "Carteira Digital Integrada",
-        "description": "Gerencie seus rendimentos, receba pagamentos e envie remessas internacionais a partir de uma unica plataforma com taxas minimas."
+        "description": "Gerencie sua renda, receba pagamentos e envie remessas internacionais de uma única plataforma com taxas mínimas."
       },
       "contracts": {
-        "title": "Contratos Digitais com Blockchain",
-        "description": "Assine contratos digitalmente com verificacao imutavel. Transparencia total em termos, beneficios e condicoes de trabalho."
+        "title": "Contratos Digitais em Blockchain",
+        "description": "Assine contratos digitalmente com verificação imutável. Total transparência em termos, benefícios e condições de trabalho."
       },
       "documents": {
-        "title": "Verificacao de Documentos",
-        "description": "Envie e verifique seu passaporte, certificacoes e documentos de trabalho. Perfis verificados geram mais confianca com empregadores."
+        "title": "Verificação de Documentos",
+        "description": "Carregue e verifique seu passaporte, certificações e documentos de trabalho. Perfis verificados geram mais confiança com empregadores."
       },
       "multilingual": {
-        "title": "Suporte Multilingue",
-        "description": "Plataforma disponivel em 6 idiomas: Espanhol, Ingles, Portugues, Frances, Alemao e Arabe. Comunicacao sem barreiras."
+        "title": "Suporte Multilíngue",
+        "description": "Plataforma disponível em 6 idiomas: espanhol, inglês, português, francês, alemão e árabe. Comunicação sem barreiras."
       },
       "network": {
         "title": "Rede Profissional Global",
-        "description": "Conecte-se com profissionais de 28 paises. Construa sua rede, compartilhe experiencias e acesse oportunidades exclusivas."
+        "description": "Conecte-se com profissionais de 28 países. Construa sua rede, compartilhe experiências e acesse oportunidades exclusivas."
       }
     },
     "howItWorks": {
@@ -244,58 +259,110 @@
       "subtitle": "Em 5 passos simples, conecte seu talento com oportunidades globais.",
       "step1": {
         "title": "Crie sua conta",
-        "description": "Registre-se como trabalhador ou empresa em menos de 2 minutos. Selecione seu papel e comece."
+        "description": "Registre-se como trabalhador ou empresa em menos de 2 minutos. Selecione sua função e comece."
       },
       "step2": {
         "title": "Complete seu perfil",
-        "description": "Adicione sua experiencia, habilidades, idiomas e documentos. Um perfil completo multiplica suas oportunidades."
+        "description": "Adicione sua experiência, habilidades, idiomas e documentos. Um perfil completo multiplica suas oportunidades."
       },
       "step3": {
         "title": "Busque vagas",
-        "description": "Explore vagas filtradas por setor, pais e salario. Nosso sistema sugere as melhores correspondencias."
+        "description": "Explore vagas filtradas por setor, país e salário. Nosso sistema sugere as melhores correspondências para você."
       },
       "step4": {
-        "title": "Candidate-se e conecte",
+        "title": "Candidate-se e conecte-se",
         "description": "Envie sua candidatura diretamente. Comunique-se com empregadores e assine contratos digitais seguros."
       },
       "step5": {
         "title": "Trabalhe globalmente",
-        "description": "Gerencie seu contrato, receba pagamentos em sua carteira e construa sua carreira internacional."
+        "description": "Gerencie seu contrato, receba pagamentos na sua carteira e construa sua carreira internacional."
       }
     },
     "testimonials": {
-      "badge": "Historias reais",
-      "title": "O que dizem nossos usuarios",
-      "subtitle": "Milhares de trabalhadores e empresas ja confiam na Syneria para conectar talento global.",
+      "badge": "Histórias reais",
+      "title": "O que nossos usuários dizem",
+      "subtitle": "Milhares de trabalhadores e empresas já confiam na Syneria para conectar talentos globais.",
       "testimonial1": {
-        "quote": "Gracas a Syneria, encontrei um emprego estavel na Alemanha em menos de 3 semanas. O processo foi transparente e o contrato digital me deu muita confianca.",
+        "quote": "Graças à Syneria, encontrei um emprego estável na Alemanha em menos de 3 semanas. O processo foi transparente e o contrato digital me deu muita confiança.",
         "name": "Carlos Ramirez",
         "role": "Eletricista Industrial",
-        "country": "Colombia"
+        "country": "Colômbia"
       },
       "testimonial2": {
-        "quote": "Como empresa, a Syneria nos permite acessar talento qualificado de toda a America Latina. Os perfis verificados e o sistema de contratos economizam semanas de trabalho.",
+        "quote": "Como empresa, a Syneria nos permite acessar talentos qualificados de toda a América Latina. Perfis verificados e o sistema de contratos economizam semanas de trabalho.",
         "name": "Sarah Mueller",
         "role": "Gerente de RH - BauTech GmbH",
         "country": "Alemanha"
       },
       "testimonial3": {
-        "quote": "A carteira integrada e incrivel. Recebo meu salario e posso enviar remessas para minha familia diretamente da plataforma. Tudo em um so lugar.",
+        "quote": "A carteira integrada é incrível. Recebo meu salário e posso enviar remessas para minha família diretamente pela plataforma. Tudo em um só lugar.",
         "name": "Maria Gonzalez",
         "role": "Chef Profissional",
-        "country": "Mexico"
+        "country": "México"
       }
     },
     "cta": {
-      "badge": "Junte-se gratis hoje",
+      "badge": "Cadastre-se grátis hoje",
       "title": "Seu Talento, Seu Mundo,",
       "titleHighlight": "Sua Economia",
-      "subtitle": "Registre-se gratuitamente e acesse milhares de oportunidades de emprego em 28 paises. Sua carreira internacional comeca hoje.",
-      "createAccount": "Criar Conta Gratis",
-      "iAmCompany": "Sou Empresa",
-      "noCreditCard": "Sem cartao de credito",
-      "registerIn2Min": "Registro em 2 minutos",
+      "subtitle": "Registre-se gratuitamente e acesse milhares de oportunidades de emprego em 28 países. Sua carreira internacional começa hoje.",
+      "createAccount": "Criar Conta Grátis",
+      "iAmCompany": "Sou uma Empresa",
+      "noCreditCard": "Sem necessidade de cartão de crédito",
+      "registerIn2Min": "Cadastro em 2 minutos",
       "support6Languages": "Suporte em 6 idiomas"
     }
+  },
+  "errors": {
+    "notAuthenticated": "Não autenticado",
+    "offline": "Sem conexão com a internet",
+    "saveFailed": "Erro ao salvar",
+    "deleteAccountFailed": "Erro ao excluir conta",
+    "companyNotFound": "Empresa não encontrada",
+    "companyNotFoundDesc": "A empresa que você procura não existe ou não está disponível.",
+    "unknown": "Erro desconhecido",
+    "somethingWentWrong": "Algo deu errado",
+    "errorDesc": "Ocorreu um erro inesperado. Você pode tentar novamente ou voltar à página inicial.",
+    "errorDetails": "Detalhes do erro",
+    "tryAgain": "Tentar novamente"
+  },
+  "roles": {
+    "worker": "Trabalhador",
+    "employer": "Empresa",
+    "switchToWorker": "Mudar para Trabalhador",
+    "switchToEmployer": "Mudar para Empresa",
+    "workerDesc": "Buscar empregos e candidatar-se",
+    "employerDesc": "Publicar vagas e contratar"
+  },
+  "sectors": {
+    "construction": "Construção",
+    "hotelAndTourism": "Hotelaria e Turismo",
+    "agriculture": "Agricultura",
+    "manufacturing": "Manufatura",
+    "technology": "Tecnologia",
+    "health": "Saúde",
+    "transportAndLogistics": "Transporte e Logística",
+    "energy": "Energia",
+    "commerce": "Comércio",
+    "domesticServices": "Serviços Domésticos"
+  },
+  "pages": {
+    "notFound": "Página não encontrada",
+    "notFoundDesc": "A página que você procura não existe ou foi movida.",
+    "backToHome": "Voltar ao início"
+  },
+  "jobTypes": {
+    "fullTime": "Tempo Integral",
+    "partTime": "Meio Período",
+    "contract": "Contrato",
+    "seasonal": "Temporário"
+  },
+  "premium": {
+    "unlockAll": "Desbloquear tudo"
+  },
+  "notifications": {
+    "markAllRead": "Marcar todas como lidas",
+    "markAsRead": "Marcar como lida",
+    "unread": "não lida(s)"
   }
 }

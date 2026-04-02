@@ -13,6 +13,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import type { MockNotification } from "@/lib/constants/mock-data";
 
 const TYPE_CONFIG: Record<
@@ -58,6 +59,7 @@ export function NotificationDropdown({
   onViewAll,
   className,
 }: NotificationDropdownProps) {
+  const t = useTranslations("common");
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -91,7 +93,7 @@ export function NotificationDropdown({
         }
         transition={{ duration: 0.6 }}
         key={unreadCount}
-        aria-label={`Notificaciones${unreadCount > 0 ? ` (${unreadCount} sin leer)` : ""}`}
+        aria-label={`${t("nav.notifications")}${unreadCount > 0 ? ` (${unreadCount} ${t("notifications.unread")})` : ""}`}
       >
         <Bell className="size-5" />
 
@@ -123,7 +125,7 @@ export function NotificationDropdown({
             {/* Header */}
             <div className="flex items-center justify-between border-b px-4 py-3">
               <h4 className="font-heading text-sm font-semibold">
-                Notificaciones
+                {t("nav.notifications")}
               </h4>
               {unreadCount > 0 && (
                 <button
@@ -131,7 +133,7 @@ export function NotificationDropdown({
                   onClick={onMarkAllAsRead}
                 >
                   <CheckCheck className="size-3" />
-                  Marcar todo como leido
+                  {t("notifications.markAllRead")}
                 </button>
               )}
             </div>
@@ -149,7 +151,7 @@ export function NotificationDropdown({
                     <Bell className="size-5 text-muted-foreground" />
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    Sin notificaciones
+                    {t("empty.noNotifications")}
                   </p>
                 </motion.div>
               ) : (
@@ -212,7 +214,7 @@ export function NotificationDropdown({
                             onMarkAsRead(notification.id);
                           }}
                           className="mt-1 shrink-0 text-muted-foreground hover:text-brand-600"
-                          aria-label="Marcar como leida"
+                          aria-label={t("notifications.markAsRead")}
                         >
                           <Check className="size-4" />
                         </button>
@@ -233,7 +235,7 @@ export function NotificationDropdown({
                     setOpen(false);
                   }}
                 >
-                  Ver todas
+                  {t("actions.viewAll")}
                   <ChevronRight className="size-3" />
                 </button>
               </div>

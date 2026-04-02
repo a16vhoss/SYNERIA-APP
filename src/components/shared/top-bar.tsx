@@ -60,7 +60,7 @@ export function TopBar({
   mobileMenuTrigger,
   showSearch = true,
   unreadCount = 0,
-  userName = "Usuario",
+  userName,
   userInitials = "U",
   userAvatarUrl,
   userRole = "Worker",
@@ -69,6 +69,7 @@ export function TopBar({
   className,
 }: TopBarProps) {
   const t = useTranslations("common");
+  const resolvedUserName = userName ?? t("misc.user");
 
   const [currentLang, setCurrentLang] = useState<string>(() => {
     if (typeof document !== "undefined") {
@@ -203,13 +204,13 @@ export function TopBar({
             }
           >
             <Avatar size="sm">
-              {userAvatarUrl && <AvatarImage src={userAvatarUrl} alt={userName} />}
+              {userAvatarUrl && <AvatarImage src={userAvatarUrl} alt={resolvedUserName} />}
               <AvatarFallback className="bg-brand-100 text-brand-700 text-[10px] font-semibold">
                 {userInitials}
               </AvatarFallback>
             </Avatar>
             <div className="hidden text-left sm:block">
-              <p className="text-xs font-medium text-foreground">{userName}</p>
+              <p className="text-xs font-medium text-foreground">{resolvedUserName}</p>
               <p className="text-[10px] text-muted-foreground">{userRole}</p>
             </div>
             <ChevronDown className="hidden h-3 w-3 text-muted-foreground sm:block" />
@@ -217,7 +218,7 @@ export function TopBar({
           <DropdownMenuContent align="end" sideOffset={8} className="w-56">
             <DropdownMenuGroup>
               <DropdownMenuLabel className="font-normal">
-                <p className="text-sm font-medium">{userName}</p>
+                <p className="text-sm font-medium">{resolvedUserName}</p>
                 <p className="text-xs text-muted-foreground">{userRole}</p>
               </DropdownMenuLabel>
             </DropdownMenuGroup>

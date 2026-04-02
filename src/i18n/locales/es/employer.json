@@ -2,6 +2,7 @@
   "dashboard": {
     "welcome": "Bienvenido, {name}!",
     "subtitle": "Resumen de tu empresa",
+    "defaultCompanyName": "Mi Empresa",
     "stats": {
       "activeVacancies": "Vacantes Activas",
       "totalCandidates": "Candidatos Totales",
@@ -21,6 +22,17 @@
   },
   "vacancies": {
     "title": "Vacantes",
+    "viewDetail": "Ver detalle",
+    "bulkPaused": "{count} vacante(s) pausada(s)",
+    "bulkClosed": "{count} vacante(s) cerrada(s)",
+    "salaryRange": "{currency} {min} - {max} /mes",
+    "salaryFrom": "Desde {currency} {amount} /mes",
+    "salaryUpTo": "Hasta {currency} {amount} /mes",
+    "salaryNotSpecified": "No especificado",
+    "applications": "Aplicaciones",
+    "noCandidatesYet": "Aún no hay candidatos para esta vacante.",
+    "viewAllCandidates": "Ver todos los candidatos ({count})",
+    "summary": "Resumen",
     "create": {
       "title": "Crear Vacante",
       "jobTitle": "Título del puesto",
@@ -53,7 +65,22 @@
       "saveDraft": "Guardar como borrador",
       "publishing": "Publicando...",
       "success": "Vacante creada exitosamente",
-      "error": "Error al crear la vacante"
+      "error": "Error al crear la vacante",
+      "errors": {
+        "selectSector": "Selecciona un sector",
+        "selectType": "Selecciona un tipo",
+        "selectCountry": "Selecciona un país",
+        "minChars2": "Mínimo 2 caracteres",
+        "fieldRequired": "Campo requerido",
+        "minChars3": "Mínimo 3 caracteres",
+        "minChars10": "Mínimo 10 caracteres"
+      },
+      "selectSectorPlaceholder": "Seleccionar sector",
+      "selectCountryPlaceholder": "Seleccionar país",
+      "cityLabel": "Ciudad",
+      "cityPlaceholder": "Ciudad",
+      "salaryMinPlaceholder": "Salario mínimo",
+      "salaryMaxPlaceholder": "Salario máximo"
     },
     "edit": {
       "title": "Editar Vacante",
@@ -69,7 +96,8 @@
       "reopen": "Reabrir vacante",
       "delete": "Eliminar vacante",
       "deleteConfirm": "Estás seguro de que quieres eliminar esta vacante?",
-      "duplicate": "Duplicar vacante"
+      "duplicate": "Duplicar vacante",
+      "closeWarning": "Esta vacante tiene {count} aplicaciones activas. Los candidatos serán notificados del cierre."
     },
     "empty": "Aún no has creado vacantes",
     "emptyAction": "Crear primera vacante"
@@ -110,7 +138,13 @@
       "notesPlaceholder": "Notas adicionales...",
       "confirm": "Confirmar entrevista",
       "cancel": "Cancelar entrevista",
-      "reschedule": "Reprogramar"
+      "reschedule": "Reprogramar",
+      "errors": {
+        "selectDate": "Selecciona una fecha",
+        "enterTime": "Ingresa la hora",
+        "enterValidUrl": "Ingresa una URL válida",
+        "maxChars500": "Máximo 500 caracteres"
+      }
     },
     "empty": "No hay candidatos para esta vacante",
     "pipeline": {
@@ -119,7 +153,10 @@
       "interview": "Entrevista",
       "offer": "Oferta",
       "hired": "Contratados",
-      "rejected": "Rechazados"
+      "rejected": "Rechazados",
+      "pending": "Pendientes",
+      "reviewing": "En Revisión",
+      "accepted": "Aceptados"
     }
   },
   "contracts": {
@@ -144,7 +181,38 @@
       "create": "Crear contrato",
       "creating": "Creando...",
       "success": "Contrato creado exitosamente",
-      "error": "Error al crear el contrato"
+      "error": "Error al crear el contrato",
+      "errors": {
+        "selectWorker": "Selecciona un trabajador",
+        "minChars3": "Mínimo 3 caracteres",
+        "enterSchedule": "Ingresa un horario",
+        "enterCountry": "Ingresa el país",
+        "enterCity": "Ingresa la ciudad",
+        "enterSalary": "Ingresa el salario",
+        "selectCurrency": "Selecciona moneda",
+        "enterStartDate": "Ingresa fecha de inicio",
+        "enterEndDate": "Ingresa fecha de fin",
+        "minChars10": "Mínimo 10 caracteres"
+      },
+      "benefits": {
+        "housing": "Alojamiento",
+        "healthInsurance": "Seguro Médico",
+        "transport": "Transporte",
+        "meals": "Comida",
+        "training": "Formación",
+        "tools": "Herramientas",
+        "laptop": "Laptop",
+        "extraVacation": "Vacaciones Extras"
+      },
+      "positionPlaceholder": "Ej: Asistente de Construcción",
+      "schedulePlaceholder": "Ej: Lunes a Viernes, 9:00 - 18:00",
+      "defaultSchedule": "Lunes a Viernes, 9:00 - 18:00",
+      "countryPlaceholder": "País",
+      "cityPlaceholder": "Ciudad",
+      "termsPlaceholder": "Describe los términos y condiciones del contrato..."
+    },
+    "renew": {
+      "termsPlaceholder": "Describe los nuevos términos..."
     },
     "manage": {
       "view": "Ver contrato",
@@ -198,7 +266,9 @@
       "send": "Enviar pago",
       "sending": "Enviando...",
       "success": "Pago enviado exitosamente",
-      "error": "Error al enviar el pago"
+      "error": "Error al enviar el pago",
+      "monthlyPaymentDescription": "Pago mensual {month}",
+      "descriptionPlaceholder": "Descripción del pago"
     }
   },
   "companyProfile": {
@@ -226,6 +296,20 @@
     "socialMedia": "Redes sociales",
     "save": "Guardar perfil",
     "saving": "Guardando...",
-    "success": "Perfil actualizado exitosamente"
+    "success": "Perfil actualizado exitosamente",
+    "namePlaceholder": "Ej: Mi Empresa S.A.",
+    "descriptionFieldPlaceholder": "Describe brevemente tu empresa...",
+    "cityPlaceholder": "Ej: Madrid",
+    "websitePlaceholder": "https://www.miempresa.com",
+    "employeesPlaceholder": "Ej: 50",
+    "gradients": {
+      "green": "Verde",
+      "orange": "Naranja",
+      "purple": "Púrpura",
+      "blue": "Azul",
+      "red": "Rojo",
+      "teal": "Teal"
+    },
+    "gradientAriaLabel": "Gradiente {name}"
   }
 }

@@ -15,7 +15,7 @@ import {
 import { COUNTRIES, SECTORS, JOB_TYPES } from "@/lib/constants/countries";
 
 const SALARY_RANGES = [
-  { value: "0", label: "Todos" },
+  { value: "0", label: "__all__" },
   { value: "1000", label: "$1,000+" },
   { value: "2000", label: "$2,000+" },
   { value: "3000", label: "$3,000+" },
@@ -82,8 +82,8 @@ export function JobFilters({
           <SelectContent>
             <SelectItem value="all">{t("jobs.filters.category")}</SelectItem>
             {SECTORS.map((s) => (
-              <SelectItem key={s} value={s}>
-                {s}
+              <SelectItem key={s.value} value={s.value}>
+                {tc(`sectors.${s.label}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -113,7 +113,7 @@ export function JobFilters({
             <SelectItem value="all">{t("jobs.filters.type")}</SelectItem>
             {JOB_TYPES.map((jt) => (
               <SelectItem key={jt.value} value={jt.value}>
-                {jt.label}
+                {tc(`jobTypes.${jt.label}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -127,7 +127,7 @@ export function JobFilters({
           <SelectContent>
             {SALARY_RANGES.map((sr) => (
               <SelectItem key={sr.value} value={sr.value}>
-                {sr.label}
+                {sr.label === "__all__" ? tc("misc.all") : sr.label}
               </SelectItem>
             ))}
           </SelectContent>

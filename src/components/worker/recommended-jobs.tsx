@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Briefcase, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -30,6 +31,8 @@ interface RecommendedJobsProps {
 }
 
 export function RecommendedJobs({ jobs }: RecommendedJobsProps) {
+  const t = useTranslations("worker");
+
   return (
     <section className="flex flex-col gap-4">
       {/* Header row */}
@@ -40,7 +43,7 @@ export function RecommendedJobs({ jobs }: RecommendedJobsProps) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
         >
-          Empleos Recomendados
+          {t("dashboard.recommendedJobs")}
         </motion.h2>
 
         <motion.div
@@ -52,7 +55,7 @@ export function RecommendedJobs({ jobs }: RecommendedJobsProps) {
             href="/jobs"
             className="group flex items-center gap-1 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700"
           >
-            ver todos
+            {t("dashboard.viewAll")}
             <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </motion.div>
@@ -62,10 +65,10 @@ export function RecommendedJobs({ jobs }: RecommendedJobsProps) {
       {jobs.length === 0 ? (
         <EmptyState
           icon={Briefcase}
-          title="Sin recomendaciones aun"
-          description="Completa tu perfil para recibir empleos personalizados que se ajusten a tu experiencia."
+          title={t("dashboard.noRecommendations")}
+          description={t("dashboard.noRecommendationsDesc")}
           action={{
-            label: "Completar perfil",
+            label: t("dashboard.completeProfile"),
             onClick: () => {
               window.location.href = "/profile";
             },

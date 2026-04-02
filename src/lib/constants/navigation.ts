@@ -14,30 +14,30 @@ import {
 } from "lucide-react";
 
 export const WORKER_NAV = [
-  { label: "Panel", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Buscar Empleos", href: "/jobs", icon: Briefcase },
-  { label: "Mis Aplicaciones", href: "/applications", icon: FileText },
-  { label: "Red", href: "/network", icon: Users },
-  { label: "Wallet", href: "/wallet", icon: Wallet },
-  { label: "Mi Perfil", href: "/profile", icon: User },
-  { label: "Mensajes", href: "/messages", icon: MessageSquare },
+  { label: "dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "searchJobs", href: "/jobs", icon: Briefcase },
+  { label: "myApplications", href: "/applications", icon: FileText },
+  { label: "network", href: "/network", icon: Users },
+  { label: "wallet", href: "/wallet", icon: Wallet },
+  { label: "myProfile", href: "/profile", icon: User },
+  { label: "messages", href: "/messages", icon: MessageSquare },
 ] as const;
 
 export const EMPLOYER_NAV = [
-  { label: "Dashboard", href: "/employer/dashboard", icon: LayoutDashboard },
-  { label: "Mis Vacantes", href: "/employer/vacancies", icon: Briefcase },
-  { label: "Candidatos", href: "/employer/candidates", icon: UserSearch },
-  { label: "Contratos", href: "/employer/contracts", icon: FileSignature },
-  { label: "Wallet", href: "/employer/wallet", icon: Wallet },
+  { label: "dashboard", href: "/employer/dashboard", icon: LayoutDashboard },
+  { label: "vacancies", href: "/employer/vacancies", icon: Briefcase },
+  { label: "candidates", href: "/employer/candidates", icon: UserSearch },
+  { label: "contracts", href: "/employer/contracts", icon: FileSignature },
+  { label: "wallet", href: "/employer/wallet", icon: Wallet },
   {
-    label: "Empresa Perfil",
+    label: "company",
     href: "/employer/company-profile",
     icon: Building2,
   },
-  { label: "Mensajes", href: "/employer/messages", icon: MessageSquare },
+  { label: "messages", href: "/employer/messages", icon: MessageSquare },
 ] as const;
 
 export const BOTTOM_NAV = [
-  { label: "Configuracion", href: "#config", icon: Settings },
-  { label: "Cerrar Sesion", href: "#logout", icon: LogOut },
+  { label: "settings", href: "#config", icon: Settings },
+  { label: "logout", href: "#logout", icon: LogOut },
 ] as const;

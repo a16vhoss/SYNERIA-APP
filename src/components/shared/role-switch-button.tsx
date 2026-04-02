@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Building2, User, ArrowLeftRight } from "lucide-react";
 import { switchRole } from "@/lib/actions/role-switch";
+import { useTranslations } from "next-intl";
 
 interface RoleSwitchButtonProps {
   activeRole: "worker" | "employer";
@@ -10,12 +11,13 @@ interface RoleSwitchButtonProps {
 
 export function RoleSwitchButton({ activeRole }: RoleSwitchButtonProps) {
   const [loading, setLoading] = useState(false);
+  const t = useTranslations("common");
 
   const isWorker = activeRole === "worker";
-  const targetLabel = isWorker ? "Cambiar a Empresa" : "Cambiar a Worker";
+  const targetLabel = isWorker ? t("roles.switchToEmployer") : t("roles.switchToWorker");
   const targetDescription = isWorker
-    ? "Publicar vacantes y contratar"
-    : "Buscar empleos y aplicar";
+    ? t("roles.employerDesc")
+    : t("roles.workerDesc");
   const Icon = isWorker ? Building2 : User;
 
   async function handleSwitch() {

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   Briefcase,
@@ -92,6 +93,9 @@ export function JobDetailSidebar({
   similarJobs,
   className,
 }: JobDetailSidebarProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
+
   return (
     <div className={cn("flex flex-col gap-4", className)}>
       {/* Job Summary */}
@@ -103,7 +107,7 @@ export function JobDetailSidebar({
       >
         <Card>
           <CardHeader>
-            <CardTitle>Resumen del Empleo</CardTitle>
+            <CardTitle>{t("jobs.detail.jobSummary")}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-3.5">
             {summary.map((item, i) => {
@@ -137,7 +141,7 @@ export function JobDetailSidebar({
       >
         <Card>
           <CardHeader>
-            <CardTitle>Sobre la Empresa</CardTitle>
+            <CardTitle>{t("jobs.detail.aboutCompany")}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col items-center gap-3 text-center">
             <CompanyAvatar
@@ -160,7 +164,7 @@ export function JobDetailSidebar({
             </div>
             <Link href={`/company/${company.id}`}>
               <Button variant="outline" size="sm" className="mt-1">
-                Ver perfil
+                {tc("actions.viewProfile")}
               </Button>
             </Link>
           </CardContent>
@@ -176,7 +180,7 @@ export function JobDetailSidebar({
       >
         <Card>
           <CardHeader>
-            <CardTitle>Empleos Similares</CardTitle>
+            <CardTitle>{t("jobs.detail.similarJobs")}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-3">
             {similarJobs.map((job) => (

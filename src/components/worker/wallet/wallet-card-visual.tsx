@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Wifi } from "lucide-react";
 
@@ -18,6 +19,7 @@ export function WalletCardVisual({
   lastFour = "4829",
   expiry = "12/29",
 }: WalletCardVisualProps) {
+  const t = useTranslations("worker");
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -89,7 +91,7 @@ export function WalletCardVisual({
       <div className="mt-3 flex items-end justify-between">
         <div>
           <p className="text-[10px] uppercase tracking-wider text-white/40">
-            Titular
+            {t("wallet.card.holder")}
           </p>
           <p className="text-sm font-medium tracking-wide text-white">
             {holderName}
@@ -97,7 +99,7 @@ export function WalletCardVisual({
         </div>
         <div className="text-right">
           <p className="text-[10px] uppercase tracking-wider text-white/40">
-            Expira
+            {t("wallet.card.expires")}
           </p>
           <p className="font-mono text-sm text-white">{expiry}</p>
         </div>

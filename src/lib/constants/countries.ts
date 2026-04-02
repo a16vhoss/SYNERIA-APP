@@ -44,21 +44,21 @@ export const COUNTRIES = [
 ] as const;
 
 export const SECTORS = [
-  "Construccion",
-  "Hoteleria y Turismo",
-  "Agricultura",
-  "Manufactura",
-  "Tecnologia",
-  "Salud",
-  "Transporte y Logistica",
-  "Energia",
-  "Comercio",
-  "Servicios Domesticos",
+  { value: "construction", label: "construction" },
+  { value: "hotel_tourism", label: "hotelAndTourism" },
+  { value: "agriculture", label: "agriculture" },
+  { value: "manufacturing", label: "manufacturing" },
+  { value: "technology", label: "technology" },
+  { value: "health", label: "health" },
+  { value: "transport_logistics", label: "transportAndLogistics" },
+  { value: "energy", label: "energy" },
+  { value: "commerce", label: "commerce" },
+  { value: "domestic_services", label: "domesticServices" },
 ] as const;
 
 export const JOB_TYPES = [
-  { value: "full_time", label: "Jornada Completa" },
-  { value: "part_time", label: "Media Jornada" },
-  { value: "contract", label: "Contrato" },
-  { value: "seasonal", label: "Temporal" },
+  { value: "full_time", label: "fullTime" },
+  { value: "part_time", label: "partTime" },
+  { value: "contract", label: "contract" },
+  { value: "seasonal", label: "seasonal" },
 ] as const;

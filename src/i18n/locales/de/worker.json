@@ -15,7 +15,19 @@
     "profileCompletion": "Profil vervollstaendigen",
     "profileCompletionDesc": "Vervollstaendigen Sie Ihr Profil, um Ihre Chancen zu verbessern",
     "noRecommendations": "Derzeit keine Empfehlungen",
-    "viewAllJobs": "Alle Jobs anzeigen"
+    "noRecommendationsDesc": "Vervollstaendigen Sie Ihr Profil, um personalisierte Jobs zu erhalten.",
+    "viewAllJobs": "Alle Jobs anzeigen",
+    "availableJobs": "Verfuegbare Jobs",
+    "myApplications": "Meine Bewerbungen",
+    "notifications": "Benachrichtigungen",
+    "profileCompleted": "Profil vervollstaendigt",
+    "completeProfile": "Profil vervollstaendigen",
+    "viewAll": "alle anzeigen",
+    "tabs": {
+      "panel": "Uebersicht",
+      "searchJobs": "Jobs suchen",
+      "myApplications": "Meine Bewerbungen"
+    }
   },
   "jobs": {
     "title": "Jobs suchen",
@@ -59,7 +71,13 @@
       "shareJob": "Job teilen",
       "reportJob": "Job melden",
       "similarJobs": "Aehnliche Jobs",
-      "alreadyApplied": "Sie haben sich bereits fuer diesen Job beworben"
+      "alreadyApplied": "Sie haben sich bereits fuer diesen Job beworben",
+      "jobSummary": "Stellenuebersicht",
+      "salaryNegotiable": "Verhandelbar",
+      "locationTBD": "Standort offen",
+      "notSpecified": "Nicht angegeben",
+      "indefinite": "Unbefristet",
+      "defaultTitle": "Arbeitsstelle"
     },
     "apply": {
       "title": "Bewerben fuer {jobTitle}",
@@ -74,6 +92,23 @@
       "submitting": "Wird gesendet...",
       "success": "Bewerbung erfolgreich gesendet",
       "error": "Fehler beim Senden der Bewerbung"
+    },
+    "save": "Job speichern",
+    "unsave": "Von Gespeicherten entfernen"
+  },
+  "interviews": {
+    "scheduled": "Sie haben ein geplantes Vorstellungsgespraech",
+    "atTime": "um",
+    "joinCall": "Anruf beitreten",
+    "confirmed": "Teilnahme bestaetigt",
+    "declined": "Kann nicht teilnehmen - Arbeitgeber benachrichtigt",
+    "confirmAttendance": "Teilnahme bestaetigen",
+    "cannotAttend": "Kann nicht teilnehmen",
+    "countdown": {
+      "past": "Vergangen",
+      "today": "Heute",
+      "tomorrow": "Morgen",
+      "inDays": "In {count} Tagen"
     }
   },
   "applications": {
@@ -108,8 +143,10 @@
       "experience": "Erfahrung",
       "education": "Ausbildung",
       "skills": "Faehigkeiten",
-      "documents": "Dokumente"
+      "documents": "Dokumente",
+      "settings": "Einstellungen"
     },
+    "tabsAriaLabel": "Profil-Tabs",
     "personal": {
       "avatar": "Profilbild",
       "changeAvatar": "Bild aendern",
@@ -125,7 +162,13 @@
       "headlinePlaceholder": "Z.B.: Full Stack Entwickler",
       "website": "Webseite",
       "linkedin": "LinkedIn",
-      "github": "GitHub"
+      "github": "GitHub",
+      "fullName": "Vollstaendiger Name",
+      "dateOfBirth": "Geburtsdatum",
+      "namePlaceholder": "Ihr Name",
+      "cityPlaceholder": "Ihre Stadt",
+      "updateData": "Daten aktualisieren",
+      "saveSuccess": "Profil erfolgreich aktualisiert"
     },
     "experience": {
       "addExperience": "Erfahrung hinzufuegen",
@@ -136,7 +179,11 @@
       "endDate": "Enddatum",
       "current": "Aktuelle Position",
       "description": "Beschreibung",
-      "noExperience": "Sie haben noch keine Berufserfahrung hinzugefuegt"
+      "noExperience": "Sie haben noch keine Berufserfahrung hinzugefuegt",
+      "emptyDescription": "Fuegen Sie Ihre Erfahrung hinzu, damit Arbeitgeber Ihren beruflichen Werdegang kennenlernen koennen.",
+      "positionPlaceholder": "z.B. Maschinenbediener",
+      "companyPlaceholder": "z.B. Alpha Bau GmbH",
+      "descriptionPlaceholder": "Beschreiben Sie Ihre Aufgaben..."
     },
     "education": {
       "addEducation": "Ausbildung hinzufuegen",
@@ -147,7 +194,11 @@
       "startDate": "Startdatum",
       "endDate": "Enddatum",
       "current": "Laufend",
-      "noEducation": "Sie haben noch keine Ausbildung hinzugefuegt"
+      "noEducation": "Sie haben noch keine Ausbildung hinzugefuegt",
+      "emptyDescription": "Fuegen Sie Ihre akademische Ausbildung hinzu, um Ihr berufliches Profil zu staerken.",
+      "institutionPlaceholder": "z.B. Nationale Universitaet",
+      "degreePlaceholder": "z.B. Bauingenieurwesen",
+      "descriptionPlaceholder": "Beschreiben Sie Ihre Ausbildung..."
     },
     "skills": {
       "addSkill": "Faehigkeit hinzufuegen",
@@ -166,7 +217,31 @@
       "certificate": "Zertifikat",
       "id": "Ausweis",
       "other": "Sonstiges",
-      "noDocuments": "Sie haben noch keine Dokumente hochgeladen"
+      "noDocuments": "Sie haben noch keine Dokumente hochgeladen",
+      "passport": "Reisepass",
+      "dragOrClick": "Ziehen oder klicken",
+      "uploadError": "Fehler beim Hochladen des Dokuments"
+    },
+    "settings": {
+      "emailNotifications": "E-Mail-Benachrichtigungen",
+      "newMatchingJobs": "Neue passende Jobs",
+      "applicationStatus": "Bewerbungsstatus",
+      "frequency": "Haeufigkeit",
+      "daily": "Taeglich",
+      "weekly": "Woechentlich",
+      "monthly": "Monatlich",
+      "platformLanguage": "Plattformsprache",
+      "dangerZone": "Gefahrenzone",
+      "deleteWarning": "Diese Aktion ist unwiderruflich. Alle Ihre Daten werden geloescht, einschliesslich Profil, Bewerbungen, Vertraege und Wallet.",
+      "deleteAccountTitle": "Konto dauerhaft loeschen",
+      "deleteConfirmDesc": "Diese Aktion kann nicht rueckgaengig gemacht werden. Geben Sie LOESCHEN ein zur Bestaetigung.",
+      "typeDeletePlaceholder": "\"LOESCHEN\" eingeben",
+      "deletePermanently": "Dauerhaft loeschen",
+      "deleteKeyword": "LOESCHEN",
+      "myAccount": "mein Konto",
+      "saveSettings": "Einstellungen speichern",
+      "sessionClosed": "Sitzung geschlossen",
+      "saveSuccess": "Einstellungen gespeichert"
     }
   },
   "wallet": {
@@ -174,6 +249,30 @@
     "balance": "Verfuegbares Guthaben",
     "totalEarnings": "Gesamte Einnahmen",
     "pendingPayments": "Ausstehende Zahlungen",
+    "totalBalance": "Gesamtguthaben",
+    "sendMoney": "Geld senden",
+    "receive": "Empfangen",
+    "connectedAccounts": "Verbundene Konten",
+    "addBankAccount": "Bankkonto hinzufuegen",
+    "bankConnectionSoon": "Bankverbindung demnachst verfuegbar",
+    "accountTypes": {
+      "checking": "Girokonto",
+      "savings": "Sparkonto"
+    },
+    "stats": {
+      "title": "Finanzstatistiken",
+      "earnedThisMonth": "Diesen Monat verdient",
+      "vsLastMonth": "+45% gg. Vormonat",
+      "remittancesSent": "Ueberweisungen gesendet",
+      "transfers": "{count} Ueberweisungen",
+      "feesSaved": "Gebuehren gespart",
+      "vsTraditional": "gg. traditionelle Dienste",
+      "paymentsReceived": "Zahlungen empfangen"
+    },
+    "quickActions": {
+      "microInsurance": "Mikroversicherungen",
+      "topUps": "Aufladungen"
+    },
     "tabs": {
       "overview": "Uebersicht",
       "transactions": "Transaktionen",
@@ -190,7 +289,11 @@
       "status": "Status",
       "income": "Einnahme",
       "withdrawal": "Abhebung",
-      "fee": "Gebuehr"
+      "fee": "Gebuehr",
+      "recentTitle": "Letzte Transaktionen",
+      "filterIncome": "Einnahmen",
+      "sent": "Gesendet",
+      "empty": "Keine Transaktionen in dieser Kategorie."
     },
     "remittance": {
       "title": "Ueberweisung senden",
@@ -213,7 +316,20 @@
       "amount": "Betrag",
       "rate": "Wechselkurs",
       "youReceive": "Sie erhalten",
-      "execute": "Tausch ausfuehren"
+      "execute": "Tausch ausfuehren",
+      "description": "Tauschen Sie Waehrungen zu den besten Marktkursen.",
+      "exchangeRate": "Wechselkurs",
+      "fee": "Gebuehr (1%)",
+      "youWillReceive": "Sie erhalten",
+      "swapButton": "Waehrung tauschen",
+      "success": "Tausch erfolgreich abgeschlossen"
+    },
+    "currencies": {
+      "usd": "USD - US-Dollar",
+      "eur": "EUR - Euro",
+      "gbp": "GBP - Britisches Pfund",
+      "chf": "CHF - Schweizer Franken",
+      "mxn": "MXN - Mexikanischer Peso"
     },
     "card": {
       "title": "Virtuelle Karte",
@@ -224,7 +340,9 @@
       "freeze": "Karte sperren",
       "unfreeze": "Karte entsperren",
       "spendingLimit": "Ausgabenlimit",
-      "monthlySpent": "Monatliche Ausgaben"
+      "monthlySpent": "Monatliche Ausgaben",
+      "holder": "Inhaber",
+      "expires": "Laeuft ab"
     }
   },
   "contracts": {
@@ -268,7 +386,19 @@
       "newEndDate": "Neues Enddatum",
       "newTerms": "Neue Bedingungen (optional)",
       "submit": "Verlaengerung beantragen"
-    }
+    },
+    "progress": "Vertragsfortschritt",
+    "daysRemaining": "{count} Tage verbleibend",
+    "terms": "Vertragsbedingungen",
+    "visaSponsorship": "Visum-Sponsoring inklusive",
+    "schedule": "Arbeitszeit:",
+    "signDigitally": "Digital unterschreiben",
+    "awaitingSignature": "Warten auf Unterschrift des Arbeitnehmers",
+    "requestCancellation": "Kuendigung beantragen",
+    "respondToRequest": "Auf Anfrage antworten",
+    "renewContract": "Vertrag verlaengern",
+    "currentContract": "Aktueller Vertrag",
+    "contractCount": "Vertrag/Vertraege"
   },
   "messages": {
     "title": "Nachrichten",
@@ -319,6 +449,22 @@
       "endorse": "Empfehlen",
       "endorseSkill": "Faehigkeit empfehlen",
       "noEndorsements": "Sie haben noch keine Empfehlungen"
+    },
+    "skillEndorsements": "Faehigkeitsempfehlungen",
+    "endorse": "Empfehlen",
+    "connectedSince": "Verbunden seit",
+    "mutualConnections": "gemeinsame Verbindungen",
+    "removeConnection": "Verbindung entfernen",
+    "pendingRequest": "Ausstehende Anfrage",
+    "cancelRequest": "Anfrage abbrechen",
+    "connect": "Verbinden",
+    "sameCompany": "Gleiches Unternehmen",
+    "sameCountry": "Gleiches Land",
+    "sameSector": "Gleiche Branche",
+    "activity": {
+      "postedVacancy": "hat eine neue Stelle veroeffentlicht",
+      "completedContract": "hat einen Vertrag abgeschlossen",
+      "viewVacancy": "Stelle ansehen"
     }
   },
   "reviews": {
@@ -345,6 +491,17 @@
     "submit": "Bewertung absenden",
     "submitting": "Wird gesendet...",
     "success": "Bewertung erfolgreich gesendet",
-    "noReviews": "Sie haben noch keine Bewertungen"
+    "noReviews": "Sie haben noch keine Bewertungen",
+    "rateExperience": "Bewerten Sie Ihre Erfahrung mit",
+    "rateExperienceDesc": "Ihre Meinung hilft anderen Arbeitnehmern, bessere Entscheidungen zu treffen.",
+    "leaveReview": "Bewertung abgeben"
+  },
+  "company": {
+    "companyJobs": "Stellenangebote dieses Unternehmens",
+    "noVacancies": "Keine aktiven Stellenangebote",
+    "noVacanciesDesc": "Dieses Unternehmen hat derzeit keine offenen Stellen.",
+    "reviews": "Bewertungen",
+    "noReviews": "Noch keine Bewertungen",
+    "noReviewsDesc": "Es gibt noch keine Bewertungen fuer dieses Unternehmen. Seien Sie die erste Person, die eine abgibt."
   }
 }

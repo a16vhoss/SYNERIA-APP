@@ -15,7 +15,10 @@
     "vacancies": "Stellenangebote",
     "candidates": "Kandidaten",
     "help": "Hilfe",
-    "notifications": "Benachrichtigungen"
+    "notifications": "Benachrichtigungen",
+    "principal": "Hauptmenu",
+    "support": "Support",
+    "menuTitle": "Navigationsmenü"
   },
   "footer": {
     "about": "Ueber uns",
@@ -67,7 +70,13 @@
     "restore": "Wiederherstellen",
     "print": "Drucken",
     "export": "Exportieren",
-    "import": "Importieren"
+    "import": "Importieren",
+    "viewAll": "Alle anzeigen",
+    "viewDetails": "Details anzeigen",
+    "viewProfile": "Profil anzeigen",
+    "closeBanner": "Banner schliessen",
+    "downloadPDF": "PDF herunterladen",
+    "searchPlaceholder": "Suchen..."
   },
   "status": {
     "active": "Aktiv",
@@ -181,7 +190,65 @@
     "comingSoon": "Demnachst verfuegbar",
     "beta": "Beta",
     "new": "Neu",
-    "premium": "Premium"
+    "premium": "Premium",
+    "saving": "Wird gespeichert...",
+    "perMonth": "/Monat",
+    "user": "Benutzer",
+    "company": "Unternehmen",
+    "recent": "Aktuell",
+    "allRightsReserved": "Alle Rechte vorbehalten."
+  },
+  "errors": {
+    "notAuthenticated": "Nicht authentifiziert",
+    "offline": "Keine Internetverbindung",
+    "saveFailed": "Fehler beim Speichern",
+    "deleteAccountFailed": "Fehler beim Loeschen des Kontos",
+    "companyNotFound": "Unternehmen nicht gefunden",
+    "companyNotFoundDesc": "Das gesuchte Unternehmen existiert nicht oder ist nicht verfuegbar.",
+    "unknown": "Unbekannter Fehler",
+    "somethingWentWrong": "Etwas ist schiefgelaufen",
+    "errorDesc": "Ein unerwarteter Fehler ist aufgetreten. Sie koennen es erneut versuchen oder zur Startseite zurueckkehren.",
+    "errorDetails": "Fehlerdetails",
+    "tryAgain": "Erneut versuchen"
+  },
+  "notifications": {
+    "markAllRead": "Alle als gelesen markieren",
+    "markAsRead": "Als gelesen markieren",
+    "unread": "ungelesen"
+  },
+  "roles": {
+    "worker": "Arbeitnehmer",
+    "employer": "Unternehmen",
+    "switchToWorker": "Zum Arbeitnehmer wechseln",
+    "switchToEmployer": "Zum Unternehmen wechseln",
+    "workerDesc": "Jobs suchen und bewerben",
+    "employerDesc": "Stellenangebote veroeffentlichen und einstellen"
+  },
+  "premium": {
+    "unlockAll": "Alles freischalten"
+  },
+  "pages": {
+    "notFound": "Seite nicht gefunden",
+    "notFoundDesc": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "backToHome": "Zurueck zur Startseite"
+  },
+  "sectors": {
+    "construction": "Bauwesen",
+    "hotelAndTourism": "Hotel & Tourismus",
+    "agriculture": "Landwirtschaft",
+    "manufacturing": "Fertigung",
+    "technology": "Technologie",
+    "health": "Gesundheit",
+    "transportAndLogistics": "Transport & Logistik",
+    "energy": "Energie",
+    "commerce": "Handel",
+    "domesticServices": "Haushaltsdienstleistungen"
+  },
+  "jobTypes": {
+    "fullTime": "Vollzeit",
+    "partTime": "Teilzeit",
+    "contract": "Vertrag",
+    "seasonal": "Saisonarbeit"
   },
   "landing": {
     "nav": {

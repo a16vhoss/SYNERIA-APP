@@ -1,10 +1,12 @@
 import { createClient } from "@/lib/supabase/server";
 import { type MockVacancy } from "@/lib/constants/mock-data";
 import { VacanciesClient } from "./vacancies-client";
+import { getTranslations } from "next-intl/server";
 
-export const metadata = {
-  title: "Gestion de Vacantes | Syneria",
-};
+export async function generateMetadata() {
+  const t = await getTranslations("common");
+  return { title: `${t("nav.vacancies")} | Syneria` };
+}
 
 async function getVacancies(): Promise<MockVacancy[]> {
   try {

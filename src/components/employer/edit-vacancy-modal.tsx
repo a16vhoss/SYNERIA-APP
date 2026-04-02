@@ -68,6 +68,7 @@ export function EditVacancyModal({
   onSubmit,
 }: EditVacancyModalProps) {
   const t = useTranslations("employer");
+  const tc = useTranslations("common");
   const {
     register,
     handleSubmit,
@@ -163,8 +164,8 @@ export function EditVacancyModal({
                 id="edit-title"
                 placeholder={t("vacancies.create.jobTitlePlaceholder")}
                 {...register("title", {
-                  required: "Campo requerido",
-                  minLength: { value: 3, message: "Minimo 3 caracteres" },
+                  required: t("vacancies.create.errors.fieldRequired"),
+                  minLength: { value: 3, message: t("vacancies.create.errors.minChars3") },
                 })}
                 aria-invalid={!!errors.title}
                 className="mt-1"
@@ -183,8 +184,8 @@ export function EditVacancyModal({
                 placeholder={t("vacancies.create.descriptionPlaceholder")}
                 rows={3}
                 {...register("description", {
-                  required: "Campo requerido",
-                  minLength: { value: 10, message: "Minimo 10 caracteres" },
+                  required: t("vacancies.create.errors.fieldRequired"),
+                  minLength: { value: 10, message: t("vacancies.create.errors.minChars10") },
                 })}
                 aria-invalid={!!errors.description}
                 className="mt-1"
@@ -206,14 +207,14 @@ export function EditVacancyModal({
                 <select
                   id="edit-sector"
                   {...register("sector", {
-                    required: "Selecciona un sector",
+                    required: t("vacancies.create.errors.selectSector"),
                   })}
                   className={selectClasses}
                 >
-                  <option value="">Seleccionar sector</option>
+                  <option value="">{t("vacancies.create.selectSectorPlaceholder")}</option>
                   {SECTORS.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
+                    <option key={s.value} value={s.value}>
+                      {tc(`sectors.${s.label}`)}
                     </option>
                   ))}
                 </select>
@@ -228,14 +229,14 @@ export function EditVacancyModal({
                 <select
                   id="edit-contract_type"
                   {...register("contract_type", {
-                    required: "Selecciona un tipo",
+                    required: t("vacancies.create.errors.selectType"),
                   })}
                   className={selectClasses}
                 >
-                  <option value="">Jornada Completa</option>
+                  <option value="">{t("vacancies.create.fullTime")}</option>
                   {JOB_TYPES.map((j) => (
                     <option key={j.value} value={j.value}>
-                      {j.label}
+                      {tc(`jobTypes.${j.label}`)}
                     </option>
                   ))}
                 </select>
@@ -272,11 +273,11 @@ export function EditVacancyModal({
                 <select
                   id="edit-country"
                   {...register("country", {
-                    required: "Selecciona un pais",
+                    required: t("vacancies.create.errors.selectCountry"),
                   })}
                   className={selectClasses}
                 >
-                  <option value="">Seleccionar pais</option>
+                  <option value="">{t("vacancies.create.selectCountryPlaceholder")}</option>
                   {COUNTRIES.map((c) => (
                     <option key={c.code} value={c.code}>
                       {c.flag} {c.name}
@@ -290,13 +291,13 @@ export function EditVacancyModal({
                 )}
               </div>
               <div>
-                <Label htmlFor="edit-city">Ciudad</Label>
+                <Label htmlFor="edit-city">{t("vacancies.create.cityLabel")}</Label>
                 <Input
                   id="edit-city"
-                  placeholder="Ciudad"
+                  placeholder={t("vacancies.create.cityPlaceholder")}
                   {...register("city", {
-                    required: "Campo requerido",
-                    minLength: { value: 2, message: "Minimo 2 caracteres" },
+                    required: t("vacancies.create.errors.fieldRequired"),
+                    minLength: { value: 2, message: t("vacancies.create.errors.minChars2") },
                   })}
                   aria-invalid={!!errors.city}
                   className="mt-1"
@@ -319,7 +320,7 @@ export function EditVacancyModal({
                 <Input
                   id="edit-salary_min"
                   type="number"
-                  placeholder="Salario minimo"
+                  placeholder={t("vacancies.create.salaryMinPlaceholder")}
                   {...register("salary_min")}
                   className="mt-1"
                 />
@@ -329,7 +330,7 @@ export function EditVacancyModal({
                 <Input
                   id="edit-salary_max"
                   type="number"
-                  placeholder="Salario maximo"
+                  placeholder={t("vacancies.create.salaryMaxPlaceholder")}
                   {...register("salary_max")}
                   className="mt-1"
                 />

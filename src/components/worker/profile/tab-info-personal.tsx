@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,17 +24,19 @@ import { createClient } from "@/lib/supabase/client";
 /*  Schema                                                             */
 /* ------------------------------------------------------------------ */
 
-const personalInfoSchema = z.object({
-  fullName: z.string().min(2, "Nombre requerido"),
-  email: z.string().email("Email invalido"),
-  phone: z.string().min(5, "Telefono requerido"),
-  country: z.string().min(1, "Selecciona un pais"),
-  city: z.string().min(1, "Ciudad requerida"),
-  dateOfBirth: z.string().min(1, "Fecha requerida"),
-  bio: z.string().max(500, "Maximo 500 caracteres").optional().default(""),
-});
+function createPersonalInfoSchema(tc: ReturnType<typeof useTranslations>) {
+  return z.object({
+    fullName: z.string().min(2, tc("validation.required")),
+    email: z.string().email(tc("validation.invalidEmail")),
+    phone: z.string().min(5, tc("validation.required")),
+    country: z.string().min(1, tc("validation.required")),
+    city: z.string().min(1, tc("validation.required")),
+    dateOfBirth: z.string().min(1, tc("validation.required")),
+    bio: z.string().max(500, tc("validation.maxLength", { max: 500 })).optional().default(""),
+  });
+}
 
-type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
+type PersonalInfoValues = z.infer<ReturnType<typeof createPersonalInfoSchema>>;
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
@@ -56,6 +59,9 @@ const fadeUp = {
 };
 
 export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
+  const t = useTranslations("worker");
+  const tc = useTranslations("common");
+  const personalInfoSchema = createPersonalInfoSchema(tc);
   const [selectedCountry, setSelectedCountry] = useState(defaultValues.country);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -94,7 +100,7 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
         .eq("id", user.id);
 
       if (error) throw error;
-      setSaveMessage({ type: "success", text: "Perfil actualizado correctamente" });
+      setSaveMessage({ type: "success", text: t("profile.personal.saveSuccess") });
     } catch (err) {
       setSaveMessage({ type: "error", text: err instanceof Error ? err.message : "Error al guardar" });
     } finally {
@@ -112,10 +118,10 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
       >
         {/* Nombre completo */}
         <motion.div className="space-y-1.5" variants={fadeUp}>
-          <Label htmlFor="fullName">Nombre completo</Label>
+          <Label htmlFor="fullName">{t("profile.personal.fullName")}</Label>
           <Input
             id="fullName"
-            placeholder="Tu nombre"
+            placeholder={t("profile.personal.namePlaceholder")}
             {...register("fullName")}
             aria-invalid={!!errors.fullName}
           />
@@ -126,7 +132,7 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
 
         {/* Email */}
         <motion.div className="space-y-1.5" variants={fadeUp}>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t("profile.personal.email")}</Label>
           <Input
             id="email"
             type="email"
@@ -138,7 +144,7 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
 
         {/* Telefono */}
         <motion.div className="space-y-1.5" variants={fadeUp}>
-          <Label htmlFor="phone">Telefono</Label>
+          <Label htmlFor="phone">{t("profile.personal.phone")}</Label>
           <Input
             id="phone"
             placeholder="+51 999 999 999"
@@ -152,7 +158,7 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
 
         {/* Pais */}
         <motion.div className="space-y-1.5" variants={fadeUp}>
-          <Label>Pais</Label>
+          <Label>{t("profile.personal.country")}</Label>
           <Select
             value={selectedCountry}
             onValueChange={(val) => {
@@ -161,7 +167,7 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
             }}
           >
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="Seleccionar pais" />
+              <SelectValue placeholder={t("profile.personal.country")} />
             </SelectTrigger>
             <SelectContent>
               {COUNTRIES.map((c) => (
@@ -178,10 +184,10 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
 
         {/* Ciudad */}
         <motion.div className="space-y-1.5" variants={fadeUp}>
-          <Label htmlFor="city">Ciudad</Label>
+          <Label htmlFor="city">{t("profile.personal.city")}</Label>
           <Input
             id="city"
-            placeholder="Bogota"
+            placeholder={t("profile.personal.cityPlaceholder")}
             {...register("city")}
             aria-invalid={!!errors.city}
           />
@@ -192,7 +198,7 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
 
         {/* Fecha de nacimiento */}
         <motion.div className="space-y-1.5" variants={fadeUp}>
-          <Label htmlFor="dateOfBirth">Fecha de nacimiento</Label>
+          <Label htmlFor="dateOfBirth">{t("profile.personal.dateOfBirth")}</Label>
           <Input
             id="dateOfBirth"
             type="date"
@@ -208,7 +214,7 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
         {/* Bio / Descripcion - full width */}
         <motion.div className="space-y-1.5 sm:col-span-2" variants={fadeUp}>
           <div className="flex items-center justify-between">
-            <Label htmlFor="bio">Bio / Descripcion</Label>
+            <Label htmlFor="bio">{t("profile.personal.bio")}</Label>
             <span className="text-xs text-muted-foreground">
               {bioValue.length}/500
             </span>
@@ -217,7 +223,7 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
             id="bio"
             rows={4}
             maxLength={500}
-            placeholder="Cuentanos sobre ti..."
+            placeholder={t("profile.personal.bioPlaceholder")}
             {...register("bio")}
             aria-invalid={!!errors.bio}
           />
@@ -250,10 +256,10 @@ export function TabInfoPersonal({ defaultValues }: TabInfoPersonalProps) {
         transition={{ delay: 0.4 }}
       >
         <Button type="button" variant="outline">
-          Cancelar
+          {tc("actions.cancel")}
         </Button>
         <Button type="submit" disabled={saving}>
-          {saving ? "Guardando..." : "Actualizar Datos"}
+          {saving ? tc("misc.loading") : t("profile.personal.updateData")}
         </Button>
       </motion.div>
     </form>

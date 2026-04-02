@@ -1,6 +1,7 @@
 "use client";
 
 import { use, useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { MessageSquare, Briefcase } from "lucide-react";
 
@@ -56,6 +57,7 @@ export default function PublicCompanyPage({
   params: Promise<{ companyId: string }>;
 }) {
   const { companyId } = use(params);
+  const t = useTranslations("worker");
 
   const [company, setCompany] = useState<CompanyData | null>(null);
   const [activeVacancies, setActiveVacancies] = useState<VacancyData[]>([]);
@@ -127,7 +129,7 @@ export default function PublicCompanyPage({
       <div className="flex flex-col items-center justify-center py-20">
         <Briefcase className="mb-4 size-12 text-muted-foreground" />
         <h2 className="font-heading text-xl font-bold text-foreground">
-          Empresa no encontrada
+          {t("company.noVacancies")}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
           La empresa que buscas no existe o no esta disponible.
@@ -170,7 +172,7 @@ export default function PublicCompanyPage({
         <motion.div variants={fadeUp}>
           <GlassCard hover={false}>
             <h2 className="mb-3 font-heading text-lg font-semibold text-foreground">
-              Sobre la empresa
+              {t("jobs.detail.aboutCompany")}
             </h2>
             <p className="text-sm leading-relaxed text-muted-foreground">
               {company.description}
@@ -191,7 +193,7 @@ export default function PublicCompanyPage({
       {/* Active Jobs */}
       <motion.div variants={fadeUp}>
         <h2 className="mb-4 font-heading text-lg font-semibold text-foreground">
-          Empleos de esta empresa
+          {t("company.companyJobs")}
         </h2>
         {activeVacancies.length > 0 ? (
           <div className="grid gap-4 sm:grid-cols-2">
@@ -208,7 +210,7 @@ export default function PublicCompanyPage({
                   location: vacancy.location,
                   salary: vacancy.salary_min && vacancy.salary_max
                     ? `$${vacancy.salary_min.toLocaleString()} - $${vacancy.salary_max.toLocaleString()}/mes`
-                    : "A convenir",
+                    : t("jobs.detail.salaryNegotiable"),
                   tags: [],
                 }}
               />
@@ -218,8 +220,8 @@ export default function PublicCompanyPage({
           <GlassCard hover={false}>
             <EmptyState
               icon={Briefcase}
-              title="Sin vacantes activas"
-              description="Esta empresa no tiene vacantes publicadas en este momento."
+              title={t("company.noVacancies")}
+              description={t("company.noVacanciesDesc")}
             />
           </GlassCard>
         )}
@@ -228,13 +230,13 @@ export default function PublicCompanyPage({
       {/* Reviews section - placeholder */}
       <motion.div variants={fadeUp}>
         <h2 className="mb-4 font-heading text-lg font-semibold text-foreground">
-          Resenas
+          {t("company.reviews")}
         </h2>
         <GlassCard hover={false}>
           <EmptyState
             icon={MessageSquare}
-            title="Sin resenas aun"
-            description="Todavia no hay resenas para esta empresa. Se la primera persona en dejar una."
+            title={t("company.noReviews")}
+            description={t("company.noReviewsDesc")}
           />
         </GlassCard>
       </motion.div>

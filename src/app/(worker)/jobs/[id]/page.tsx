@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
 import { JobDetailClient } from "./job-detail-client";
 import { notFound } from "next/navigation";
 
@@ -20,6 +21,8 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
     return notFound();
   }
 
+  const t = await getTranslations("worker");
+
   const { data: similarJobs } = await supabase
     .from("jobs")
     .select("id, title, salary_min, companies(name)")
@@ -31,19 +34,19 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
   const company = job.companies as any;
   const jobData = {
     id: job.id,
-    title: job.title ?? "Puesto de Trabajo",
+    title: job.title ?? t("jobs.detail.defaultTitle"),
     companyName: company?.name ?? "Empresa",
     companyLetter: company?.logo_letter ?? (company?.name?.charAt(0) ?? "E"),
     companyGradient: company?.logo_gradient ?? "green",
     sector: job.sector ?? "General",
-    location: `${job.city ?? ""}, ${job.country ?? ""}`.replace(/^, |, $/g, "") || "Ubicacion por definir",
+    location: `${job.city ?? ""}, ${job.country ?? ""}`.replace(/^, |, $/g, "") || t("jobs.detail.locationTBD"),
     flag: "",
     postedAgo: job.created_at
       ? `Hace ${Math.max(1, Math.round((Date.now() - new Date(job.created_at).getTime()) / 86400000))} dias`
       : "Reciente",
     salary: job.salary_min
       ? `$${job.salary_min.toLocaleString()}${job.salary_max ? ` - $${job.salary_max.toLocaleString()}` : ""}/mes`
-      : "A convenir",
+      : t("jobs.detail.salaryNegotiable"),
     tags: [] as { label: string; variant: string }[],
     description: job.description ?? "",
     responsibilities: (job.responsibilities as string[]) ?? [],
@@ -52,10 +55,10 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
     summary: {
       sector: job.sector ?? "General",
       type: job.job_type === "full_time" ? "Jornada Completa" : "Medio Tiempo",
-      experience: job.experience_required ?? "No especificada",
+      experience: job.experience_required ?? t("jobs.detail.notSpecified"),
       languages: Array.isArray(job.languages_required) ? job.languages_required.join(", ") : "Espanol",
       startDate: job.start_date ?? "Por definir",
-      duration: job.duration ?? "Indefinido",
+      duration: job.duration ?? t("jobs.detail.indefinite"),
     },
     company: {
       id: company?.id ?? "",

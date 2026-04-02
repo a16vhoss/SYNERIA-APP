@@ -15,7 +15,10 @@
     "vacancies": "Vacantes",
     "candidates": "Candidatos",
     "help": "Ayuda",
-    "notifications": "Notificaciones"
+    "notifications": "Notificaciones",
+    "principal": "Principal",
+    "support": "Soporte",
+    "menuTitle": "Menú de navegación"
   },
   "footer": {
     "about": "Acerca de",
@@ -67,7 +70,13 @@
     "restore": "Restaurar",
     "print": "Imprimir",
     "export": "Exportar",
-    "import": "Importar"
+    "import": "Importar",
+    "viewAll": "Ver todos",
+    "viewDetails": "Ver Detalles",
+    "viewProfile": "Ver Perfil",
+    "closeBanner": "Cerrar banner",
+    "downloadPDF": "Descargar PDF",
+    "searchPlaceholder": "Buscar..."
   },
   "status": {
     "active": "Activo",
@@ -181,7 +190,65 @@
     "comingSoon": "Próximamente",
     "beta": "Beta",
     "new": "Nuevo",
-    "premium": "Premium"
+    "premium": "Premium",
+    "saving": "Guardando...",
+    "perMonth": "/mes",
+    "user": "Usuario",
+    "company": "Empresa",
+    "recent": "Reciente",
+    "allRightsReserved": "Todos los derechos reservados."
+  },
+  "errors": {
+    "notAuthenticated": "No autenticado",
+    "offline": "Sin conexión a internet",
+    "saveFailed": "Error al guardar",
+    "deleteAccountFailed": "Error al eliminar cuenta",
+    "companyNotFound": "Empresa no encontrada",
+    "companyNotFoundDesc": "La empresa que buscas no existe o no está disponible.",
+    "unknown": "Error desconocido",
+    "somethingWentWrong": "Algo salió mal",
+    "errorDesc": "Ocurrió un error inesperado. Puedes intentar de nuevo o volver al inicio.",
+    "errorDetails": "Detalles del error",
+    "tryAgain": "Intentar de nuevo"
+  },
+  "notifications": {
+    "markAllRead": "Marcar todas leídas",
+    "markAsRead": "Marcar como leída",
+    "unread": "sin leer"
+  },
+  "roles": {
+    "worker": "Trabajador",
+    "employer": "Empresa",
+    "switchToWorker": "Cambiar a Worker",
+    "switchToEmployer": "Cambiar a Empresa",
+    "workerDesc": "Buscar empleos y aplicar",
+    "employerDesc": "Publicar vacantes y contratar"
+  },
+  "premium": {
+    "unlockAll": "Desbloquea todo"
+  },
+  "pages": {
+    "notFound": "Página no encontrada",
+    "notFoundDesc": "La página que buscas no existe o fue movida a otra ubicación.",
+    "backToHome": "Volver al inicio"
+  },
+  "sectors": {
+    "construction": "Construcción",
+    "hotelAndTourism": "Hotelería y Turismo",
+    "agriculture": "Agricultura",
+    "manufacturing": "Manufactura",
+    "technology": "Tecnología",
+    "health": "Salud",
+    "transportAndLogistics": "Transporte y Logística",
+    "energy": "Energía",
+    "commerce": "Comercio",
+    "domesticServices": "Servicios Domésticos"
+  },
+  "jobTypes": {
+    "fullTime": "Jornada Completa",
+    "partTime": "Media Jornada",
+    "contract": "Contrato",
+    "seasonal": "Temporal"
   },
   "landing": {
     "nav": {

@@ -15,7 +15,19 @@
     "profileCompletion": "Completar Perfil",
     "profileCompletionDesc": "Completa tu perfil para mejorar tus oportunidades",
     "noRecommendations": "No hay recomendaciones por ahora",
-    "viewAllJobs": "Ver todos los empleos"
+    "noRecommendationsDesc": "Completa tu perfil para recibir empleos personalizados que se ajusten a tu experiencia.",
+    "viewAllJobs": "Ver todos los empleos",
+    "availableJobs": "Empleos disponibles",
+    "myApplications": "Mis aplicaciones",
+    "notifications": "Notificaciones",
+    "profileCompleted": "Perfil completado",
+    "completeProfile": "Completar perfil",
+    "viewAll": "ver todos",
+    "tabs": {
+      "panel": "Panel",
+      "searchJobs": "Buscar Empleos",
+      "myApplications": "Mis Aplicaciones"
+    }
   },
   "jobs": {
     "title": "Buscar Empleos",
@@ -59,7 +71,13 @@
       "shareJob": "Compartir empleo",
       "reportJob": "Reportar empleo",
       "similarJobs": "Empleos similares",
-      "alreadyApplied": "Ya aplicaste a este empleo"
+      "alreadyApplied": "Ya aplicaste a este empleo",
+      "jobSummary": "Resumen del Empleo",
+      "salaryNegotiable": "A convenir",
+      "locationTBD": "Ubicación por definir",
+      "notSpecified": "No especificada",
+      "indefinite": "Indefinido",
+      "defaultTitle": "Puesto de Trabajo"
     },
     "apply": {
       "title": "Aplicar a {jobTitle}",
@@ -74,6 +92,23 @@
       "submitting": "Enviando...",
       "success": "Aplicación enviada exitosamente",
       "error": "Error al enviar la aplicación"
+    },
+    "save": "Guardar empleo",
+    "unsave": "Quitar de guardados"
+  },
+  "interviews": {
+    "scheduled": "Tienes una entrevista programada",
+    "atTime": "a las",
+    "joinCall": "Unirse a la llamada",
+    "confirmed": "Asistencia confirmada",
+    "declined": "No puedes asistir - notificado al empleador",
+    "confirmAttendance": "Confirmar Asistencia",
+    "cannotAttend": "No Puedo Asistir",
+    "countdown": {
+      "past": "Pasada",
+      "today": "Hoy",
+      "tomorrow": "Mañana",
+      "inDays": "En {count} días"
     }
   },
   "applications": {
@@ -108,8 +143,10 @@
       "experience": "Experiencia",
       "education": "Educación",
       "skills": "Habilidades",
-      "documents": "Documentos"
+      "documents": "Documentos",
+      "settings": "Configuración"
     },
+    "tabsAriaLabel": "Tabs de perfil",
     "personal": {
       "avatar": "Foto de perfil",
       "changeAvatar": "Cambiar foto",
@@ -125,7 +162,13 @@
       "headlinePlaceholder": "Ej: Desarrollador Full Stack",
       "website": "Sitio web",
       "linkedin": "LinkedIn",
-      "github": "GitHub"
+      "github": "GitHub",
+      "fullName": "Nombre completo",
+      "dateOfBirth": "Fecha de nacimiento",
+      "namePlaceholder": "Tu nombre",
+      "cityPlaceholder": "Tu ciudad",
+      "updateData": "Actualizar Datos",
+      "saveSuccess": "Perfil actualizado correctamente"
     },
     "experience": {
       "addExperience": "Agregar experiencia",
@@ -136,7 +179,11 @@
       "endDate": "Fecha de fin",
       "current": "Trabajo actual",
       "description": "Descripción",
-      "noExperience": "Aún no has agregado experiencia laboral"
+      "noExperience": "Aún no has agregado experiencia laboral",
+      "emptyDescription": "Agrega tu experiencia para que los empleadores puedan conocer tu trayectoria profesional.",
+      "positionPlaceholder": "Ej: Operador de Maquinaria",
+      "companyPlaceholder": "Ej: Constructora Alpha S.A.",
+      "descriptionPlaceholder": "Describe tus responsabilidades..."
     },
     "education": {
       "addEducation": "Agregar educación",
@@ -147,7 +194,11 @@
       "startDate": "Fecha de inicio",
       "endDate": "Fecha de fin",
       "current": "En curso",
-      "noEducation": "Aún no has agregado educación"
+      "noEducation": "Aún no has agregado educación",
+      "emptyDescription": "Agrega tu formación académica para fortalecer tu perfil profesional.",
+      "institutionPlaceholder": "Ej: Universidad Nacional",
+      "degreePlaceholder": "Ej: Ingeniería Civil",
+      "descriptionPlaceholder": "Describe tu formación..."
     },
     "skills": {
       "addSkill": "Agregar habilidad",
@@ -166,7 +217,31 @@
       "certificate": "Certificado",
       "id": "Identificación",
       "other": "Otro",
-      "noDocuments": "Aún no has subido documentos"
+      "noDocuments": "Aún no has subido documentos",
+      "passport": "Pasaporte",
+      "dragOrClick": "Arrastra o haz click",
+      "uploadError": "Error al subir documento"
+    },
+    "settings": {
+      "emailNotifications": "Notificaciones por Email",
+      "newMatchingJobs": "Nuevos empleos compatibles",
+      "applicationStatus": "Estado de aplicaciones",
+      "frequency": "Frecuencia",
+      "daily": "Diaria",
+      "weekly": "Semanal",
+      "monthly": "Mensual",
+      "platformLanguage": "Idioma de la plataforma",
+      "dangerZone": "Zona de peligro",
+      "deleteWarning": "Esta acción es irreversible. Se eliminarán todos tus datos, incluyendo perfil, aplicaciones, contratos y wallet.",
+      "deleteAccountTitle": "Eliminar cuenta permanentemente",
+      "deleteConfirmDesc": "Esta acción no se puede deshacer. Escribe ELIMINAR para confirmar.",
+      "typeDeletePlaceholder": "Escribe \"ELIMINAR\"",
+      "deletePermanently": "Eliminar permanentemente",
+      "deleteKeyword": "ELIMINAR",
+      "myAccount": "mi cuenta",
+      "saveSettings": "Guardar Configuración",
+      "sessionClosed": "Sesión cerrada",
+      "saveSuccess": "Configuración guardada"
     }
   },
   "wallet": {
@@ -174,6 +249,30 @@
     "balance": "Saldo Disponible",
     "totalEarnings": "Ganancias Totales",
     "pendingPayments": "Pagos Pendientes",
+    "totalBalance": "Balance Total",
+    "sendMoney": "Enviar Dinero",
+    "receive": "Recibir",
+    "connectedAccounts": "Cuentas Conectadas",
+    "addBankAccount": "Agregar cuenta bancaria",
+    "bankConnectionSoon": "Conexión bancaria disponible próximamente",
+    "accountTypes": {
+      "checking": "Cuenta Corriente",
+      "savings": "Cuenta Ahorro"
+    },
+    "stats": {
+      "title": "Estadísticas Financieras",
+      "earnedThisMonth": "Ganado este mes",
+      "vsLastMonth": "+45% vs mes anterior",
+      "remittancesSent": "Remesas enviadas",
+      "transfers": "{count} transferencias",
+      "feesSaved": "Comisiones ahorradas",
+      "vsTraditional": "vs servicios tradicionales",
+      "paymentsReceived": "Pagos recibidos"
+    },
+    "quickActions": {
+      "microInsurance": "Microseguros",
+      "topUps": "Recargas"
+    },
     "tabs": {
       "overview": "Resumen",
       "transactions": "Transacciones",
@@ -190,7 +289,11 @@
       "status": "Estado",
       "income": "Ingreso",
       "withdrawal": "Retiro",
-      "fee": "Comisión"
+      "fee": "Comisión",
+      "recentTitle": "Transacciones Recientes",
+      "filterIncome": "Ingresos",
+      "sent": "Enviadas",
+      "empty": "No hay transacciones en esta categoría."
     },
     "remittance": {
       "title": "Enviar Remesa",
@@ -213,7 +316,20 @@
       "amount": "Monto",
       "rate": "Tasa de cambio",
       "youReceive": "Recibes",
-      "execute": "Ejecutar cambio"
+      "execute": "Ejecutar cambio",
+      "description": "Cambia entre divisas con las mejores tasas del mercado.",
+      "exchangeRate": "Tasa de cambio",
+      "fee": "Comisión (1%)",
+      "youWillReceive": "Recibirás",
+      "swapButton": "Cambiar Divisa",
+      "success": "Cambio realizado exitosamente"
+    },
+    "currencies": {
+      "usd": "USD - Dólar Americano",
+      "eur": "EUR - Euro",
+      "gbp": "GBP - Libra Esterlina",
+      "chf": "CHF - Franco Suizo",
+      "mxn": "MXN - Peso Mexicano"
     },
     "card": {
       "title": "Tarjeta Virtual",
@@ -224,7 +340,9 @@
       "freeze": "Congelar tarjeta",
       "unfreeze": "Descongelar tarjeta",
       "spendingLimit": "Límite de gasto",
-      "monthlySpent": "Gasto mensual"
+      "monthlySpent": "Gasto mensual",
+      "holder": "Titular",
+      "expires": "Expira"
     }
   },
   "contracts": {
@@ -268,7 +386,19 @@
       "newEndDate": "Nueva fecha de fin",
       "newTerms": "Nuevos términos (opcional)",
       "submit": "Solicitar renovación"
-    }
+    },
+    "progress": "Progreso del contrato",
+    "daysRemaining": "{count} días restantes",
+    "terms": "Términos del Contrato",
+    "visaSponsorship": "Patrocinio de visa incluido",
+    "schedule": "Horario:",
+    "signDigitally": "Firmar Digitalmente",
+    "awaitingSignature": "Esperando firma del trabajador",
+    "requestCancellation": "Solicitar Cancelación",
+    "respondToRequest": "Responder Solicitud",
+    "renewContract": "Renovar Contrato",
+    "currentContract": "Contrato actual",
+    "contractCount": "contrato(s)"
   },
   "messages": {
     "title": "Mensajes",
@@ -319,6 +449,22 @@
       "endorse": "Validar",
       "endorseSkill": "Validar habilidad",
       "noEndorsements": "Aún no tienes validaciones"
+    },
+    "skillEndorsements": "Recomendaciones de habilidades",
+    "endorse": "Recomendar",
+    "connectedSince": "Conectados desde",
+    "mutualConnections": "conexiones mutuas",
+    "removeConnection": "Eliminar conexión",
+    "pendingRequest": "Solicitud pendiente",
+    "cancelRequest": "Cancelar solicitud",
+    "connect": "Conectar",
+    "sameCompany": "Misma empresa",
+    "sameCountry": "Mismo país",
+    "sameSector": "Mismo sector",
+    "activity": {
+      "postedVacancy": "publicó una nueva vacante",
+      "completedContract": "completó un contrato",
+      "viewVacancy": "Ver vacante"
     }
   },
   "reviews": {
@@ -345,6 +491,17 @@
     "submit": "Enviar reseña",
     "submitting": "Enviando...",
     "success": "Reseña enviada exitosamente",
-    "noReviews": "Aún no tienes reseñas"
+    "noReviews": "Aún no tienes reseñas",
+    "rateExperience": "Califica tu experiencia con",
+    "rateExperienceDesc": "Tu opinión ayuda a otros trabajadores a tomar mejores decisiones.",
+    "leaveReview": "Dejar Reseña"
+  },
+  "company": {
+    "companyJobs": "Empleos de esta empresa",
+    "noVacancies": "Sin vacantes activas",
+    "noVacanciesDesc": "Esta empresa no tiene vacantes publicadas en este momento.",
+    "reviews": "Reseñas",
+    "noReviews": "Sin reseñas aún",
+    "noReviewsDesc": "Todavía no hay reseñas para esta empresa. Sé la primera persona en dejar una."
   }
 }

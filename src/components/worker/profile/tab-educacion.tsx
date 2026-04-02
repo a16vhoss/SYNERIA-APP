@@ -34,15 +34,17 @@ export interface EducationEntry {
   description: string;
 }
 
-const educationSchema = z.object({
-  institution: z.string().min(2, "Institucion requerida"),
-  degree: z.string().min(2, "Titulo / grado requerido"),
-  startDate: z.string().min(1, "Fecha inicio requerida"),
-  endDate: z.string().optional().default(""),
-  description: z.string().max(500).optional().default(""),
-});
+function createEducationSchema(tc: ReturnType<typeof useTranslations>) {
+  return z.object({
+    institution: z.string().min(2, tc("validation.required")),
+    degree: z.string().min(2, tc("validation.required")),
+    startDate: z.string().min(1, tc("validation.required")),
+    endDate: z.string().optional().default(""),
+    description: z.string().max(500).optional().default(""),
+  });
+}
 
-type EducationFormValues = z.infer<typeof educationSchema>;
+type EducationFormValues = z.infer<ReturnType<typeof createEducationSchema>>;
 
 /* ------------------------------------------------------------------ */
 /*  Animations                                                         */
@@ -71,6 +73,7 @@ const modalVariant = {
 export function TabEducacion() {
   const t = useTranslations("worker");
   const tc = useTranslations("common");
+  const educationSchema = createEducationSchema(tc);
   const [entries, setEntries] = useState<EducationEntry[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -146,7 +149,7 @@ export function TabEducacion() {
         <EmptyState
           icon={GraduationCap}
           title={t("profile.education.noEducation")}
-          description="Agrega tu formacion academica para fortalecer tu perfil profesional."
+          description={t("profile.education.emptyDescription")}
           action={{ label: t("profile.education.addEducation"), onClick: openAdd }}
         />
 
@@ -169,6 +172,9 @@ export function TabEducacion() {
             cancel: tc("actions.cancel"),
             save: tc("actions.save"),
             add: tc("actions.create"),
+            institutionPlaceholder: t("profile.education.institutionPlaceholder"),
+            degreePlaceholder: t("profile.education.degreePlaceholder"),
+            descriptionPlaceholder: t("profile.education.descriptionPlaceholder"),
           }}
         />
       </>
@@ -264,6 +270,9 @@ export function TabEducacion() {
           cancel: tc("actions.cancel"),
           save: tc("actions.save"),
           add: tc("actions.create"),
+          institutionPlaceholder: t("profile.education.institutionPlaceholder"),
+          degreePlaceholder: t("profile.education.degreePlaceholder"),
+          descriptionPlaceholder: t("profile.education.descriptionPlaceholder"),
         }}
       />
     </>
@@ -286,6 +295,9 @@ interface EducationDialogLabels {
   cancel: string;
   save: string;
   add: string;
+  institutionPlaceholder: string;
+  degreePlaceholder: string;
+  descriptionPlaceholder: string;
 }
 
 interface EducationDialogProps {
@@ -328,7 +340,7 @@ function EducationDialog({
               <Label htmlFor="edu-institution">{labels.institution}</Label>
               <Input
                 id="edu-institution"
-                placeholder="Ej: Universidad Nacional"
+                placeholder={labels.institutionPlaceholder}
                 {...register("institution")}
                 aria-invalid={!!errors.institution}
               />
@@ -341,7 +353,7 @@ function EducationDialog({
               <Label htmlFor="edu-degree">{labels.degree}</Label>
               <Input
                 id="edu-degree"
-                placeholder="Ej: Ingenieria Civil"
+                placeholder={labels.degreePlaceholder}
                 {...register("degree")}
                 aria-invalid={!!errors.degree}
               />
@@ -380,7 +392,7 @@ function EducationDialog({
                 id="edu-desc"
                 rows={3}
                 maxLength={500}
-                placeholder="Describe tu formacion..."
+                placeholder={labels.descriptionPlaceholder}
                 {...register("description")}
               />
             </div>

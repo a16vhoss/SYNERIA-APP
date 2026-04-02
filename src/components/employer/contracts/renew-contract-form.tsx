@@ -24,33 +24,35 @@ import { renewContract } from "@/lib/actions/contracts";
 import type { ContractData } from "@/lib/actions/contracts";
 
 /* ------------------------------------------------------------------ */
-/*  Schema                                                             */
+/*  Schema factory                                                     */
 /* ------------------------------------------------------------------ */
 
-const renewSchema = z.object({
-  salary: z.string().min(1, "Ingresa el salario"),
-  currency: z.string().min(1, "Selecciona moneda"),
-  start_date: z.string().min(1, "Ingresa fecha de inicio"),
-  end_date: z.string().min(1, "Ingresa fecha de fin"),
-  terms: z.string().min(10, "Minimo 10 caracteres"),
-});
+function createRenewSchema(t: (key: string) => string) {
+  return z.object({
+    salary: z.string().min(1, t("contracts.create.errors.enterSalary")),
+    currency: z.string().min(1, t("contracts.create.errors.selectCurrency")),
+    start_date: z.string().min(1, t("contracts.create.errors.enterStartDate")),
+    end_date: z.string().min(1, t("contracts.create.errors.enterEndDate")),
+    terms: z.string().min(10, t("contracts.create.errors.minChars10")),
+  });
+}
 
-type RenewFormData = z.infer<typeof renewSchema>;
+type RenewFormData = z.infer<ReturnType<typeof createRenewSchema>>;
 
 /* ------------------------------------------------------------------ */
-/*  Benefits                                                           */
+/*  Benefits keys                                                      */
 /* ------------------------------------------------------------------ */
 
-const AVAILABLE_BENEFITS = [
-  "Alojamiento",
-  "Seguro Medico",
-  "Transporte",
-  "Comida",
-  "Formacion",
-  "Herramientas",
-  "Laptop",
-  "Vacaciones Extras",
-];
+const BENEFIT_KEYS = [
+  "housing",
+  "healthInsurance",
+  "transport",
+  "meals",
+  "training",
+  "tools",
+  "laptop",
+  "extraVacation",
+] as const;
 
 /* ------------------------------------------------------------------ */
 /*  Animation                                                          */
@@ -91,6 +93,8 @@ export function RenewContractForm({
   const tc = useTranslations("common");
   const [selectedBenefits, setSelectedBenefits] = useState<string[]>([]);
 
+  const renewSchema = createRenewSchema(t);
+
   const {
     register,
     handleSubmit,
@@ -114,11 +118,11 @@ export function RenewContractForm({
     }
   }, [parentContract, reset]);
 
-  function toggleBenefit(benefit: string) {
+  function toggleBenefit(benefitKey: string) {
     setSelectedBenefits((prev) =>
-      prev.includes(benefit)
-        ? prev.filter((b) => b !== benefit)
-        : [...prev, benefit]
+      prev.includes(benefitKey)
+        ? prev.filter((b) => b !== benefitKey)
+        : [...prev, benefitKey]
     );
   }
 
@@ -304,7 +308,7 @@ export function RenewContractForm({
               <Label htmlFor="terms">{t("contracts.create.terms")}</Label>
               <Textarea
                 id="terms"
-                placeholder="Describe los nuevos terminos..."
+                placeholder={t("contracts.renew.termsPlaceholder")}
                 {...register("terms")}
                 className="mt-1 min-h-24"
               />
@@ -318,16 +322,16 @@ export function RenewContractForm({
             <motion.div custom={6} variants={fieldVariants}>
               <Label className="mb-2 block">{t("vacancies.create.benefits")}</Label>
               <div className="grid grid-cols-2 gap-2">
-                {AVAILABLE_BENEFITS.map((benefit) => (
+                {BENEFIT_KEYS.map((benefitKey) => (
                   <label
-                    key={benefit}
+                    key={benefitKey}
                     className="flex cursor-pointer items-center gap-2 rounded-lg border border-foreground/5 p-2 transition-colors hover:bg-muted/50"
                   >
                     <Checkbox
-                      checked={selectedBenefits.includes(benefit)}
-                      onCheckedChange={() => toggleBenefit(benefit)}
+                      checked={selectedBenefits.includes(benefitKey)}
+                      onCheckedChange={() => toggleBenefit(benefitKey)}
                     />
-                    <span className="text-sm">{benefit}</span>
+                    <span className="text-sm">{t(`contracts.create.benefits.${benefitKey}`)}</span>
                   </label>
                 ))}
               </div>

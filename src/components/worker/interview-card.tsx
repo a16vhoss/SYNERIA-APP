@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   Video,
@@ -22,7 +23,7 @@ interface InterviewCardProps {
   onDecline: () => void;
 }
 
-function getCountdownLabel(dateStr: string): string {
+function getCountdownLabel(dateStr: string, t: ReturnType<typeof useTranslations>): string {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const target = new Date(dateStr + "T00:00:00");
@@ -30,10 +31,10 @@ function getCountdownLabel(dateStr: string): string {
   const diffMs = target.getTime() - today.getTime();
   const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
 
-  if (diffDays < 0) return "Pasada";
-  if (diffDays === 0) return "Hoy";
-  if (diffDays === 1) return "Manana";
-  return `En ${diffDays} dias`;
+  if (diffDays < 0) return t("interviews.countdown.past");
+  if (diffDays === 0) return t("interviews.countdown.today");
+  if (diffDays === 1) return t("interviews.countdown.tomorrow");
+  return t("interviews.countdown.inDays", { count: diffDays });
 }
 
 function formatInterviewDate(dateStr: string): string {
@@ -53,8 +54,9 @@ export function InterviewCard({
   onConfirm,
   onDecline,
 }: InterviewCardProps) {
-  const countdown = getCountdownLabel(interview.date);
-  const isPast = countdown === "Pasada";
+  const t = useTranslations("worker");
+  const countdown = getCountdownLabel(interview.date, t);
+  const isPast = countdown === t("interviews.countdown.past");
   const isConfirmed = interview.confirmed === true;
   const isDeclined = interview.confirmed === false;
   const isPending = interview.confirmed === null;
@@ -79,7 +81,7 @@ export function InterviewCard({
             "rounded-full px-2.5 py-0.5 text-xs font-medium",
             isPast
               ? "bg-gray-100 text-gray-600"
-              : countdown === "Hoy"
+              : countdown === t("interviews.countdown.today")
                 ? "bg-amber-100 text-amber-700"
                 : "bg-violet-100 text-violet-700"
           )}
@@ -109,7 +111,7 @@ export function InterviewCard({
             className="inline-flex items-center gap-1.5 rounded-md bg-violet-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-violet-700"
           >
             <Video className="size-3.5" />
-            Unirse a la llamada
+            {t("interviews.joinCall")}
             <ExternalLink className="size-3" />
           </a>
         </div>
@@ -131,7 +133,7 @@ export function InterviewCard({
           animate={{ opacity: 1, scale: 1 }}
         >
           <CheckCircle2 className="size-4" />
-          Asistencia confirmada
+          {t("interviews.confirmed")}
         </motion.div>
       )}
 
@@ -142,7 +144,7 @@ export function InterviewCard({
           animate={{ opacity: 1, scale: 1 }}
         >
           <XCircle className="size-4" />
-          No puedes asistir - notificado al empleador
+          {t("interviews.declined")}
         </motion.div>
       )}
 
@@ -157,7 +159,7 @@ export function InterviewCard({
             }}
           >
             <CheckCircle2 className="mr-1.5 size-3.5" />
-            Confirmar Asistencia
+            {t("interviews.confirmAttendance")}
           </Button>
           <Button
             size="sm"
@@ -169,7 +171,7 @@ export function InterviewCard({
             }}
           >
             <XCircle className="mr-1.5 size-3.5" />
-            No Puedo Asistir
+            {t("interviews.cannotAttend")}
           </Button>
         </div>
       )}

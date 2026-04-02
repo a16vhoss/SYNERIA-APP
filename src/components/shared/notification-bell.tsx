@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Bell, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export interface Notification {
   id: string;
@@ -28,6 +29,7 @@ export function NotificationBell({
   onMarkAllRead,
   className,
 }: NotificationBellProps) {
+  const t = useTranslations("common");
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -60,7 +62,7 @@ export function NotificationBell({
         }
         transition={{ duration: 0.6 }}
         key={unreadCount}
-        aria-label={`Notificaciones${unreadCount > 0 ? ` (${unreadCount} sin leer)` : ""}`}
+        aria-label={`${t("nav.notifications")}${unreadCount > 0 ? ` (${unreadCount} ${t("notifications.unread")})` : ""}`}
       >
         <Bell className="size-5" />
 
@@ -93,14 +95,14 @@ export function NotificationBell({
             {/* Header */}
             <div className="flex items-center justify-between border-b px-4 py-3">
               <h4 className="font-heading text-sm font-semibold">
-                Notificaciones
+                {t("nav.notifications")}
               </h4>
               {unreadCount > 0 && onMarkAllRead && (
                 <button
                   className="text-xs font-medium text-brand-600 hover:underline"
                   onClick={onMarkAllRead}
                 >
-                  Marcar todas leídas
+                  {t("notifications.markAllRead")}
                 </button>
               )}
             </div>
@@ -109,7 +111,7 @@ export function NotificationBell({
             <div className="max-h-72 overflow-y-auto">
               {notifications.length === 0 ? (
                 <div className="py-8 text-center text-sm text-muted-foreground">
-                  Sin notificaciones
+                  {t("empty.noNotifications")}
                 </div>
               ) : (
                 notifications.map((notification, i) => (
@@ -150,7 +152,7 @@ export function NotificationBell({
                       <button
                         onClick={() => onMarkRead(notification.id)}
                         className="mt-1 shrink-0 text-muted-foreground hover:text-brand-600"
-                        aria-label="Marcar como leída"
+                        aria-label={t("notifications.markAsRead")}
                       >
                         <Check className="size-4" />
                       </button>

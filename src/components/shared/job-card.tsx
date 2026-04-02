@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { CompanyAvatar } from "./company-avatar";
+import { useTranslations } from "next-intl";
 
 interface JobTag {
   label: string;
@@ -47,6 +48,8 @@ export function JobCard({
   index = 0,
   className,
 }: JobCardProps) {
+  const t = useTranslations("common");
+
   return (
     <motion.div
       className={cn(
@@ -84,7 +87,7 @@ export function JobCard({
           onClick={() => onSave?.(job.id)}
           className="text-muted-foreground transition-colors hover:text-brand-600"
           whileTap={{ scale: 0.85 }}
-          aria-label={isSaved ? "Quitar de guardados" : "Guardar empleo"}
+          aria-label={isSaved ? t("actions.close") : t("actions.save")}
         >
           {isSaved ? (
             <BookmarkCheck className="size-5 text-brand-600" />
@@ -133,7 +136,7 @@ export function JobCard({
           className="flex-1"
           onClick={() => onApply?.(job.id)}
         >
-          Aplicar
+          {t("actions.apply")}
         </Button>
       </div>
     </motion.div>

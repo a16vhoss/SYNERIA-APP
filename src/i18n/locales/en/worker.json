@@ -15,7 +15,19 @@
     "profileCompletion": "Complete Profile",
     "profileCompletionDesc": "Complete your profile to improve your opportunities",
     "noRecommendations": "No recommendations at the moment",
-    "viewAllJobs": "View all jobs"
+    "noRecommendationsDesc": "Complete your profile to receive personalized jobs matching your experience.",
+    "viewAllJobs": "View all jobs",
+    "availableJobs": "Available jobs",
+    "myApplications": "My applications",
+    "notifications": "Notifications",
+    "profileCompleted": "Profile completed",
+    "completeProfile": "Complete profile",
+    "viewAll": "view all",
+    "tabs": {
+      "panel": "Overview",
+      "searchJobs": "Search Jobs",
+      "myApplications": "My Applications"
+    }
   },
   "jobs": {
     "title": "Search Jobs",
@@ -59,7 +71,13 @@
       "shareJob": "Share job",
       "reportJob": "Report job",
       "similarJobs": "Similar jobs",
-      "alreadyApplied": "You have already applied to this job"
+      "alreadyApplied": "You have already applied to this job",
+      "jobSummary": "Job Summary",
+      "salaryNegotiable": "Negotiable",
+      "locationTBD": "Location to be defined",
+      "notSpecified": "Not specified",
+      "indefinite": "Indefinite",
+      "defaultTitle": "Job Position"
     },
     "apply": {
       "title": "Apply to {jobTitle}",
@@ -74,6 +92,23 @@
       "submitting": "Submitting...",
       "success": "Application submitted successfully",
       "error": "Error submitting application"
+    },
+    "save": "Save job",
+    "unsave": "Remove from saved"
+  },
+  "interviews": {
+    "scheduled": "You have a scheduled interview",
+    "atTime": "at",
+    "joinCall": "Join call",
+    "confirmed": "Attendance confirmed",
+    "declined": "Cannot attend - employer notified",
+    "confirmAttendance": "Confirm Attendance",
+    "cannotAttend": "Cannot Attend",
+    "countdown": {
+      "past": "Past",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "inDays": "In {count} days"
     }
   },
   "applications": {
@@ -108,8 +143,10 @@
       "experience": "Experience",
       "education": "Education",
       "skills": "Skills",
-      "documents": "Documents"
+      "documents": "Documents",
+      "settings": "Settings"
     },
+    "tabsAriaLabel": "Profile tabs",
     "personal": {
       "avatar": "Profile photo",
       "changeAvatar": "Change photo",
@@ -125,7 +162,13 @@
       "headlinePlaceholder": "E.g., Full Stack Developer",
       "website": "Website",
       "linkedin": "LinkedIn",
-      "github": "GitHub"
+      "github": "GitHub",
+      "fullName": "Full name",
+      "dateOfBirth": "Date of birth",
+      "namePlaceholder": "Your name",
+      "cityPlaceholder": "Your city",
+      "updateData": "Update Data",
+      "saveSuccess": "Profile updated successfully"
     },
     "experience": {
       "addExperience": "Add experience",
@@ -136,7 +179,11 @@
       "endDate": "End date",
       "current": "Current position",
       "description": "Description",
-      "noExperience": "You haven't added any work experience yet"
+      "noExperience": "You haven't added any work experience yet",
+      "emptyDescription": "Add your experience so employers can learn about your professional background.",
+      "positionPlaceholder": "E.g., Machine Operator",
+      "companyPlaceholder": "E.g., Alpha Construction Co.",
+      "descriptionPlaceholder": "Describe your responsibilities..."
     },
     "education": {
       "addEducation": "Add education",
@@ -147,7 +194,11 @@
       "startDate": "Start date",
       "endDate": "End date",
       "current": "Currently studying",
-      "noEducation": "You haven't added any education yet"
+      "noEducation": "You haven't added any education yet",
+      "emptyDescription": "Add your academic background to strengthen your professional profile.",
+      "institutionPlaceholder": "E.g., National University",
+      "degreePlaceholder": "E.g., Civil Engineering",
+      "descriptionPlaceholder": "Describe your education..."
     },
     "skills": {
       "addSkill": "Add skill",
@@ -166,7 +217,31 @@
       "certificate": "Certificate",
       "id": "ID",
       "other": "Other",
-      "noDocuments": "You haven't uploaded any documents yet"
+      "noDocuments": "You haven't uploaded any documents yet",
+      "passport": "Passport",
+      "dragOrClick": "Drag or click",
+      "uploadError": "Error uploading document"
+    },
+    "settings": {
+      "emailNotifications": "Email Notifications",
+      "newMatchingJobs": "New matching jobs",
+      "applicationStatus": "Application status",
+      "frequency": "Frequency",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "platformLanguage": "Platform language",
+      "dangerZone": "Danger zone",
+      "deleteWarning": "This action is irreversible. All your data will be deleted, including profile, applications, contracts, and wallet.",
+      "deleteAccountTitle": "Delete account permanently",
+      "deleteConfirmDesc": "This action cannot be undone. Type DELETE to confirm.",
+      "typeDeletePlaceholder": "Type \"DELETE\"",
+      "deletePermanently": "Delete permanently",
+      "deleteKeyword": "DELETE",
+      "myAccount": "my account",
+      "saveSettings": "Save Settings",
+      "sessionClosed": "Session closed",
+      "saveSuccess": "Settings saved"
     }
   },
   "wallet": {
@@ -174,6 +249,30 @@
     "balance": "Available Balance",
     "totalEarnings": "Total Earnings",
     "pendingPayments": "Pending Payments",
+    "totalBalance": "Total Balance",
+    "sendMoney": "Send Money",
+    "receive": "Receive",
+    "connectedAccounts": "Connected Accounts",
+    "addBankAccount": "Add bank account",
+    "bankConnectionSoon": "Bank connection coming soon",
+    "accountTypes": {
+      "checking": "Checking Account",
+      "savings": "Savings Account"
+    },
+    "stats": {
+      "title": "Financial Statistics",
+      "earnedThisMonth": "Earned this month",
+      "vsLastMonth": "+45% vs last month",
+      "remittancesSent": "Remittances sent",
+      "transfers": "{count} transfers",
+      "feesSaved": "Fees saved",
+      "vsTraditional": "vs traditional services",
+      "paymentsReceived": "Payments received"
+    },
+    "quickActions": {
+      "microInsurance": "Micro Insurance",
+      "topUps": "Top-ups"
+    },
     "tabs": {
       "overview": "Overview",
       "transactions": "Transactions",
@@ -190,7 +289,11 @@
       "status": "Status",
       "income": "Income",
       "withdrawal": "Withdrawal",
-      "fee": "Fee"
+      "fee": "Fee",
+      "recentTitle": "Recent Transactions",
+      "filterIncome": "Income",
+      "sent": "Sent",
+      "empty": "No transactions in this category."
     },
     "remittance": {
       "title": "Send Remittance",
@@ -213,7 +316,20 @@
       "amount": "Amount",
       "rate": "Exchange rate",
       "youReceive": "You receive",
-      "execute": "Execute swap"
+      "execute": "Execute swap",
+      "description": "Exchange currencies with the best market rates.",
+      "exchangeRate": "Exchange rate",
+      "fee": "Fee (1%)",
+      "youWillReceive": "You will receive",
+      "swapButton": "Swap Currency",
+      "success": "Swap completed successfully"
+    },
+    "currencies": {
+      "usd": "USD - US Dollar",
+      "eur": "EUR - Euro",
+      "gbp": "GBP - British Pound",
+      "chf": "CHF - Swiss Franc",
+      "mxn": "MXN - Mexican Peso"
     },
     "card": {
       "title": "Virtual Card",
@@ -224,7 +340,9 @@
       "freeze": "Freeze card",
       "unfreeze": "Unfreeze card",
       "spendingLimit": "Spending limit",
-      "monthlySpent": "Monthly spending"
+      "monthlySpent": "Monthly spending",
+      "holder": "Holder",
+      "expires": "Expires"
     }
   },
   "contracts": {
@@ -268,7 +386,19 @@
       "newEndDate": "New end date",
       "newTerms": "New terms (optional)",
       "submit": "Request renewal"
-    }
+    },
+    "progress": "Contract progress",
+    "daysRemaining": "{count} days remaining",
+    "terms": "Contract Terms",
+    "visaSponsorship": "Visa sponsorship included",
+    "schedule": "Schedule:",
+    "signDigitally": "Sign Digitally",
+    "awaitingSignature": "Awaiting worker's signature",
+    "requestCancellation": "Request Cancellation",
+    "respondToRequest": "Respond to Request",
+    "renewContract": "Renew Contract",
+    "currentContract": "Current contract",
+    "contractCount": "contract(s)"
   },
   "messages": {
     "title": "Messages",
@@ -319,6 +449,22 @@
       "endorse": "Endorse",
       "endorseSkill": "Endorse skill",
       "noEndorsements": "You have no endorsements yet"
+    },
+    "skillEndorsements": "Skill endorsements",
+    "endorse": "Endorse",
+    "connectedSince": "Connected since",
+    "mutualConnections": "mutual connections",
+    "removeConnection": "Remove connection",
+    "pendingRequest": "Pending request",
+    "cancelRequest": "Cancel request",
+    "connect": "Connect",
+    "sameCompany": "Same company",
+    "sameCountry": "Same country",
+    "sameSector": "Same sector",
+    "activity": {
+      "postedVacancy": "posted a new vacancy",
+      "completedContract": "completed a contract",
+      "viewVacancy": "View vacancy"
     }
   },
   "reviews": {
@@ -345,6 +491,17 @@
     "submit": "Submit review",
     "submitting": "Submitting...",
     "success": "Review submitted successfully",
-    "noReviews": "You have no reviews yet"
+    "noReviews": "You have no reviews yet",
+    "rateExperience": "Rate your experience with",
+    "rateExperienceDesc": "Your feedback helps other workers make better decisions.",
+    "leaveReview": "Leave Review"
+  },
+  "company": {
+    "companyJobs": "Jobs from this company",
+    "noVacancies": "No active vacancies",
+    "noVacanciesDesc": "This company has no vacancies posted at this time.",
+    "reviews": "Reviews",
+    "noReviews": "No reviews yet",
+    "noReviewsDesc": "There are no reviews for this company yet. Be the first to leave one."
   }
 }

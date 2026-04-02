@@ -73,7 +73,7 @@ export function PaymentModal({
     if (selectedContract) {
       setAmount(String(selectedContract.salary));
       const month = new Date().toLocaleDateString("es-ES", { month: "long" });
-      setDescription(`Pago mensual ${month}`);
+      setDescription(t("wallet.sendPayment.monthlyPaymentDescription", { month }));
     }
   }, [selectedContract]);
 
@@ -167,7 +167,7 @@ export function PaymentModal({
             <Label htmlFor="pay-desc">{t("vacancies.create.description")}</Label>
             <Input
               id="pay-desc"
-              placeholder="Pago mensual marzo"
+              placeholder={t("wallet.sendPayment.descriptionPlaceholder")}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />

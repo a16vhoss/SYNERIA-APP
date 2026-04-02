@@ -185,24 +185,24 @@ export function VacanciesClient({
     []
   );
 
-  async function handleCreate(data: Record<string, unknown>) {
+  async function handleCreate(data: { title: string; description: string; sector: string; contract_type: string; country: string; city: string; salary_min: string; salary_max: string; requirements: string; benefits: string }) {
     try {
       const newVacancy = await createJob({
-        title: (data.title as string) ?? "",
-        description: (data.description as string) ?? "",
-        sector: (data.sector as string) ?? "",
-        contract_type: (data.contractType as string) ?? (data.contract_type as string) ?? "full_time",
-        country: (data.country as string) ?? "",
-        city: (data.city as string) ?? "",
-        salary_min: data.salaryMin?.toString() ?? data.salary_min?.toString(),
-        salary_max: data.salaryMax?.toString() ?? data.salary_max?.toString(),
-        requirements: (data.requirements as string) ?? "",
-        benefits: (data.benefits as string) ?? "",
+        title: data.title ?? "",
+        description: data.description ?? "",
+        sector: data.sector ?? "",
+        contract_type: data.contract_type ?? "full_time",
+        country: data.country ?? "",
+        city: data.city ?? "",
+        salary_min: data.salary_min,
+        salary_max: data.salary_max,
+        requirements: data.requirements ?? "",
+        benefits: data.benefits ?? "",
       });
       setVacancies((prev) => [newVacancy, ...prev]);
-      toast.success("Vacante publicada correctamente");
+      toast.success(t("vacancies.create.success"));
     } catch {
-      toast.error("Error al crear la vacante");
+      toast.error(t("vacancies.create.error"));
     }
   }
 
@@ -224,7 +224,7 @@ export function VacanciesClient({
         };
       })
     );
-    toast.success("Vacante actualizada correctamente");
+    toast.success(t("vacancies.edit.success"));
   }
 
   function handleDelete(id: string) {
@@ -234,7 +234,7 @@ export function VacanciesClient({
       next.delete(id);
       return next;
     });
-    toast.success("Vacante eliminada");
+    toast.success(t("vacancies.status.delete"));
   }
 
   // ── Bulk actions ───────────────────────────────────────────────────
@@ -263,7 +263,7 @@ export function VacanciesClient({
           : v
       )
     );
-    toast.success(`${selected.size} vacante(s) pausada(s)`);
+    toast.success(t("vacancies.bulkPaused", { count: selected.size }));
     setSelected(new Set());
   }
 
@@ -273,7 +273,7 @@ export function VacanciesClient({
         selected.has(v.id) ? { ...v, status: "closed" as const } : v
       )
     );
-    toast.success(`${selected.size} vacante(s) cerrada(s)`);
+    toast.success(t("vacancies.bulkClosed", { count: selected.size }));
     setSelected(new Set());
   }
 
@@ -562,7 +562,7 @@ export function VacanciesClient({
                               size="icon-xs"
                               variant="ghost"
                               onClick={() => setEditingVacancy(vacancy)}
-                              title="Editar"
+                              title={t("vacancies.edit.title")}
                             >
                               <Pencil className="size-3.5" />
                             </Button>
@@ -570,7 +570,7 @@ export function VacanciesClient({
                               <Button
                                 size="icon-xs"
                                 variant="ghost"
-                                title="Ver detalle"
+                                title={t("vacancies.viewDetail")}
                               >
                                 <Eye className="size-3.5" />
                               </Button>
@@ -584,7 +584,7 @@ export function VacanciesClient({
                               variant="ghost"
                               className="text-destructive hover:bg-destructive/10"
                               onClick={() => handleDelete(vacancy.id)}
-                              title="Eliminar"
+                              title={t("vacancies.status.delete")}
                             >
                               <Trash2 className="size-3.5" />
                             </Button>
